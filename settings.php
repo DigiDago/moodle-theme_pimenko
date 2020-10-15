@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of the moockie2 theme for Moodle
+// This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,23 +17,25 @@
 
 /**
  * Theme Telaformation settings file.
+ *
  * @package    theme_telaformation
  * @copyright  Tela Botanica 2020
- * @author     Sylvain Revenu - Pimenko 2020
+ * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Every file should have GPL and copyright in the header - we skip it in tutorials but you should not skip it for real.
-
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
+
+require_once(__DIR__ . '/libs/admin_setting_confightmleditor.php');
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
 if ($ADMIN->fulltree) {
 
     // Boost provides a nice setting page which splits settings onto separate tabs. We want to use it here.
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingtelaformation', get_string('configtitle', 'theme_telaformation'));
+    $settings =
+            new theme_boost_admin_settingspage_tabs('themesettingtelaformation', get_string('configtitle', 'theme_telaformation'));
 
     // Each page is a tab - the first is the "General" tab.
     $page = new admin_settingpage('theme_telaformation_general', get_string('generalsettings', 'theme_telaformation'));
@@ -64,7 +66,7 @@ if ($ADMIN->fulltree) {
 
     // Preset files setting.
     $name = 'theme_telaformation/presetfiles';
-    $title = get_string('presetfiles','theme_telaformation');
+    $title = get_string('presetfiles', 'theme_telaformation');
     $description = get_string('presetfiles_desc', 'theme_telaformation');
 
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
@@ -99,4 +101,7 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     $settings->add($page);
+
+    // Login settings
+    include(dirname(__FILE__) . '/settings/login.php');
 }

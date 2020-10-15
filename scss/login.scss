@@ -1,0 +1,81 @@
+// This file is part of the Telaformation theme for Moodle
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Theme Telaformation style files.
+ * @package    theme_telaformation
+ * @copyright  Tela Botanica 2020
+ * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* Login Page */
+/* Background Image */
+
+#page-login-index {
+    background-image: unquote("loginbgimage");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: unquote("loginbgstyle");
+
+    .card-header {
+        display: none;
+    }
+
+    .outercont {
+        display: flex;
+        flex-direction: column;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        height: 100vh;
+        /* Add a top padding to avoid content overlay */
+        left: 50%;
+        margin: 0;
+        padding: 50px 15px 0;
+        position: relative;
+        transform: translateX(-50%);
+    }
+
+    .fullin.narrow .container,
+    .fullin.standard .container {
+        width: 100% !important;
+    }
+
+    #page-footer {
+        margin: auto 0 0 !important;
+    }
+
+    #page-content {
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+
+    #page {
+        background: none;
+    }
+}
+
+#page-login-index header {
+    background-color: unquote("loginbgopacity1");
+
+    #page-login-index #page-navbar,
+    #page-login-index .card {
+        background-color: unquote("loginbgopacity2");
+    }
+
+    #page-login-index #page-footer {
+        background-color: unquote("loginbgopacity3");
+    }
+}

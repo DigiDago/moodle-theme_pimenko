@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of the moockie2 theme for Moodle
+// This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,14 +16,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings file.
+ * Theme Telaformation config file.
+ *
  * @package    theme_telaformation
  * @copyright  Tela Botanica 2020
- * @author     Sylvain Revenu - Pimenko 2020
+ * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-// Every file should have GPL and copyright in the header - we skip it in tutorials but you should not skip it for real.
 
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
@@ -76,8 +75,21 @@ $THEME->scss = function($theme) {
     return theme_telaformation_get_main_scss_content($theme);
 };
 
+// This function can make alterations and replace patterns within the CSS.
+$THEME->csspostprocess = 'theme_telaformation_process_css';
+
 // This is a function that returns some SCSS as a string to prepend to the main SCSS file.
 $THEME->prescsscallback = 'theme_telaformation_get_pre_scss';
 
 // This is a function that returns some SCSS as a string to append to the main SCSS file.
 $THEME->extrascsscallback = 'theme_telaformation_get_extra_scss';
+
+// Define here layout we override.
+// Login page.
+$THEME->layouts = [
+        'login' => array(
+                'file' => 'login.php',
+                'regions' => array(),
+                'options' => array('langmenu' => true),
+        )
+];

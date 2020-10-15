@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of the moockie2 theme for Moodle
+// This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings file.
+ * Theme Telaformation lang file.
  * @package    theme_telaformation
  * @copyright  Tela Botanica 2020
- * @author     Sylvain Revenu - Pimenko 2020
+ * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Every file should have GPL and copyright in the header - we skip it in tutorials but you should not skip it for real.
+
 // This line protects the file from being accessed by a URL directly.
 // This is the FR Lang package
 defined('MOODLE_INTERNAL') || die();

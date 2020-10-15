@@ -1,0 +1,92 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+    @package    theme_telaformation
+    @copyright  Tela Botanica 2020
+    @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
+    @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+}}
+{{!
+    @template theme_telaformation/login
+
+    Login page template
+
+    Example context (json):
+    {
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "htmlattributes": "HTML attributes",
+            "bodyattributes": "HTML bodyattributes",
+            "standard_top_of_body_html": "The standard tags (typically skip links) that should be output just inside",
+            "main_content": "<h1>Headers keep HTML validators happy</h1>",
+            "logintextstartwrapper": "Some HTML content",
+            "logintextboxtop": "Some HTML content",
+            "logintextboxbottom": "Some HTML content"
+        }
+    }
+}}
+
+{{{ output.doctype }}}
+<html {{{ output.htmlattributes }}}>
+    {{> theme_boost/head }}
+
+    <body {{{ bodyattributes }}}>
+    {{> core/local/toast/wrapper}}
+        <div id="page-wrapper" class="d-print-block">
+            {{{ output.standard_top_of_body_html }}}
+            <!-- Default navbar. -->
+            {{> theme_boost/navbar }}
+            <!-- Default nav-drawer. -->
+            {{> theme_boost/nav-drawer }}
+            <div class="container outercont">
+                <div id="page-content" class="row">
+                    <section id="region-main" class="col-12">
+                        {{{logintextstartwrapper}}}
+                        {{#logintextboxtop}}
+                            {{{logintextboxtop}}}
+                            {{/logintextboxtop}}
+                        {{{logintextendwrapper}}}
+
+                        {{{maincontent}}}
+
+                        <div class="my-1 my-sm-5"></div>
+                        {{{logintextstartwrapper}}}
+                        {{#logintextboxbottom}}
+                            {{{logintextboxbottom}}}
+                            {{/logintextboxbottom}}
+                        {{{logintextendwrapper}}}
+
+                    </section>
+                </div>
+            </div>
+            <!-- Default footer. -->
+            {{> theme_boost/footer }}
+        </div>
+
+    </body>
+</html>
+{{#js}}
+    <!--    Need this to init drawer and loader.-->
+    M.util.js_pending('theme_boost/drawer');
+    require(['theme_boost/drawer'], function(drawer) {
+        drawer.init();
+        M.util.js_complete('theme_boost/drawer');
+    });
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader'], function() {
+        M.util.js_complete('theme_boost/loader');
+    });
+{{/js}}

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of the moockie2 theme for Moodle
+// This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings file.
+ * Theme Telaformation lang file.
  * @package    theme_telaformation
  * @copyright  Tela Botanica 2020
- * @author     Sylvain Revenu - Pimenko 2020
+ * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Every file should have GPL and copyright in the header - we skip it in tutorials but you should not skip it for real.
+
 // This line protects the file from being accessed by a URL directly.
 // This is the EN Lang package
 defined('MOODLE_INTERNAL') || die();
@@ -60,3 +60,30 @@ $string['rawscsspre'] = 'Raw initial SCSS';
 $string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 // We need to include a lang string for each block region.
 $string['region-side-pre'] = 'Right';
+
+// Login page traduction
+$string['loginsettings'] = 'Login page settings';
+$string['logintextboxtop'] = 'Top text box';
+$string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
+
+// Login *******************************************************.
+$string['loginsettings'] = 'Login Page';
+$string['loginsettingsheading'] = 'Customize the login page';
+$string['logindesc'] = 'Customize the login page with adding an image background and texts above and below the login box.';
+$string['loginsettingsheading'] = 'Customize the login page.';
+$string['loginbgimage'] = 'Background image';
+$string['loginbgimagedesc'] = 'Add a background image to the full size page.';
+$string['loginbgstyle'] = 'Login background style';
+$string['loginbgstyledesc'] = 'Select the style for the uploaded image.';
+$string['loginbgopacity'] = 'Login page header, navbar, login box and footer background opacity when there is a background image';
+$string['loginbgopacitydesc'] = 'Login background opacity for the header, navbar, login box and footer when there is a background image.';
+$string['logintextboxtop'] = 'Top text box';
+$string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
+$string['logintextboxbottom'] = 'Bottom text box';
+$string['logintextboxbottomdesc'] = 'Add a custom text below the login box.';
+
+$string['stylecover'] = 'Cover';
+$string['stylestretch'] = 'Stretch';
+
+$string['hide'] = 'Hide';
+$string['show'] = 'Show';
