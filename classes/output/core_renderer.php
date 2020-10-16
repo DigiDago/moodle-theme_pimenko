@@ -76,10 +76,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         // Output content.
         $template->output = $OUTPUT;
 
-        $template->logintextstartwrapper = '<div class="row justify-content-center"><div class="col-xl-6 col-sm-8 ">' .
-                '<div class="card"><div class="card-block">';
-        $template->logintextendwrapper = '</div></div></div></div>';
-
         // Main login content.
         $template->maincontent = $OUTPUT->main_content();
 
