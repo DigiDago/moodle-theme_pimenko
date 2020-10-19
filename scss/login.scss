@@ -25,14 +25,13 @@
 /* Background Image */
 
 #page-login-index {
-    background-image: unquote("loginbgimage");
-    background-position: 0 0;
-    background-repeat: no-repeat;
+    background: unquote("loginbgimage");
     background-size: unquote("loginbgstyle");
 }
 
 #page-login-index,
 #page-login-signup {
+    height: auto;
 
     .textbox {
         p {

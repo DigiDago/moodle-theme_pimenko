@@ -121,7 +121,7 @@ function theme_telaformation_process_css($css, $theme) {
     $loginbgimage = '';
     if (!empty($theme->settings->loginbgimage)) {
         $loginbgimage = $theme->setting_file_url('loginbgimage', 'loginbgimage');
-        $loginbgimage = 'url("' . $loginbgimage . '")';
+        $loginbgimage = 'url("' . $loginbgimage . '") no-repeat center center fixed';
     }
     $defaults['loginbgimage'] = $loginbgimage;
 
