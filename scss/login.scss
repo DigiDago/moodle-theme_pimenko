@@ -29,6 +29,20 @@
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: unquote("loginbgstyle");
+}
+
+#page-login-index,
+#page-login-signup {
+
+    .textbox {
+        p {
+            padding: 10px;
+            text-align: center !important;
+            margin-bottom: 0;
+            color: #343b3f;
+            font-size: 1.5rem;
+        }
+    }
 
     #page-wrapper {
         padding-top: 50px;
@@ -66,6 +80,20 @@
 
     #page {
         background: none;
+    }
+
+    @media (min-width: 1200px){
+        .container {
+            max-width: 100%;
+        }
+    }
+}
+
+#page-login-signup {
+    .textbox {
+        p {
+            display: none;
+        }
     }
 }
 

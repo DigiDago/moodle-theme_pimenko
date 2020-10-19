@@ -53,8 +53,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if (isloggedin()) {
             $navdraweropen = (get_user_preferences(
                             'drawer-open-nav',
-                            'true'
-                    ) == 'false');
+                            'false'
+                    ) == 'true');
         } else {
             $navdraweropen = false;
         }
