@@ -25,7 +25,12 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-global $PAGE, $OUTPUT;
+global $OUTPUT;
+
+user_preference_allow_ajax_update(
+        'drawer-open-nav',
+        PARAM_ALPHA
+);
 
 // Call the renderer of login page.
 echo $OUTPUT->render_login_page($OUTPUT);

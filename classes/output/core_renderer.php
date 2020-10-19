@@ -54,7 +54,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $navdraweropen = (get_user_preferences(
                             'drawer-open-nav',
                             'false'
-                    ) == 'true');
+                    ) == 'false');
         } else {
             $navdraweropen = false;
         }
