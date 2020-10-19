@@ -30,6 +30,10 @@
     background-repeat: no-repeat;
     background-size: unquote("loginbgstyle");
 
+    #page-wrapper {
+        padding-top: 50px;
+    }
+
     .card-header {
         display: none;
     }
@@ -39,11 +43,9 @@
         flex-direction: column;
         -ms-flex-negative: 0;
         flex-shrink: 0;
-        height: 100vh;
         /* Add a top padding to avoid content overlay */
         left: 50%;
-        margin: 0;
-        padding: 50px 15px 0;
+        margin: auto 0;
         position: relative;
         transform: translateX(-50%);
     }
@@ -54,7 +56,7 @@
     }
 
     #page-footer {
-        margin: auto 0 0 !important;
+        margin: 0;
     }
 
     #page-content {
