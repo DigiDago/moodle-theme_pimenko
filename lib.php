@@ -107,7 +107,9 @@ function theme_telaformation_process_css($css, $theme) {
             'loginbgstyle' => '',
             'loginbgopacity1' => '',
             'loginbgopacity2' => '',
-            'loginbgopacity3' => ''
+            'loginbgopacity3' => '',
+            'navbarcolor' => '#FFF',
+            'navbartextcolor' => '#343b3f'
     ];
 
     // Get all the defined settings for the theme and replace defaults.
@@ -148,6 +150,11 @@ function theme_telaformation_process_css($css, $theme) {
     $defaults['loginbgopacity1'] = $loginbgopacity1;
     $defaults['loginbgopacity2'] = $loginbgopacity2;
     $defaults['loginbgopacity3'] = $loginbgopacity3;
+
+    // Darken color for link in navbar.
+    $color = $defaults['navbartextcolor'];
+    $defaults['darkencolor'] = colourBrightness($color,-0.5);
+
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);
@@ -217,10 +224,54 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
             return $theme->setting_file_serve('loginbgimage', $args, $forcedownload, $options);
         } else if ($filearea === 'favicon') {
             return $theme->setting_file_serve('favicon', $args, $forcedownload, $options);
+        }  else if ($filearea === 'sitelogo') {
+            return $theme->setting_file_serve('sitelogo', $args, $forcedownload, $options);
         } else {
             send_file_not_found();
         }
     } else {
         send_file_not_found();
     }
+}
+
+/** Function to darker css */
+function colourBrightness($hex, $percent)
+{
+    // Work out if hash given
+    $hash = '';
+    if (stristr($hex, '#')) {
+        $hex = str_replace('#', '', $hex);
+        $hash = '#';
+    }
+    /// HEX TO RGB
+    $rgb = [hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2))];
+    //// CALCULATE
+    for ($i = 0; $i < 3; $i++) {
+        // See if brighter or darker
+        if ($percent > 0) {
+            // Lighter
+            $rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1 - $percent));
+        } else {
+            // Darker
+            $positivePercent = $percent - ($percent * 2);
+            $rgb[$i] = round($rgb[$i] * (1 - $positivePercent)); // round($rgb[$i] * (1-$positivePercent));
+        }
+        // In case rounding up causes us to go to 256
+        if ($rgb[$i] > 255) {
+            $rgb[$i] = 255;
+        }
+    }
+    //// RBG to Hex
+    $hex = '';
+    for ($i = 0; $i < 3; $i++) {
+        // Convert the decimal digit to hex
+        $hexDigit = dechex($rgb[$i]);
+        // Add a leading zero if necessary
+        if (strlen($hexDigit) == 1) {
+            $hexDigit = "0" . $hexDigit;
+        }
+        // Append to the hex string
+        $hex .= $hexDigit;
+    }
+    return $hash . $hex;
 }

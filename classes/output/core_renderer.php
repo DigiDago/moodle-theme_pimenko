@@ -27,6 +27,7 @@ namespace theme_telaformation\output;
 
 use stdClass;
 use theme_config;
+use context_course;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -47,7 +48,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public final function render_login_page($OUTPUT): string {
-        global $PAGE;
+        global $SITE ,$PAGE;
 
         // We check if the user is connected and we set the drawer to close.
         if (isloggedin()) {
@@ -66,6 +67,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         // Define some needed var for ur template.
         $template = new stdClass();
+        $template->sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
         $template->bodyattributes = $OUTPUT->body_attributes($extraclasses);
         $template->logintextboxtop = $OUTPUT->get_setting('logintextboxtop', 'format_html');
         $template->logintextboxbottom = $OUTPUT->get_setting('logintextboxbottom', 'format_html');
@@ -111,4 +113,38 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
     }
 
+    /**
+     * @return string
+     */
+    public function sitelogo(): string {
+        $sitelogo = '';
+        if (!empty($this->page->theme->settings->sitelogo)) {
+            if (empty($this->themeconfig)) {
+                $this->themeconfig = $theme = theme_config::load('telaformation');
+            }
+            $sitelogo = $this->themeconfig->setting_file_url(
+                    'sitelogo',
+                    'sitelogo'
+            );
+        }
+        return $sitelogo;
+    }
+
+    /**
+     * Returns the URL for the favicon.
+     *
+     * @return string The favicon URL
+     */
+    public function favicon(): string {
+        if (!empty($this->page->theme->settings->favicon)) {
+            if (empty($this->themeconfig)) {
+                $this->themeconfig = $theme = theme_config::load('telaformation');
+            }
+            return $this->themeconfig->setting_file_url(
+                    'favicon',
+                    'favicon'
+            );
+        }
+        return parent::favicon();
+    }
 }
