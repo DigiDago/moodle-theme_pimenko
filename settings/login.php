@@ -27,7 +27,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Some parts there are from 'adaptable' theme.
-$page = new admin_settingpage('theme_telaformation_login', get_string('loginsettingsheading', 'theme_telaformation'));
+$page = new admin_settingpage('theme_telaformation_login', get_string('loginsettings', 'theme_telaformation'));
 
 // Login page background image.
 $name = 'theme_telaformation/loginbgimage';

@@ -90,14 +90,6 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    // Site logo.
-    $name = 'theme_telaformation/sitelogo';
-    $title = get_string('sitelogo', 'theme_telaformation');
-    $description = get_string('sitelogodesc', 'theme_telaformation');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'sitelogo');
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
-
     // Must add the page after definiting all the settings!
     $settings->add($page);
 

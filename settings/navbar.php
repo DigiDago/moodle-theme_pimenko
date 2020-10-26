@@ -27,7 +27,15 @@
 defined('MOODLE_INTERNAL') || die;
 
 $page = new admin_settingpage('theme_telaformation_navbar',
-        get_string('navbarcolor', 'theme_telaformation'));
+        get_string('navbarsettings', 'theme_telaformation'));
+
+// Site logo.
+$name = 'theme_telaformation/sitelogo';
+$title = get_string('sitelogo', 'theme_telaformation');
+$description = get_string('sitelogodesc', 'theme_telaformation');
+$setting = new admin_setting_configstoredfile($name, $title, $description, 'sitelogo');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
 
 // Navbar color.
 $name          = 'theme_telaformation/navbarcolor';
