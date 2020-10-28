@@ -91,5 +91,11 @@ $THEME->layouts = [
                 'file' => 'login.php',
                 'regions' => array(),
                 'options' => array('langmenu' => true),
-        )
+        ),
+        // My public page.
+        'mypublic' => array(
+                'file' => 'columns2.php',
+                'regions' => array('side-pre'),
+                'defaultregion' => 'side-pre',
+        ),
 ];

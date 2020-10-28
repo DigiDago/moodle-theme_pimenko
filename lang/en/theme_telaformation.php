@@ -83,6 +83,12 @@ $string['navbarcolordesc'] = 'Add a background color to your nav bar';
 $string['navbartextcolor'] = 'Nav bar text color';
 $string['navbartextcolordesc'] = 'Add a text color to your nav bar';
 
+// Profile page.
+$string['profile:joinedon']    = 'Joined on ';
+$string['profile:lastaccess']  = 'Last access ';
+$string['profile:basicinfo']   = 'Basic Information';
+$string['profile:contactinfo'] = 'Contact Information';
+
 // Login *******************************************************.
 $string['loginsettings'] = 'Login Page';
 $string['loginsettingsheading'] = 'Customize the login page';
