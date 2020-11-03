@@ -28,6 +28,7 @@ namespace theme_telaformation\output;
 use stdClass;
 use theme_config;
 use context_course;
+use custom_menu;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -69,8 +70,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $template = new stdClass();
         $template->sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
         $template->bodyattributes = $OUTPUT->body_attributes($extraclasses);
-        $template->logintextboxtop = $OUTPUT->get_setting('logintextboxtop', 'format_html');
-        $template->logintextboxbottom = $OUTPUT->get_setting('logintextboxbottom', 'format_html');
 
         // Define nav for the drawer.
         $template->flatnavigation = $PAGE->flatnav;
@@ -146,5 +145,37 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             );
         }
         return parent::favicon();
+    }
+
+    /**
+     * Renders the login form.
+     *
+     * @param \core_auth\output\login $form The renderable.
+     * @return string
+     */
+    public function render_login(\core_auth\output\login $form) {
+        global $CFG, $SITE, $OUTPUT;
+
+        $context = $form->export_for_template($this);
+
+        // Override because rendering is not supported in template yet.
+        if ($CFG->rememberusername == 0) {
+            $context->cookieshelpiconformatted = $this->help_icon('cookiesenabledonlysession');
+        } else {
+            $context->cookieshelpiconformatted = $this->help_icon('cookiesenabled');
+        }
+        $context->errorformatted = $this->error_text($context->error);
+        $url = $this->get_logo_url();
+        if ($url) {
+            $url = $url->out(false);
+        }
+        $context->logourl = $url;
+        $context->sitename = format_string($SITE->fullname, true,
+                ['context' => context_course::instance(SITEID), "escape" => false]);
+
+        $context->logintextboxtop = $OUTPUT->get_setting('logintextboxtop', 'format_html');
+        $context->logintextboxbottom = $OUTPUT->get_setting('logintextboxbottom', 'format_html');
+
+        return $this->render_from_template('core/loginform', $context);
     }
 }
