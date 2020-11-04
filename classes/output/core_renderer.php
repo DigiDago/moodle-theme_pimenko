@@ -130,6 +130,71 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Render footer
+     *
+     * @return string footer template
+     */
+    public function footer_custom_content(): string {
+        $theme = theme_config::load('telaformation');
+
+        $template = new stdClass();
+
+        $template->columns = [];
+
+        for ($i = 1; $i <= 4; $i++) {
+            $heading = "footerheading{$i}";
+            $text = "footertext{$i}";
+            if (isset($theme->settings->$text) && !empty($theme->settings->$text)) {
+                $space = [
+                        '/ /',
+                        "/\s/",
+                        "/&nbsp;/",
+                        "/\t/",
+                        "/\n/",
+                        "/\r/",
+                        "/<p>/",
+                        "/<\/p>/"
+                ];
+                $textwithoutspace = preg_replace(
+                        $space,
+                        '',
+                        $theme->settings->$text
+                );
+                if (!empty($textwithoutspace)) {
+                    $column = new stdClass();
+                    $column->text = format_text($theme->settings->$text);
+                    $column->list = [];
+                    $menu = new custom_menu(
+                            $column->text,
+                            current_language()
+                    );
+                    foreach ($menu->get_children() as $item) {
+                        $listitem = new stdClass();
+                        $listitem->text = $item->get_text();
+                        $listitem->url = $item->get_url();
+                        $column->list[] = $listitem;
+                    }
+                    if (isset($theme->settings->$heading)) {
+                        $column->heading = format_text($theme->settings->$heading);
+                    }
+                    $template->columns[] = $column;
+                }
+            }
+        }
+
+        if (count($template->columns) > 0) {
+            $template->gridcount = (12 / (count($template->columns)));
+        } else {
+            $template->gridcount = 12;
+        }
+
+        return $this->render_from_template(
+                'theme_telaformation/footercustomcontent',
+                $template
+        );
+    }
+
+    /**
      * Returns the URL for the favicon.
      *
      * @return string The favicon URL

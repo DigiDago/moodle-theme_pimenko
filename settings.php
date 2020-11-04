@@ -28,6 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/libs/admin_setting_confightmleditor.php');
+require_once( __DIR__ . "/libs/simple_theme_settings.php" );
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
@@ -113,4 +114,5 @@ if ($ADMIN->fulltree) {
     // Login settings
     include(dirname(__FILE__) . '/settings/login.php');
     include(dirname(__FILE__) . '/settings/navbar.php');
+    include(dirname(__FILE__) . '/settings/footer.php');
 }

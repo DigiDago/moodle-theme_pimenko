@@ -109,7 +109,9 @@ function theme_telaformation_process_css($css, $theme) {
             'loginbgopacity2' => '',
             'loginbgopacity3' => '',
             'navbarcolor' => '#FFF',
-            'navbartextcolor' => '#343b3f'
+            'navbartextcolor' => '#343B3F',
+            'footercolor' => '#343B3F',
+            'footertextcolor' => '#FFF'
     ];
 
     // Get all the defined settings for the theme and replace defaults.
@@ -153,8 +155,11 @@ function theme_telaformation_process_css($css, $theme) {
 
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
-    $defaults['darkencolor'] = colourBrightness($color,-0.5);
+    $defaults['darkennavcolor'] = colourBrightness($color,-0.5);
 
+    // Footer darkencolor.
+    $color = $defaults['footertextcolor'];
+    $defaults['darkenfootercolor'] = colourBrightness($color,-0.5);
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);

@@ -77,11 +77,11 @@ $string['sitelogo'] = 'Site logo';
 $string['sitelogodesc'] = 'Add a logo for ur site';
 
 // Navbar *******************************************************.
-$string['navbarsettings'] = 'Nav bar settings';
-$string['navbarcolor'] = 'Nav bar color';
-$string['navbarcolordesc'] = 'Add a background color to your nav bar';
-$string['navbartextcolor'] = 'Nav bar text color';
-$string['navbartextcolordesc'] = 'Add a text color to your nav bar';
+$string['navbarsettings'] = 'Navbar';
+$string['navbarcolor'] = 'Navbar color';
+$string['navbarcolordesc'] = 'Add a background color to your navbar';
+$string['navbartextcolor'] = 'Navbar text color';
+$string['navbartextcolordesc'] = 'Add a text color to your navbar';
 
 // Profile page.
 $string['profile:joinedon']    = 'Joined on ';
@@ -104,6 +104,19 @@ $string['logintextboxtop'] = 'Top text box';
 $string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
 $string['logintextboxbottom'] = 'Bottom text box';
 $string['logintextboxbottomdesc'] = 'Add a custom text below the login box.';
+
+// Footer *******************************************************.
+$string['footersettings']      = 'Footer';
+$string['settings:footer:footercolumn']      = 'Footer column {$a}';
+$string['settings:footer:footerheading']     = 'Footer heading {$a}';
+$string['settings:footer:footertext']        = 'Footer text {$a}';
+$string['settings:footer:footerheadingdesc'] = 'h3 header for column';
+$string['settings:footer:footertextdesc']    = 'Add content for the footer.';
+$string['settings:footer:footercolumndesc']  = '';
+$string['footercolor'] = 'Footer color';
+$string['footercolordesc'] = 'Add a background color to your footer';
+$string['footertextcolor'] = 'Footer text color';
+$string['footertextcolordesc'] = 'Add a text color to your footer';
 
 $string['stylecover'] = 'Cover';
 $string['stylestretch'] = 'Stretch';

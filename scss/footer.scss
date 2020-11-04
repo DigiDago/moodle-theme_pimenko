@@ -1,0 +1,15 @@
+
+footer {
+    background-color: unquote('footercolor') !important;
+    color: unquote('footertextcolor') !important;
+
+    a {
+        color: unquote('footertextcolor') !important;
+
+        &:hover,
+        &:focus {
+            color: unquote('darkenfootercolor') !important;
+        }
+    }
+}
+
