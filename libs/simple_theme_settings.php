@@ -18,7 +18,7 @@
 
 /**
  * Theme moockie renderers file.
- * @package    theme_moockie2
+ * @package    theme_telaformation
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

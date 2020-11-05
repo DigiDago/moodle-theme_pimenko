@@ -72,7 +72,7 @@ $setting       = new admin_setting_configcolourpicker(
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-$setting = new moockie2_simple_theme_settings(
+$setting = new simple_theme_settings(
         $page,
         'theme_telaformation',
         'settings:footer:'
