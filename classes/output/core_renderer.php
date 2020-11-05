@@ -29,6 +29,8 @@ use stdClass;
 use theme_config;
 use context_course;
 use custom_menu;
+use html_writer;
+use completion_info;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -242,5 +244,120 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $context->logintextboxbottom = $OUTPUT->get_setting('logintextboxbottom', 'format_html');
 
         return $this->render_from_template('core/loginform', $context);
+    }
+
+    /**
+     * Render mod completion
+     * If we're on a 'mod' page, retrieve the mod object and check it's completion state in order to conditionally
+     * pop a completion modal and show a link to the next activity in the footer.
+     *
+     * @return string list of $mod, show completed activity (bool), and show completion modal (bool)
+     */
+    public function render_completion_footer(): string {
+        global $PAGE, $COURSE, $OUTPUT;
+
+        if ($COURSE->enablecompletion != COMPLETION_ENABLED) {
+            return '';
+        }
+
+        if ($OUTPUT->body_id() == 'page-mod-quiz-attempt') {
+            return '';
+        }
+
+        echo html_writer::start_tag(
+                'form',
+                [
+                        'action' => '.',
+                        'method' => 'get'
+                ]
+        );
+        echo html_writer::start_tag('div');
+        echo html_writer::empty_tag(
+                'input',
+                [
+                        'type' => 'hidden',
+                        'id' => 'completion_dynamic_change',
+                        'name' => 'completion_dynamic_change',
+                        'value' => '0'
+                ]
+        );
+        echo html_writer::end_tag('div');
+        echo html_writer::end_tag('form');
+
+        $PAGE->requires->js_init_call('M.core_completion.init');
+
+        $renderer = $PAGE->get_renderer(
+                'core',
+                'course'
+        );
+
+        $completioninfo = new completion_info($COURSE);
+
+        // Short-circuit if we are not on a mod page, and allow restful access
+        $pagepath = explode(
+                '-',
+                $PAGE->pagetype
+        );
+        if ($pagepath[0] != 'mod') {
+            return '';
+        }
+        if ($pagepath[2] == 'index') {
+            return '';
+        }
+        // Make sure we have a mod object.
+        $mod = $PAGE->cm;
+        if (!is_object($mod)) {
+            return '';
+        }
+
+        // Get all course modules from modinfo
+        $cms = $mod->get_modinfo()->cms;
+
+        $currentcmidfoundflag = false;
+        $nextmod = false;
+        // Loop through all course modules to find the next mod
+        foreach ($cms as $cmid => $cm) {
+            // The nextmod must be after the current mod
+            // Keep looping until the current mod is found (+1)
+            if (!$currentcmidfoundflag) {
+                if ($cmid == $mod->id) {
+                    $currentcmidfoundflag = true;
+                }
+
+                // short circuit to next mod in list
+                continue;
+
+            } else {
+                // (The continue and else condition are not mutually neccessary
+                // but the statement block is more clear with the explicit else)
+
+                // The current activity has been found... set the next activity to the first
+                // user visible mod after this point.
+                if ($cm->uservisible) {
+                    $nextmod = $cm;
+                    break;
+                }
+            }
+        }
+        $template = new stdClass();
+
+        if ($nextmod) {
+            $template->nextmodname = format_string($nextmod->name);
+            $template->nextmodurl = $nextmod->url;
+        }
+
+        if ($completioninfo->is_enabled($mod)) {
+            $template->completionicon = $renderer->course_section_cm_completion(
+                    $COURSE,
+                    $completioninfo,
+                    $mod,
+                    ['showcompletiontext' => true]
+            );
+            return $OUTPUT->render_from_template(
+                    'theme_telaformation/completionfooter',
+                    $template
+            );
+        }
+        return '';
     }
 }

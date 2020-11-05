@@ -217,6 +217,7 @@ function theme_telaformation_hex2rgb($hex) {
  */
 function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     static $theme;
+
     if (empty($theme)) {
         $theme = theme_config::load('telaformation');
     }
@@ -316,4 +317,13 @@ function telaformation_redirect_to_profile_page($bodyid) {
         redirect( $redirecturl );
     }
 
+}
+
+/**
+ * Get icon mapping for font-awesome.
+ */
+function theme_telaformation_get_fontawesome_icon_map() {
+    return [
+            'theme_telaformation:t/check' => 'fa-check',
+    ];
 }

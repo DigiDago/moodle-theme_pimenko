@@ -84,6 +84,8 @@ $THEME->prescsscallback = 'theme_telaformation_get_pre_scss';
 // This is a function that returns some SCSS as a string to append to the main SCSS file.
 $THEME->extrascsscallback = 'theme_telaformation_get_extra_scss';
 
+$THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
+
 // Define here layout we override.
 // Login page.
 $THEME->layouts = [

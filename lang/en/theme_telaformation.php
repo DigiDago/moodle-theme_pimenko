@@ -123,3 +123,26 @@ $string['stylestretch'] = 'Stretch';
 
 $string['hide'] = 'Hide';
 $string['show'] = 'Show';
+
+//Completion.
+$string['completion-alt-manual-n']              = 'Not complete';
+$string['completion-alt-manual-n-override']     = 'Not complete';
+$string['completion-alt-manual-y']              = 'Not complete';
+$string['completion-alt-manual-y-override']     = 'Not complete';
+$string['completion-alt-auto-n']                = 'Not complete';
+$string['completion-alt-auto-n-override']       = 'Not complete';
+$string['completion-alt-auto-y']                = 'Not complete';
+$string['completion-alt-auto-y-override']       = 'Not complete';
+$string['completion-tooltip-manual-n']          = 'Click to mark as complete';
+$string['completion-tooltip-manual-n-override'] = 'Click to mark as complete';
+$string['completion-tooltip-manual-y']          = 'Click to mark as not complete';
+$string['completion-tooltip-manual-y-override'] = 'Click to mark as not complete';
+$string['completion-tooltip-auto-n']            = 'Automatic completion';
+$string['completion-tooltip-auto-n-override']   = 'Automatic completion';
+$string['completion-tooltip-auto-y']            = 'Automatic completion';
+$string['completion-tooltip-auto-y-override']   = 'Automatic completion';
+$string['completion-tooltip-auto-pass']         = 'Automatic completion';
+$string['completion-tooltip-auto-enabled']      = 'The system marks this item complete';
+$string['completion-tooltip-manual-enabled']    = 'Students can manually mark this item complete';
+$string['completion-alt-auto-enabled']          = 'The system marks this item complete';
+$string['completion-alt-manual-enabled']        = 'Students can manually mark this item complete';

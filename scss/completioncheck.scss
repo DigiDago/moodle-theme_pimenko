@@ -1,0 +1,60 @@
+.next_activity_area {
+    background-color: transparent;
+    margin-top: 0;
+    min-height: 120px;
+
+    .checkbox {
+        label {
+            background-color: gray;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 60px;
+            justify-content: center;
+            margin-left: auto;
+            user-select: none;
+            width: 60px;
+
+            &.active {
+                background-color: green;
+
+                .completionfooter {
+                    display: none;
+                }
+            }
+
+            input[type="checkbox"] {
+                opacity: 0;
+            }
+
+            .fa {
+                width: 60px;
+                height: 60px;
+                font-size: 35px;
+            }
+
+            &:active:not(.disable) {
+                box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 10px 2px rgba(0, 0, 0, .12);
+            }
+
+            &.disable {
+                cursor: not-allowed;
+
+                &::before {
+                    cursor: not-allowed;
+                }
+            }
+
+            .completionfooter {
+                display: inline-block;
+                font-size: 15px;
+                margin: -12px auto 0;
+                text-align: center;
+                width: 80%;
+            }
+        }
+    }
+}

@@ -34,10 +34,15 @@ if (isloggedin()) {
 } else {
     $navdraweropen = false;
 }
+
 $extraclasses = [];
 if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
+
+$PAGE->requires->js_call_amd('theme_telaformation/telaformation', 'init');
+$PAGE->requires->js_call_amd('theme_telaformation/completion', 'init');
+
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
