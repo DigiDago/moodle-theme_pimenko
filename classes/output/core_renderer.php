@@ -31,6 +31,8 @@ use context_course;
 use custom_menu;
 use html_writer;
 use completion_info;
+use context_system;
+use moodle_url;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -51,7 +53,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public final function render_login_page($OUTPUT): string {
-        global $SITE ,$PAGE;
+        global $SITE, $PAGE;
 
         // We check if the user is connected and we set the drawer to close.
         if (isloggedin()) {
@@ -70,7 +72,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         // Define some needed var for ur template.
         $template = new stdClass();
-        $template->sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
+        $template->sitename =
+                format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
         $template->bodyattributes = $OUTPUT->body_attributes($extraclasses);
 
         // Define nav for the drawer.
@@ -362,31 +365,26 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Returns true if manager buttons are to be shown, false otherwise.
-     *
-     * @return true if manager buttons are to be shown, false otherwise.
-     */
-    public function show_manager_buttons(): bool {
-        global $PAGE;
-        if (!empty($PAGE->layout_options['managerbtns']) && ($PAGE->layout_options['managerbtns'])) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Returns "add course" and "view all courses" buttons.
      *
      * @return string HTML for "add course" and "view all courses" buttons.
      */
     public function add_managerbtns(): string {
         global $CFG;
+
+        // We display this only if we are on dashboard page.
+        if ($this->page->pagelayout != "mydashboard") {
+            return false;
+        }
+
         $output = '';
         $output .= html_writer::start_tag(
                 'div',
                 ['class' => 'managerbtns']
         );
         $context = context_system::instance();
+
+        // Add button create course, we check user capability.
         if (has_capability(
                 'moodle/course:create',
                 $context
@@ -404,13 +402,16 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                     get_string('addnewcourse'),
                     'get'
             );
-            $url = new moodle_url('/course/index.php');
-            $output .= $this->single_button(
-                    $url,
-                    get_string('viewallcourses'),
-                    'get'
-            );
         }
+
+        // Add button redirect to course list.
+        $url = new moodle_url('/course/index.php');
+        $output .= $this->single_button(
+                $url,
+                get_string('viewallcourses'),
+                'get'
+        );
+
         $output .= html_writer::end_tag('div');
         return $output;
     }
