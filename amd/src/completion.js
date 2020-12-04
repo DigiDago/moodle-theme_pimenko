@@ -22,8 +22,8 @@
 define(['jquery', 'core/str', 'theme_boost/bootstrap/tooltip'], function($, str, tooltip) {
     let completioncheck = $('#completioncheck');
     let modulename = completioncheck.attr("data-modulename");
-    let tooltipAjxY = str.get_string('completion-tooltip-manual-y', 'theme_moockie2', modulename);
-    let tooltipAjxN = str.get_string('completion-tooltip-manual-n', 'theme_moockie2', modulename);
+    let tooltipAjxY = str.get_string('completion-tooltip-manual-y', 'theme_telaformation', modulename);
+    let tooltipAjxN = str.get_string('completion-tooltip-manual-n', 'theme_telaformation', modulename);
 
     let checkbox = document.getElementsByTagName("input");
 

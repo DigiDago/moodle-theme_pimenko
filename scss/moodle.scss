@@ -22,6 +22,7 @@
  */
 
 @import "../../boost/scss/moodle";
+@import "body";
 @import "login";
 @import "navbar";
 @import "navbardrawer";
@@ -29,3 +30,4 @@
 @import "profile";
 @import "footer";
 @import "completioncheck";
+@import "catalog";

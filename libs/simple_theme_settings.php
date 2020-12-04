@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of the moockie theme for Moodle
+// This file is part of the telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 
 /**
- * Theme moockie renderers file.
+ * Theme telaformation renderers file.
  * @package    theme_telaformation
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

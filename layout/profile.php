@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme moockie lib.
+ * Theme telaformation lib.
  * @package    theme_telaformation
  * @copyright  2017 DigiDago
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

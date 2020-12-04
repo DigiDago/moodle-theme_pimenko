@@ -1,0 +1,13 @@
+<div class="course_category_tree m-b-20 clearfix">
+
+    {{#expandall}}
+        <div class="collapsible-actions">
+            <a href="#" class="courseopenall">{{ expandall }}</a>
+            <a href="#" class="coursecloseall hidden">{{ collapseall }}</a>
+        </div>
+    {{/expandall}}
+
+    <div class="content">
+        {{{ categorycontent }}}
+    </div>
+</div>

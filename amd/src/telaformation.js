@@ -29,6 +29,23 @@ define(['jquery'],
             $(function() {
                 $("#completion-block").tooltip({trigger: "hover"});
             });
+
+            // Open all boxes on the Course Categories page.
+            $(".courseopenall").click(function(event) {
+                event.preventDefault();
+                $('.collapse').collapse("show");
+                $(".panel-heading").addClass("active");
+                $(this).toggleClass("hidden");
+                $(".coursecloseall").toggleClass("hidden");
+            });
+
+            $(".coursecloseall").click(function(event) {
+                event.preventDefault();
+                $(".collapse.show").collapse("hide");
+                $(".panel-heading").removeClass("active");
+                $(this).toggleClass("hidden");
+                $(".courseopenall").toggleClass("hidden");
+            });
         };
 
         return {

@@ -146,3 +146,6 @@ $string['completion-tooltip-auto-enabled']      = 'The system marks this item co
 $string['completion-tooltip-manual-enabled']    = 'Students can manually mark this item complete';
 $string['completion-alt-auto-enabled']          = 'The system marks this item complete';
 $string['completion-alt-manual-enabled']        = 'Students can manually mark this item complete';
+
+// Catalog
+$string['viewcat']              = 'View cat';

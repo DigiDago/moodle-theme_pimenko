@@ -360,4 +360,58 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
         return '';
     }
+
+    /**
+     * Returns true if manager buttons are to be shown, false otherwise.
+     *
+     * @return true if manager buttons are to be shown, false otherwise.
+     */
+    public function show_manager_buttons(): bool {
+        global $PAGE;
+        if (!empty($PAGE->layout_options['managerbtns']) && ($PAGE->layout_options['managerbtns'])) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns "add course" and "view all courses" buttons.
+     *
+     * @return string HTML for "add course" and "view all courses" buttons.
+     */
+    public function add_managerbtns(): string {
+        global $CFG;
+        $output = '';
+        $output .= html_writer::start_tag(
+                'div',
+                ['class' => 'managerbtns']
+        );
+        $context = context_system::instance();
+        if (has_capability(
+                'moodle/course:create',
+                $context
+        )) {
+            // Print link to create a new course, for the 1st available category.
+            $url = new moodle_url(
+                    '/course/edit.php',
+                    [
+                            'category' => $CFG->defaultrequestcategory,
+                            'returnto' => 'topcat'
+                    ]
+            );
+            $output .= $this->single_button(
+                    $url,
+                    get_string('addnewcourse'),
+                    'get'
+            );
+            $url = new moodle_url('/course/index.php');
+            $output .= $this->single_button(
+                    $url,
+                    get_string('viewallcourses'),
+                    'get'
+            );
+        }
+        $output .= html_writer::end_tag('div');
+        return $output;
+    }
 }
