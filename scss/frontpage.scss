@@ -1,0 +1,46 @@
+.front-page-row {
+
+    > div {
+        margin-top: 1rem;
+    }
+
+    .card {
+        background-color: inherit;
+        border: none;
+    }
+}
+
+.moodle-region {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+@for $i from 1 through 8 {
+
+    #front-page-row-#{$i} {
+        background-color: unquote("blockregionrowbackgroundcolor#{$i}");
+        color: unquote("blockregionrowtextcolor#{$i}");
+
+        a {
+            color: unquote("blockregionrowlinkcolor#{$i}");
+
+            &:hover,
+            &:focus {
+                color: unquote("blockregionrowlinkhovercolor#{$i}");
+            }
+
+            &.menu-action {
+
+                &,
+                &:hover,
+                &:focus {
+                    color: black;
+                }
+            }
+        }
+
+        .block_html .header h2 {
+            color: unquote("blockregionrowtextcolor#{$i}");
+        }
+    }
+}

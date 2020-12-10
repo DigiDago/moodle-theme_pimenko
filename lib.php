@@ -111,7 +111,40 @@ function theme_telaformation_process_css($css, $theme) {
             'navbarcolor' => '#FFF',
             'navbartextcolor' => '#343B3F',
             'footercolor' => '#343B3F',
-            'footertextcolor' => '#FFF'
+            'footertextcolor' => '#FFF',
+            'blockregionrowbackgroundcolor1' => '',
+            'blockregionrowbackgroundcolor2' => '',
+            'blockregionrowbackgroundcolor3' => '',
+            'blockregionrowbackgroundcolor4' => '',
+            'blockregionrowbackgroundcolor5' => '',
+            'blockregionrowbackgroundcolor6' => '',
+            'blockregionrowbackgroundcolor7' => '',
+            'blockregionrowbackgroundcolor8' => '',
+            'blockregionrowtextcolor1' => '',
+            'blockregionrowtextcolor2' => '',
+            'blockregionrowtextcolor3' => '',
+            'blockregionrowtextcolor4' => '',
+            'blockregionrowtextcolor5' => '',
+            'blockregionrowtextcolor6' => '',
+            'blockregionrowtextcolor7' => '',
+            'blockregionrowtextcolor8' => '',
+            'blockregionrowlinkcolor1' => '',
+            'blockregionrowlinkcolor2' => '',
+            'blockregionrowlinkcolor3' => '',
+            'blockregionrowlinkcolor4' => '',
+            'blockregionrowlinkcolor5' => '',
+            'blockregionrowlinkcolor6' => '',
+            'blockregionrowlinkcolor7' => '',
+            'blockregionrowlinkcolor8' => '',
+            'blockregionrowlinkhovercolor1' => '',
+            'blockregionrowlinkhovercolor2' => '',
+            'blockregionrowlinkhovercolor3' => '',
+            'blockregionrowlinkhovercolor4' => '',
+            'blockregionrowlinkhovercolor5' => '',
+            'blockregionrowlinkhovercolor6' => '',
+            'blockregionrowlinkhovercolor7' => '',
+            'blockregionrowlinkhovercolor8' => '',
+            'googlefont' => 'Verdana',
     ];
 
     // Get all the defined settings for the theme and replace defaults.
@@ -155,11 +188,11 @@ function theme_telaformation_process_css($css, $theme) {
 
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
-    $defaults['darkennavcolor'] = colourBrightness($color,-0.5);
+    $defaults['darkennavcolor'] = colourBrightness($color, -0.5);
 
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
-    $defaults['darkenfootercolor'] = colourBrightness($color,-0.5);
+    $defaults['darkenfootercolor'] = colourBrightness($color, -0.5);
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);
@@ -221,19 +254,20 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
     if (empty($theme)) {
         $theme = theme_config::load('telaformation');
     }
+
     if ($context->contextlevel == CONTEXT_SYSTEM) {
         // By default, theme files must be cache-able by both browsers and proxies.  From 'More' theme.
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
         }
-        if ($filearea === 'loginbgimage') {
-            return $theme->setting_file_serve('loginbgimage', $args, $forcedownload, $options);
-        } else if ($filearea === 'favicon') {
-            return $theme->setting_file_serve('favicon', $args, $forcedownload, $options);
-        }  else if ($filearea === 'sitelogo') {
-            return $theme->setting_file_serve('sitelogo', $args, $forcedownload, $options);
-        } else {
-            send_file_not_found();
+        switch ($filearea) {
+            case 'loginbgimage':
+            case 'favicon':
+            case 'sitelogo':
+            case strstr($filearea, 'slideimage'):
+                return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+            default:
+                send_file_not_found();
         }
     } else {
         send_file_not_found();
@@ -241,8 +275,7 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
 }
 
 /** Function to darker css */
-function colourBrightness($hex, $percent)
-{
+function colourBrightness($hex, $percent) {
     // Work out if hash given
     $hash = '';
     if (stristr($hex, '#')) {
@@ -291,30 +324,30 @@ function colourBrightness($hex, $percent)
 function telaformation_redirect_to_profile_page($bodyid) {
     global $USER;
     if (optional_param(
-            'noredir' , 0 , PARAM_INT
+            'noredir', 0, PARAM_INT
     )) {
         return;
     }
     if ($bodyid == 'page-user-profile') {
-        $id          = optional_param(
-                'id' , 0 , PARAM_INT
+        $id = optional_param(
+                'id', 0, PARAM_INT
         );
-        $params      = [ 'userid' => $id ];
+        $params = ['userid' => $id];
         $redirecturl = new moodle_url(
-                '/theme/telaformation/layout/profile.php' , $params
+                '/theme/telaformation/layout/profile.php', $params
         );
-        if (!empty( $id )) {
-            redirect( $redirecturl );
+        if (!empty($id)) {
+            redirect($redirecturl);
         }
     } else if ($bodyid == 'page-user-preferences') {
-        $params      = [
-                'userid'      => $USER->id ,
+        $params = [
+                'userid' => $USER->id,
                 'preferences' => 1
         ];
         $redirecturl = new moodle_url(
-                '/theme/telaformation/layout/profile.php' , $params
+                '/theme/telaformation/layout/profile.php', $params
         );
-        redirect( $redirecturl );
+        redirect($redirecturl);
     }
 
 }
@@ -326,4 +359,20 @@ function theme_telaformation_get_fontawesome_icon_map() {
     return [
             'theme_telaformation:t/check' => 'fa-check',
     ];
+}
+
+/**
+ * @return array
+ */
+function theme_telaformation_regions() {
+    $regions = [
+            'side-pre',
+            'side-post'
+    ];
+    foreach (range(
+            'a', 'u'
+    ) as $reg) {
+        $regions[] = 'theme-front-' . $reg;
+    }
+    return $regions;
 }

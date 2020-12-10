@@ -27,6 +27,8 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
+require_once( $CFG->dirroot . '/theme/telaformation/lib.php' );
+
 // $THEME is defined before this page is included and we can define settings by adding properties to this global object.
 
 // The first setting we need is the name of the theme. This should be the last part of the component name, and the same
@@ -100,4 +102,10 @@ $THEME->layouts = [
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
         ),
+        // The site home page.
+        'frontpage'      => [
+                'file'          => 'frontpage.php',
+                'defaultregion' => 'side-pre',
+                'regions'       => theme_telaformation_regions(),
+        ],
 ];

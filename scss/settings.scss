@@ -1,0 +1,18 @@
+// Banner settings page - display a description on top
+#page-admin-setting-themesettingtelaformation {
+
+    #admin-settingsdescription,
+    #admin-frontpageblocksettingscription {
+
+        .form-label,
+        .form-checkbox,
+        .form-defaultinfo {
+            display: none;
+        }
+
+        .form-setting {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+}

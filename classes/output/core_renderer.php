@@ -218,6 +218,22 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Returns the google font set
+     *
+     * @return string Google font
+     */
+    public function googlefont(): string {
+        if (!empty($this->page->theme->settings->googlefont)) {
+            if (empty($this->themeconfig)) {
+                $this->themeconfig = $theme = theme_config::load('telaformation');
+            }
+            return $this->page->theme->settings->googlefont;
+        }
+        // The default font we use if no settings define.
+        return 'Verdana';
+    }
+
+    /**
      * Renders the login form.
      *
      * @param \core_auth\output\login $form The renderable.
@@ -414,5 +430,92 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         $output .= html_writer::end_tag('div');
         return $output;
+    }
+
+    /**
+     * Renders block regions on home page
+     *
+     * @return string
+     */
+    public function get_block_regions(): string {
+
+        global $PAGE, $USER;
+
+        $settingsname = 'blockrow';
+        $fields = [];
+        $retval = '';
+        $blockcount = 0;
+        $style = '';
+        $adminediting = false;
+
+        if (is_siteadmin() && isset($USER->editing) && $USER->editing == 1) {
+            $style = '" style="display: block; background: #EEEEEE; min-height: 50px;
+            border: 2px dashed #BFBDBD; margin-top: 5px';
+            $adminediting = true;
+        }
+        for ($i = 1; $i <= 8; $i++) {
+            $blocksrow = "{$settingsname}{$i}";
+            $blocksrow = $PAGE->theme->settings->$blocksrow;
+            if ($blocksrow != '0-0-0-0') {
+                $fields[] = $blocksrow;
+            }
+        }
+
+        $i = 0;
+        foreach ($fields as $field) {
+            $retval .= '<div class="row front-page-row" id="front-page-row-' . ++$i . '">';
+            $vals = explode(
+                    '-',
+                    $field
+            );
+            foreach ($vals as $val) {
+                if ($val > 0) {
+                    $retval .= "<div class=\"col-md-{$val}{$style}\">";
+
+                    // Moodle does not seem to like numbers in region names so using letter instead.
+                    $blockcount++;
+                    $block = 'theme-front-' . chr(96 + $blockcount);
+
+                    if ($adminediting) {
+                        $retval .= '<span style="padding-left: 10px;"> ' . '' . '</span>';
+                    }
+
+                    $retval .= $this->blocks(
+                            $block,
+                            'block-region-front container-fluid'
+                    );
+                    $retval .= '</div>';
+                }
+            }
+            $retval .= '</div>';
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Check if renderer is enabled.
+     *
+     * @return bool
+     */
+    public function is_carousel_enabled(): bool {
+        if (empty($this->themeconfig)) {
+            $this->themeconfig = $theme = theme_config::load('telaformation');
+        }
+        if (isset($this->themeconfig->settings->enablecarousel) && $this->themeconfig->settings->enablecarousel == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Init carousel renderer.
+     *
+     * @return string
+     */
+    public function carousel(): string {
+        global $PAGE;
+        $carousel = $PAGE->get_renderer('theme_telaformation', 'carousel');
+        return $carousel->output();
     }
 }

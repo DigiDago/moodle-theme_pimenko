@@ -28,7 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/libs/admin_setting_confightmleditor.php');
-require_once( __DIR__ . "/libs/simple_theme_settings.php" );
+require_once(__DIR__ . "/libs/simple_theme_settings.php");
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
@@ -91,6 +91,16 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    $setting = new simple_theme_settings(
+            $page,
+            'theme_telaformation',
+            'settings:font:'
+    );
+    $setting->add_text(
+            'googlefont',
+            'Verdana'
+    );
+
     // Must add the page after definiting all the settings!
     $settings->add($page);
 
@@ -112,6 +122,7 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
     // Login settings
+    include(dirname(__FILE__) . '/settings/frontpage.php');
     include(dirname(__FILE__) . '/settings/login.php');
     include(dirname(__FILE__) . '/settings/navbar.php');
     include(dirname(__FILE__) . '/settings/footer.php');
