@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -296,4 +295,3 @@ class simple_theme_settings {
         }
     }
 }
-

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -121,7 +120,7 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // Login settings
+    // Login settings.
     include(dirname(__FILE__) . '/settings/frontpage.php');
     include(dirname(__FILE__) . '/settings/login.php');
     include(dirname(__FILE__) . '/settings/navbar.php');

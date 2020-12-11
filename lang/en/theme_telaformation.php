@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +24,7 @@
  */
 
 // This line protects the file from being accessed by a URL directly.
-// This is the EN Lang package
+// This is the EN Lang package.
 defined('MOODLE_INTERNAL') || die();
 
 // A description shown in the admin theme selector.
@@ -63,7 +62,7 @@ $string['rawscsspre_desc'] =
 // We need to include a lang string for each block region.
 $string['region-side-pre'] = 'Right';
 
-// Login page traduction
+// Login page traduction.
 $string['loginsettings'] = 'Login page settings';
 $string['logintextboxtop'] = 'Top text box';
 $string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
@@ -127,7 +126,7 @@ $string['stylestretch'] = 'Stretch';
 $string['hide'] = 'Hide';
 $string['show'] = 'Show';
 
-//Completion.
+// Completion.
 $string['completion-alt-manual-n'] = 'Not complete';
 $string['completion-alt-manual-n-override'] = 'Not complete';
 $string['completion-alt-manual-y'] = 'Not complete';
@@ -150,7 +149,7 @@ $string['completion-tooltip-manual-enabled'] = 'Students can manually mark this 
 $string['completion-alt-auto-enabled'] = 'The system marks this item complete';
 $string['completion-alt-manual-enabled'] = 'Students can manually mark this item complete';
 
-// Catalog
+// Catalog.
 $string['viewcat'] = 'View cat';
 
 // Block Regions.
@@ -158,9 +157,7 @@ $string['settings:regions:title'] = 'Frontpage Block Settings';
 $string['settings:regions:frontpageblocksettingscription'] = '';
 $string['settings:regions:frontpageblocksettingscriptiondesc'] =
         'On this page you can determine the composition of the homepage, which can be divided into 8 lines. For each line, you can determine the color and if it should be composed of one or more columns. Important : after making the changes, go to the homepage of your site to add content using blocks. You can find the homepage here : <a href= ' .
-        new moodle_url(
-                $CFG->wwwroot . '/?redirect=0'
-        ) . '>Homepage</a>.';
+        new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Homepage</a>.';
 $string['settings:regions:blockrow'] = 'Block Region Row {$a}';
 $string['settings:regions:blockrowdesc'] = 'Add / set layout for block region row on front page.';
 

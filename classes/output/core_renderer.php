@@ -25,6 +25,7 @@
 
 namespace theme_telaformation\output;
 
+use core_auth\output\login;
 use stdClass;
 use theme_config;
 use context_course;
@@ -45,21 +46,22 @@ defined('MOODLE_INTERNAL') || die;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class core_renderer extends \theme_boost\output\core_renderer {
+    private $themeconfig;
 
     /**
      * Returns template of login page.
      *
-     * @param $OUTPUT
+     * @param $output
+     *
      * @return string
      */
-    public final function render_login_page($OUTPUT): string {
-        global $SITE, $PAGE;
+    public function render_login_page($output): string {
+        global $SITE;
 
         // We check if the user is connected and we set the drawer to close.
         if (isloggedin()) {
             $navdraweropen = (get_user_preferences(
-                            'drawer-open-nav',
-                            'false'
+                            'drawer-open-nav', 'false'
                     ) == 'false');
         } else {
             $navdraweropen = false;
@@ -72,49 +74,26 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         // Define some needed var for ur template.
         $template = new stdClass();
-        $template->sitename =
-                format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
-        $template->bodyattributes = $OUTPUT->body_attributes($extraclasses);
+        $template->sitename = format_string(
+                $SITE->shortname, true, [
+                        'context' => context_course::instance(SITEID),
+                        "escape" => false
+                ]
+        );
+        $template->bodyattributes = $output->body_attributes($extraclasses);
 
         // Define nav for the drawer.
-        $template->flatnavigation = $PAGE->flatnav;
+        $template->flatnavigation = $this->page->flatnav;
 
         // Output content.
-        $template->output = $OUTPUT;
+        $template->output = $output;
 
         // Main login content.
-        $template->maincontent = $OUTPUT->main_content();
+        $template->maincontent = $output->main_content();
 
-        return $OUTPUT->render_from_template(
-                'theme_telaformation/login',
-                $template
+        return $output->render_from_template(
+                'theme_telaformation/login', $template
         );
-    }
-
-    /**
-     * Returns settings as formatted text
-     *
-     * @param string $setting
-     * @param bool $format = false
-     * @param string $theme = null
-     * @return string
-     */
-    public function get_setting($setting, $format = false, $theme = null) {
-        if (empty($theme)) {
-            $theme = theme_config::load('telaformation');
-        }
-
-        if (empty($theme->settings->$setting)) {
-            return false;
-        } else if (!$format) {
-            return $theme->settings->$setting;
-        } else if ($format === 'format_text') {
-            return format_text($theme->settings->$setting, FORMAT_PLAIN);
-        } else if ($format === 'format_html') {
-            return format_text($theme->settings->$setting, FORMAT_HTML, array('trusted' => true));
-        } else {
-            return format_string($theme->settings->$setting);
-        }
     }
 
     /**
@@ -127,8 +106,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('telaformation');
             }
             $sitelogo = $this->themeconfig->setting_file_url(
-                    'sitelogo',
-                    'sitelogo'
+                    'sitelogo', 'sitelogo'
             );
         }
         return $sitelogo;
@@ -161,17 +139,14 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                         "/<\/p>/"
                 ];
                 $textwithoutspace = preg_replace(
-                        $space,
-                        '',
-                        $theme->settings->$text
+                        $space, '', $theme->settings->$text
                 );
                 if (!empty($textwithoutspace)) {
                     $column = new stdClass();
                     $column->text = format_text($theme->settings->$text);
                     $column->list = [];
                     $menu = new custom_menu(
-                            $column->text,
-                            current_language()
+                            $column->text, current_language()
                     );
                     foreach ($menu->get_children() as $item) {
                         $listitem = new stdClass();
@@ -194,8 +169,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return $this->render_from_template(
-                'theme_telaformation/footercustomcontent',
-                $template
+                'theme_telaformation/footercustomcontent', $template
         );
     }
 
@@ -210,8 +184,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('telaformation');
             }
             return $this->themeconfig->setting_file_url(
-                    'favicon',
-                    'favicon'
+                    'favicon', 'favicon'
             );
         }
         return parent::favicon();
@@ -236,11 +209,12 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Renders the login form.
      *
-     * @param \core_auth\output\login $form The renderable.
+     * @param login $form The renderable.
+     *
      * @return string
      */
-    public function render_login(\core_auth\output\login $form) {
-        global $CFG, $SITE, $OUTPUT;
+    public function render_login(login $form) {
+        global $CFG, $SITE;
 
         $context = $form->export_for_template($this);
 
@@ -256,13 +230,44 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $url = $url->out(false);
         }
         $context->logourl = $url;
-        $context->sitename = format_string($SITE->fullname, true,
-                ['context' => context_course::instance(SITEID), "escape" => false]);
+        $context->sitename = format_string(
+                $SITE->fullname, true, [
+                        'context' => context_course::instance(SITEID),
+                        "escape" => false
+                ]
+        );
 
-        $context->logintextboxtop = $OUTPUT->get_setting('logintextboxtop', 'format_html');
-        $context->logintextboxbottom = $OUTPUT->get_setting('logintextboxbottom', 'format_html');
+        $context->logintextboxtop = self::get_setting('logintextboxtop', 'format_html');
+        $context->logintextboxbottom = self::get_setting('logintextboxbottom', 'format_html');
 
         return $this->render_from_template('core/loginform', $context);
+    }
+
+    /**
+     * Returns settings as formatted text
+     *
+     * @param string $setting
+     * @param bool $format = false
+     * @param string $theme = null
+     *
+     * @return string
+     */
+    public function get_setting($setting, $format = false, $theme = null) {
+        if (empty($theme)) {
+            $theme = theme_config::load('telaformation');
+        }
+
+        if (empty($theme->settings->$setting)) {
+            return false;
+        } else if (!$format) {
+            return $theme->settings->$setting;
+        } else if ($format === 'format_text') {
+            return format_text($theme->settings->$setting, FORMAT_PLAIN);
+        } else if ($format === 'format_html') {
+            return format_text($theme->settings->$setting, FORMAT_HTML, ['trusted' => true]);
+        } else {
+            return format_string($theme->settings->$setting);
+        }
     }
 
     /**
@@ -273,27 +278,25 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string list of $mod, show completed activity (bool), and show completion modal (bool)
      */
     public function render_completion_footer(): string {
-        global $PAGE, $COURSE, $OUTPUT;
+        global $COURSE;
 
         if ($COURSE->enablecompletion != COMPLETION_ENABLED) {
             return '';
         }
 
-        if ($OUTPUT->body_id() == 'page-mod-quiz-attempt') {
+        if ($this->output->body_id() == 'page-mod-quiz-attempt') {
             return '';
         }
 
         echo html_writer::start_tag(
-                'form',
-                [
+                'form', [
                         'action' => '.',
                         'method' => 'get'
                 ]
         );
         echo html_writer::start_tag('div');
         echo html_writer::empty_tag(
-                'input',
-                [
+                'input', [
                         'type' => 'hidden',
                         'id' => 'completion_dynamic_change',
                         'name' => 'completion_dynamic_change',
@@ -303,19 +306,17 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('form');
 
-        $PAGE->requires->js_init_call('M.core_completion.init');
+        $this->page->requires->js_init_call('M.core_completion.init');
 
-        $renderer = $PAGE->get_renderer(
-                'core',
-                'course'
+        $renderer = $this->page->get_renderer(
+                'core', 'course'
         );
 
         $completioninfo = new completion_info($COURSE);
 
-        // Short-circuit if we are not on a mod page, and allow restful access
+        // Short-circuit if we are not on a mod page, and allow restful access.
         $pagepath = explode(
-                '-',
-                $PAGE->pagetype
+                '-', $this->page->pagetype
         );
         if ($pagepath[0] != 'mod') {
             return '';
@@ -324,34 +325,33 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             return '';
         }
         // Make sure we have a mod object.
-        $mod = $PAGE->cm;
+        $mod = $this->page->cm;
         if (!is_object($mod)) {
             return '';
         }
 
-        // Get all course modules from modinfo
+        // Get all course modules from modinfo.
         $cms = $mod->get_modinfo()->cms;
 
         $currentcmidfoundflag = false;
         $nextmod = false;
-        // Loop through all course modules to find the next mod
+        // Loop through all course modules to find the next mod.
         foreach ($cms as $cmid => $cm) {
-            // The nextmod must be after the current mod
-            // Keep looping until the current mod is found (+1)
+            // The nextmod must be after the current mod.
+            // Keep looping until the current mod is found (+1).
             if (!$currentcmidfoundflag) {
                 if ($cmid == $mod->id) {
                     $currentcmidfoundflag = true;
                 }
 
-                // short circuit to next mod in list
+                // Short circuit to next mod in list.
                 continue;
 
             } else {
-                // (The continue and else condition are not mutually neccessary
-                // but the statement block is more clear with the explicit else)
-
-                // The current activity has been found... set the next activity to the first
-                // user visible mod after this point.
+                // The continue and else condition are not mutually neccessary.
+                // But the statement block is more clear with the explicit else).
+                // The current activity has been found... set the next activity to the first.
+                // User visible mod after this point.
                 if ($cm->uservisible) {
                     $nextmod = $cm;
                     break;
@@ -367,14 +367,10 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         if ($completioninfo->is_enabled($mod)) {
             $template->completionicon = $renderer->course_section_cm_completion(
-                    $COURSE,
-                    $completioninfo,
-                    $mod,
-                    ['showcompletiontext' => true]
+                    $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
             );
-            return $OUTPUT->render_from_template(
-                    'theme_telaformation/completionfooter',
-                    $template
+            return $this->output->render_from_template(
+                    'theme_telaformation/completionfooter', $template
             );
         }
         return '';
@@ -395,37 +391,30 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         $output = '';
         $output .= html_writer::start_tag(
-                'div',
-                ['class' => 'managerbtns']
+                'div', ['class' => 'managerbtns']
         );
         $context = context_system::instance();
 
         // Add button create course, we check user capability.
         if (has_capability(
-                'moodle/course:create',
-                $context
+                'moodle/course:create', $context
         )) {
             // Print link to create a new course, for the 1st available category.
             $url = new moodle_url(
-                    '/course/edit.php',
-                    [
+                    '/course/edit.php', [
                             'category' => $CFG->defaultrequestcategory,
                             'returnto' => 'topcat'
                     ]
             );
             $output .= $this->single_button(
-                    $url,
-                    get_string('addnewcourse'),
-                    'get'
+                    $url, get_string('addnewcourse'), 'get'
             );
         }
 
         // Add button redirect to course list.
         $url = new moodle_url('/course/index.php');
         $output .= $this->single_button(
-                $url,
-                get_string('viewallcourses'),
-                'get'
+                $url, get_string('viewallcourses'), 'get'
         );
 
         $output .= html_writer::end_tag('div');
@@ -439,7 +428,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function get_block_regions(): string {
 
-        global $PAGE, $USER;
+        global $USER;
 
         $settingsname = 'blockrow';
         $fields = [];
@@ -450,12 +439,12 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         if (is_siteadmin() && isset($USER->editing) && $USER->editing == 1) {
             $style = '" style="display: block; background: #EEEEEE; min-height: 50px;
-            border: 2px dashed #BFBDBD; margin-top: 5px';
+        border: 2px dashed #BFBDBD; margin-top: 5px';
             $adminediting = true;
         }
         for ($i = 1; $i <= 8; $i++) {
             $blocksrow = "{$settingsname}{$i}";
-            $blocksrow = $PAGE->theme->settings->$blocksrow;
+            $blocksrow = $this->page->theme->settings->$blocksrow;
             if ($blocksrow != '0-0-0-0') {
                 $fields[] = $blocksrow;
             }
@@ -465,8 +454,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         foreach ($fields as $field) {
             $retval .= '<div class="row front-page-row" id="front-page-row-' . ++$i . '">';
             $vals = explode(
-                    '-',
-                    $field
+                    '-', $field
             );
             foreach ($vals as $val) {
                 if ($val > 0) {
@@ -481,8 +469,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                     }
 
                     $retval .= $this->blocks(
-                            $block,
-                            'block-region-front container-fluid'
+                            $block, 'block-region-front container-fluid'
                     );
                     $retval .= '</div>';
                 }
@@ -502,7 +489,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if (empty($this->themeconfig)) {
             $this->themeconfig = $theme = theme_config::load('telaformation');
         }
-        if (isset($this->themeconfig->settings->enablecarousel) && $this->themeconfig->settings->enablecarousel == 1) {
+        if (isset($this->themeconfig->settings->enablecarousel)
+                && $this->themeconfig->settings->enablecarousel == 1) {
             return true;
         }
         return false;
@@ -514,8 +502,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function carousel(): string {
-        global $PAGE;
-        $carousel = $PAGE->get_renderer('theme_telaformation', 'carousel');
+        $carousel = $this->page->get_renderer('theme_telaformation', 'carousel');
         return $carousel->output();
     }
 }

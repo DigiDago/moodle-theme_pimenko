@@ -16,11 +16,16 @@
 
 /**
  * Theme telaformation lib.
+ *
  * @package    theme_telaformation
  * @copyright  2017 DigiDago
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require(__DIR__.'/../../../config.php');
+
+require(__DIR__ . '/../../../config.php');
+require_login();
+
+global $OUTPUT, $PAGE;
 
 $context = context_system::instance();
 
@@ -31,11 +36,10 @@ $userid = required_param(
 
 $PAGE->set_url(
         '/user/profile.php',
-        [ 'id' => $userid ]
+        ['id' => $userid]
 );
 
 if (!empty($CFG->forceloginforprofiles)) {
-    require_login();
     if (isguestuser()) {
         $PAGE->set_context(context_system::instance());
         echo $OUTPUT->header();
@@ -50,8 +54,6 @@ if (!empty($CFG->forceloginforprofiles)) {
         echo $OUTPUT->footer();
         die;
     }
-} else if (!empty($CFG->forcelogin)) {
-    require_login();
 }
 
 $PAGE->set_context($context);

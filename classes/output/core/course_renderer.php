@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -17,6 +16,7 @@
 
 /**
  * Course renderer.
+ *
  * @package    theme_telaformation
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -33,10 +33,11 @@ use moodle_url;
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once( $CFG->dirroot . '/course/renderer.php' );
+require_once($CFG->dirroot . '/course/renderer.php');
 
 /**
  * Course renderer class.
+ *
  * @package    theme_telaformation
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -50,17 +51,16 @@ class course_renderer extends \core_course_renderer {
      * If completion is manual, returns a form (with an icon inside) that allows user to
      * toggle completion
      *
-     * @param stdClass        $course         course object
+     * @param stdClass $course course object
      * @param completion_info $completioninfo completion info for the course, it is recommended
      *                                        to fetch once for all modules in course/section for performance
-     * @param cm_info         $mod            module to show completion for
-     * @param array           $displayoptions display options, not used in core
+     * @param cm_info $mod module to show completion for
+     * @param array $displayoptions display options, not used in core
      *
      * @return string
      * @throws \coding_exception
      */
     public function course_section_cm_completion($course, &$completioninfo, cm_info $mod, $displayoptions = []) {
-        global $OUTPUT;
         $output = '';
         if (!empty($displayoptions['hidecompletion']) || !isloggedin() || isguestuser() || !$mod->uservisible) {
             return $output;
@@ -79,11 +79,11 @@ class course_renderer extends \core_course_renderer {
             return $output;
         }
 
-        $completiondata   = $completioninfo->get_data(
+        $completiondata = $completioninfo->get_data(
                 $mod,
                 true
         );
-        $completionicon   = '';
+        $completionicon = '';
         $completioniconop = '';
 
         if ($this->page->user_is_editing()) {
@@ -98,15 +98,16 @@ class course_renderer extends \core_course_renderer {
         } else if ($completion == COMPLETION_TRACKING_MANUAL) {
             switch ($completiondata->completionstate) {
                 case COMPLETION_INCOMPLETE:
-                    $completionicon   = 'manual-n';
+                    $completionicon = 'manual-n';
                     $completioniconop = 'manual-y';
                     break;
                 case COMPLETION_COMPLETE:
-                    $completionicon   = 'manual-y';
+                    $completionicon = 'manual-y';
                     $completioniconop = 'manual-n';
                     break;
             }
-        } else { // Automatic
+        } else {
+            // Automatic.
             switch ($completiondata->completionstate) {
                 case COMPLETION_INCOMPLETE:
                     $completionicon = 'auto-n';
@@ -127,10 +128,10 @@ class course_renderer extends \core_course_renderer {
 
         if ($completionicon) {
             $modtemplate->completionicon = $completionicon;
-            $modtemplate->modid          = $mod->id;
-            $modtemplate->modname        = format_string($mod->name);
-            $modtemplate->status         = null;
-            if($this->page->pagelayout == 'incourse') {
+            $modtemplate->modid = $mod->id;
+            $modtemplate->modname = format_string($mod->name);
+            $modtemplate->status = null;
+            if ($this->page->pagelayout == 'incourse') {
                 $modtemplate->displayicon = true;
             }
 
@@ -144,7 +145,7 @@ class course_renderer extends \core_course_renderer {
                                 $formattedname
                         )
                 );
-                $modtemplate->tooltiptext  = format_string(
+                $modtemplate->tooltiptext = format_string(
                         get_string(
                                 'completion-tooltip-' . $completionicon,
                                 'theme_telaformation'
@@ -161,13 +162,13 @@ class course_renderer extends \core_course_renderer {
 
             if ($this->page->user_is_editing()) {
                 $modtemplate->useredit = 1;
-                $modtemplate->state    = 1;
+                $modtemplate->state = 1;
                 if ($completiondata->completionstate == COMPLETION_COMPLETE) {
                     $modtemplate->status = 'checked';
-                    $modtemplate->state  = 0;
+                    $modtemplate->state = 0;
                 }
                 $modtemplate->class = 'completioncheck';
-                $output             .= $OUTPUT->render_from_template(
+                $output .= $this->output->render_from_template(
                         'theme_telaformation/completioncheck',
                         $modtemplate
                 );
@@ -176,10 +177,10 @@ class course_renderer extends \core_course_renderer {
                 $modtemplate->state = 1;
                 if ($completiondata->completionstate == COMPLETION_COMPLETE) {
                     $modtemplate->status = 'checked';
-                    $modtemplate->state  = 0;
+                    $modtemplate->state = 0;
                 }
                 $modtemplate->class = 'completioncheck';
-                $output             .= $OUTPUT->render_from_template(
+                $output .= $this->output->render_from_template(
                         'theme_telaformation/completioncheck',
                         $modtemplate
                 );
@@ -189,17 +190,17 @@ class course_renderer extends \core_course_renderer {
                 if ($completionicon == 'auto-y' || $completionicon == 'auto-pass') {
 
                     $modtemplate->status = 'checked disabled';
-                    $modtemplate->class  = 'autocompletioncheck';
+                    $modtemplate->class = 'autocompletioncheck';
 
-                    $output .= $OUTPUT->render_from_template(
+                    $output .= $this->output->render_from_template(
                             'theme_telaformation/completioncheck',
                             $modtemplate
                     );
 
                 } else {
                     $modtemplate->status = 'disabled';
-                    $modtemplate->class  = 'autocompletioncheck';
-                    $output              .= $OUTPUT->render_from_template(
+                    $modtemplate->class = 'autocompletioncheck';
+                    $output .= $this->output->render_from_template(
                             'theme_telaformation/completioncheck',
                             $modtemplate
                     );
@@ -212,14 +213,14 @@ class course_renderer extends \core_course_renderer {
     /**
      * Returns HTML to display a tree of subcategories and courses in the given category.
      *
-     * @param coursecat_helper $chelper   various display options
-     * @param coursecat        $coursecat top category (this category's name and description will NOT be added to the
+     * @param coursecat_helper $chelper various display options
+     * @param coursecat $coursecat top category (this category's name and description will NOT be added to the
      *                                    tree)
      *
      * @return string
      */
     protected function coursecat_tree(coursecat_helper $chelper, $coursecat) {
-        global $OUTPUT, $CFG;
+        global $CFG;
         $template = new stdClass();
 
         // We need root path.
@@ -237,11 +238,11 @@ class course_renderer extends \core_course_renderer {
         $template->categorycontent = $categorycontent;
 
         if ($coursecat->get_children_count()) {
-            $template->expandall   = get_string('expandall');
+            $template->expandall = get_string('expandall');
             $template->collapseall = get_string('collapseall');
         }
 
-        return $OUTPUT->render_from_template(
+        return $this->output->render_from_template(
                 'theme_telaformation/course_category_tree',
                 $template
         );
@@ -251,15 +252,15 @@ class course_renderer extends \core_course_renderer {
      * Renders the list of subcategories in a category.
      *
      * @param coursecat_helper $chelper various display options
-     * @param coursecat        $coursecat
-     * @param int              $depth   depth of the category in the current tree
+     * @param coursecat $coursecat
+     * @param int $depth depth of the category in the current tree
      *
      * @return string
      * @throws \coding_exception
      * @throws \moodle_exception
      */
     protected function coursecat_subcategories(coursecat_helper $chelper, $coursecat, $depth) {
-        global $CFG, $OUTPUT;
+        global $CFG;
 
         $this->collapsecontainerid++;
 
@@ -276,23 +277,23 @@ class course_renderer extends \core_course_renderer {
         }
 
         // Prepare content of paging bar or more link if it is needed.
-        $paginationurl      = $chelper->get_categories_display_option('paginationurl');
+        $paginationurl = $chelper->get_categories_display_option('paginationurl');
         $paginationallowall = $chelper->get_categories_display_option('paginationallowall');
         if ($totalcount > count($subcategories)) {
             if ($paginationurl) {
                 // The option 'paginationurl was specified, display pagingbar.
-                $perpage   = $chelper->get_categories_display_option(
+                $perpage = $chelper->get_categories_display_option(
                         'limit',
                         $CFG->coursesperpage
                 );
-                $page      = $chelper->get_categories_display_option('offset') / $perpage;
+                $page = $chelper->get_categories_display_option('offset') / $perpage;
                 $pagingbar = $this->paging_bar(
                         $totalcount,
                         $page,
                         $perpage,
                         $paginationurl->out(
                                 false,
-                                [ 'perpage' => $perpage ]
+                                ['perpage' => $perpage]
                         )
                 );
                 if ($paginationallowall) {
@@ -301,7 +302,7 @@ class course_renderer extends \core_course_renderer {
                             html_writer::link(
                                     $paginationurl->out(
                                             false,
-                                            [ 'perpage' => 'all' ]
+                                            ['perpage' => 'all']
                                     ),
                                     get_string(
                                             'showall',
@@ -309,7 +310,7 @@ class course_renderer extends \core_course_renderer {
                                             $totalcount
                                     )
                             ),
-                            [ 'class' => 'paging paging-showall' ]
+                            ['class' => 'paging paging-showall']
                     );
                 }
             } else if ($viewmoreurl = $chelper->get_categories_display_option('viewmoreurl')) {
@@ -327,23 +328,23 @@ class course_renderer extends \core_course_renderer {
                         'viewmoretext',
                         new lang_string('viewmore')
                 );
-                $morelink     = html_writer::tag(
+                $morelink = html_writer::tag(
                         'div',
                         html_writer::link(
                                 $viewmoreurl,
                                 $viewmoretext
                         ),
-                        [ 'class' => 'paging paging-morelink' ]
+                        ['class' => 'paging paging-morelink']
                 );
             }
-        } else if (( $totalcount > $CFG->coursesperpage ) && $paginationurl && $paginationallowall) {
+        } else if (($totalcount > $CFG->coursesperpage) && $paginationurl && $paginationallowall) {
             // There are more than one page of results and we are in 'view all' mode, suggest to go back to paginated view mode.
             $pagingbar = html_writer::tag(
                     'div',
                     html_writer::link(
                             $paginationurl->out(
                                     false,
-                                    [ 'perpage' => $CFG->coursesperpage ]
+                                    ['perpage' => $CFG->coursesperpage]
                             ),
                             get_string(
                                     'showperpage',
@@ -351,16 +352,16 @@ class course_renderer extends \core_course_renderer {
                                     $CFG->coursesperpage
                             )
                     ),
-                    [ 'class' => 'paging paging-showperpage' ]
+                    ['class' => 'paging paging-showperpage']
             );
         }
 
         // Display list of subcategories.
-        $template        = new stdClass();
+        $template = new stdClass();
         $template->items = [];
 
         $template->collapseid = 'accordion_' . $this->collapsecontainerid;
-        $chelper->collapseid  = 'accordion_' . $this->collapsecontainerid;
+        $chelper->collapseid = 'accordion_' . $this->collapsecontainerid;
         foreach ($subcategories as $subcategory) {
             $template->items[] = $this->coursecat_category(
                     $chelper,
@@ -375,7 +376,7 @@ class course_renderer extends \core_course_renderer {
             $template->morelink = $morelink;
         }
 
-        return $OUTPUT->render_from_template(
+        return $this->output->render_from_template(
                 'theme_telaformation/categoryaccordion',
                 $template
         );
@@ -387,37 +388,36 @@ class course_renderer extends \core_course_renderer {
      * use {@link core_course_renderer::course_category()}
      *
      * @param coursecat_helper $chelper various display options
-     * @param coursecat        $coursecat
-     * @param int              $depth   depth of this category in the current tree
+     * @param coursecat $coursecat
+     * @param int $depth depth of this category in the current tree
      *
      * @return string
      */
     protected function coursecat_category(coursecat_helper $chelper, $coursecat, $depth) {
-        global $OUTPUT;
         // Open category tag.
 
-        $template               = new stdClass();
-        $template->name         = $coursecat->get_formatted_name();
-        $template->id           = 'cat' . $coursecat->id;
+        $template = new stdClass();
+        $template->name = $coursecat->get_formatted_name();
+        $template->id = 'cat' . $coursecat->id;
         $template->accordion_id = $chelper->collapseid;
-        $template->collapse_id  = $chelper->collapseid . '_' . $coursecat->id;
-        $template->cat_url      = new moodle_url(
+        $template->collapse_id = $chelper->collapseid . '_' . $coursecat->id;
+        $template->cat_url = new moodle_url(
                 '/course/index.php',
-                [ 'categoryid' => $coursecat->id ]
+                ['categoryid' => $coursecat->id]
         );
 
         if (empty($this->firstcat)) {
-            $template->open   = 'in';
-            $this->firstcat   = 'used';
+            $template->open = 'in';
+            $this->firstcat = 'used';
             $template->active = 'active';
         }
-        $template->depth   = $depth;
+        $template->depth = $depth;
         $template->content = $this->coursecat_category_content(
                 $chelper,
                 $coursecat,
                 $depth
         );
-        return $OUTPUT->render_from_template(
+        return $this->output->render_from_template(
                 'theme_telaformation/categorypanel',
                 $template
         );

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -27,9 +26,9 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-require_once( $CFG->dirroot . '/theme/telaformation/lib.php' );
+require_once($CFG->dirroot . '/theme/telaformation/lib.php');
 
-// $THEME is defined before this page is included and we can define settings by adding properties to this global object.
+// Var $THEME is defined before this page is included and we can define settings by adding properties to this global object.
 
 // The first setting we need is the name of the theme. This should be the last part of the component name, and the same
 // as the directory name for our theme.
@@ -67,7 +66,8 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 // pages in Moodle. Boost does not require these blocks because it provides other ways to navigate built into the theme.
 $THEME->requiredblocks = '';
 
-// This is a feature that tells the blocks library not to use the "Add a block" block. We don't want this in boost based themes because
+// This is a feature that tells the blocks library not to use the "Add a block" block.
+// We don't want this in boost based themes because
 // it forces a block region into the page when editing is enabled and it takes up too much room.
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 
@@ -103,9 +103,9 @@ $THEME->layouts = [
                 'defaultregion' => 'side-pre',
         ),
         // The site home page.
-        'frontpage'      => [
-                'file'          => 'frontpage.php',
+        'frontpage' => [
+                'file' => 'frontpage.php',
                 'defaultregion' => 'side-pre',
-                'regions'       => theme_telaformation_regions(),
+                'regions' => theme_telaformation_regions(),
         ],
 ];

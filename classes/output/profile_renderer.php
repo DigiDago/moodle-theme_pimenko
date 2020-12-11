@@ -16,6 +16,7 @@
 
 /**
  * Theme telaformation profile renderer file.
+ *
  * @package    theme_telaformation
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -39,30 +40,30 @@ class profile_renderer extends \renderer_base {
     private $user;
 
     public function userprofile($userid) {
-        global $DB, $OUTPUT, $USER;
+        global $DB, $USER;
 
         $preferences = optional_param(
-            'preferences',
-            0,
-            PARAM_INT
+                'preferences',
+                0,
+                PARAM_INT
         );
 
-        if($preferences) {
+        if ($preferences) {
             $this->page->set_url('/user/preferences.php', ['id' => $userid]);
         }
 
         if ($user = $DB->get_record(
-            'user',
-            [ 'id' => $userid ]
+                'user',
+                ['id' => $userid]
         )) {
 
-            $this->user         = $user;
+            $this->user = $user;
             $this->user->msgurl = new moodle_url(
-                '/message/index.php',
-                [ 'id' => $this->user->id ]
+                    '/message/index.php',
+                    ['id' => $this->user->id]
             );
-            $currentuser        = ( $user->id == $USER->id );
-            $isadmin            = is_siteadmin($USER);
+            $currentuser = ($user->id == $USER->id);
+            $isadmin = is_siteadmin($USER);
 
             $this->user->seegrades = false;
             if ($currentuser) {
@@ -73,10 +74,9 @@ class profile_renderer extends \renderer_base {
 
             $this->user->seeemail = false;
             if (($isadmin)
-                or ($currentuser)
-                or ($user->maildisplay == 1)
-                or ($user->maildisplay == 2 and enrol_sharing_course($user, $USER)))
-            {
+                    or ($currentuser)
+                    or ($user->maildisplay == 1)
+                    or ($user->maildisplay == 2 and enrol_sharing_course($user, $USER))) {
                 $this->user->seeemail = true;
             }
 
@@ -85,70 +85,70 @@ class profile_renderer extends \renderer_base {
             // Extra user attributes.
 
             $this->user->fullname = fullname($this->user);
-            $userpicture          = new user_picture($this->user);
-            $userpicture->link    = false;
-            $userpicture->size    = 200;
-            $this->user->picture  = $userpicture->get_url(
-                $this->page,
-                $OUTPUT
+            $userpicture = new user_picture($this->user);
+            $userpicture->link = false;
+            $userpicture->size = 200;
+            $this->user->picture = $userpicture->get_url(
+                    $this->page,
+                    $this->output
             );
 
-            // Define contactarray from email viewing permission
+            // Define contactarray from email viewing permission.
             if ($this->user->seeemail) {
                 $contactarray = [
-                    'email',
-                    'city',
-                    'country'
+                        'email',
+                        'city',
+                        'country'
                 ];
             } else {
                 $contactarray = [
-                    'city',
-                    'country'
+                        'city',
+                        'country'
                 ];
             }
             $this->carddetail(
-                'time',
-                get_string(
-                    'profile:joinedon',
-                    'theme_telaformation'
-                ) . userdate(
-                    $this->user->firstaccess,
-                    get_string('strftimemonthyear')
-                )
+                    'time',
+                    get_string(
+                            'profile:joinedon',
+                            'theme_telaformation'
+                    ) . userdate(
+                            $this->user->firstaccess,
+                            get_string('strftimemonthyear')
+                    )
             );
             $this->carddetail(
-                'time',
-                get_string(
-                    'profile:lastaccess',
-                    'theme_telaformation'
-                ) . userdate(
-                    $this->user->lastaccess,
-                    get_string('strftimedatetimeshort')
-                )
+                    'time',
+                    get_string(
+                            'profile:lastaccess',
+                            'theme_telaformation'
+                    ) . userdate(
+                            $this->user->lastaccess,
+                            get_string('strftimedatetimeshort')
+                    )
             );
 
             $this->user->carddetails = $this->carddetails;
 
             $this->profileblock(
-                'person',
-                get_string(
-                    'profile:basicinfo',
-                    'theme_telaformation'
-                ),
-                format_text(
-                    $this->user->description,
-                    $this->user->descriptionformat
-                )
+                    'person',
+                    get_string(
+                            'profile:basicinfo',
+                            'theme_telaformation'
+                    ),
+                    format_text(
+                            $this->user->description,
+                            $this->user->descriptionformat
+                    )
             );
 
             $this->profileblock(
-                'phone',
-                get_string(
-                    'profile:contactinfo',
-                    'theme_telaformation'
-                ),
-                '',
-                $contactarray
+                    'phone',
+                    get_string(
+                            'profile:contactinfo',
+                            'theme_telaformation'
+                    ),
+                    '',
+                    $contactarray
             );
 
             $tree = manager::build_tree($this->user, $currentuser);
@@ -159,8 +159,8 @@ class profile_renderer extends \renderer_base {
                 $profile->content = $this->userpreferences($this->user->id);
             } else {
                 $profile->content = $this->render_from_template(
-                    'theme_telaformation/profiledescription',
-                    $this->user
+                        'theme_telaformation/profiledescription',
+                        $this->user
                 );
             }
 
@@ -168,8 +168,8 @@ class profile_renderer extends \renderer_base {
 
             // User enrolments Tab.
             return $this->render_from_template(
-                'theme_telaformation/profile',
-                $profile
+                    'theme_telaformation/profile',
+                    $profile
             );
         } else {
             return '';
@@ -180,13 +180,13 @@ class profile_renderer extends \renderer_base {
         if (!isset($this->carddetails)) {
             $this->carddetails = [];
         }
-        $detail       = new stdClass();
+        $detail = new stdClass();
         $detail->icon = 'zmdi zmdi-' . $icon;
         $detail->text = $string;
         if ($url) {
             $detail->text = new moodle_url(
-                $url,
-                $detail->text
+                    $url,
+                    $detail->text
             );
         }
         if (!empty($detail->text)) {
@@ -199,7 +199,7 @@ class profile_renderer extends \renderer_base {
             $this->profileblocks = [];
         }
 
-        $block       = new stdClass();
+        $block = new stdClass();
         $block->icon = 'zmdi zmdi-' . $icon;
         switch ($icon) {
             case "badges":
@@ -222,26 +222,26 @@ class profile_renderer extends \renderer_base {
                 break;
         }
         $block->sectionname = $name;
-        $block->properties  = [];
+        $block->properties = [];
 
         foreach ($properties as $property) {
             $block->dttype = true;
             if (isset($this->user->$property)) {
-                $userprop            = new stdClass();
-                $userprop->label     = get_string($property);
-                $userprop->value     = $this->user->$property;
+                $userprop = new stdClass();
+                $userprop->label = get_string($property);
+                $userprop->value = $this->user->$property;
                 $block->properties[] = $userprop;
             }
         }
 
         if (is_array($content)) {
-            $block->listtype   = true;
+            $block->listtype = true;
             $block->properties = $content;
         } else {
             $block->content = $content;
         }
 
-        if (!empty($content) || ( count($block->properties) > 0 )) {
+        if (!empty($content) || (count($block->properties) > 0)) {
             $this->user->profileblocks[] = $block;
         }
     }
@@ -255,6 +255,146 @@ class profile_renderer extends \renderer_base {
             }
             $this->render($category);
         }
+    }
+
+    public function userpreferences($userid) {
+        global $USER, $CFG;
+
+        require_once($CFG->libdir . '/navigationlib.php');
+        $currentuser = $userid == $USER->id;
+
+        // Check that the user is a valid user.
+        $user = core_user::get_user($userid);
+
+        if (!$currentuser) {
+            $this->page->navigation->extend_for_user($USER);
+            // Need to check that settings exist.
+            if ($settings = $this->page->settingsnav->find(
+                    'userviewingsettings' . $USER->id,
+                    null
+            )) {
+                $settings->make_active();
+            }
+            // Show an error if there are no preferences that this user has access to.
+            if (!$this->page->settingsnav->can_view_user_preferences($userid)) {
+                throw new moodle_exception(
+                        'cannotedituserpreferences',
+                        'error'
+                );
+            }
+        } else {
+            // Shutdown the users node in the navigation menu.
+            $usernode = $this->page->navigation->find(
+                    'users',
+                    null
+            );
+            $usernode->make_inactive();
+
+            $settings = $this->page->settingsnav->find(
+                    'usercurrentsettings',
+                    null
+            );
+            $settings->make_active();
+        }
+
+        // Identifying the nodes.
+        $groups = [];
+        $orphans = [];
+
+        foreach ($settings->children as $setting) {
+            if ($setting->has_children()) {
+                $icon = $this->pref_icon($setting->key);
+                $groups[] = new preferences_group(
+                        $icon . $setting->get_content(),
+                        $setting->children
+                );
+            } else {
+                $orphans[] = $setting;
+            }
+        }
+        if (!empty($orphans)) {
+            $groups[] = new preferences_group(
+                    get_string('miscellaneous'),
+                    $orphans
+            );
+        }
+
+        $preferences = new preferences_groups($groups);
+
+        return $this->render_preferences_groups($preferences);
+    }
+
+    public function pref_icon($key) {
+        $settingicons = [
+                'useraccount' => 'zmdi-info',
+                'blogs' => 'zmdi-globe-alt',
+                'badges' => 'zmdi-badge-check',
+                '1' => 'zmdi-male'
+        ];
+        $icon = html_writer::tag(
+                'i',
+                '',
+                ['class' => 'zmdi m-r-5 zmdi-miscellaneous ' . $key]
+        );
+        if (array_key_exists(
+                $key,
+                $settingicons
+        )) {
+            $icontype = $settingicons[$key];
+            $icon = html_writer::tag(
+                    'i',
+                    '',
+                    ['class' => 'zmdi m-r-5 ' . $icontype]
+            );
+        }
+        return $icon;
+    }
+
+    /**
+     * Renders preferences groups.
+     *
+     * @param preferences_groups $renderable The renderable
+     *
+     * @return string The output.
+     * @throws \coding_exception
+     * @throws \moodle_exception
+     */
+    public function render_preferences_groups(preferences_groups $renderable) {
+
+        foreach ($renderable->groups as $group) {
+            foreach ($group->nodes as $node) {
+                if ($node->has_children()) {
+                    debugging(
+                            'Preferences nodes do not support children',
+                            DEBUG_DEVELOPER
+                    );
+                }
+                if ($node->text == get_string('editorpreferences')) {
+                    continue;
+                }
+                $group->shownodes[] = $this->render_pref_node($node);
+            }
+        }
+
+        return $this->render_from_template(
+                'theme_telaformation/preferenceblocks',
+                $renderable
+        );
+    }
+
+    /**
+     * Render a node.
+     *
+     * @param node $node
+     *
+     * @return string
+     */
+    public function render_pref_node($node) {
+        $nodetemplate = new stdClass();
+        $nodetemplate->url = $node->action;
+        $nodetemplate->title = $node->text;
+        $nodetemplate->classes = $node->classes;
+        return $nodetemplate;
     }
 
     /**
@@ -272,26 +412,28 @@ class profile_renderer extends \renderer_base {
             return '';
         }
 
-        // Standard available
-        // blogs - notes - forumposts - forumdiscussions - learningplans - todayslogs - alllogs - outline - complete - usersessions - grade -
+        // Standard available.
+        // Blogs - notes - forumposts - forumdiscussions.
+        // Learningplans - todayslogs - alllogs.
+        // Outline - complete - usersessions - grade.
         $hiddenitems = [
-            'forumposts',
-            'forumdiscussions'
+                'forumposts',
+                'forumdiscussions'
         ];
-        $content     = [];
+        $content = [];
         foreach ($nodes as $key => $node) {
             if (in_array(
-                $key,
-                $hiddenitems
+                    $key,
+                    $hiddenitems
             )) {
                 continue;
             }
             $content[] = $this->render($node);
         }
         $this->profileblock(
-            $category->name,
-            $category->title,
-            $content
+                $category->name,
+                $category->title,
+                $content
         );
     }
 
@@ -303,151 +445,10 @@ class profile_renderer extends \renderer_base {
      * @return string
      */
     public function render_node($node) {
-        $nodetemplate          = new stdClass();
-        $nodetemplate->url     = $node->url;
-        $nodetemplate->title   = $node->title;
+        $nodetemplate = new stdClass();
+        $nodetemplate->url = $node->url;
+        $nodetemplate->title = $node->title;
         $nodetemplate->content = $node->content;
         return $nodetemplate;
-    }
-
-    /**
-     * Render a node.
-     *
-     * @param node $node
-     *
-     * @return string
-     */
-    public function render_pref_node($node) {
-        $nodetemplate          = new stdClass();
-        $nodetemplate->url     = $node->action;
-        $nodetemplate->title   = $node->text;
-        $nodetemplate->classes = $node->classes;
-        return $nodetemplate;
-    }
-
-    public function userpreferences($userid) {
-        global $USER, $CFG;
-
-        require_once( $CFG->libdir . '/navigationlib.php' );
-        $currentuser = $userid == $USER->id;
-
-        // Check that the user is a valid user.
-        $user = core_user::get_user($userid);
-
-        if (!$currentuser) {
-            $this->page->navigation->extend_for_user($USER);
-            // Need to check that settings exist.
-            if ($settings = $this->page->settingsnav->find(
-                'userviewingsettings' . $USER->id,
-                null
-            )) {
-                $settings->make_active();
-            }
-            // Show an error if there are no preferences that this user has access to.
-            if (!$this->page->settingsnav->can_view_user_preferences($userid)) {
-                throw new moodle_exception(
-                    'cannotedituserpreferences',
-                    'error'
-                );
-            }
-        } else {
-            // Shutdown the users node in the navigation menu.
-            $usernode = $this->page->navigation->find(
-                'users',
-                null
-            );
-            $usernode->make_inactive();
-
-            $settings = $this->page->settingsnav->find(
-                'usercurrentsettings',
-                null
-            );
-            $settings->make_active();
-        }
-
-        // Identifying the nodes.
-        $groups  = [];
-        $orphans = [];
-
-
-        foreach ($settings->children as $setting) {
-            if ($setting->has_children()) {
-                $icon     = $this->pref_icon($setting->key);
-                $groups[] = new preferences_group(
-                    $icon . $setting->get_content(),
-                    $setting->children
-                );
-            } else {
-                $orphans[] = $setting;
-            }
-        }
-        if (!empty($orphans)) {
-            $groups[] = new preferences_group(
-                get_string('miscellaneous'),
-                $orphans
-            );
-        }
-
-        $preferences = new preferences_groups($groups);
-
-        return $this->render_preferences_groups($preferences);
-    }
-
-    function pref_icon($key) {
-        $settingicons = [
-            'useraccount' => 'zmdi-info',
-            'blogs'       => 'zmdi-globe-alt',
-            'badges'      => 'zmdi-badge-check',
-            '1'           => 'zmdi-male'
-        ];
-        $icon         = html_writer::tag(
-            'i',
-            '',
-            [ 'class' => 'zmdi m-r-5 zmdi-miscellaneous ' . $key ]
-        );
-        if (array_key_exists(
-            $key,
-            $settingicons
-        )) {
-            $icontype = $settingicons[$key];
-            $icon     = html_writer::tag(
-                'i',
-                '',
-                [ 'class' => 'zmdi m-r-5 ' . $icontype ]
-            );
-        }
-        return $icon;
-    }
-
-    /**
-     * Renders preferences groups.
-     *
-     * @param  preferences_groups $renderable The renderable
-     *
-     * @return string The output.
-     * @throws \coding_exception
-     * @throws \moodle_exception
-     */
-    public function render_preferences_groups(preferences_groups $renderable) {
-
-        foreach ($renderable->groups as $group) {
-            foreach ($group->nodes as $node) {
-                if ($node->has_children()) {
-                    debugging(
-                        'Preferences nodes do not support children',
-                        DEBUG_DEVELOPER
-                    );
-                }
-                if ($node->text == get_string('editorpreferences')) {
-                    continue;
-                }
-                $group->shownodes[] = $this->render_pref_node($node);
-            }
-        }
-
-        return $this->render_from_template(
-            'theme_telaformation/preferenceblocks',
-            $renderable
-        );
     }
 }

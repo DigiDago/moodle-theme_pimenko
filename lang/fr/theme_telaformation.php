@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +24,7 @@
 
 
 // This line protects the file from being accessed by a URL directly.
-// This is the FR Lang package
+// This is the FR Lang package.
 defined('MOODLE_INTERNAL') || die();
 
 // A description shown in the admin theme selector.

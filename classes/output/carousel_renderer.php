@@ -41,7 +41,7 @@ final class carousel_renderer extends plugin_renderer_base {
      * @return string
      * @throws moodle_exception
      */
-    public function output() : string {
+    public function output(): string {
         $this->load_items();
         $template = new stdClass();
         $template->slides = $this->slides;
@@ -62,7 +62,7 @@ final class carousel_renderer extends plugin_renderer_base {
         for ($i = 1; $i <= $imagenr; $i++) {
             $slide = new stdClass();
             // We need to count from 0 or indicator will not work.
-            $slide->slidenum = $i-1;
+            $slide->slidenum = $i - 1;
             $slide->active = '';
             if ($i == 1) {
                 $slide->active = 'active';

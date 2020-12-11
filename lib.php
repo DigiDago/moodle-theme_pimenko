@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -35,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_telaformation_get_main_scss_content($theme) {
+function theme_telaformation_get_main_scss_content($theme): string {
     global $CFG;
 
     // File storage API.
@@ -178,9 +177,9 @@ function theme_telaformation_process_css($css, $theme) {
     $loginbgopacity2 = '';
     $loginbgopacity3 = '';
     if (!empty($theme->settings->loginbgopacity)) {
-        //$loginbgopacity1 = theme_telaformation_hex2rgba($theme->settings->headerbkcolor2, $theme->settings->loginbgopacity);
+        $loginbgopacity1 = theme_telaformation_hex2rgba($theme->settings->headerbkcolor2, $theme->settings->loginbgopacity);
         $loginbgopacity2 = 'rgba(255, 255, 255, ' . $theme->settings->loginbgopacity . ') !important;';
-        //$loginbgopacity3 = theme_telaformation_hex2rgba($theme->settings->footerbkcolor, $theme->settings->loginbgopacity);
+        $loginbgopacity3 = theme_telaformation_hex2rgba($theme->settings->footerbkcolor, $theme->settings->loginbgopacity);
     }
     $defaults['loginbgopacity1'] = $loginbgopacity1;
     $defaults['loginbgopacity2'] = $loginbgopacity2;
@@ -188,11 +187,11 @@ function theme_telaformation_process_css($css, $theme) {
 
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
-    $defaults['darkennavcolor'] = colourBrightness($color, -0.5);
+    $defaults['darkennavcolor'] = colourbrightness($color, -0.5);
 
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
-    $defaults['darkenfootercolor'] = colourBrightness($color, -0.5);
+    $defaults['darkenfootercolor'] = colourbrightness($color, -0.5);
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);
@@ -275,44 +274,44 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
 }
 
 /** Function to darker css */
-function colourBrightness($hex, $percent) {
-    // Work out if hash given
+function colourbrightness($hex, $percent) {
+    // Work out if hash given.
     $hash = '';
     if (stristr($hex, '#')) {
         $hex = str_replace('#', '', $hex);
         $hash = '#';
     }
-    /// HEX TO RGB
+    // HEX TO RGB.
     $rgb = [hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2))];
-    //// CALCULATE
+    // CALCULATE.
     for ($i = 0; $i < 3; $i++) {
-        // See if brighter or darker
+        // See if brighter or darker.
         if ($percent > 0) {
-            // Lighter
+            // Lighter.
             $rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1 - $percent));
         } else {
-            // Darker
-            $positivePercent = $percent - ($percent * 2);
-            $rgb[$i] = round($rgb[$i] * (1 - $positivePercent)); // round($rgb[$i] * (1-$positivePercent));
+            // Darker.
+            $positivepercent = $percent - ($percent * 2);
+            $rgb[$i] = round($rgb[$i] * (1 - $positivepercent));
         }
-        // In case rounding up causes us to go to 256
+        // In case rounding up causes us to go to 256.
         if ($rgb[$i] > 255) {
             $rgb[$i] = 255;
         }
     }
-    //// RBG to Hex
+    // RBG to Hex.
     $hex = '';
     for ($i = 0; $i < 3; $i++) {
-        // Convert the decimal digit to hex
-        $hexDigit = dechex($rgb[$i]);
-        // Add a leading zero if necessary
-        if (strlen($hexDigit) == 1) {
-            $hexDigit = "0" . $hexDigit;
+        // Convert the decimal digit to hex.
+        $hexdigit = dechex($rgb[$i]);
+        // Add a leading zero if necessary.
+        if (strlen($hexdigit) == 1) {
+            $hexdigit = "0" . $hexdigit;
         }
-        // Append to the hex string
-        $hex .= $hexDigit;
+        // Append to the hex string.
+        $hex .= $hexdigit;
     }
-    return $hash . $hex;
+    return sprintf("%s%s", $hash, $hex);
 }
 
 /**
