@@ -37,6 +37,7 @@ use moodle_url;
 
 defined('MOODLE_INTERNAL') || die;
 
+
 /**
  * Class core_renderer extended
  *
@@ -283,8 +284,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if ($COURSE->enablecompletion != COMPLETION_ENABLED) {
             return '';
         }
-
-        if ($this->output->body_id() == 'page-mod-quiz-attempt') {
+        if ($this->page->bodyid == 'page-mod-quiz-attempt') {
             return '';
         }
 
@@ -369,7 +369,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $template->completionicon = $renderer->course_section_cm_completion(
                     $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
             );
-            return $this->output->render_from_template(
+            return $renderer->render_from_template(
                     'theme_telaformation/completionfooter', $template
             );
         }

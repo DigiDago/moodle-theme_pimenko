@@ -102,6 +102,9 @@ function theme_telaformation_get_extra_scss($theme) {
 function theme_telaformation_process_css($css, $theme) {
     // Define the default settings for the theme incase they've not been set.
     $defaults = [
+            'brandcolor' => '#000',
+            'brandcolorbutton' => '#000',
+            'brandcolortextbutton' => '#FFF',
             'loginbgimage' => '',
             'loginbgstyle' => '',
             'loginbgopacity1' => '',
@@ -192,6 +195,12 @@ function theme_telaformation_process_css($css, $theme) {
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
     $defaults['darkenfootercolor'] = colourbrightness($color, -0.5);
+
+    // Hoover button.
+    $color = $defaults['brandcolorbutton'];
+    $defaults['darkenbrandcolorbutton'] = colourbrightness($color, 0.5);
+    $color = $defaults['brandcolortextbutton'];
+    $defaults['darkenbrandcolortextbutton'] = colourbrightness($color, 0.5);
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);

@@ -1,8 +1,47 @@
 body {
-    font-family: unquote('googlefont'), serif !important;
+    font-family: unquote('googlefont'), serif;
 
     #page {
         margin-top: 0;
     }
-}
 
+    .btn-primary,
+    .btn-outline-secondary,
+    .btn-secondary {
+        background: unquote('brandcolorbutton');
+        color: unquote('brandcolortextbutton');
+
+        &:hover {
+            background: unquote('darkenbrandcolorbutton');
+            color: unquote('darkenbrandcolortextbutton');
+        }
+    }
+
+    .dropdown-item {
+        &:focus {
+            background: none;
+            color: #212529;
+        }
+    }
+
+    section.block {
+
+        .card-body {
+            padding: 0 !important;
+
+            .card-title {
+                background: unquote('brandcolorbutton');
+                color: unquote('brandcolortextbutton');
+                display: inline-block !important;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .card-text {
+                padding-bottom: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    }
+}

@@ -5,7 +5,6 @@
     }
 
     .card {
-        background-color: inherit;
         border: none;
     }
 }
@@ -18,15 +17,15 @@
 @for $i from 1 through 8 {
 
     #front-page-row-#{$i} {
-        background-color: unquote("blockregionrowbackgroundcolor#{$i}");
-        color: unquote("blockregionrowtextcolor#{$i}");
+        background-color: unquote('blockregionrowbackgroundcolor#{$i}');
+        color: unquote('blockregionrowtextcolor#{$i}');
 
         a {
-            color: unquote("blockregionrowlinkcolor#{$i}");
+            color: unquote('blockregionrowlinkcolor#{$i}');
 
             &:hover,
             &:focus {
-                color: unquote("blockregionrowlinkhovercolor#{$i}");
+                color: unquote('blockregionrowlinkhovercolor#{$i}');
             }
 
             &.menu-action {
@@ -40,7 +39,7 @@
         }
 
         .block_html .header h2 {
-            color: unquote("blockregionrowtextcolor#{$i}");
+            color: unquote('blockregionrowtextcolor#{$i}');
         }
     }
 }

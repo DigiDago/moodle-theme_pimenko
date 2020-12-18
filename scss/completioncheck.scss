@@ -26,14 +26,14 @@
                 }
             }
 
-            input[type="checkbox"] {
+            input[type='checkbox'] {
                 opacity: 0;
             }
 
             .fa {
-                width: 60px;
-                height: 60px;
                 font-size: 35px;
+                height: 60px;
+                width: 60px;
             }
 
             &:active:not(.disable) {

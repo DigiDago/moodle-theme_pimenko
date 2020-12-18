@@ -21,7 +21,18 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-[data-region="drawer"] {
-    top: 65px;
+[data-region='drawer'] {
+    background: #fff;
     height: calc(100% - 65px);
+    top: 65px;
+
+    .list-group-item {
+        background: none;
+        border: none;
+
+        &.active,
+        &:hover {
+            color: unquote('brandcolor');
+        }
+    }
 }

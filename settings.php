@@ -83,6 +83,22 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Default color for button.
+    $name = 'theme_telaformation/brandcolorbutton';
+    $title = get_string('brandcolorbutton', 'theme_telaformation');
+    $description = get_string('brandcolorbuttondesc', 'theme_telaformation');
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Default text color for button.
+    $name = 'theme_telaformation/brandcolortextbutton';
+    $title = get_string('brandcolortextbutton', 'theme_telaformation');
+    $description = get_string('brandcolortextbuttondesc', 'theme_telaformation');
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
     // Site Favicon.
     $name = 'theme_telaformation/favicon';
     $title = get_string('favicon', 'theme_telaformation');

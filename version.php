@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the Telaformation theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -27,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // This is the version of the plugin.
-$plugin->version = '2020100932';
+$plugin->version = '2020100933';
 
 // This is the version of Moodle this plugin requires.
 $plugin->requires = '2019111800';

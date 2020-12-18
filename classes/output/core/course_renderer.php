@@ -61,9 +61,9 @@ class course_renderer extends \core_course_renderer {
      * @throws \coding_exception
      */
     public function course_section_cm_completion($course, &$completioninfo, cm_info $mod, $displayoptions = []) {
-        $output = '';
+        $content = '';
         if (!empty($displayoptions['hidecompletion']) || !isloggedin() || isguestuser() || !$mod->uservisible) {
-            return $output;
+            return $content;
         }
         if ($completioninfo === null) {
             $completioninfo = new completion_info($course);
@@ -71,12 +71,12 @@ class course_renderer extends \core_course_renderer {
         $completion = $completioninfo->is_enabled($mod);
         if ($completion == COMPLETION_TRACKING_NONE) {
             if ($this->page->user_is_editing()) {
-                $output .= html_writer::span(
+                $content .= html_writer::span(
                         '&nbsp;',
                         'filler'
                 );
             }
-            return $output;
+            return $content;
         }
 
         $completiondata = $completioninfo->get_data(
@@ -168,7 +168,7 @@ class course_renderer extends \core_course_renderer {
                     $modtemplate->state = 0;
                 }
                 $modtemplate->class = 'completioncheck';
-                $output .= $this->output->render_from_template(
+                $content .= $this->output->render_from_template(
                         'theme_telaformation/completioncheck',
                         $modtemplate
                 );
@@ -180,7 +180,7 @@ class course_renderer extends \core_course_renderer {
                     $modtemplate->state = 0;
                 }
                 $modtemplate->class = 'completioncheck';
-                $output .= $this->output->render_from_template(
+                $content .= $this->output->render_from_template(
                         'theme_telaformation/completioncheck',
                         $modtemplate
                 );
@@ -192,7 +192,7 @@ class course_renderer extends \core_course_renderer {
                     $modtemplate->status = 'checked disabled';
                     $modtemplate->class = 'autocompletioncheck';
 
-                    $output .= $this->output->render_from_template(
+                    $content .= $this->output->render_from_template(
                             'theme_telaformation/completioncheck',
                             $modtemplate
                     );
@@ -200,14 +200,14 @@ class course_renderer extends \core_course_renderer {
                 } else {
                     $modtemplate->status = 'disabled';
                     $modtemplate->class = 'autocompletioncheck';
-                    $output .= $this->output->render_from_template(
+                    $content .= $this->output->render_from_template(
                             'theme_telaformation/completioncheck',
                             $modtemplate
                     );
                 }
             }
         }
-        return $output;
+        return $content;
     }
 
     /**
