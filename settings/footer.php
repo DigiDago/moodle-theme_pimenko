@@ -91,6 +91,4 @@ for ($i = 1; $i <= 4; $i++) {
             $i
     );
 }
-$page->add($setting);
-
 $settings->add($page);

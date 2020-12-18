@@ -31,6 +31,7 @@ require_once(__DIR__ . "/libs/simple_theme_settings.php");
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
+/** @var admin_root $ADMIN */
 if ($ADMIN->fulltree) {
 
     // Boost provides a nice setting page which splits settings onto separate tabs. We want to use it here.
@@ -121,8 +122,8 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
     // Login settings.
-    include(dirname(__FILE__) . '/settings/frontpage.php');
-    include(dirname(__FILE__) . '/settings/login.php');
-    include(dirname(__FILE__) . '/settings/navbar.php');
-    include(dirname(__FILE__) . '/settings/footer.php');
+    include_once(dirname(__FILE__) . '/settings/frontpage.php');
+    include_once(dirname(__FILE__) . '/settings/login.php');
+    include_once(dirname(__FILE__) . '/settings/navbar.php');
+    include_once(dirname(__FILE__) . '/settings/footer.php');
 }
