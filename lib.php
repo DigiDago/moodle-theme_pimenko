@@ -190,17 +190,17 @@ function theme_telaformation_process_css($css, $theme) {
 
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
-    $defaults['darkennavcolor'] = colourbrightness($color, -0.5);
+    $defaults['darkennavcolor'] = colorbrightness($color, -0.5);
 
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
-    $defaults['darkenfootercolor'] = colourbrightness($color, -0.5);
+    $defaults['darkenfootercolor'] = colorbrightness($color, -0.5);
 
     // Hoover button.
     $color = $defaults['brandcolorbutton'];
-    $defaults['darkenbrandcolorbutton'] = colourbrightness($color, 0.5);
+    $defaults['darkenbrandcolorbutton'] = colorbrightness($color, 0.5);
     $color = $defaults['brandcolortextbutton'];
-    $defaults['darkenbrandcolortextbutton'] = colourbrightness($color, 0.5);
+    $defaults['darkenbrandcolortextbutton'] = colorbrightness($color, 0.5);
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);
@@ -283,7 +283,7 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
 }
 
 /** Function to darker css */
-function colourbrightness($hex, $percent) {
+function colorbrightness($hex, $percent) {
     // Work out if hash given.
     $hash = '';
     if (stristr($hex, '#')) {

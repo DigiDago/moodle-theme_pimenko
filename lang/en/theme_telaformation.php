@@ -33,10 +33,18 @@ $string['choosereadme'] = 'Theme telaformation is a child theme of Boost. It add
 $string['pluginname'] = 'Telaformation';
 // The name of the second tab in the theme settings.
 $string['advancedsettings'] = 'Advanced settings';
-// The brand colour setting.
-$string['brandcolor'] = 'Brand colour';
-// The brand colour setting description.
-$string['brandcolor_desc'] = 'The accent colour.';
+// The brand color setting.
+$string['brandcolor'] = 'Brand color';
+// The brand color setting description.
+$string['brandcolor_desc'] = 'Define a brand color.';
+// The button brand color setting.
+$string['brandcolorbutton'] = 'Button brand color';
+// The button brand color setting description.
+$string['brandcolorbuttondesc'] = 'Define a brand color for button.';
+// The button brand color setting.
+$string['brandcolortextbutton'] = 'Brand color';
+// The button brand color setting description.
+$string['brandcolortextbuttondesc'] = 'Define a text color for button.';
 // Name of the settings pages.
 $string['configtitle'] = 'Telaformation settings';
 // Name of the first settings tab.

@@ -33,9 +33,9 @@ $string['choosereadme'] = 'Le thème de la téléformation est un thème enfant 
 $string['pluginname'] = 'Telaformation';
 // The name of the second tab in the theme settings.
 $string['advancedsettings'] = 'Options avancées';
-// The brand colour setting.
+// The brand color setting.
 $string['brandcolor'] = 'Couleur générale';
-// The brand colour setting description.
+// The brand color setting description.
 $string['brandcolor_desc'] = 'Défini la couleur principale du site ( pour les liens ... )';
 // Name of the settings pages.
 $string['configtitle'] = 'Options Telaformation';
