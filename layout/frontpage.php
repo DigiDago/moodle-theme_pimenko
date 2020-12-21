@@ -16,6 +16,7 @@
 
 /**
  * A two column layout for the boost theme.
+ *
  * @package    theme_telaformation2
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,7 +28,7 @@ user_preference_allow_ajax_update(
         'drawer-open-nav',
         PARAM_ALPHA
 );
-require_once( $CFG->libdir . '/behat/lib.php' );
+require_once($CFG->libdir . '/behat/lib.php');
 
 if (isloggedin()) {
     $navdraweropen = false;
@@ -38,34 +39,30 @@ $extraclasses = [];
 if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
-$bodyattributes                     = $OUTPUT->body_attributes($extraclasses);
-$blockshtml                         = $OUTPUT->blocks('side-pre');
-$hasblocks                          = strpos(
-                $blockshtml,
-                'data-block='
-        ) !== false;
-$regionmainsettingsmenu             = $OUTPUT->region_main_settings_menu();
-$hasfrontpageregions                = $OUTPUT->get_block_regions();
-$iscarouselenabled                  = $OUTPUT->is_carousel_enabled();
-$templatecontext                    = [
-        'sitename'                  => format_string(
+$bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = strpos( $blockshtml, 'data-block=' ) !== false;
+$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
+$hasfrontpageregions = $OUTPUT->get_block_regions();
+$iscarouselenabled = $OUTPUT->is_carousel_enabled();
+$templatecontext = [
+        'sitename' => format_string(
                 $SITE->shortname,
                 true,
                 [
                         'context' => context_course::instance(SITEID),
-                        "escape"  => false
+                        "escape" => false
                 ]
         ),
-        'output'                    => $OUTPUT,
-        'sidepreblocks'             => $blockshtml,
-        'hasblocks'                 => $hasblocks,
-        'bodyattributes'            => $bodyattributes,
-        'navdraweropen'             => $navdraweropen,
-        'regionmainsettingsmenu'    => $regionmainsettingsmenu,
+        'output' => $OUTPUT,
+        'sidepreblocks' => $blockshtml,
+        'hasblocks' => $hasblocks,
+        'bodyattributes' => $bodyattributes,
+        'navdraweropen' => $navdraweropen,
+        'regionmainsettingsmenu' => $regionmainsettingsmenu,
         'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-        'hasfrontpageregions'       => !empty($hasfrontpageregions),
-        'isbannerenabled'           => $isbannerenabled,
-        'iscarouselenabled'         => $iscarouselenabled,
+        'hasfrontpageregions' => !empty($hasfrontpageregions),
+        'iscarouselenabled' => $iscarouselenabled,
 ];
 
 // Include js module.
@@ -77,4 +74,3 @@ echo $OUTPUT->render_from_template(
         'theme_telaformation/frontpage',
         $templatecontext
 );
-
