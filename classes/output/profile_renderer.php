@@ -89,8 +89,7 @@ class profile_renderer extends \renderer_base {
             $userpicture->link = false;
             $userpicture->size = 200;
             $this->user->picture = $userpicture->get_url(
-                    $this->page,
-                    $this->output
+                    $this->page
             );
 
             // Define contactarray from email viewing permission.
