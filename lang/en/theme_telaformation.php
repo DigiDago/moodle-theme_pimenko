@@ -159,9 +159,10 @@ $string['completion-alt-manual-enabled'] = 'Students can manually mark this item
 
 // Catalog.
 $string['viewcat'] = 'View cat';
+$string['viewcourse'] = 'View course';
 
 // Block Regions.
-$string['settings:regions:title'] = 'Frontpage Block Settings';
+$string['frontpage'] = 'Frontpage Block Settings';
 $string['settings:regions:frontpageblocksettingscription'] = '';
 $string['settings:regions:frontpageblocksettingscriptiondesc'] =
         'On this page you can determine the composition of the homepage, which can be divided into 8 lines. For each line, you can determine the color and if it should be composed of one or more columns. Important : after making the changes, go to the homepage of your site to add content using blocks. You can find the homepage here : <a href= ' .
@@ -181,14 +182,23 @@ $string['settings:regions:blockregionrowlinkhovercolordesc'] =
         'Add / set a link hover color for the block region row on front page.';
 
 // Slide.
-$string['settings:regions:enablecarousel'] = 'Enable carousel';
-$string['settings:regions:enablecarouseldesc'] = 'Allows to display or not the carousel';
-$string['settings:regions:slideimagenr'] = 'Number of slides';
-$string['settings:regions:slideimagenrdesc'] = '';
-$string['settings:regions:slideimage'] = 'Slide image {$a}';
-$string['settings:regions:slideimagedesc'] = '';
-$string['settings:regions:slidecaption'] = 'Slide caption {$a}';
-$string['settings:regions:slidecaptiondesc'] = '';
+$string['settings:frontslider:enablecarousel'] = 'Enable carousel';
+$string['settings:frontslider:enablecarouseldesc'] = 'Allows to display or not the carousel';
+$string['settings:frontslider:slideimagenr'] = 'Number of slides';
+$string['settings:frontslider:slideimagenrdesc'] = 'Define the number of slides you will use.
+                                                <br>Note: you will have to save this option to display new settings field.';
+$string['settings:frontslider:slideimage'] = 'Slide image {$a}';
+$string['settings:frontslider:slideimagedesc'] = 'Set a picture for this slide';
+$string['settings:frontslider:slidecaption'] = 'Slide caption {$a}';
+$string['settings:frontslider:slidecaptiondesc'] = 'Set a text for this slide';
+
+// Course card frontpage.
+$string['settings:frontcoursecard:showcustomfields'] = 'show customs fields';
+$string['settings:frontcoursecard:showcustomfieldsdesc'] = 'Show custom field in frontpage page course card';
+$string['settings:frontcoursecard:showcontacts'] = 'Show contacts';
+$string['settings:frontcoursecard:showcontactsdesc'] = 'Show contact in frontpage page course card';
+$string['settings:frontcoursecard:showstartdate'] = 'Show start date';
+$string['settings:frontcoursecard:showstartdatedesc'] = 'Show start date in frontpage page course card';
 
 // Fonts.
 $string['settings:font:googlefont'] = 'Google font';

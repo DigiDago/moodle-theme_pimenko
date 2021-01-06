@@ -26,9 +26,11 @@ body {
 
     section.block {
 
-        .card-body {
+        & > .card-body {
             padding: 0 !important;
+        }
 
+        .card-body {
             .card-title {
                 background: unquote('brandcolorbutton');
                 color: unquote('brandcolortextbutton');

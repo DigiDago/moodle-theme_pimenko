@@ -24,12 +24,18 @@
 
 namespace theme_telaformation\output\core;
 
+use core_completion\progress;
 use stdClass;
 use html_writer;
 use completion_info;
 use cm_info;
 use coursecat_helper;
 use moodle_url;
+use lang_string;
+use context_system;
+use core_course_list_element;
+use core_course_category;
+use theme_config;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -43,6 +49,7 @@ require_once($CFG->dirroot . '/course/renderer.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_renderer extends \core_course_renderer {
+    private $collapsecontainerid;
 
     /**
      * Renders html for completion box on course page
@@ -58,7 +65,6 @@ class course_renderer extends \core_course_renderer {
      * @param array $displayoptions display options, not used in core
      *
      * @return string
-     * @throws \coding_exception
      */
     public function course_section_cm_completion($course, &$completioninfo, cm_info $mod, $displayoptions = []) {
         $content = '';
@@ -211,215 +217,219 @@ class course_renderer extends \core_course_renderer {
     }
 
     /**
-     * Returns HTML to display a tree of subcategories and courses in the given category.
-     *
-     * @param coursecat_helper $chelper various display options
-     * @param coursecat $coursecat top category (this category's name and description will NOT be added to the
-     *                                    tree)
+     * Returns HTML to print list of available courses for the frontpage
      *
      * @return string
      */
-    protected function coursecat_tree(coursecat_helper $chelper, $coursecat) {
-        global $CFG;
-        $template = new stdClass();
-
-        // We need root path.
-        $template->rootpath = $CFG->wwwroot;
-
-        $categorycontent = $this->coursecat_category_content(
-                $chelper,
-                $coursecat,
-                0
-        );
-        if (empty($categorycontent)) {
-            return '';
-        }
-
-        $template->categorycontent = $categorycontent;
-
-        if ($coursecat->get_children_count()) {
-            $template->expandall = get_string('expandall');
-            $template->collapseall = get_string('collapseall');
-        }
-
-        return $this->output->render_from_template(
-                'theme_telaformation/course_category_tree',
-                $template
-        );
-    }
-
-    /**
-     * Renders the list of subcategories in a category.
-     *
-     * @param coursecat_helper $chelper various display options
-     * @param coursecat $coursecat
-     * @param int $depth depth of the category in the current tree
-     *
-     * @return string
-     * @throws \coding_exception
-     * @throws \moodle_exception
-     */
-    protected function coursecat_subcategories(coursecat_helper $chelper, $coursecat, $depth) {
+    public function frontpage_available_courses() {
         global $CFG;
 
-        $this->collapsecontainerid++;
+        $chelper = new coursecat_helper();
+        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED)->set_courses_display_options(
+                [
+                        'recursive' => true,
+                        'limit' => $CFG->frontpagecourselimit,
+                        'viewmoreurl' => new moodle_url('/course/index.php'),
+                        'viewmoretext' => new lang_string('fulllistofcourses')
+                ]
+        );
+        $chelper->set_attributes(['class' => 'frontpage-course-list-all']);
+        $courses = get_courses();
 
-        $subcategories = [];
-        if (!$chelper->get_categories_display_option('nodisplay')) {
-            $subcategories = $coursecat->get_children($chelper->get_categories_display_options());
-        }
-        $totalcount = $coursecat->get_children_count();
-        if (!$totalcount) {
-            // Note that we call core_course_category::get_children_count()
-            // AFTER core_course_category::get_children() to avoid extra DB requests.
-            // Categories count is cached during children categories retrieval.
-            return '';
-        }
-
-        // Prepare content of paging bar or more link if it is needed.
-        $paginationurl = $chelper->get_categories_display_option('paginationurl');
-        $paginationallowall = $chelper->get_categories_display_option('paginationallowall');
-        if ($totalcount > count($subcategories)) {
-            if ($paginationurl) {
-                // The option 'paginationurl was specified, display pagingbar.
-                $perpage = $chelper->get_categories_display_option(
-                        'limit',
-                        $CFG->coursesperpage
-                );
-                $page = $chelper->get_categories_display_option('offset') / $perpage;
-                $pagingbar = $this->paging_bar(
-                        $totalcount,
-                        $page,
-                        $perpage,
-                        $paginationurl->out(
-                                false,
-                                ['perpage' => $perpage]
-                        )
-                );
-                if ($paginationallowall) {
-                    $pagingbar .= html_writer::tag(
-                            'div',
-                            html_writer::link(
-                                    $paginationurl->out(
-                                            false,
-                                            ['perpage' => 'all']
-                                    ),
-                                    get_string(
-                                            'showall',
-                                            '',
-                                            $totalcount
-                                    )
-                            ),
-                            ['class' => 'paging paging-showall']
-                    );
-                }
-            } else if ($viewmoreurl = $chelper->get_categories_display_option('viewmoreurl')) {
-                // The option 'viewmoreurl' was specified, display more link (if it is link to category view page, add category id).
-                if ($viewmoreurl->compare(
-                        new moodle_url('/course/index.php'),
-                        URL_MATCH_BASE
+        if (!$courses && !$this->page->user_is_editing() && has_capability(
+                        'moodle/course:create',
+                        context_system::instance()
                 )) {
-                    $viewmoreurl->param(
-                            'categoryid',
-                            $coursecat->id
-                    );
-                }
-                $viewmoretext = $chelper->get_categories_display_option(
-                        'viewmoretext',
-                        new lang_string('viewmore')
-                );
-                $morelink = html_writer::tag(
-                        'div',
-                        html_writer::link(
-                                $viewmoreurl,
-                                $viewmoretext
-                        ),
-                        ['class' => 'paging paging-morelink']
-                );
-            }
-        } else if (($totalcount > $CFG->coursesperpage) && $paginationurl && $paginationallowall) {
-            // There are more than one page of results and we are in 'view all' mode, suggest to go back to paginated view mode.
-            $pagingbar = html_writer::tag(
-                    'div',
-                    html_writer::link(
-                            $paginationurl->out(
-                                    false,
-                                    ['perpage' => $CFG->coursesperpage]
-                            ),
-                            get_string(
-                                    'showperpage',
-                                    '',
-                                    $CFG->coursesperpage
-                            )
-                    ),
-                    ['class' => 'paging paging-showperpage']
-            );
+            // Print link to create a new course, for the 1st available category.
+            return $this->add_new_course_button();
         }
 
-        // Display list of subcategories.
-        $template = new stdClass();
-        $template->items = [];
-
-        $template->collapseid = 'accordion_' . $this->collapsecontainerid;
-        $chelper->collapseid = 'accordion_' . $this->collapsecontainerid;
-        foreach ($subcategories as $subcategory) {
-            $template->items[] = $this->coursecat_category(
-                    $chelper,
-                    $subcategory,
-                    $depth + 1
-            );
-        }
-        if (!empty($pagingbar)) {
-            $template->pagingbar = $pagingbar;
-        }
-        if (!empty($morelink)) {
-            $template->morelink = $morelink;
-        }
-
-        return $this->output->render_from_template(
-                'theme_telaformation/categoryaccordion',
-                $template
+        return $this->frontpage_courseboxes(
+                $chelper,
+                $courses
         );
     }
 
     /**
-     * Returns HTML to display a course category as a part of a tree.
-     * This is an internal function, to display a particular category and all its contents.
-     * use {@link core_course_renderer::course_category()}
+     * Review frontpage coursebox renderer.
      *
-     * @param coursecat_helper $chelper various display options
-     * @param coursecat $coursecat
-     * @param int $depth depth of this category in the current tree
+     * @param coursecat_helper $chelper
+     * @param                  $courses
      *
      * @return string
      */
-    protected function coursecat_category(coursecat_helper $chelper, $coursecat, $depth) {
-        // Open category tag.
-
-        $template = new stdClass();
-        $template->name = $coursecat->get_formatted_name();
-        $template->id = 'cat' . $coursecat->id;
-        $template->accordion_id = $chelper->collapseid;
-        $template->collapse_id = $chelper->collapseid . '_' . $coursecat->id;
-        $template->cat_url = new moodle_url(
-                '/course/index.php',
-                ['categoryid' => $coursecat->id]
-        );
-
-        if (empty($this->firstcat)) {
-            $template->open = 'in';
-            $this->firstcat = 'used';
-            $template->active = 'active';
-        }
-        $template->depth = $depth;
-        $template->content = $this->coursecat_category_content(
+    public function frontpage_courseboxes(coursecat_helper $chelper, $courses) {
+        $content = '';
+        $template = $this->get_courses_template(
                 $chelper,
-                $coursecat,
-                $depth
+                $courses
         );
-        return $this->output->render_from_template(
-                'theme_telaformation/categorypanel',
+
+        $content .= $this->output->render_from_template(
+                'theme_telaformation/course_card',
                 $template
         );
+
+        return $content;
+    }
+
+    public function get_courses_template($chelper, $courses) {
+        global $CFG, $DB;
+
+        if (empty($this->categories)) {
+            $this->categories = $DB->get_records(
+                    'course_categories',
+                    ['visible' => 1]
+            );
+        }
+
+        $template = new stdClass();
+        $template->coursecount = 0;
+        $template->courses = [];
+
+        $rendercourses = [];
+        $mycourses = enrol_get_my_courses();
+
+        $template->tag_list = [];
+        $output = null;
+
+        // Show or hide some field for frontpage course card.
+        $theme = theme_config::load('telaformation');
+
+        $template->showcustomfields = false;
+        if ($theme->settings->showcustomfields) {
+            $template->showcustomfields = $theme->settings->showcustomfields;
+        }
+
+        $template->showcontacts = false;
+        if ($theme->settings->showcontacts) {
+            $template->showcontacts = $theme->settings->showcontacts;
+        }
+
+        $template->showstartdate = false;
+        if ($theme->settings->showstartdate) {
+            $template->showstartdate = $theme->settings->showstartdate;
+        }
+
+        foreach ($courses as $course) {
+            if ($course->id == 1) {
+                continue;
+            }
+            if ($course instanceof stdClass) {
+                $course = new core_course_list_element($course);
+            }
+            if (array_key_exists($course->id, $mycourses) or $this->page->pagetype == "site-index") {
+                $rendercourse = new stdClass();
+                // Get course name.
+                $rendercourse->coursename = $chelper->get_course_formatted_name($course);
+
+                // Display course contacts. See core_course_list_element::get_course_contacts().
+                if ($course->has_course_contacts()) {
+                    $rendercourse->contacts = [];
+                    foreach ($course->get_course_contacts() as $userid => $coursecontact) {
+                        $contact = new stdClass();
+                        $contact->role = $coursecontact['rolename'];
+                        $contact->name = $coursecontact['username'];
+                        $contact->url = new moodle_url(
+                                '/user/view.php',
+                                [
+                                        'id' => $userid,
+                                        'course' => SITEID
+                                ]
+                        );
+                        $rendercourse->contacts[] = $contact;
+                    }
+                }
+
+                // Get course description.
+                if ($course->has_summary()) {
+                    $rendercourse->coursedescription = strip_tags($chelper->get_course_formatted_summary($course));
+                }
+                // Get course dates.
+                if ($course->startdate) {
+                    $rendercourse->startdate = userdate(
+                            $course->startdate,
+                            get_string('strftimedate')
+                    );
+                }
+                // Get course category name.
+                if ($catid = $course->category) {
+                    if (array_key_exists(
+                            $catid,
+                            $this->categories
+                    )) {
+                        $category = \core_course_category::get($course->category);
+                        $rendercourse->category = $category->get_formatted_name();
+                    } else {
+                        $rendercourse->category = null;
+                    }
+                }
+
+                // Get course link.
+                $params = ["id" => $course->id];
+                $rendercourse->viewurl = new moodle_url(
+                        "/course/view.php",
+                        $params
+                );
+
+                // Search custom fields.
+                $customfields = $course->get_custom_fields();
+                $rendercourse->customfields = [];
+                // Adding of custom fields in the template.
+                foreach ($customfields as $customfield) {
+                    $cf = new stdClass();
+                    $cf->customfield = $customfield->get_value();
+
+                    if ($cf->customfield != '') {
+                        $rendercourse->customfields[] = $cf;
+                    }
+                }
+
+                // Get course image.
+                foreach ($course->get_course_overviewfiles() as $file) {
+                    if ($file->is_valid_image()) {
+                        $rendercourse->courseimage =
+                                $CFG->wwwroot . '/pluginfile.php/' . $file->get_contextid() . '/' . $file->get_component() . '/' .
+                                $file->get_filearea() . $file->get_filepath() . $file->get_filename();
+                    }
+                }
+                if (!isset($rendercourse->courseimage)) {
+                    $rendercourse->courseimage = $this->output->get_generated_image_for_id($course->id);
+                }
+
+                // Get the course progress.
+                $rendercourse->hasprogress = false;
+                if (array_key_exists(
+                        $course->id,
+                        $mycourses
+                )) {
+                    $completion = new completion_info($course);
+                    $rendercourse->hasprogress = true;
+                    $rendercourse->progress = $this->course_progress($course->id);
+                }
+
+                $rendercourses[] = $rendercourse;
+                $template->coursecount++;
+            }
+        }
+
+        $template->courses = $rendercourses;
+        return $template;
+    }
+
+    /**
+     * @param int $courseid
+     *
+     * @return float
+     */
+    public function course_progress(int $courseid): float {
+        $course = get_course($courseid);
+        $percentage = progress::get_course_progress_percentage($course);
+        if (!is_null($percentage)) {
+            $percentage = floor($percentage);
+        } else {
+            $percentage = 0;
+        }
+        return $percentage;
     }
 }

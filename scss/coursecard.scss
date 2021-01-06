@@ -1,0 +1,25 @@
+
+#frontpage-available-course-list {
+    .dashboard-card-deck .dashboard-card {
+        flex-basis: auto;
+    }
+
+    @media (min-width: 576px) {
+        .card.dashboard-card {
+            max-width: 100%;
+            width: 300px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .card.dashboard-card {
+            flex-basis: calc(50% - 0.5rem);
+        }
+    }
+
+    @media (min-width: 840px) {
+        .card.dashboard-card {
+            flex-basis: calc(33.33% - 0.5rem);
+        }
+    }
+}

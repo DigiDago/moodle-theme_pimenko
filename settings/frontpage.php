@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage(
         'theme_telaformation_regions_settings',
         get_string(
-                'settings:regions:title',
+                'frontpage',
                 'theme_telaformation'
         ),
         'theme/telaformation:configure'
@@ -37,7 +37,17 @@ $page = new admin_settingpage(
 $setting = new simple_theme_settings(
         $page,
         'theme_telaformation',
-        'settings:regions:'
+        'settings:frontcoursecard:'
+);
+
+$setting->add_checkbox('showcustomfields');
+$setting->add_checkbox('showcontacts');
+$setting->add_checkbox('showstartdate');
+
+$setting = new simple_theme_settings(
+        $page,
+        'theme_telaformation',
+        'settings:frontslider:'
 );
 
 $setting->add_checkbox('enablecarousel');
@@ -66,6 +76,12 @@ for ($i = 1; $i <= $imagenr; $i++) {
             $i
     );
 }
+
+$setting = new simple_theme_settings(
+        $page,
+        'theme_telaformation',
+        'settings:regions:'
+);
 
 $bootstrap12 = [
         '0-0-0-0' => 'disabled',
