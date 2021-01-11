@@ -144,7 +144,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 );
                 if (!empty($textwithoutspace)) {
                     $column = new stdClass();
-                    $column->text = format_text($theme->settings->$text);
+                    $column->text = format_text($theme->settings->$text, FORMAT_HTML);
+                    $column->classtext = $text;
                     $column->list = [];
                     $menu = new custom_menu(
                             $column->text, current_language()
@@ -156,7 +157,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                         $column->list[] = $listitem;
                     }
                     if (isset($theme->settings->$heading)) {
-                        $column->heading = format_text($theme->settings->$heading);
+                        $column->heading = format_text($theme->settings->$heading, FORMAT_HTML);
+                        $column->classheading = $heading;
                     }
                     $template->columns[] = $column;
                 }

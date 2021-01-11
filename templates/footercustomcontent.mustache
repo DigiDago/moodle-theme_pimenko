@@ -19,13 +19,18 @@
         {{#columns}}
             <div class="col-sm-{{gridcount}}">
                 <div class="p-l-10 p-t-20 text-left">
-                    {{{heading}}}
-                    <div>
-                        {{{text}}}
-                    </div>
+                    {{#heading}}
+                        <div id={{{classheading}}}>
+                            {{{heading}}}
+                        </div>
+                    {{/heading}}
+                    {{#text}}
+                        <div id={{{classtext}}}>
+                            {{{text}}}
+                        </div>
+                    {{/text}}
                 </div>
             </div>
         {{/columns}}
     </div>
 </div>
-
