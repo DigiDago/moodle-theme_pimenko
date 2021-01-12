@@ -385,6 +385,9 @@ class course_renderer extends \core_course_renderer {
                     }
                 }
 
+                // Course visible.
+                $rendercourse->visible = $course->visible;
+
                 // Get course image.
                 foreach ($course->get_course_overviewfiles() as $file) {
                     if ($file->is_valid_image()) {
