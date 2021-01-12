@@ -203,3 +203,28 @@ $string['settings:frontcoursecard:showstartdatedesc'] = 'Show start date in fron
 // Fonts.
 $string['settings:font:googlefont'] = 'Google font';
 $string['settings:font:googlefontdesc'] = 'Please refer to the page: https://fonts.google.com/ to find your typography';
+
+// Frontpage Block Regions name.
+$string['region-theme-front-a'] = 'Telaformation front-a';
+$string['region-theme-front-b'] = 'Telaformation front-b';
+$string['region-theme-front-c'] = 'Telaformation front-c';
+$string['region-theme-front-d'] = 'Telaformation front-d';
+$string['region-theme-front-e'] = 'Telaformation front-e';
+$string['region-theme-front-f'] = 'Telaformation front-f';
+$string['region-theme-front-g'] = 'Telaformation front-g';
+$string['region-theme-front-h'] = 'Telaformation front-h';
+$string['region-theme-front-i'] = 'Telaformation front-i';
+$string['region-theme-front-j'] = 'Telaformation front-j';
+$string['region-theme-front-k'] = 'Telaformation front-k';
+$string['region-theme-front-l'] = 'Telaformation front-l';
+$string['region-theme-front-m'] = 'Telaformation front-m';
+$string['region-theme-front-n'] = 'Telaformation front-n';
+$string['region-theme-front-o'] = 'Telaformation front-o';
+$string['region-theme-front-p'] = 'Telaformation front-p';
+$string['region-theme-front-q'] = 'Telaformation front-q';
+$string['region-theme-front-r'] = 'Telaformation front-r';
+$string['region-theme-front-s'] = 'Telaformation front-s';
+$string['region-theme-front-t'] = 'Telaformation front-t';
+$string['region-theme-front-u'] = 'Telaformation front-u';
+$string['region-side-post'] = 'Right';
+$string['region-side-pre'] = 'Left';
