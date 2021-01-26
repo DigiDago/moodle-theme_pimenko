@@ -160,6 +160,7 @@ $string['completion-alt-manual-enabled'] = 'Students can manually mark this item
 // Catalog.
 $string['viewcat'] = 'View cat';
 $string['viewcourse'] = 'View course';
+$string['nextmod'] = 'Next Activity';
 
 // Block Regions.
 $string['frontpage'] = 'Frontpage Block Settings';
