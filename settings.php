@@ -31,7 +31,6 @@ require_once(__DIR__ . "/libs/simple_theme_settings.php");
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
-/** @var admin_root $ADMIN */
 if ($ADMIN->fulltree) {
 
     // Boost provides a nice setting page which splits settings onto separate tabs. We want to use it here.

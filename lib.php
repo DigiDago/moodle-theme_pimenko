@@ -272,6 +272,7 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
             case 'loginbgimage':
             case 'favicon':
             case 'sitelogo':
+            case 'telaformationimages':
             case strstr($filearea, 'slideimage'):
                 return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
             default:

@@ -91,6 +91,13 @@ $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 // Define here layout we override.
 // Login page.
 $THEME->layouts = [
+        // Main course page.
+        'course' => array(
+                'file' => 'columns2.php',
+                'regions' => array('side-pre'),
+                'defaultregion' => 'side-pre',
+                'options' => array('langmenu' => true),
+        ),
         'login' => array(
                 'file' => 'login.php',
                 'regions' => array(),

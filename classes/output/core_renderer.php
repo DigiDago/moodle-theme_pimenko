@@ -183,6 +183,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function favicon(): string {
         if (!empty($this->page->theme->settings->favicon)) {
+
             if (empty($this->themeconfig)) {
                 $this->themeconfig = $theme = theme_config::load('telaformation');
             }
@@ -290,24 +291,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             return '';
         }
 
-        echo html_writer::start_tag(
-                'form', [
-                        'action' => '.',
-                        'method' => 'get'
-                ]
-        );
-        echo html_writer::start_tag('div');
-        echo html_writer::empty_tag(
-                'input', [
-                        'type' => 'hidden',
-                        'id' => 'completion_dynamic_change',
-                        'name' => 'completion_dynamic_change',
-                        'value' => '0'
-                ]
-        );
-        echo html_writer::end_tag('div');
-        echo html_writer::end_tag('form');
-
         $this->page->requires->js_init_call('M.core_completion.init');
 
         $renderer = $this->page->get_renderer(
@@ -366,7 +349,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $template->nextmodname = format_string($nextmod->name);
             $template->nextmodurl = $nextmod->url;
         }
-
         if ($completioninfo->is_enabled($mod)) {
             $template->completionicon = $renderer->course_section_cm_completion(
                     $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
