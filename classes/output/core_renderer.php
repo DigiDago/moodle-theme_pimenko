@@ -284,7 +284,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     public function render_completion_footer(): string {
         global $COURSE;
 
-        if ($COURSE->enablecompletion != COMPLETION_ENABLED) {
+        if ($COURSE->enablecompletion != COMPLETION_ENABLED || $this->page->pagelayout == "admin") {
             return '';
         }
         if ($this->page->bodyid == 'page-mod-quiz-attempt') {
