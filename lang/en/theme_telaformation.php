@@ -70,11 +70,6 @@ $string['rawscsspre_desc'] =
 // We need to include a lang string for each block region.
 $string['region-side-pre'] = 'Right';
 
-// Login page traduction.
-$string['loginsettings'] = 'Login page settings';
-$string['logintextboxtop'] = 'Top text box';
-$string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
-
 // Favicon *******************************************************.
 
 $string['favicon'] = 'Favicon';
@@ -102,7 +97,6 @@ $string['profile:contactinfo'] = 'Contact Information';
 $string['loginsettings'] = 'Login Page';
 $string['loginsettingsheading'] = 'Customize the login page';
 $string['logindesc'] = 'Customize the login page with adding an image background and texts above and below the login box.';
-$string['loginsettingsheading'] = 'Customize the login page.';
 $string['loginbgimage'] = 'Background image';
 $string['loginbgimagedesc'] = 'Add a background image to the full size page.';
 $string['loginbgstyle'] = 'Login background style';
