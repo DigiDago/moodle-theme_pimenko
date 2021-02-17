@@ -284,10 +284,10 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     public function render_completion_footer(): string {
         global $COURSE;
 
-        if ($COURSE->enablecompletion != COMPLETION_ENABLED || $this->page->pagelayout == "admin") {
-            return '';
-        }
-        if ($this->page->bodyid == 'page-mod-quiz-attempt') {
+        if ($COURSE->enablecompletion != COMPLETION_ENABLED
+                || $this->page->pagelayout == "admin"
+                || $this->page->pagetype == "course-editsection"
+                || $this->page->bodyid == 'page-mod-quiz-attempt') {
             return '';
         }
 
