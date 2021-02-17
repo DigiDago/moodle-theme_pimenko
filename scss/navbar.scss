@@ -52,6 +52,10 @@ nav.navbar.telaformation-navbar {
         color: #333 !important;
     }
 
+    .nav-item {
+        display: flex;
+    }
+
     .dropdown-toggle::after {
         display: none;
     }
