@@ -1,13 +1,21 @@
-<div class="course_category_tree m-b-20 clearfix">
-
-    {{#expandall}}
-        <div class="collapsible-actions">
-            <a href="#" class="courseopenall">{{ expandall }}</a>
-            <a href="#" class="coursecloseall hidden">{{ collapseall }}</a>
-        </div>
-    {{/expandall}}
-
-    <div class="content">
-        {{{ categorycontent }}}
+<div {{{contentattributes}}}>
+    <div class="collapsible-actions">
+        <a href="#" class="{{{linkclass}}}">{{{linkname}}}</a>
     </div>
+    <div class="content">{{{categorycontent}}}</div>
 </div>
+{{#js}}
+    <!--   We open all 1st rank category by default. -->
+    $(document).ready(function() {
+        if($('.categoryname')) {
+            $('.categoryname').click();
+        }
+
+        <!-- Change default event click action. -->
+        $('body').on('click', '.coursename a.aalink', function(event) {
+            event.preventDefault();
+            let selectormoreinfo = '#' + $(this).data('moreinfoid') + ' i';
+            $(selectormoreinfo).click();
+        });
+    });
+{{/js}}

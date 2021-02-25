@@ -421,6 +421,8 @@ class course_renderer extends \core_course_renderer {
     }
 
     /**
+     * Return course progress.
+     *
      * @param int $courseid
      *
      * @return float
@@ -434,5 +436,116 @@ class course_renderer extends \core_course_renderer {
             $percentage = 0;
         }
         return $percentage;
+    }
+
+    /**
+     * Returns HTML to display a tree of subcategories and courses in the given category
+     *
+     * @param coursecat_helper $chelper various display options
+     * @param core_course_category $coursecat top category (this category's name and description will NOT be added to the tree)
+     * @return string
+     */
+    protected function coursecat_tree(coursecat_helper $chelper, $coursecat) {
+        // Reset the category expanded flag for this course category tree first.
+        $this->categoryexpandedonload = true;
+        $template = new stdClass();
+        $template->categorycontent = $this->coursecat_category_content($chelper, $coursecat, 0);
+        if (empty($template->categorycontent)) {
+            return '';
+        }
+
+        // Start content generation.
+        $content = '';
+        $template->attributes = $chelper->get_and_erase_attributes('course_category_tree clearfix');
+        $template->contentattributes = '';
+        foreach ($template->attributes as $key => $attribute) {
+            $template->contentattributes .= $key . "=" . $attribute;
+        }
+
+        if ($coursecat->get_children_count()) {
+            $template->linkclass = 'collapseexpand aabtn';
+
+            // Check if the category content contains subcategories with children's content loaded.
+            if ($this->categoryexpandedonload) {
+                $template->linkclass .= ' collapse-all';
+                $template->linkname = get_string('collapseall');
+            } else {
+                $template->linkname = get_string('expandall');
+            }
+            // Only show the collapse/expand if there are children to expand.
+            $this->page->requires->strings_for_js(array('collapseall', 'expandall'), 'moodle');
+        }
+
+        $content .= $this->output->render_from_template(
+                'theme_telaformation/course_category_tree',
+                $template
+        );
+
+        return $content;
+    }
+
+    /**
+     * Returns HTML to display course name.
+     *
+     * @param coursecat_helper $chelper
+     * @param core_course_list_element $course
+     * @return string
+     */
+    protected function course_name(coursecat_helper $chelper, core_course_list_element $course): string {
+        $content = '';
+        $template = new stdClass();
+        if ($chelper->get_show_courses() >= self::COURSECAT_SHOW_COURSES_EXPANDED) {
+            $template->nametag = 'h3';
+        } else {
+            $template->nametag = 'div';
+        }
+        $coursename = $chelper->get_course_formatted_name($course);
+        $template->coursenamelink = html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
+                $coursename, ['class' => $course->visible ? 'aalink' : 'aalink dimmed',
+                        'data-moreinfoid' => 'moreinfo' . $course->id]);
+        // If we display course in collapsed form but the course has summary or course contacts, display the link to the info page.
+        if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
+            if ($course->has_summary() || $course->has_course_contacts() || $course->has_course_overviewfiles()
+                    || $course->has_custom_fields()) {
+                $template->url = new moodle_url('/course/info.php', ['id' => $course->id]);
+                $template->title = $this->strings->summary;
+                $template->moreinfoid = 'moreinfo' . $course->id;
+                $template->image = $this->output->pix_icon('i/info', $this->strings->summary);
+                // Make sure JS file to expand course content is included.
+                $this->coursecat_include_js();
+            }
+        }
+        $content .= $this->output->render_from_template(
+                'theme_telaformation/course_name',
+                $template
+        );
+
+        return $content;
+    }
+
+    /**
+     * Returns HTML to display course content (summary, course contacts and optionally category name)
+     *
+     * This method is called from coursecat_coursebox() and may be re-used in AJAX
+     *
+     * @param coursecat_helper $chelper various display options
+     * @param stdClass|core_course_list_element $course
+     * @return string
+     */
+    protected function coursecat_coursebox_content(coursecat_helper $chelper, $course) {
+        if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
+            return '';
+        }
+        if ($course instanceof stdClass) {
+            $course = new core_course_list_element($course);
+        }
+        $content = $this->course_summary($chelper, $course);
+        $content .= $this->course_overview_files($course);
+        $content .= $this->course_contacts($course);
+        $content .= $this->course_category_name($chelper, $course);
+        $content .= $this->course_custom_fields($course);
+        $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
+                'Enter', ['class' => 'entercourse btn btn-secondary']);
+        return $content;
     }
 }
