@@ -38,6 +38,7 @@ use pix_icon;
 use action_menu_link_secondary;
 use action_menu;
 use action_menu_filler;
+use core_text;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -291,7 +292,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 || $this->page->pagelayout == "admin"
                 || $this->page->pagetype == "course-editsection"
                 || $this->page->bodyid == 'page-mod-quiz-attempt'
-                || (isset($this->page->cm->completion) && !$this->page->cm->completion)) {
+                || (isset($this->page->cm->completion) && !$this->page->cm->completion)
+                || !isset($this->page->cm->completion)) {
             return '';
         }
 
