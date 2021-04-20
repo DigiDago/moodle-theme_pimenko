@@ -501,8 +501,11 @@ class course_renderer extends \core_course_renderer {
         }
         $coursename = $chelper->get_course_formatted_name($course);
         $template->coursenamelink = html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
-                $coursename, ['class' => $course->visible ? 'aalink' : 'aalink dimmed',
-                        'data-moreinfoid' => 'moreinfo' . $course->id]);
+                $coursename, [
+                        'class' => $course->visible ? 'aalink' : 'aalink dimmed',
+                        'data-moreinfoid' => 'moreinfo' . $course->id,
+                        'data-summary' => $course->has_summary()
+                ]);
         // If we display course in collapsed form but the course has summary or course contacts, display the link to the info page.
         if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
             if ($course->has_summary() || $course->has_course_contacts() || $course->has_course_overviewfiles()

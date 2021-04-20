@@ -13,9 +13,11 @@
 
         <!-- Change default event click action. -->
         $('body').on('click', '.coursename a.aalink', function(event) {
-            event.preventDefault();
-            let selectormoreinfo = '#' + $(this).data('moreinfoid') + ' i';
-            $(selectormoreinfo).click();
+            if($(this).data('summary') == true) {
+                event.preventDefault();
+                let selectormoreinfo = '#' + $(this).data('moreinfoid') + ' i';
+                $(selectormoreinfo).click();
+            }
         });
     });
 {{/js}}
