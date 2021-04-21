@@ -115,4 +115,12 @@ $THEME->layouts = [
                 'defaultregion' => 'side-pre',
                 'regions' => theme_telaformation_regions(),
         ],
+        'telaformationProfile' => array(
+                'file' => 'columns2.php',
+                'regions' => [
+                        'side-pre',
+                        'side-post'
+                ],
+                'defaultregion' => 'side-pre',
+        ),
 ];

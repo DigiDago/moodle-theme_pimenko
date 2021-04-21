@@ -57,7 +57,7 @@ if (!empty($CFG->forceloginforprofiles)) {
 }
 
 $PAGE->set_context($context);
-$PAGE->set_pagelayout('base');
+$PAGE->set_pagelayout('telaformationProfile');
 $PAGE->set_title('Profile');
 $PAGE->blocks->show_only_fake_blocks();
 
