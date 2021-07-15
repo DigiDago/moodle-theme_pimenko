@@ -554,4 +554,31 @@ class course_renderer extends \core_course_renderer {
             ), ['class' => 'entercourse btn btn-secondary']);
         return $content;
     }
+
+    /**
+     * Renders the activity information.
+     *
+     * Defer to template.
+     *
+     * @param \core_course\output\activity_information $page
+     * @return string html for the page
+     */
+    public function render_activity_information(\core_course\output\activity_information $page) {
+        global $COURSE;
+
+        $theme    = theme_config::load('telaformation');
+        $moodlecompletion  = $theme->settings->moodleactivitycompletion;
+
+        $data = $page->export_for_template($this->output);
+        $data->showdates = $COURSE->showactivitydates;
+
+        if (!$moodlecompletion) {
+            $data->showcompletionconditions = $COURSE->showcompletionconditions == COMPLETION_SHOW_CONDITIONS;
+            $data->showmanualcompletion = $data->showcompletionconditions;
+        } else {
+            $data->moodlecompletion = $moodlecompletion;
+        }
+
+        return $this->output->render_from_template('theme_telaformation/activity_info', $data);
+    }
 }

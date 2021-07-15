@@ -35,10 +35,28 @@ if ($ADMIN->fulltree) {
 
     // Boost provides a nice setting page which splits settings onto separate tabs. We want to use it here.
     $settings =
-            new theme_boost_admin_settingspage_tabs('themesettingtelaformation', get_string('configtitle', 'theme_telaformation'));
+        new theme_boost_admin_settingspage_tabs('themesettingtelaformation', get_string('configtitle', 'theme_telaformation'));
 
     // Each page is a tab - the first is the "General" tab.
     $page = new admin_settingpage('theme_telaformation_general', get_string('generalsettings', 'theme_telaformation'));
+
+    // Active or not moodle activity completion.
+    $name = 'theme_telaformation/moodleactivitycompletion';
+    $title = get_string(
+        'moodleactivitycompletion',
+        'theme_telaformation'
+    );
+    $description = get_string(
+        'moodleactivitycompletion_desc',
+        'theme_telaformation'
+    );
+    $setting = new admin_setting_configcheckbox(
+        $name,
+        $title,
+        $description,
+        '0'
+    );
+    $page->add($setting);
 
     // Replicate the preset setting from boost.
     $name = 'theme_telaformation/preset';
@@ -70,7 +88,7 @@ if ($ADMIN->fulltree) {
     $description = get_string('presetfiles_desc', 'theme_telaformation');
 
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-            array('maxfiles' => 20, 'accepted_types' => array('.scss')));
+        array('maxfiles' => 20, 'accepted_types' => array('.scss')));
     $page->add($setting);
 
     // Variable $brand-color.
@@ -107,13 +125,13 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     $setting = new simple_theme_settings(
-            $page,
-            'theme_telaformation',
-            'settings:font:'
+        $page,
+        'theme_telaformation',
+        'settings:font:'
     );
     $setting->add_text(
-            'googlefont',
-            'Verdana'
+        'googlefont',
+        'Verdana'
     );
 
     // Must add the page after definiting all the settings!
@@ -124,13 +142,13 @@ if ($ADMIN->fulltree) {
 
     // Raw SCSS to include before the content.
     $setting = new admin_setting_configtextarea('theme_telaformation/scsspre',
-            get_string('rawscsspre', 'theme_telaformation'), get_string('rawscsspre_desc', 'theme_telaformation'), '', PARAM_RAW);
+        get_string('rawscsspre', 'theme_telaformation'), get_string('rawscsspre_desc', 'theme_telaformation'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Raw SCSS to include after the content.
     $setting = new admin_setting_configtextarea('theme_telaformation/scss', get_string('rawscss', 'theme_telaformation'),
-            get_string('rawscss_desc', 'theme_telaformation'), '', PARAM_RAW);
+        get_string('rawscss_desc', 'theme_telaformation'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 

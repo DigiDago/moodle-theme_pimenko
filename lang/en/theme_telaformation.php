@@ -226,3 +226,7 @@ $string['region-side-pre'] = 'Left';
 
 // Trad enter button in courselist.
 $string['entercourse'] = 'Enter';
+
+// Moodle activity completion design enabling setting.
+$string['moodleactivitycompletion']      = "Enable display of moodle activity completion";
+$string['moodleactivitycompletion_desc'] = "This option enables the default display of the activity completion used by moodle";

@@ -355,7 +355,11 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $template->nextmodname = format_string($nextmod->name);
             $template->nextmodurl = $nextmod->url;
         }
-        if ($completioninfo->is_enabled($mod)) {
+
+        $theme    = theme_config::load('telaformation');
+        $moodlecompletion  = $theme->settings->moodleactivitycompletion;
+
+        if ($completioninfo->is_enabled($mod) && !$moodlecompletion) {
             $template->completionicon = $renderer->course_section_cm_completion(
                     $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
             );
