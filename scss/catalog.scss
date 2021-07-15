@@ -39,7 +39,14 @@
 
     .entercourse {
         clear: both;
-        float: right;
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+        height: 50px;
+        line-height: 38px;
+        margin: auto;
+        text-transform: uppercase;
+        width: 50%;
     }
 
     .coursename a.aalink {

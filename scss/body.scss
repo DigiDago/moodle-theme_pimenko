@@ -32,10 +32,14 @@ body {
     .btn-outline-secondary,
     .btn-secondary {
         background: unquote('brandcolorbutton');
+        border-color: unquote('brandcolorbutton');
         color: unquote('brandcolortextbutton');
 
-        &:hover {
+        &:hover,
+        &:active,
+        &:focus {
             background: unquote('darkenbrandcolorbutton');
+            border-color: unquote('darkenbrandcolorbutton');
             color: unquote('darkenbrandcolortextbutton');
         }
     }

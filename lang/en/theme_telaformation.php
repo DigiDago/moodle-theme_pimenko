@@ -42,7 +42,7 @@ $string['brandcolorbutton'] = 'Button brand color';
 // The button brand color setting description.
 $string['brandcolorbuttondesc'] = 'Define a brand color for button.';
 // The button brand color setting.
-$string['brandcolortextbutton'] = 'Brand color';
+$string['brandcolortextbutton'] = 'Button brand color';
 // The button brand color setting description.
 $string['brandcolortextbuttondesc'] = 'Define a text color for button.';
 // Name of the settings pages.
@@ -109,6 +109,12 @@ $string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
 $string['logintextboxbottom'] = 'Bottom text box';
 $string['logintextboxbottomdesc'] = 'Add a custom text below the login box.';
 
+$string['stylecover'] = 'Cover';
+$string['stylestretch'] = 'Stretch';
+
+$string['hide'] = 'Hide';
+$string['show'] = 'Show';
+
 // Footer *******************************************************.
 $string['footersettings'] = 'Footer';
 $string['settings:footer:footercolumn'] = 'Footer column {$a}';
@@ -121,12 +127,6 @@ $string['footercolor'] = 'Footer color';
 $string['footercolordesc'] = 'Add a background color to your footer';
 $string['footertextcolor'] = 'Footer text color';
 $string['footertextcolordesc'] = 'Add a text color to your footer';
-
-$string['stylecover'] = 'Cover';
-$string['stylestretch'] = 'Stretch';
-
-$string['hide'] = 'Hide';
-$string['show'] = 'Show';
 
 // Completion.
 $string['completion-alt-manual-n'] = 'Not complete';
@@ -223,3 +223,6 @@ $string['region-theme-front-t'] = 'Telaformation front-t';
 $string['region-theme-front-u'] = 'Telaformation front-u';
 $string['region-side-post'] = 'Right';
 $string['region-side-pre'] = 'Left';
+
+// Trad enter button in courselist.
+$string['entercourse'] = 'Enter';

@@ -37,6 +37,10 @@ $string['advancedsettings'] = 'Options avancées';
 $string['brandcolor'] = 'Couleur générale';
 // The brand color setting description.
 $string['brandcolor_desc'] = 'Défini la couleur principale du site ( pour les liens ... )';
+// The button brand color setting.
+$string['brandcolortextbutton'] = 'Couleur générale des boutons';
+// The button brand color setting description.
+$string['brandcolortextbuttondesc'] = 'Définir une couleur générale pour les boutons';
 // Name of the settings pages.
 $string['configtitle'] = 'Options Telaformation';
 // Name of the first settings tab.
@@ -100,6 +104,12 @@ $string['logintextboxtopdesc'] = 'Ajoutez un texte personnalisé au-dessus de la
 $string['logintextboxbottom'] = 'Zone de texte inférieur';
 $string['logintextboxbottomdesc'] = 'Ajoutez un texte personnalisé au-dessous de la zone de connexion.';
 
+$string['stylecover'] = 'Cover';
+$string['stylestretch'] = 'Stretch';
+
+$string['hide'] = 'Cacher';
+$string['show'] = 'Afficher';
+
 // Footer *******************************************************.
 $string['footersettings'] = 'Pied de page';
 $string['settings:footer:footercolumn'] = 'Pied de page colonne {$a}';
@@ -157,9 +167,9 @@ $string['settings:regions:blockregionrowtextcolor'] = 'Couleur de texte de la zo
 $string['settings:regions:blockregionrowtextcolordesc'] = 'Ajoutez / définissez une couleur de texte pour la zone de contenue sur la première page.';
 $string['settings:regions:blockregionrowlinkcolor'] = 'Couleur des liens de la zone {$a}';
 $string['settings:regions:blockregionrowlinkcolordesc'] = 'Ajoutez / définissez une couleur pour les liens pour la zone de contenue sur la première page.';
-$string['settings:regions:blockregionrowlinkhovercolor'] = 'Couleur des liens \'hover\' de la zone {$a}';
+$string['settings:regions:blockregionrowlinkhovercolor'] = 'Couleur des liens \'survoler\' de la zone {$a}';
 $string['settings:regions:blockregionrowlinkhovercolordesc'] =
-        'Ajoutez / définissez une couleur pour les liens \'hover\' pour la zone de contenue sur la première page.';
+        'Ajoutez / définissez une couleur pour les liens \'survoler\' pour la zone de contenue sur la première page.';
 
 // Slide.
 $string['settings:frontslider:enablecarousel'] = 'Activer le carrousel';
@@ -209,8 +219,6 @@ $string['region-theme-front-u'] = 'Telaformation front-u';
 $string['region-side-post'] = 'Droite';
 $string['region-side-pre'] = 'Gauche';
 
-$string['stylecover'] = 'Cover';
-$string['stylestretch'] = 'Stretch';
+// Trad enter button in courselist.
+$string['entercourse'] = 'Entrer';
 
-$string['hide'] = 'Cacher';
-$string['show'] = 'Afficher';

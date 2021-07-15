@@ -548,7 +548,10 @@ class course_renderer extends \core_course_renderer {
         $content .= $this->course_category_name($chelper, $course);
         $content .= $this->course_custom_fields($course);
         $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
-                'Enter', ['class' => 'entercourse btn btn-secondary']);
+            get_string(
+                'entercourse',
+                'theme_telaformation'
+            ), ['class' => 'entercourse btn btn-secondary']);
         return $content;
     }
 }
