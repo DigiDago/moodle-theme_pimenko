@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation lib file.
+ * Theme Pimenko lib file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_telaformation_get_main_scss_content($theme): string {
+function theme_pimenko_get_main_scss_content($theme): string {
     global $CFG;
 
     // File storage API.
@@ -50,8 +50,8 @@ function theme_telaformation_get_main_scss_content($theme): string {
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
 
-    } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_telaformation', 'preset', 0, '/', $filename))) {
-        // This preset file was fetched from the file area for theme_telaformation and not theme_boost (see the line above).
+    } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_pimenko', 'preset', 0, '/', $filename))) {
+        // This preset file was fetched from the file area for theme_pimenko and not theme_boost (see the line above).
         $scss .= $presetfile->get_content();
     } else {
         // Safety fallback - maybe new installs etc.
@@ -69,7 +69,7 @@ function theme_telaformation_get_main_scss_content($theme): string {
  * @param theme_config $theme The theme config object.
  * @return array
  */
-function theme_telaformation_get_pre_scss($theme) {
+function theme_pimenko_get_pre_scss($theme) {
     // Load the settings from the parent.
     $theme = theme_config::load('boost');
     // Call the parent themes get_pre_scss function.
@@ -84,7 +84,7 @@ function theme_telaformation_get_pre_scss($theme) {
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_telaformation_get_extra_scss($theme) {
+function theme_pimenko_get_extra_scss($theme) {
     // Load the settings from the parent.
     $theme = theme_config::load('boost');
     // Call the parent themes get_extra_scss function.
@@ -99,7 +99,7 @@ function theme_telaformation_get_extra_scss($theme) {
  * @param theme_config $theme The theme config object.
  * @return string The parsed CSS The parsed CSS.
  */
-function theme_telaformation_process_css($css, $theme) {
+function theme_pimenko_process_css($css, $theme) {
     // Define the default settings for the theme incase they've not been set.
     $defaults = [
             'brandcolor' => '#000',
@@ -180,9 +180,9 @@ function theme_telaformation_process_css($css, $theme) {
     $loginbgopacity2 = '';
     $loginbgopacity3 = '';
     if (!empty($theme->settings->loginbgopacity)) {
-        $loginbgopacity1 = theme_telaformation_hex2rgba($theme->settings->headerbkcolor2, $theme->settings->loginbgopacity);
+        $loginbgopacity1 = theme_pimenko_hex2rgba($theme->settings->headerbkcolor2, $theme->settings->loginbgopacity);
         $loginbgopacity2 = 'rgba(255, 255, 255, ' . $theme->settings->loginbgopacity . ') !important;';
-        $loginbgopacity3 = theme_telaformation_hex2rgba($theme->settings->footerbkcolor, $theme->settings->loginbgopacity);
+        $loginbgopacity3 = theme_pimenko_hex2rgba($theme->settings->footerbkcolor, $theme->settings->loginbgopacity);
     }
     $defaults['loginbgopacity1'] = $loginbgopacity1;
     $defaults['loginbgopacity2'] = $loginbgopacity2;
@@ -215,8 +215,8 @@ function theme_telaformation_process_css($css, $theme) {
  * @param string $alpha
  * @return string
  */
-function theme_telaformation_hex2rgba($hex, $alpha) {
-    $rgba = theme_telaformation_hex2rgb($hex);
+function theme_pimenko_hex2rgba($hex, $alpha) {
+    $rgba = theme_pimenko_hex2rgb($hex);
     $rgba[] = $alpha;
     return 'rgba(' . implode(", ", $rgba) . ') !important'; // Returns the rgba values separated by commas.
 }
@@ -227,7 +227,7 @@ function theme_telaformation_hex2rgba($hex, $alpha) {
  * @param string $hex
  * @return array
  */
-function theme_telaformation_hex2rgb($hex) {
+function theme_pimenko_hex2rgb($hex) {
     // From: http://bavotasan.com/2011/convert-hex-color-to-rgb-using-php/.
     $hex = str_replace("#", "", $hex);
 
@@ -256,11 +256,11 @@ function theme_telaformation_hex2rgb($hex) {
  * @param array $options
  * @return bool
  */
-function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     static $theme;
 
     if (empty($theme)) {
-        $theme = theme_config::load('telaformation');
+        $theme = theme_config::load('pimenko');
     }
 
     if ($context->contextlevel == CONTEXT_SYSTEM) {
@@ -272,7 +272,7 @@ function theme_telaformation_pluginfile($course, $cm, $context, $filearea, $args
             case 'loginbgimage':
             case 'favicon':
             case 'sitelogo':
-            case 'telaformationimages':
+            case 'pimenkoimages':
             case strstr($filearea, 'slideimage'):
                 return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
             default:
@@ -330,7 +330,7 @@ function colorbrightness($hex, $percent) {
  * @throws coding_exception
  * @throws moodle_exception
  */
-function telaformation_redirect_to_profile_page($bodyid) {
+function pimenko_redirect_to_profile_page($bodyid) {
     global $USER;
     if (optional_param(
             'noredir', 0, PARAM_INT
@@ -343,7 +343,7 @@ function telaformation_redirect_to_profile_page($bodyid) {
         );
         $params = ['userid' => $id];
         $redirecturl = new moodle_url(
-                '/theme/telaformation/layout/profile.php', $params
+                '/theme/pimenko/layout/profile.php', $params
         );
         if (!empty($id)) {
             redirect($redirecturl);
@@ -354,7 +354,7 @@ function telaformation_redirect_to_profile_page($bodyid) {
                 'preferences' => 1
         ];
         $redirecturl = new moodle_url(
-                '/theme/telaformation/layout/profile.php', $params
+                '/theme/pimenko/layout/profile.php', $params
         );
         redirect($redirecturl);
     }
@@ -364,16 +364,16 @@ function telaformation_redirect_to_profile_page($bodyid) {
 /**
  * Get icon mapping for font-awesome.
  */
-function theme_telaformation_get_fontawesome_icon_map() {
+function theme_pimenko_get_fontawesome_icon_map() {
     return [
-            'theme_telaformation:t/check' => 'fa-check',
+            'theme_pimenko:t/check' => 'fa-check',
     ];
 }
 
 /**
  * @return array
  */
-function theme_telaformation_regions() {
+function theme_pimenko_regions() {
     $regions = [
             'side-pre',
             'side-post'

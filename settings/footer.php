@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings footer file.
+ * Theme Pimenko settings footer file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,17 +26,17 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Some parts there are from 'adaptable' theme.
-$page = new admin_settingpage('theme_telaformation_footer', get_string('footersettings', 'theme_telaformation'));
+$page = new admin_settingpage('theme_pimenko_footer', get_string('footersettings', 'theme_pimenko'));
 
 // Navbar color.
-$name          = 'theme_telaformation/footercolor';
+$name          = 'theme_pimenko/footercolor';
 $title         = get_string(
         'footercolor',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $description   = get_string(
         'footercolordesc',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $previewconfig = null;
 $setting       = new admin_setting_configcolourpicker(
@@ -51,14 +51,14 @@ $page->add($setting);
 
 // Navbar text color.
 
-$name          = 'theme_telaformation/footertextcolor';
+$name          = 'theme_pimenko/footertextcolor';
 $title         = get_string(
         'footertextcolor',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $description   = get_string(
         'footertextcolordesc',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $previewconfig = null;
 $setting       = new admin_setting_configcolourpicker(
@@ -73,7 +73,7 @@ $page->add($setting);
 
 $setting = new simple_theme_settings(
         $page,
-        'theme_telaformation',
+        'theme_pimenko',
         'settings:footer:'
 );
 

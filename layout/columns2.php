@@ -17,7 +17,7 @@
 /**
  * A two column layout for the boost theme.
  *
- * @package   theme_telaformation
+ * @package   theme_pimenko
  * @copyright 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 
-telaformation_redirect_to_profile_page($PAGE->bodyid);
+pimenko_redirect_to_profile_page($PAGE->bodyid);
 
 if (isloggedin()) {
     $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
@@ -40,8 +40,8 @@ if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
 
-$PAGE->requires->js_call_amd('theme_telaformation/telaformation', 'init');
-$PAGE->requires->js_call_amd('theme_telaformation/completion', 'init');
+$PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
+$PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');

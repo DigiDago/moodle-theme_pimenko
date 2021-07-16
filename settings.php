@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings file.
+ * Theme Pimenko settings file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,20 +35,20 @@ if ($ADMIN->fulltree) {
 
     // Boost provides a nice setting page which splits settings onto separate tabs. We want to use it here.
     $settings =
-        new theme_boost_admin_settingspage_tabs('themesettingtelaformation', get_string('configtitle', 'theme_telaformation'));
+        new theme_boost_admin_settingspage_tabs('themesettingpimenko', get_string('configtitle', 'theme_pimenko'));
 
     // Each page is a tab - the first is the "General" tab.
-    $page = new admin_settingpage('theme_telaformation_general', get_string('generalsettings', 'theme_telaformation'));
+    $page = new admin_settingpage('theme_pimenko_general', get_string('generalsettings', 'theme_pimenko'));
 
     // Active or not moodle activity completion.
-    $name = 'theme_telaformation/moodleactivitycompletion';
+    $name = 'theme_pimenko/moodleactivitycompletion';
     $title = get_string(
         'moodleactivitycompletion',
-        'theme_telaformation'
+        'theme_pimenko'
     );
     $description = get_string(
         'moodleactivitycompletion_desc',
-        'theme_telaformation'
+        'theme_pimenko'
     );
     $setting = new admin_setting_configcheckbox(
         $name,
@@ -59,16 +59,16 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     // Replicate the preset setting from boost.
-    $name = 'theme_telaformation/preset';
-    $title = get_string('preset', 'theme_telaformation');
-    $description = get_string('preset_desc', 'theme_telaformation');
+    $name = 'theme_pimenko/preset';
+    $title = get_string('preset', 'theme_pimenko');
+    $description = get_string('preset_desc', 'theme_pimenko');
     $default = 'default.scss';
 
     // We list files in our own file area to add to the drop down. We will provide our own function to
     // load all the presets from the correct paths.
     $context = context_system::instance();
     $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, 'theme_telaformation', 'preset', 0, 'itemid, filepath, filename', false);
+    $files = $fs->get_area_files($context->id, 'theme_pimenko', 'preset', 0, 'itemid, filepath, filename', false);
 
     $choices = [];
     foreach ($files as $file) {
@@ -83,9 +83,9 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     // Preset files setting.
-    $name = 'theme_telaformation/presetfiles';
-    $title = get_string('presetfiles', 'theme_telaformation');
-    $description = get_string('presetfiles_desc', 'theme_telaformation');
+    $name = 'theme_pimenko/presetfiles';
+    $title = get_string('presetfiles', 'theme_pimenko');
+    $description = get_string('presetfiles_desc', 'theme_pimenko');
 
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
         array('maxfiles' => 20, 'accepted_types' => array('.scss')));
@@ -93,40 +93,40 @@ if ($ADMIN->fulltree) {
 
     // Variable $brand-color.
     // We use an empty default value because the default colour should come from the preset.
-    $name = 'theme_telaformation/brandcolor';
-    $title = get_string('brandcolor', 'theme_telaformation');
-    $description = get_string('brandcolor_desc', 'theme_telaformation');
+    $name = 'theme_pimenko/brandcolor';
+    $title = get_string('brandcolor', 'theme_pimenko');
+    $description = get_string('brandcolor_desc', 'theme_pimenko');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Default color for button.
-    $name = 'theme_telaformation/brandcolorbutton';
-    $title = get_string('brandcolorbutton', 'theme_telaformation');
-    $description = get_string('brandcolorbuttondesc', 'theme_telaformation');
+    $name = 'theme_pimenko/brandcolorbutton';
+    $title = get_string('brandcolorbutton', 'theme_pimenko');
+    $description = get_string('brandcolorbuttondesc', 'theme_pimenko');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Default text color for button.
-    $name = 'theme_telaformation/brandcolortextbutton';
-    $title = get_string('brandcolortextbutton', 'theme_telaformation');
-    $description = get_string('brandcolortextbuttondesc', 'theme_telaformation');
+    $name = 'theme_pimenko/brandcolortextbutton';
+    $title = get_string('brandcolortextbutton', 'theme_pimenko');
+    $description = get_string('brandcolortextbuttondesc', 'theme_pimenko');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Site Favicon.
-    $name = 'theme_telaformation/favicon';
-    $title = get_string('favicon', 'theme_telaformation');
-    $description = get_string('favicondesc', 'theme_telaformation');
+    $name = 'theme_pimenko/favicon';
+    $title = get_string('favicon', 'theme_pimenko');
+    $description = get_string('favicondesc', 'theme_pimenko');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'favicon');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     $setting = new simple_theme_settings(
         $page,
-        'theme_telaformation',
+        'theme_pimenko',
         'settings:font:'
     );
     $setting->add_text(
@@ -138,17 +138,17 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
     // Advanced settings.
-    $page = new admin_settingpage('theme_telaformation_advanced', get_string('advancedsettings', 'theme_telaformation'));
+    $page = new admin_settingpage('theme_pimenko_advanced', get_string('advancedsettings', 'theme_pimenko'));
 
     // Raw SCSS to include before the content.
-    $setting = new admin_setting_configtextarea('theme_telaformation/scsspre',
-        get_string('rawscsspre', 'theme_telaformation'), get_string('rawscsspre_desc', 'theme_telaformation'), '', PARAM_RAW);
+    $setting = new admin_setting_configtextarea('theme_pimenko/scsspre',
+        get_string('rawscsspre', 'theme_pimenko'), get_string('rawscsspre_desc', 'theme_pimenko'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Raw SCSS to include after the content.
-    $setting = new admin_setting_configtextarea('theme_telaformation/scss', get_string('rawscss', 'theme_telaformation'),
-        get_string('rawscss_desc', 'theme_telaformation'), '', PARAM_RAW);
+    $setting = new admin_setting_configtextarea('theme_pimenko/scss', get_string('rawscss', 'theme_pimenko'),
+        get_string('rawscss_desc', 'theme_pimenko'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 

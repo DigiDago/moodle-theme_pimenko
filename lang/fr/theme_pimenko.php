@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation lang file.
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * Theme Pimenko lang file.
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 // A description shown in the admin theme selector.
 $string['choosereadme'] = 'Le thème de la téléformation est un thème enfant de Boost. Il ajoute quelques nouvelles fonctionnalités';
 // The name of our plugin.
-$string['pluginname'] = 'Telaformation';
+$string['pluginname'] = 'Pimenko';
 // The name of the second tab in the theme settings.
 $string['advancedsettings'] = 'Options avancées';
 // The brand color setting.
@@ -42,7 +42,7 @@ $string['brandcolortextbutton'] = 'Couleur générale des boutons';
 // The button brand color setting description.
 $string['brandcolortextbuttondesc'] = 'Définir une couleur générale pour les boutons';
 // Name of the settings pages.
-$string['configtitle'] = 'Options Telaformation';
+$string['configtitle'] = 'Options Pimenko';
 // Name of the first settings tab.
 $string['generalsettings'] = 'Options générales';
 // Preset files setting.
@@ -195,27 +195,27 @@ $string['settings:font:googlefont'] = 'Police Google';
 $string['settings:font:googlefontdesc'] = 'Veuillez vous référer à la page: https://fonts.google.com/ pour trouver votre typographie';
 
 // Frontpage Block Regions name.
-$string['region-theme-front-a'] = 'Telaformation front-a';
-$string['region-theme-front-b'] = 'Telaformation front-b';
-$string['region-theme-front-c'] = 'Telaformation front-c';
-$string['region-theme-front-d'] = 'Telaformation front-d';
-$string['region-theme-front-e'] = 'Telaformation front-e';
-$string['region-theme-front-f'] = 'Telaformation front-f';
-$string['region-theme-front-g'] = 'Telaformation front-g';
-$string['region-theme-front-h'] = 'Telaformation front-h';
-$string['region-theme-front-i'] = 'Telaformation front-i';
-$string['region-theme-front-j'] = 'Telaformation front-j';
-$string['region-theme-front-k'] = 'Telaformation front-k';
-$string['region-theme-front-l'] = 'Telaformation front-l';
-$string['region-theme-front-m'] = 'Telaformation front-m';
-$string['region-theme-front-n'] = 'Telaformation front-n';
-$string['region-theme-front-o'] = 'Telaformation front-o';
-$string['region-theme-front-p'] = 'Telaformation front-p';
-$string['region-theme-front-q'] = 'Telaformation front-q';
-$string['region-theme-front-r'] = 'Telaformation front-r';
-$string['region-theme-front-s'] = 'Telaformation front-s';
-$string['region-theme-front-t'] = 'Telaformation front-t';
-$string['region-theme-front-u'] = 'Telaformation front-u';
+$string['region-theme-front-a'] = 'Pimenko front-a';
+$string['region-theme-front-b'] = 'Pimenko front-b';
+$string['region-theme-front-c'] = 'Pimenko front-c';
+$string['region-theme-front-d'] = 'Pimenko front-d';
+$string['region-theme-front-e'] = 'Pimenko front-e';
+$string['region-theme-front-f'] = 'Pimenko front-f';
+$string['region-theme-front-g'] = 'Pimenko front-g';
+$string['region-theme-front-h'] = 'Pimenko front-h';
+$string['region-theme-front-i'] = 'Pimenko front-i';
+$string['region-theme-front-j'] = 'Pimenko front-j';
+$string['region-theme-front-k'] = 'Pimenko front-k';
+$string['region-theme-front-l'] = 'Pimenko front-l';
+$string['region-theme-front-m'] = 'Pimenko front-m';
+$string['region-theme-front-n'] = 'Pimenko front-n';
+$string['region-theme-front-o'] = 'Pimenko front-o';
+$string['region-theme-front-p'] = 'Pimenko front-p';
+$string['region-theme-front-q'] = 'Pimenko front-q';
+$string['region-theme-front-r'] = 'Pimenko front-r';
+$string['region-theme-front-s'] = 'Pimenko front-s';
+$string['region-theme-front-t'] = 'Pimenko front-t';
+$string['region-theme-front-u'] = 'Pimenko front-u';
 $string['region-side-post'] = 'Droite';
 $string['region-side-pre'] = 'Gauche';
 

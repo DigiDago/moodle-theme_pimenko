@@ -17,12 +17,12 @@
 /**
  * Course renderer.
  *
- * @package    theme_telaformation
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_telaformation\output\core;
+namespace theme_pimenko\output\core;
 
 use core_completion\progress;
 use stdClass;
@@ -44,7 +44,7 @@ require_once($CFG->dirroot . '/course/renderer.php');
 /**
  * Course renderer class.
  *
- * @package    theme_telaformation
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -147,14 +147,14 @@ class course_renderer extends \core_course_renderer {
                 $modtemplate->completetext = format_string(
                         get_string(
                                 'completion-alt-' . $completionicon,
-                                'theme_telaformation',
+                                'theme_pimenko',
                                 $formattedname
                         )
                 );
                 $modtemplate->tooltiptext = format_string(
                         get_string(
                                 'completion-tooltip-' . $completionicon,
-                                'theme_telaformation'
+                                'theme_pimenko'
                         )
                 );
                 if (!empty($completioniconop)) {
@@ -175,7 +175,7 @@ class course_renderer extends \core_course_renderer {
                 }
                 $modtemplate->class = 'completioncheck';
                 $content .= $this->output->render_from_template(
-                        'theme_telaformation/completioncheck',
+                        'theme_pimenko/completioncheck',
                         $modtemplate
                 );
             } else if ($completion == COMPLETION_TRACKING_MANUAL) {
@@ -187,7 +187,7 @@ class course_renderer extends \core_course_renderer {
                 }
                 $modtemplate->class = 'completioncheck';
                 $content .= $this->output->render_from_template(
-                        'theme_telaformation/completioncheck',
+                        'theme_pimenko/completioncheck',
                         $modtemplate
                 );
 
@@ -199,7 +199,7 @@ class course_renderer extends \core_course_renderer {
                     $modtemplate->class = 'autocompletioncheck';
 
                     $content .= $this->output->render_from_template(
-                            'theme_telaformation/completioncheck',
+                            'theme_pimenko/completioncheck',
                             $modtemplate
                     );
 
@@ -207,7 +207,7 @@ class course_renderer extends \core_course_renderer {
                     $modtemplate->status = 'disabled';
                     $modtemplate->class = 'autocompletioncheck';
                     $content .= $this->output->render_from_template(
-                            'theme_telaformation/completioncheck',
+                            'theme_pimenko/completioncheck',
                             $modtemplate
                     );
                 }
@@ -266,7 +266,7 @@ class course_renderer extends \core_course_renderer {
         );
 
         $content .= $this->output->render_from_template(
-                'theme_telaformation/course_card',
+                'theme_pimenko/course_card',
                 $template
         );
 
@@ -294,7 +294,7 @@ class course_renderer extends \core_course_renderer {
         $output = null;
 
         // Show or hide some field for frontpage course card.
-        $theme = theme_config::load('telaformation');
+        $theme = theme_config::load('pimenko');
 
         $template->showcustomfields = false;
         if ($theme->settings->showcustomfields) {
@@ -477,7 +477,7 @@ class course_renderer extends \core_course_renderer {
         }
 
         $content .= $this->output->render_from_template(
-                'theme_telaformation/course_category_tree',
+                'theme_pimenko/course_category_tree',
                 $template
         );
 
@@ -519,7 +519,7 @@ class course_renderer extends \core_course_renderer {
             }
         }
         $content .= $this->output->render_from_template(
-                'theme_telaformation/course_name',
+                'theme_pimenko/course_name',
                 $template
         );
 
@@ -550,7 +550,7 @@ class course_renderer extends \core_course_renderer {
         $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
             get_string(
                 'entercourse',
-                'theme_telaformation'
+                'theme_pimenko'
             ), ['class' => 'entercourse btn btn-secondary']);
         return $content;
     }
@@ -566,7 +566,7 @@ class course_renderer extends \core_course_renderer {
     public function render_activity_information(\core_course\output\activity_information $page) {
         global $COURSE;
 
-        $theme    = theme_config::load('telaformation');
+        $theme    = theme_config::load('pimenko');
         if ($this->page->pagelayout == 'course') {
             $moodlecompletion  = true;
         } else {
@@ -583,6 +583,6 @@ class course_renderer extends \core_course_renderer {
             $data->moodlecompletion = $moodlecompletion;
         }
 
-        return $this->output->render_from_template('theme_telaformation/activity_info', $data);
+        return $this->output->render_from_template('theme_pimenko/activity_info', $data);
     }
 }

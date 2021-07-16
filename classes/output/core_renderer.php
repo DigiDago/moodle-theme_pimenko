@@ -15,15 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation renderer file.
+ * Theme Pimenko renderer file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_telaformation\output;
+namespace theme_pimenko\output;
 
 use core_auth\output\login;
 use stdClass;
@@ -45,8 +45,8 @@ defined('MOODLE_INTERNAL') || die;
 /**
  * Class core_renderer extended
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -97,7 +97,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $template->maincontent = $output->main_content();
 
         return $output->render_from_template(
-                'theme_telaformation/login', $template
+                'theme_pimenko/login', $template
         );
     }
 
@@ -108,7 +108,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $sitelogo = '';
         if (!empty($this->page->theme->settings->sitelogo)) {
             if (empty($this->themeconfig)) {
-                $this->themeconfig = $theme = theme_config::load('telaformation');
+                $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             $sitelogo = $this->themeconfig->setting_file_url(
                     'sitelogo', 'sitelogo'
@@ -123,7 +123,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string footer template
      */
     public function footer_custom_content(): string {
-        $theme = theme_config::load('telaformation');
+        $theme = theme_config::load('pimenko');
 
         $template = new stdClass();
 
@@ -176,7 +176,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return $this->render_from_template(
-                'theme_telaformation/footercustomcontent', $template
+                'theme_pimenko/footercustomcontent', $template
         );
     }
 
@@ -189,7 +189,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if (!empty($this->page->theme->settings->favicon)) {
 
             if (empty($this->themeconfig)) {
-                $this->themeconfig = $theme = theme_config::load('telaformation');
+                $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             return $this->themeconfig->setting_file_url(
                     'favicon', 'favicon'
@@ -206,7 +206,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     public function googlefont(): string {
         if (!empty($this->page->theme->settings->googlefont)) {
             if (empty($this->themeconfig)) {
-                $this->themeconfig = $theme = theme_config::load('telaformation');
+                $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             return $this->page->theme->settings->googlefont;
         }
@@ -262,7 +262,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function get_setting($setting, $format = false, $theme = null) {
         if (empty($theme)) {
-            $theme = theme_config::load('telaformation');
+            $theme = theme_config::load('pimenko');
         }
 
         if (empty($theme->settings->$setting)) {
@@ -356,14 +356,14 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $template->nextmodurl = $nextmod->url;
         }
 
-        $theme    = theme_config::load('telaformation');
+        $theme    = theme_config::load('pimenko');
         $moodlecompletion  = $theme->settings->moodleactivitycompletion;
         if ($completioninfo->is_enabled($mod) && !$moodlecompletion) {
             $template->completionicon = $renderer->course_section_cm_completion(
                     $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
             );
             return $renderer->render_from_template(
-                    'theme_telaformation/completionfooter', $template
+                    'theme_pimenko/completionfooter', $template
             );
         }
         return '';
@@ -480,7 +480,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function is_carousel_enabled(): bool {
         if (empty($this->themeconfig)) {
-            $this->themeconfig = $theme = theme_config::load('telaformation');
+            $this->themeconfig = $theme = theme_config::load('pimenko');
         }
         if (isset($this->themeconfig->settings->enablecarousel)
                 && $this->themeconfig->settings->enablecarousel == 1) {
@@ -495,7 +495,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function carousel(): string {
-        $carousel = $this->page->get_renderer('theme_telaformation', 'carousel');
+        $carousel = $this->page->get_renderer('theme_pimenko', 'carousel');
         return $carousel->output();
     }
 

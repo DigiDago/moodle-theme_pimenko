@@ -1,5 +1,5 @@
 <?php
-// This file is part of the telaformation theme for Moodle
+// This file is part of the pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme telaformation lib.
+ * Theme pimenko lib.
  *
- * @package    theme_telaformation
+ * @package    theme_pimenko
  * @copyright  2017 DigiDago
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -57,12 +57,12 @@ if (!empty($CFG->forceloginforprofiles)) {
 }
 
 $PAGE->set_context($context);
-$PAGE->set_pagelayout('telaformationProfile');
+$PAGE->set_pagelayout('pimenkoProfile');
 $PAGE->set_title('Profile');
 $PAGE->blocks->show_only_fake_blocks();
 
 $profile = $PAGE->get_renderer(
-        'theme_telaformation',
+        'theme_pimenko',
         'profile'
 );
 

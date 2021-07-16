@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation config file.
+ * Theme Pimenko config file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,13 +26,13 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/theme/telaformation/lib.php');
+require_once($CFG->dirroot . '/theme/pimenko/lib.php');
 
 // Var $THEME is defined before this page is included and we can define settings by adding properties to this global object.
 
 // The first setting we need is the name of the theme. This should be the last part of the component name, and the same
 // as the directory name for our theme.
-$THEME->name = 'telaformation';
+$THEME->name = 'pimenko';
 
 // This setting list the style sheets we want to include in our theme. Because we want to use SCSS instead of CSS - we won't
 // list any style sheets. If we did we would list the name of a file in the /style/ folder for our theme without any css file
@@ -74,17 +74,17 @@ $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 // This is the function that returns the SCSS source for the main file in our theme. We override the boost version because
 // we want to allow presets uploaded to our own theme file area to be selected in the preset list.
 $THEME->scss = function($theme) {
-    return theme_telaformation_get_main_scss_content($theme);
+    return theme_pimenko_get_main_scss_content($theme);
 };
 
 // This function can make alterations and replace patterns within the CSS.
-$THEME->csspostprocess = 'theme_telaformation_process_css';
+$THEME->csspostprocess = 'theme_pimenko_process_css';
 
 // This is a function that returns some SCSS as a string to prepend to the main SCSS file.
-$THEME->prescsscallback = 'theme_telaformation_get_pre_scss';
+$THEME->prescsscallback = 'theme_pimenko_get_pre_scss';
 
 // This is a function that returns some SCSS as a string to append to the main SCSS file.
-$THEME->extrascsscallback = 'theme_telaformation_get_extra_scss';
+$THEME->extrascsscallback = 'theme_pimenko_get_extra_scss';
 
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 
@@ -113,9 +113,9 @@ $THEME->layouts = [
         'frontpage' => [
                 'file' => 'frontpage.php',
                 'defaultregion' => 'side-pre',
-                'regions' => theme_telaformation_regions(),
+                'regions' => theme_pimenko_regions(),
         ],
-        'telaformationProfile' => array(
+        'pimenkoProfile' => array(
                 'file' => 'columns2.php',
                 'regions' => [
                         'side-pre',

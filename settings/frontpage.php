@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings footer file.
+ * Theme Pimenko settings footer file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,16 +27,16 @@ defined('MOODLE_INTERNAL') || die;
 
 // Frontpage Blocks.
 $page = new admin_settingpage(
-        'theme_telaformation_regions_settings',
+        'theme_pimenko_regions_settings',
         get_string(
                 'frontpage',
-                'theme_telaformation'
+                'theme_pimenko'
         ),
-        'theme/telaformation:configure'
+        'theme/pimenko:configure'
 );
 $setting = new simple_theme_settings(
         $page,
-        'theme_telaformation',
+        'theme_pimenko',
         'settings:frontcoursecard:'
 );
 
@@ -46,7 +46,7 @@ $setting->add_checkbox('showstartdate');
 
 $setting = new simple_theme_settings(
         $page,
-        'theme_telaformation',
+        'theme_pimenko',
         'settings:frontslider:'
 );
 
@@ -61,7 +61,7 @@ $setting->add_select(
         1,
         $range
 );
-$config = get_config('theme_telaformation');
+$config = get_config('theme_pimenko');
 $imagenr = 0;
 if (!empty($config->slideimagenr)) {
     $imagenr = $config->slideimagenr;
@@ -79,7 +79,7 @@ for ($i = 1; $i <= $imagenr; $i++) {
 
 $setting = new simple_theme_settings(
         $page,
-        'theme_telaformation',
+        'theme_pimenko',
         'settings:regions:'
 );
 

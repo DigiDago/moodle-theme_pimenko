@@ -17,7 +17,7 @@
 /**
  * A two column layout for the boost theme.
  *
- * @package    theme_telaformation2
+ * @package    theme_pimenko2
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -65,11 +65,11 @@ $templatecontext = [
 ];
 
 // Include js module.
-$PAGE->requires->js_call_amd('theme_telaformation/telaformation', 'init');
-$PAGE->requires->js_call_amd('theme_telaformation/completion', 'init');
+$PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
+$PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
 $templatecontext['flatnavigation'] = $PAGE->flatnav;
 echo $OUTPUT->render_from_template(
-        'theme_telaformation/frontpage',
+        'theme_pimenko/frontpage',
         $templatecontext
 );

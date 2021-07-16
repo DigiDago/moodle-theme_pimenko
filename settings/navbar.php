@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,36 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings navbar file.
+ * Theme Pimenko settings navbar file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage('theme_telaformation_navbar',
-        get_string('navbarsettings', 'theme_telaformation'));
+$page = new admin_settingpage('theme_pimenko_navbar',
+        get_string('navbarsettings', 'theme_pimenko'));
 
 // Site logo.
-$name = 'theme_telaformation/sitelogo';
-$title = get_string('sitelogo', 'theme_telaformation');
-$description = get_string('sitelogodesc', 'theme_telaformation');
+$name = 'theme_pimenko/sitelogo';
+$title = get_string('sitelogo', 'theme_pimenko');
+$description = get_string('sitelogodesc', 'theme_pimenko');
 $setting = new admin_setting_configstoredfile($name, $title, $description, 'sitelogo');
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Navbar color.
-$name          = 'theme_telaformation/navbarcolor';
+$name          = 'theme_pimenko/navbarcolor';
 $title         = get_string(
         'navbarcolor',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $description   = get_string(
         'navbarcolordesc',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $previewconfig = null;
 $setting       = new admin_setting_configcolourpicker(
@@ -59,14 +59,14 @@ $page->add($setting);
 
 // Navbar text color.
 
-$name          = 'theme_telaformation/navbartextcolor';
+$name          = 'theme_pimenko/navbartextcolor';
 $title         = get_string(
         'navbartextcolor',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $description   = get_string(
         'navbartextcolordesc',
-        'theme_telaformation'
+        'theme_pimenko'
 );
 $previewconfig = null;
 $setting       = new admin_setting_configcolourpicker(

@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Telaformation theme for Moodle
+// This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation settings login file.
+ * Theme Pimenko settings login file.
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,25 +26,25 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Some parts there are from 'adaptable' theme.
-$page = new admin_settingpage('theme_telaformation_login', get_string('loginsettings', 'theme_telaformation'));
+$page = new admin_settingpage('theme_pimenko_login', get_string('loginsettings', 'theme_pimenko'));
 
 // Login page background image.
-$name = 'theme_telaformation/loginbgimage';
-$title = get_string('loginbgimage', 'theme_telaformation');
-$description = get_string('loginbgimagedesc', 'theme_telaformation');
+$name = 'theme_pimenko/loginbgimage';
+$title = get_string('loginbgimage', 'theme_pimenko');
+$description = get_string('loginbgimagedesc', 'theme_pimenko');
 $setting = new admin_setting_configstoredfile($name, $title, $description, 'loginbgimage');
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Login page background style.
-$name = 'theme_telaformation/loginbgstyle';
-$title = get_string('loginbgstyle', 'theme_telaformation');
-$description = get_string('loginbgstyledesc', 'theme_telaformation');
+$name = 'theme_pimenko/loginbgstyle';
+$title = get_string('loginbgstyle', 'theme_pimenko');
+$description = get_string('loginbgstyledesc', 'theme_pimenko');
 $default = 'cover';
 $setting = new admin_setting_configselect($name, $title, $description, $default,
         array(
-                'cover' => get_string('stylecover', 'theme_telaformation'),
-                'stretch' => get_string('stylestretch', 'theme_telaformation')
+                'cover' => get_string('stylecover', 'theme_pimenko'),
+                'stretch' => get_string('stylestretch', 'theme_pimenko')
         )
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
@@ -65,28 +65,28 @@ $opactitychoices = array(
         '1.0' => '1.0'
 );
 
-$name = 'theme_telaformation/loginbgopacity';
-$title = get_string('loginbgopacity', 'theme_telaformation');
-$description = get_string('loginbgopacitydesc', 'theme_telaformation');
+$name = 'theme_pimenko/loginbgopacity';
+$title = get_string('loginbgopacity', 'theme_pimenko');
+$description = get_string('loginbgopacitydesc', 'theme_pimenko');
 $default = '0.8';
 $setting = new admin_setting_configselect($name, $title, $description, $default, $opactitychoices);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Top text.
-$name = 'theme_telaformation/logintextboxtop';
-$title = get_string('logintextboxtop', 'theme_telaformation');
-$description = get_string('logintextboxtopdesc', 'theme_telaformation');
+$name = 'theme_pimenko/logintextboxtop';
+$title = get_string('logintextboxtop', 'theme_pimenko');
+$description = get_string('logintextboxtopdesc', 'theme_pimenko');
 $default = '';
-$setting = new telaformation_setting_confightmleditor($name, $title, $description, $default);
+$setting = new pimenko_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
 
 // Bottom text.
-$name = 'theme_telaformation/logintextboxbottom';
-$title = get_string('logintextboxbottom', 'theme_telaformation');
-$description = get_string('logintextboxbottomdesc', 'theme_telaformation');
+$name = 'theme_pimenko/logintextboxbottom';
+$title = get_string('logintextboxbottom', 'theme_pimenko');
+$description = get_string('logintextboxbottomdesc', 'theme_pimenko');
 $default = '';
-$setting = new telaformation_setting_confightmleditor($name, $title, $description, $default);
+$setting = new pimenko_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
 
 $settings->add($page);

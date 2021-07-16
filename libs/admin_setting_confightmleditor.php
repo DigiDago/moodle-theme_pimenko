@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Telaformation setting config html editor
+ * Theme Pimenko setting config html editor
  *
- * @package    theme_telaformation
- * @copyright  Tela Botanica 2020
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@
  * (http://icsbcn.blogspot.com.es/2015/03/use-image-repository-in-theme-settings.html) This post laid the ground work
  * for most of the code featured in this file.
  */
-class telaformation_setting_confightmleditor extends admin_setting_configtext {
+class pimenko_setting_confightmleditor extends admin_setting_configtext {
 
     /** @var int number of rows */
     private $rows;
@@ -59,7 +59,7 @@ class telaformation_setting_confightmleditor extends admin_setting_configtext {
      * @param string $filearea
      */
     public function __construct($name, $visiblename, $description, $defaultsetting, $paramtype = PARAM_RAW, $cols = 60, $rows = 8,
-            $filearea = 'telaformationimages') {
+            $filearea = 'pimenkoimages') {
         $this->rows = $rows;
         $this->cols = $cols;
         $this->filearea = $filearea;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of the telaformation theme for Moodle
+// This file is part of the pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme telaformation profile renderer file.
+ * Theme pimenko profile renderer file.
  *
- * @package    theme_telaformation
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_telaformation\output;
+namespace theme_pimenko\output;
 
 use moodle_url;
 use stdClass;
@@ -109,7 +109,7 @@ class profile_renderer extends \renderer_base {
                     'time',
                     get_string(
                             'profile:joinedon',
-                            'theme_telaformation'
+                            'theme_pimenko'
                     ) . userdate(
                             $this->user->firstaccess,
                             get_string('strftimemonthyear')
@@ -119,7 +119,7 @@ class profile_renderer extends \renderer_base {
                     'time',
                     get_string(
                             'profile:lastaccess',
-                            'theme_telaformation'
+                            'theme_pimenko'
                     ) . userdate(
                             $this->user->lastaccess,
                             get_string('strftimedatetimeshort')
@@ -132,7 +132,7 @@ class profile_renderer extends \renderer_base {
                     'person',
                     get_string(
                             'profile:basicinfo',
-                            'theme_telaformation'
+                            'theme_pimenko'
                     ),
                     format_text(
                             $this->user->description,
@@ -144,7 +144,7 @@ class profile_renderer extends \renderer_base {
                     'phone',
                     get_string(
                             'profile:contactinfo',
-                            'theme_telaformation'
+                            'theme_pimenko'
                     ),
                     '',
                     $contactarray
@@ -158,7 +158,7 @@ class profile_renderer extends \renderer_base {
                 $profile->content = $this->userpreferences($this->user->id);
             } else {
                 $profile->content = $this->render_from_template(
-                        'theme_telaformation/profiledescription',
+                        'theme_pimenko/profiledescription',
                         $this->user
                 );
             }
@@ -167,7 +167,7 @@ class profile_renderer extends \renderer_base {
 
             // User enrolments Tab.
             return $this->render_from_template(
-                    'theme_telaformation/profile',
+                    'theme_pimenko/profile',
                     $profile
             );
         } else {
@@ -376,7 +376,7 @@ class profile_renderer extends \renderer_base {
         }
 
         return $this->render_from_template(
-                'theme_telaformation/preferenceblocks',
+                'theme_pimenko/preferenceblocks',
                 $renderable
         );
     }

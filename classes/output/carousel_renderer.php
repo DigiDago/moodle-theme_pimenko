@@ -1,5 +1,5 @@
 <?php
-// This file is part of the telaformation theme for Moodle
+// This file is part of the pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme telaformation renderer file.
+ * Theme pimenko renderer file.
  *
- * @package    theme_telaformation
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_telaformation\output;
+namespace theme_pimenko\output;
 
 use coding_exception;
 use moodle_exception;
@@ -47,7 +47,7 @@ final class carousel_renderer extends plugin_renderer_base {
         $template->slides = $this->slides;
         $template->layout = 'centered';
         return $this->render_from_template(
-                'theme_telaformation/carousel',
+                'theme_pimenko/carousel',
                 $template
         );
     }
@@ -57,7 +57,7 @@ final class carousel_renderer extends plugin_renderer_base {
      * @throws coding_exception
      */
     private function load_items(): bool {
-        $this->themeconf = $theme = theme_config::load('telaformation');
+        $this->themeconf = $theme = theme_config::load('pimenko');
         $imagenr = $this->themeconf->settings->slideimagenr;
         for ($i = 1; $i <= $imagenr; $i++) {
             $slide = new stdClass();

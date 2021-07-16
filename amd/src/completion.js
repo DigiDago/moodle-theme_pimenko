@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    theme_telaformation
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -22,8 +22,8 @@
 define(['jquery', 'core/str', 'theme_boost/bootstrap/tooltip'], function($, str, tooltip) {
     let completioncheck = $('#completioncheck');
     let modulename = completioncheck.attr("data-modulename");
-    let tooltipAjxY = str.get_string('completion-tooltip-manual-y', 'theme_telaformation', modulename);
-    let tooltipAjxN = str.get_string('completion-tooltip-manual-n', 'theme_telaformation', modulename);
+    let tooltipAjxY = str.get_string('completion-tooltip-manual-y', 'theme_pimenko', modulename);
+    let tooltipAjxN = str.get_string('completion-tooltip-manual-n', 'theme_pimenko', modulename);
 
     let checkbox = document.getElementsByTagName("input");
 

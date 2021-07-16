@@ -1,5 +1,5 @@
 <?php
-// This file is part of the telaformation theme for Moodle
+// This file is part of the pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 
 
 /**
- * Theme telaformation renderers file.
- * @package    theme_telaformation
+ * Theme pimenko renderers file.
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -206,7 +206,7 @@ class simple_theme_settings {
     }
 
     public function add_superhtmleditors($setting, $instance, $default = '') {
-        $htmleditor = new telaformation_setting_confightmleditor(
+        $htmleditor = new pimenko_setting_confightmleditor(
                 $this->name_for($setting . $instance),
                 $this->title_for(
                         $setting,
