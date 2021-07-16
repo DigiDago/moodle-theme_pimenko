@@ -567,7 +567,11 @@ class course_renderer extends \core_course_renderer {
         global $COURSE;
 
         $theme    = theme_config::load('telaformation');
-        $moodlecompletion  = $theme->settings->moodleactivitycompletion;
+        if ($this->page->pagelayout == 'course') {
+            $moodlecompletion  = true;
+        } else {
+            $moodlecompletion  = $theme->settings->moodleactivitycompletion;
+        }
 
         $data = $page->export_for_template($this->output);
         $data->showdates = $COURSE->showactivitydates;
