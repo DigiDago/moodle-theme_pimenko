@@ -71,7 +71,7 @@ $setting       = new admin_setting_configcolourpicker(
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-$setting = new simple_theme_settings(
+$setting = new theme_pimenko_simple_theme_settings(
         $page,
         'theme_pimenko',
         'settings:footer:'

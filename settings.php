@@ -26,8 +26,8 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . '/libs/admin_setting_confightmleditor.php');
-require_once(__DIR__ . "/libs/simple_theme_settings.php");
+require_once(__DIR__ . '/libs/theme_pimenko_admin_setting_confightmleditor.php');
+require_once(__DIR__ . "/libs/theme_pimenko_simple_theme_settings.php");
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
@@ -124,7 +124,7 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    $setting = new simple_theme_settings(
+    $setting = new theme_pimenko_simple_theme_settings(
         $page,
         'theme_pimenko',
         'settings:font:'

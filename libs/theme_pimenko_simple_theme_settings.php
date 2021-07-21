@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-class simple_theme_settings {
+class theme_pimenko_simple_theme_settings {
     private $settingspage;
     private $strprefix;
 
@@ -181,7 +181,7 @@ class simple_theme_settings {
     }
 
     public function add_htmleditor($setting, $default = '') {
-        $htmleditor = new admin_setting_confightmleditor(
+        $htmleditor = new theme_pimenko_admin_setting_confightmleditor(
                 $this->name_for($setting),
                 $this->title_for($setting),
                 $this->description_for($setting),
@@ -192,7 +192,7 @@ class simple_theme_settings {
     }
 
     public function add_htmleditors($setting, $instance, $default = '') {
-        $htmleditor = new admin_setting_confightmleditor(
+        $htmleditor = new theme_pimenko_admin_setting_confightmleditor(
                 $this->name_for($setting . $instance),
                 $this->title_for(
                         $setting,
@@ -206,7 +206,7 @@ class simple_theme_settings {
     }
 
     public function add_superhtmleditors($setting, $instance, $default = '') {
-        $htmleditor = new pimenko_setting_confightmleditor(
+        $htmleditor = new theme_pimenko_admin_setting_confightmleditor(
                 $this->name_for($setting . $instance),
                 $this->title_for(
                         $setting,

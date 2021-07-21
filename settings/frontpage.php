@@ -34,7 +34,7 @@ $page = new admin_settingpage(
         ),
         'theme/pimenko:configure'
 );
-$setting = new simple_theme_settings(
+$setting = new theme_pimenko_simple_theme_settings(
         $page,
         'theme_pimenko',
         'settings:frontcoursecard:'
@@ -44,7 +44,7 @@ $setting->add_checkbox('showcustomfields');
 $setting->add_checkbox('showcontacts');
 $setting->add_checkbox('showstartdate');
 
-$setting = new simple_theme_settings(
+$setting = new theme_pimenko_simple_theme_settings(
         $page,
         'theme_pimenko',
         'settings:frontslider:'
@@ -77,7 +77,7 @@ for ($i = 1; $i <= $imagenr; $i++) {
     );
 }
 
-$setting = new simple_theme_settings(
+$setting = new theme_pimenko_simple_theme_settings(
         $page,
         'theme_pimenko',
         'settings:regions:'

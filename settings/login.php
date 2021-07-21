@@ -78,7 +78,7 @@ $name = 'theme_pimenko/logintextboxtop';
 $title = get_string('logintextboxtop', 'theme_pimenko');
 $description = get_string('logintextboxtopdesc', 'theme_pimenko');
 $default = '';
-$setting = new pimenko_setting_confightmleditor($name, $title, $description, $default);
+$setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
 
 // Bottom text.
@@ -86,7 +86,7 @@ $name = 'theme_pimenko/logintextboxbottom';
 $title = get_string('logintextboxbottom', 'theme_pimenko');
 $description = get_string('logintextboxbottomdesc', 'theme_pimenko');
 $default = '';
-$setting = new pimenko_setting_confightmleditor($name, $title, $description, $default);
+$setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
 
 $settings->add($page);
