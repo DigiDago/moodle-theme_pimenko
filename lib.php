@@ -190,17 +190,17 @@ function theme_pimenko_process_css($css, $theme) {
 
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
-    $defaults['darkennavcolor'] = colorbrightness($color, -0.5);
+    $defaults['darkennavcolor'] = theme_pimenko_colorbrightness($color, -0.5);
 
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
-    $defaults['darkenfootercolor'] = colorbrightness($color, -0.5);
+    $defaults['darkenfootercolor'] = theme_pimenko_colorbrightness($color, -0.5);
 
     // Hoover button.
     $color = $defaults['brandcolorbutton'];
-    $defaults['darkenbrandcolorbutton'] = colorbrightness($color, 0.5);
+    $defaults['darkenbrandcolorbutton'] = theme_pimenko_colorbrightness($color, 0.5);
     $color = $defaults['brandcolortextbutton'];
-    $defaults['darkenbrandcolortextbutton'] = colorbrightness($color, 0.5);
+    $defaults['darkenbrandcolortextbutton'] = theme_pimenko_colorbrightness($color, 0.5);
 
     // Get all the defined settings for the theme and replace defaults.
     $css = strtr($css, $defaults);
@@ -284,7 +284,7 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
 }
 
 /** Function to darker css */
-function colorbrightness($hex, $percent) {
+function theme_pimenko_colorbrightness($hex, $percent) {
     // Work out if hash given.
     $hash = '';
     if (stristr($hex, '#')) {
@@ -330,7 +330,7 @@ function colorbrightness($hex, $percent) {
  * @throws coding_exception
  * @throws moodle_exception
  */
-function pimenko_redirect_to_profile_page($bodyid) {
+function theme_pimenko_redirect_to_profile_page($bodyid) {
     global $USER;
     if (optional_param(
             'noredir', 0, PARAM_INT

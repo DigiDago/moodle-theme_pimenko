@@ -32,7 +32,7 @@
  * (http://icsbcn.blogspot.com.es/2015/03/use-image-repository-in-theme-settings.html) This post laid the ground work
  * for most of the code featured in this file.
  */
-class pimenko_setting_confightmleditor extends admin_setting_configtext {
+class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configtext {
 
     /** @var int number of rows */
     private $rows;
