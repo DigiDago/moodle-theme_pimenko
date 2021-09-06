@@ -297,8 +297,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             return '';
         }
 
-        $this->page->requires->js_init_call('M.core_completion.init');
-
         $renderer = $this->page->get_renderer(
                 'core', 'course'
         );
