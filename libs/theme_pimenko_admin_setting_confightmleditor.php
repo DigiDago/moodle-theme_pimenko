@@ -91,7 +91,13 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
             $defaultinfo = "\n" . $default;
         }
 
-        $ctx = context_user::instance($USER->id);
+        // Handle case where USER is not define.
+        // This happen when moodle install with them.
+        if ($USER->id) {
+            $ctx = context_user::instance($USER->id);
+        } else {
+            $ctx = context_system::instance();
+        }
         $editor = editors_get_preferred_editor(FORMAT_HTML);
         $options = $this->get_options();
         $draftitemid = file_get_unused_draft_itemid();
@@ -184,7 +190,13 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
 
         $default = [];
         $default['noclean'] = false;
-        $default['context'] = context_user::instance($USER->id);
+        // Handle case where USER is not define.
+        // This happen when moodle install with them.
+        if ($USER->id) {
+            $default['context']  = context_user::instance($USER->id);
+        } else {
+            $default['context']  = context_system::instance();
+        }
         $default['maxbytes'] = 0;
         $default['maxfiles'] = -1;
         $default['forcehttps'] = false;

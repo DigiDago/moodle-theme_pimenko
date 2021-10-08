@@ -114,6 +114,7 @@ function theme_pimenko_process_css($css, $theme) {
             'navbartextcolor' => '#343B3F',
             'footercolor' => '#343B3F',
             'footertextcolor' => '#FFF',
+            'hooverfootercolor' => '',
             'blockregionrowbackgroundcolor1' => '',
             'blockregionrowbackgroundcolor2' => '',
             'blockregionrowbackgroundcolor3' => '',
@@ -194,7 +195,11 @@ function theme_pimenko_process_css($css, $theme) {
 
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
-    $defaults['darkenfootercolor'] = theme_pimenko_colorbrightness($color, -0.5);
+    if ($defaults['hooverfootercolor']) {
+        $defaults['darkenfootercolor'] = $defaults['hooverfootercolor'];
+    } else {
+        $defaults['darkenfootercolor'] = theme_pimenko_colorbrightness($color, -0.5);
+    }
 
     // Hoover button.
     $color = $defaults['brandcolorbutton'];
@@ -291,6 +296,15 @@ function theme_pimenko_colorbrightness($hex, $percent) {
         $hex = str_replace('#', '', $hex);
         $hash = '#';
     }
+
+    // This function can't handle case if extrem white or extrem black
+    // We do this to prevent strange color.
+    if ($hex === "FFF" || $hex === "FFFFFF") {
+        $hex = "FEFEFE";
+    } else if ($hex === "000" || $hex === "000000") {
+        $hex = "010101";
+    }
+
     // HEX TO RGB.
     $rgb = [hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2))];
     // CALCULATE.

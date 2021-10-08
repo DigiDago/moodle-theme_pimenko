@@ -38,9 +38,13 @@ $string['brandcolor'] = 'Couleur générale';
 // The brand color setting description.
 $string['brandcolor_desc'] = 'Défini la couleur principale du site ( pour les liens ... )';
 // The button brand color setting.
-$string['brandcolortextbutton'] = 'Couleur générale des boutons';
+$string['brandcolorbutton'] = 'Couleur de base des boutons';
 // The button brand color setting description.
-$string['brandcolortextbuttondesc'] = 'Définir une couleur générale pour les boutons';
+$string['brandcolorbuttondesc'] = 'Défini une couleur de fond pour les boutons';
+// The button brand color setting.
+$string['brandcolortextbutton'] = 'Couleur générale du texte des boutons';
+// The button brand color setting description.
+$string['brandcolortextbuttondesc'] = 'Définir une couleur générale pour les textes des boutons';
 // Name of the settings pages.
 $string['configtitle'] = 'Options Pimenko';
 // Name of the first settings tab.
@@ -122,6 +126,8 @@ $string['footercolor'] = 'Pied de page couleur';
 $string['footercolordesc'] = 'Définir la couleur de fond pour le pied de page';
 $string['footertextcolor'] = 'Pied de page couleur texte';
 $string['footertextcolordesc'] = 'Définir la couleur pour le texte du pied de page';
+$string['hooverfootercolor'] = 'Définir la couleur de surbrillance pour les liens en pied de page';
+$string['hooverfootercolordesc'] = 'Pied de page couleur de surbrillance des liens';
 
 // Completion.
 $string['completion-alt-manual-n'] = 'Incomplet';
@@ -225,5 +231,3 @@ $string['entercourse'] = 'Entrer';
 // Moodle activity completion design enabling setting.
 $string['moodleactivitycompletion']      = "Activer l'affichage de l'achévement d'activité moodle";
 $string['moodleactivitycompletion_desc'] = "Cette option active l'affichage par default de l'achévement d'activité utilisé par moodle";
-
-
