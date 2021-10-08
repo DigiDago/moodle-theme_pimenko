@@ -42,7 +42,7 @@ $string['brandcolorbutton'] = 'Button brand color';
 // The button brand color setting description.
 $string['brandcolorbuttondesc'] = 'Define a brand color for button.';
 // The button brand color setting.
-$string['brandcolortextbutton'] = 'Button brand color';
+$string['brandcolortextbutton'] = 'Button text color';
 // The button brand color setting description.
 $string['brandcolortextbuttondesc'] = 'Define a text color for button.';
 // Name of the settings pages.
@@ -127,6 +127,8 @@ $string['footercolor'] = 'Footer color';
 $string['footercolordesc'] = 'Add a background color to your footer';
 $string['footertextcolor'] = 'Footer text color';
 $string['footertextcolordesc'] = 'Add a text color to your footer';
+$string['hooverfootercolor'] = 'Footer hoover link color';
+$string['hooverfootercolordesc'] = 'Add a hoover text color to your footer';
 
 // Completion.
 $string['completion-alt-manual-n'] = 'Not complete';

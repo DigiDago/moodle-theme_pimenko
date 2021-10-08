@@ -25,10 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-// Some parts there are from 'adaptable' theme.
 $page = new admin_settingpage('theme_pimenko_footer', get_string('footersettings', 'theme_pimenko'));
 
-// Navbar color.
+// Footer color.
 $name          = 'theme_pimenko/footercolor';
 $title         = get_string(
         'footercolor',
@@ -49,8 +48,7 @@ $setting       = new admin_setting_configcolourpicker(
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-// Navbar text color.
-
+// Footer text color.
 $name          = 'theme_pimenko/footertextcolor';
 $title         = get_string(
         'footertextcolor',
@@ -69,6 +67,29 @@ $setting       = new admin_setting_configcolourpicker(
         $previewconfig
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
+
+$page->add($setting);
+
+// Footer hoover text color.
+$name          = 'theme_pimenko/hooverfootercolor';
+$title         = get_string(
+    'hooverfootercolor',
+    'theme_pimenko'
+);
+$description   = get_string(
+    'hooverfootercolordesc',
+    'theme_pimenko'
+);
+$previewconfig = null;
+$setting       = new admin_setting_configcolourpicker(
+    $name,
+    $title,
+    $description,
+    '',
+    $previewconfig
+);
+$setting->set_updatedcallback('theme_reset_all_caches');
+
 $page->add($setting);
 
 $setting = new theme_pimenko_simple_theme_settings(

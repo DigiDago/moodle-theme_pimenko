@@ -21,16 +21,17 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-footer {
-    background-color: unquote('footercolor') !important;
-    color: unquote('footertextcolor') !important;
+footer,
+#page-footer {
+    background-color: unquote('footercolor');
+    color: unquote('footertextcolor');
 
     a {
-        color: unquote('footertextcolor') !important;
+        color: unquote('footertextcolor');
 
         &:hover,
         &:focus {
-            color: unquote('darkenfootercolor') !important;
+            color: unquote('darkenfootercolor');
         }
     }
 }

@@ -25,6 +25,18 @@ nav.navbar.pimenko-navbar {
     background-color: unquote('navbarcolor') !important;
     height: 100%;
     max-height: 65px;
+    line-height: 65px;
+
+    .navbar-nav {
+        li {
+            display: flex !important;
+        }
+    }
+
+    .navbar-brand {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 
     .logo {
         img {
@@ -35,6 +47,7 @@ nav.navbar.pimenko-navbar {
     .site-name,
     .nav-item,
     :not(button).nav-link,
+    .simplesearchform .btn,
     a {
         color: unquote('navbartextcolor');
     }
@@ -48,15 +61,26 @@ nav.navbar.pimenko-navbar {
     }
 
     .dropdown-menu a,
-    .popover-region-container {
+    .popover-region-seeall-text,
+    .popover-region-container,
+    .content-item-container a,
+    .popover-region-header-actions a {
         color: #333 !important;
+        line-height: initial;
     }
 
     .nav-item {
         display: flex;
     }
 
-    .dropdown-toggle::after {
-        display: none;
+    .dropdown-toggle,
+    .popover-region-toggle {
+        &::after {
+            display: none;
+        }
+    }
+
+    .simplesearchform .btn-submit {
+        background-color: unquote('brandcolorbutton');
     }
 }
