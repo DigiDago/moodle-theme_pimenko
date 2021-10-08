@@ -29,16 +29,18 @@ body {
     }
 
     .btn-primary,
+    .btn-submit,
+    .btn-close,
     .btn-outline-secondary,
     .btn-secondary {
-        background: unquote('brandcolorbutton');
+        background-color: unquote('brandcolorbutton');
         border-color: unquote('brandcolorbutton');
         color: unquote('brandcolortextbutton');
 
         &:hover,
         &:active,
         &:focus {
-            background: unquote('darkenbrandcolorbutton');
+            background-color: unquote('darkenbrandcolorbutton');
             border-color: unquote('darkenbrandcolorbutton');
             color: unquote('darkenbrandcolortextbutton');
         }
@@ -46,8 +48,8 @@ body {
 
     .dropdown-item {
         &:focus {
-            background: none;
-            color: #212529;
+            background-color: unquote('brandcolorbutton');
+            color: unquote('brandcolortextbutton');
         }
     }
 
@@ -59,7 +61,7 @@ body {
 
         .card-body {
             .card-title {
-                background: unquote('brandcolorbutton');
+                background-color: unquote('brandcolorbutton');
                 color: unquote('brandcolortextbutton');
                 display: inline-block !important;
                 padding: 1rem;

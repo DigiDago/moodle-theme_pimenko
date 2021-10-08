@@ -83,7 +83,6 @@ define(['jquery', 'core/str', 'theme_boost/bootstrap/tooltip'], function($, str,
                     }
                     checkbox[i].parentNode.className = className;
 
-
                     checkbox[i].onchange = function(event) {
                         toggle(event);
                         let className = "checkbox-parent";
