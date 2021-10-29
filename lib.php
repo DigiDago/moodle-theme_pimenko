@@ -115,6 +115,7 @@ function theme_pimenko_process_css($css, $theme) {
             'footercolor' => '#343B3F',
             'footertextcolor' => '#FFF',
             'hooverfootercolor' => '',
+            'hoovernavbarcolor' => '',
             'blockregionrowbackgroundcolor1' => '',
             'blockregionrowbackgroundcolor2' => '',
             'blockregionrowbackgroundcolor3' => '',
@@ -191,7 +192,11 @@ function theme_pimenko_process_css($css, $theme) {
 
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
-    $defaults['darkennavcolor'] = theme_pimenko_colorbrightness($color, -0.5);
+    if ($defaults['hoovernavbarcolor']) {
+        $defaults['darkennavcolor'] = $defaults['hoovernavbarcolor'];
+    } else {
+        $defaults['darkennavcolor'] = theme_pimenko_colorbrightness($color, -0.5);
+    }
 
     // Footer darkencolor.
     $color = $defaults['footertextcolor'];
