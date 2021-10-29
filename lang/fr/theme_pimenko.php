@@ -84,6 +84,8 @@ $string['navbarcolor'] = 'Couleur de la barre de navigation';
 $string['navbarcolordesc'] = 'Couleur de fond de la barre de navigation';
 $string['navbartextcolor'] = 'Couleur du texte pour la barre de navigation';
 $string['navbartextcolordesc'] = 'Définir une couleur pour le texte de la barre de navigation';
+$string['hoovernavbarcolor'] = 'Définir la couleur de surbrillance pour les liens dans la barre de navigation';
+$string['hoovernavbarcolordesc'] = 'Couleur de surbrillance des liens dans la bare de navigation';
 
 // Profile page.
 $string['profile:joinedon'] = 'Inscrit le ';

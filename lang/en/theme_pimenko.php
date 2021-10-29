@@ -86,6 +86,8 @@ $string['navbarcolor'] = 'Navbar color';
 $string['navbarcolordesc'] = 'Add a background color to your navbar';
 $string['navbartextcolor'] = 'Navbar text color';
 $string['navbartextcolordesc'] = 'Add a text color to your navbar';
+$string['hoovernavbarcolor'] = 'Navbar hoover link color';
+$string['hoovernavbarcolordesc'] = 'Add a hoover text color to your navbar';
 
 // Profile page.
 $string['profile:joinedon'] = 'Joined on ';
