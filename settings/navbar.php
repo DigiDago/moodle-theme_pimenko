@@ -77,6 +77,29 @@ $setting       = new admin_setting_configcolourpicker(
         $previewconfig
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
+
+// Navbar hoover text color.
+$name          = 'theme_pimenko/hoovernavbarcolor';
+$title         = get_string(
+    'hoovernavbarcolor',
+    'theme_pimenko'
+);
+$description   = get_string(
+    'hoovernavbarcolordesc',
+    'theme_pimenko'
+);
+$previewconfig = null;
+$setting       = new admin_setting_configcolourpicker(
+    $name,
+    $title,
+    $description,
+    '',
+    $previewconfig
+);
+$setting->set_updatedcallback('theme_reset_all_caches');
+
+$page->add($setting);
+
 $page->add($setting);
 
 $settings->add($page);
