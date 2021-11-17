@@ -124,3 +124,5 @@ $THEME->layouts = [
                 'defaultregion' => 'side-pre',
         ),
 ];
+
+$THEME->haseditswitch = true;
