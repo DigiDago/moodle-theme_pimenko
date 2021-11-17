@@ -26,12 +26,14 @@ nav.navbar.pimenko-navbar {
     height: 100%;
     line-height: 65px;
     max-height: 65px;
+    color: unquote('navbartextcolor');
 
     .navbar-nav {
         align-items: center;
         display: flex;
 
-        li {
+        li,
+        input {
             display: flex !important;
         }
     }
@@ -85,5 +87,19 @@ nav.navbar.pimenko-navbar {
 
     .simplesearchform .btn-submit {
         background-color: unquote('brandcolorbutton');
+    }
+
+    .custom-switch .custom-control-label {
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        align-items: center;
+        color: unquote('navbartextcolor');
+
+        &::after,
+        &::before {
+            top: initial;
+        }
     }
 }

@@ -102,53 +102,54 @@ function theme_pimenko_get_extra_scss($theme) {
 function theme_pimenko_process_css($css, $theme) {
     // Define the default settings for the theme incase they've not been set.
     $defaults = [
-            'brandcolor' => '#000',
-            'brandcolorbutton' => '#000',
-            'brandcolortextbutton' => '#FFF',
-            'loginbgimage' => '',
-            'loginbgstyle' => '',
-            'loginbgopacity1' => '',
-            'loginbgopacity2' => '',
-            'loginbgopacity3' => '',
-            'navbarcolor' => '#FFF',
-            'navbartextcolor' => '#343B3F',
-            'footercolor' => '#343B3F',
-            'footertextcolor' => '#FFF',
-            'hooverfootercolor' => '',
-            'hoovernavbarcolor' => '',
-            'blockregionrowbackgroundcolor1' => '',
-            'blockregionrowbackgroundcolor2' => '',
-            'blockregionrowbackgroundcolor3' => '',
-            'blockregionrowbackgroundcolor4' => '',
-            'blockregionrowbackgroundcolor5' => '',
-            'blockregionrowbackgroundcolor6' => '',
-            'blockregionrowbackgroundcolor7' => '',
-            'blockregionrowbackgroundcolor8' => '',
-            'blockregionrowtextcolor1' => '',
-            'blockregionrowtextcolor2' => '',
-            'blockregionrowtextcolor3' => '',
-            'blockregionrowtextcolor4' => '',
-            'blockregionrowtextcolor5' => '',
-            'blockregionrowtextcolor6' => '',
-            'blockregionrowtextcolor7' => '',
-            'blockregionrowtextcolor8' => '',
-            'blockregionrowlinkcolor1' => '',
-            'blockregionrowlinkcolor2' => '',
-            'blockregionrowlinkcolor3' => '',
-            'blockregionrowlinkcolor4' => '',
-            'blockregionrowlinkcolor5' => '',
-            'blockregionrowlinkcolor6' => '',
-            'blockregionrowlinkcolor7' => '',
-            'blockregionrowlinkcolor8' => '',
-            'blockregionrowlinkhovercolor1' => '',
-            'blockregionrowlinkhovercolor2' => '',
-            'blockregionrowlinkhovercolor3' => '',
-            'blockregionrowlinkhovercolor4' => '',
-            'blockregionrowlinkhovercolor5' => '',
-            'blockregionrowlinkhovercolor6' => '',
-            'blockregionrowlinkhovercolor7' => '',
-            'blockregionrowlinkhovercolor8' => '',
-            'googlefont' => 'Verdana',
+        'brandcolor' => '#000',
+        'brandcolorbutton' => '#000',
+        'brandcolortextbutton' => '#FFF',
+        'loginbgimage' => '',
+        'loginbgstyle' => '',
+        'loginbgopacity1' => '',
+        'loginbgopacity2' => '',
+        'loginbgopacity3' => '',
+        'navbarcolor' => '#FFF',
+        'navbartextcolor' => '#343B3F',
+        'footercolor' => '#343B3F',
+        'footertextcolor' => '#FFF',
+        'hooverfootercolor' => '',
+        'hoovernavbarcolor' => '',
+        'blockregionrowbackgroundcolor1' => '',
+        'blockregionrowbackgroundcolor2' => '',
+        'blockregionrowbackgroundcolor3' => '',
+        'blockregionrowbackgroundcolor4' => '',
+        'blockregionrowbackgroundcolor5' => '',
+        'blockregionrowbackgroundcolor6' => '',
+        'blockregionrowbackgroundcolor7' => '',
+        'blockregionrowbackgroundcolor8' => '',
+        'blockregionrowtextcolor1' => '',
+        'blockregionrowtextcolor2' => '',
+        'blockregionrowtextcolor3' => '',
+        'blockregionrowtextcolor4' => '',
+        'blockregionrowtextcolor5' => '',
+        'blockregionrowtextcolor6' => '',
+        'blockregionrowtextcolor7' => '',
+        'blockregionrowtextcolor8' => '',
+        'blockregionrowlinkcolor1' => '',
+        'blockregionrowlinkcolor2' => '',
+        'blockregionrowlinkcolor3' => '',
+        'blockregionrowlinkcolor4' => '',
+        'blockregionrowlinkcolor5' => '',
+        'blockregionrowlinkcolor6' => '',
+        'blockregionrowlinkcolor7' => '',
+        'blockregionrowlinkcolor8' => '',
+        'blockregionrowlinkhovercolor1' => '',
+        'blockregionrowlinkhovercolor2' => '',
+        'blockregionrowlinkhovercolor3' => '',
+        'blockregionrowlinkhovercolor4' => '',
+        'blockregionrowlinkhovercolor5' => '',
+        'blockregionrowlinkhovercolor6' => '',
+        'blockregionrowlinkhovercolor7' => '',
+        'blockregionrowlinkhovercolor8' => '',
+        'googlefont' => 'Verdana',
+        'tooglercolor' => 'rgb(255, 255, 255)'
     ];
 
     // Get all the defined settings for the theme and replace defaults.
@@ -212,10 +213,12 @@ function theme_pimenko_process_css($css, $theme) {
     $color = $defaults['brandcolortextbutton'];
     $defaults['darkenbrandcolortextbutton'] = theme_pimenko_colorbrightness($color, 0.5);
 
-    // Get all the defined settings for the theme and replace defaults.
-    $css = strtr($css, $defaults);
+    // Set up svg toggler color.
+    $defaults['tooglercolor'] = 'rgba(' . implode(",", theme_pimenko_hex2rgb($defaults['navbartextcolor'])) . ')';
 
-    return $css;
+    // Get all the defined settings for the theme and replace defaults.
+
+    return strtr($css, $defaults);
 }
 
 /**
@@ -352,28 +355,28 @@ function theme_pimenko_colorbrightness($hex, $percent) {
 function theme_pimenko_redirect_to_profile_page($bodyid) {
     global $USER;
     if (optional_param(
-            'noredir', 0, PARAM_INT
+        'noredir', 0, PARAM_INT
     )) {
         return;
     }
     if ($bodyid == 'page-user-profile') {
         $id = optional_param(
-                'id', 0, PARAM_INT
+            'id', 0, PARAM_INT
         );
         $params = ['userid' => $id];
         $redirecturl = new moodle_url(
-                '/theme/pimenko/layout/profile.php', $params
+            '/theme/pimenko/layout/profile.php', $params
         );
         if (!empty($id)) {
             redirect($redirecturl);
         }
     } else if ($bodyid == 'page-user-preferences') {
         $params = [
-                'userid' => $USER->id,
-                'preferences' => 1
+            'userid' => $USER->id,
+            'preferences' => 1
         ];
         $redirecturl = new moodle_url(
-                '/theme/pimenko/layout/profile.php', $params
+            '/theme/pimenko/layout/profile.php', $params
         );
         redirect($redirecturl);
     }
@@ -385,7 +388,7 @@ function theme_pimenko_redirect_to_profile_page($bodyid) {
  */
 function theme_pimenko_get_fontawesome_icon_map() {
     return [
-            'theme_pimenko:t/check' => 'fa-check',
+        'theme_pimenko:t/check' => 'fa-check',
     ];
 }
 
@@ -394,11 +397,11 @@ function theme_pimenko_get_fontawesome_icon_map() {
  */
 function theme_pimenko_regions() {
     $regions = [
-            'side-pre',
-            'side-post'
+        'side-pre',
+        'side-post'
     ];
     foreach (range(
-            'a', 'u'
+        'a', 'u'
     ) as $reg) {
         $regions[] = 'theme-front-' . $reg;
     }
