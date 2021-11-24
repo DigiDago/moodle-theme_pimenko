@@ -28,9 +28,29 @@ body {
         margin-top: 0;
     }
 
+    a.see-all-link {
+        text-decoration: none;
+
+        .popover-region-footer-container {
+            padding: 0;
+
+            .popover-region-seeall-text {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: unquote('brandcolortextbutton');
+            }
+        }
+    }
+
     .btn-primary,
     .btn-submit,
+    .simplesearchform .btn-submit,
     .btn-close,
+    #goto-top-link .btn,
+    .popover-region-seeall-text,
     .btn-outline-secondary,
     .btn-secondary {
         background-color: unquote('brandcolorbutton');
@@ -47,9 +67,17 @@ body {
     }
 
     .dropdown-item {
-        &:focus {
+        &:hover,
+        &:active {
+            background-color: unquote('darkenbrandcolorbutton');
+            border-color: unquote('darkenbrandcolorbutton');
+            color: unquote('darkenbrandcolortextbutton') !important;
+        }
+        &:focus,
+        &:focus-within {
             background-color: unquote('brandcolorbutton');
-            color: unquote('brandcolortextbutton');
+            border-color: unquote('brandcolorbutton');
+            color: unquote('brandcolortextbutton') !important;
         }
     }
 
@@ -82,5 +110,9 @@ body {
 
     #goto-top-link .btn {
         float: right;
+
+        .icon {
+            margin: 0;
+        }
     }
 }

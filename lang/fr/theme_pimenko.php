@@ -232,6 +232,6 @@ $string['entercourse'] = 'Entrer';
 
 // Moodle activity completion design enabling setting.
 $string['moodleactivitycompletion']      = "Activer l'affichage de l'achévement d'activité moodle";
-$string['moodleactivitycompletion_desc'] = "Cette option active l'affichage par default de l'achévement d'activité utilisé par moodle";
+$string['moodleactivitycompletion_desc'] = "Dans les activités ou les ressources d'un cours, les conditions d'achèvement sont affichées sous la forme d'une étiquette en dessous du titre de l'activité ou de la ressource. Ce réglage permet de masquer l'étiquette qui indique l'état de l'achèvement. Elle ne modifie pas l'affichage du suivi qui apparait au-dessous de chaque activité sur la page de cours et que vous pouvez régler dans les paramètres d'un cours.";
 
 $string['totop'] = 'Aller en haut';

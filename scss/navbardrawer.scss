@@ -28,7 +28,7 @@ $togglercolor: unquote('tooglercolor');
     height: calc(100% - 65px);
     top: 65px;
 
-    .list-group-item {
+    .list-group-item.list-group-item-action {
         background: none;
         border: none;
 
@@ -36,6 +36,10 @@ $togglercolor: unquote('tooglercolor');
         &:hover {
             color: unquote('brandcolor');
         }
+    }
+
+    .list-group-item:not(.list-group-item-action) .media-body {
+        cursor: default;
     }
 }
 
