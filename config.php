@@ -80,12 +80,6 @@ $THEME->scss = function($theme) {
 // This function can make alterations and replace patterns within the CSS.
 $THEME->csspostprocess = 'theme_pimenko_process_css';
 
-// This is a function that returns some SCSS as a string to prepend to the main SCSS file.
-$THEME->prescsscallback = 'theme_pimenko_get_pre_scss';
-
-// This is a function that returns some SCSS as a string to append to the main SCSS file.
-$THEME->extrascsscallback = 'theme_pimenko_get_extra_scss';
-
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 
 // Define here layout we override.

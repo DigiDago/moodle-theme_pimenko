@@ -21,7 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-nav.navbar.pimenko-navbar {
+nav.navbar.pimenko-navbar,
+nav.navbar.pimenko-navbar.fixed-top {
     background-color: unquote('navbarcolor') !important;
     height: 100%;
     line-height: 65px;
@@ -64,14 +65,35 @@ nav.navbar.pimenko-navbar {
             color: unquote('darkennavcolor') !important;
         }
     }
-
     .dropdown-menu a,
-    .popover-region-seeall-text,
     .popover-region-container,
     .content-item-container a,
     .popover-region-header-actions a {
-        color: #333 !important;
+        color: #333;
         line-height: initial;
+
+        &.dropdown-item {
+            padding-left: 1.75em;
+
+            &:hover,
+            &:active {
+                background-color: unquote('darkenbrandcolorbutton');
+                border-color: unquote('darkenbrandcolorbutton');
+                color: unquote('darkenbrandcolortextbutton') !important;
+            }
+            &:focus,
+            &:focus-within {
+                background-color: unquote('brandcolorbutton');
+                border-color: unquote('brandcolorbutton');
+                color: unquote('brandcolortextbutton') !important;
+                &::before {
+                    content: "•"; color: unquote('brandcolortextbutton');
+                    display: inline-block;
+                    position: absolute;
+                    left: 10px;
+                }
+            }
+        }
     }
 
     .nav-item {
@@ -80,7 +102,8 @@ nav.navbar.pimenko-navbar {
 
     .dropdown-toggle,
     .popover-region-toggle {
-        &::after {
+        &::after,
+        &::before{
             display: none;
         }
     }

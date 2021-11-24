@@ -62,36 +62,6 @@ function theme_pimenko_get_main_scss_content($theme): string {
 }
 
 /**
- * Get SCSS to prepend.
- * Function to return the SCSS to prepend to our main SCSS for this theme.
- * Note the function name starts with the component name because this is a global function and we don't want namespace clashes.
- *
- * @param theme_config $theme The theme config object.
- * @return array
- */
-function theme_pimenko_get_pre_scss($theme) {
-    // Load the settings from the parent.
-    $theme = theme_config::load('boost');
-    // Call the parent themes get_pre_scss function.
-    return theme_boost_get_pre_scss($theme);
-}
-
-/**
- * Inject additional SCSS.
- * Function to return the SCSS to append to our main SCSS for this theme.
- * Note the function name starts with the component name because this is a global function and we don't want namespace clashes.
- *
- * @param theme_config $theme The theme config object.
- * @return string
- */
-function theme_pimenko_get_extra_scss($theme) {
-    // Load the settings from the parent.
-    $theme = theme_config::load('boost');
-    // Call the parent themes get_extra_scss function.
-    return theme_boost_get_extra_scss($theme);
-}
-
-/**
  * Parses CSS before it is cached.
  * This function can make alterations and replace patterns within the CSS.
  *
@@ -307,8 +277,8 @@ function theme_pimenko_colorbrightness($hex, $percent) {
 
     // This function can't handle case if extrem white or extrem black
     // We do this to prevent strange color.
-    if ($hex === "FFF" || $hex === "FFFFFF") {
-        $hex = "FEFEFE";
+    if (strtoupper($hex) === "FFF" || strtoupper($hex) === "FFFFFF") {
+        $hex = "FFFFFE";
     } else if ($hex === "000" || $hex === "000000") {
         $hex = "010101";
     }
