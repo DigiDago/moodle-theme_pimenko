@@ -18,6 +18,7 @@
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 "use strict";
 define(['jquery'],
     function($) {
@@ -30,9 +31,31 @@ define(['jquery'],
             });
         };
 
+        /**
+         * Add special classes to body depending on scroll position.
+         *
+         * @method  update
+         * @chainable
+         */
+        let scrollHandler = function() {
+            const body = document.querySelector('body');
+            const scrollY = getScrollPosition();
+            if (scrollY >= window.innerHeight) {
+                body.classList.add('scrolled');
+            } else {
+                body.classList.remove('scrolled');
+            }
+        };
+
+        let getScrollPosition = function() {
+            return window.pageYOffset || document.documentElement.scrollTop;
+        };
+
         return {
             init: function() {
                 eventlistener();
+                this.scrollY = 0;
+                window.addEventListener("scroll", scrollHandler.bind(this));
             }
         };
     });

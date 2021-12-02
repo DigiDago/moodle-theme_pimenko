@@ -27,15 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 user_preference_allow_ajax_update( 'drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 
-if (isloggedin()) {
-    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
-} else {
-    $navdraweropen = false;
-}
 $extraclasses = [];
-if ($navdraweropen) {
-    $extraclasses[] = 'drawer-open-left';
-}
+
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos( $blockshtml, 'data-block=' ) !== false;
@@ -44,6 +37,17 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $hasfrontpageregions = $OUTPUT->get_block_regions();
 $iscarouselenabled = $OUTPUT->is_carousel_enabled();
+
+$renderer = $PAGE->get_renderer('core');
+$primary = new core\navigation\output\primary($PAGE);
+$primarymenu = $primary->export_for_template($renderer);
+
+$secondarynavigation = false;
+if ($PAGE->has_secondary_navigation()) {
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs');
+    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+}
+
 $templatecontext = [
         'sitename' => format_string(
                 $SITE->shortname,
@@ -57,11 +61,12 @@ $templatecontext = [
         'sidepreblocks' => $blockshtml,
         'hasblocks' => $hasblocks,
         'bodyattributes' => $bodyattributes,
-        'navdraweropen' => $navdraweropen,
         'regionmainsettingsmenu' => $regionmainsettingsmenu,
         'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
         'hasfrontpageregions' => !empty($hasfrontpageregions),
         'iscarouselenabled' => $iscarouselenabled,
+        'primarymoremenu' => $primarymenu['moremenu'],
+        'secondarymoremenu' => $secondarynavigation ?: false,
 ];
 
 // Include js module.

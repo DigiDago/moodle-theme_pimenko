@@ -29,16 +29,7 @@ require_once($CFG->libdir . '/behat/lib.php');
 
 theme_pimenko_redirect_to_profile_page($PAGE->bodyid);
 
-if (isloggedin()) {
-    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
-} else {
-    $navdraweropen = false;
-}
-
 $extraclasses = [];
-if ($navdraweropen) {
-    $extraclasses[] = 'drawer-open-left';
-}
 
 $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
 $PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
@@ -50,15 +41,27 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+
+$renderer = $PAGE->get_renderer('core');
+$primary = new core\navigation\output\primary($PAGE);
+$primarymenu = $primary->export_for_template($renderer);
+
+$secondarynavigation = false;
+if ($PAGE->has_secondary_navigation()) {
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs');
+    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+}
+
 $templatecontext = [
         'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
         'output' => $OUTPUT,
         'sidepreblocks' => $blockshtml,
         'hasblocks' => $hasblocks,
         'bodyattributes' => $bodyattributes,
-        'navdraweropen' => $navdraweropen,
         'regionmainsettingsmenu' => $regionmainsettingsmenu,
-        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
+        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+        'primarymoremenu' => $primarymenu['moremenu'],
+        'secondarymoremenu' => $secondarynavigation ?: false,
 ];
 
 $nav = $PAGE->flatnav;
