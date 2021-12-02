@@ -19,13 +19,6 @@
 }}
 <nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex pimenko-navbar" aria-label="{{#str}}sitemenubar, admin{{/str}}">
 
-    <div class="d-flex" data-region="drawer-toggle">
-        <button class="navbar-toggler aabtn d-block my-1 mr-2" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">
-            <span class="navbar-toggler-icon"></span>
-            <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
-        </button>
-    </div>
-
     <a href="{{{ config.wwwroot }}}" class="navbar-brand aabtn {{# output.sitelogo }}has-logo{{/ output.sitelogo }}
         {{^ output.sitelogo }}
                 d-none d-sm-inline
@@ -38,6 +31,14 @@
         {{/ output.sitelogo }}
         <span class="site-name d-none d-md-inline">{{{ sitename }}}</span>
     </a>
+
+    {{#primarymoremenu}}
+        <div class="primary-navigation">
+            {{> core/moremenu}}
+        </div>
+    {{/primarymoremenu}}
+
+
 
     <ul class="navbar-nav d-none d-md-flex">
         <!-- custom_menu -->

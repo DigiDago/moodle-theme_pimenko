@@ -126,3 +126,26 @@ nav.navbar.pimenko-navbar.fixed-top {
         }
     }
 }
+
+.secondary-navigation {
+    margin: 10px 0;
+}
+
+.primary-navigation {
+    .moremenu .nav-link {
+        &:hover,
+        &:focus {
+            background: none;
+        }
+
+        &.active {
+            border: none;
+            color: unquote('darkennavcolor') !important;
+        }
+    }
+
+}
+
+.moremenu .nav-link.active {
+    border-bottom-color: unquote('brandcolorbutton');
+}
