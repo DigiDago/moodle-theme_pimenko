@@ -50,12 +50,18 @@ function theme_pimenko_get_main_scss_content($theme): string {
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
 
-    } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_pimenko', 'preset', 0, '/', $filename))) {
-        // This preset file was fetched from the file area for theme_pimenko and not theme_boost (see the line above).
-        $scss .= $presetfile->get_content();
     } else {
-        // Safety fallback - maybe new installs etc.
+        // This preset file was fetched from the file area for theme_pimenko and not theme_boost (see the line above).
+        // Fall back.
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
+        // If we have a custom files.
+        $fs = get_file_storage();
+        $filename = '/'.$theme->settings->preset;
+        $context = context_system::instance();
+        $presetfile = $fs->get_file($context->id, 'theme_pimenko', 'preset', 0, '/', $filename);
+        if ($presetfile) {
+            $scss .= $presetfile->get_content();
+        }
     }
 
     return $scss;

@@ -26,7 +26,7 @@
     margin-top: 65px;
 }
 
-[data-region=right-hand-drawer].drawer {
-    // This value need to be header height.
-    top: 65px;
+.drawer.drawer-right.show,
+.drawer.drawer-left.show {
+    z-index:1;
 }

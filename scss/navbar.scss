@@ -125,10 +125,15 @@ nav.navbar.pimenko-navbar.fixed-top {
             top: initial;
         }
     }
+
+    .custom-control {
+        display: flex;
+    }
 }
 
 .secondary-navigation {
     margin: 10px 0;
+    max-width: 100%;
 }
 
 .primary-navigation {

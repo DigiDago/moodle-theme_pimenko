@@ -120,3 +120,4 @@ $THEME->layouts = [
 ];
 
 $THEME->haseditswitch = true;
+$THEME->usescourseindex = true;
