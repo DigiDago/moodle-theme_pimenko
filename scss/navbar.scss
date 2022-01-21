@@ -51,11 +51,16 @@ nav.navbar.pimenko-navbar.fixed-top {
     }
 
     .site-name,
+    .editmode-switch-form label,
     .nav-item,
     :not(button).nav-link,
     .simplesearchform .btn,
     a {
         color: unquote('navbartextcolor');
+    }
+
+    .editmode-switch-form .custom-switch .custom-control-input {
+        height: 100%;
     }
 
     a,

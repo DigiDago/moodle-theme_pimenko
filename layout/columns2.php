@@ -44,15 +44,17 @@ user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
 user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 
 $blockshtml = $OUTPUT->blocks('side-pre');
+
 $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+if (!$hasblocks) {
+    $blockdraweropen = false;
+}
+
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index') == true);
     $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
 } else {
     $courseindexopen = false;
-    $blockdraweropen = false;
-}
-if (!$hasblocks) {
     $blockdraweropen = false;
 }
 $courseindex = core_course_drawer();
@@ -74,6 +76,7 @@ $secondarynavigation = false;
 if ($PAGE->has_secondary_navigation()) {
     $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs');
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+    //$secondarynavigation = 'toto';
 }
 
 $templatecontext = [

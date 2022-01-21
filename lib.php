@@ -154,19 +154,6 @@ function theme_pimenko_process_css($css, $theme) {
     }
     $defaults['loginbgstyle'] = $loginbgstyle;
 
-    // For login opacity.
-    $loginbgopacity1 = '';
-    $loginbgopacity2 = '';
-    $loginbgopacity3 = '';
-    if (!empty($theme->settings->loginbgopacity)) {
-        $loginbgopacity1 = theme_pimenko_hex2rgba($theme->settings->headerbkcolor2, $theme->settings->loginbgopacity);
-        $loginbgopacity2 = 'rgba(255, 255, 255, ' . $theme->settings->loginbgopacity . ') !important;';
-        $loginbgopacity3 = theme_pimenko_hex2rgba($theme->settings->footerbkcolor, $theme->settings->loginbgopacity);
-    }
-    $defaults['loginbgopacity1'] = $loginbgopacity1;
-    $defaults['loginbgopacity2'] = $loginbgopacity2;
-    $defaults['loginbgopacity3'] = $loginbgopacity3;
-
     // Darken color for link in navbar.
     $color = $defaults['navbartextcolor'];
     if ($defaults['hoovernavbarcolor']) {
