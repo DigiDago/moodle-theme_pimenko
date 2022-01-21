@@ -26,6 +26,16 @@ body {
 
     #page {
         margin-top: 0;
+
+        &.drawers {
+            padding-left: 0;
+            padding-right: 0;
+
+            #topofscroll {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
     }
 
     a.see-all-link {
