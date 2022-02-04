@@ -137,11 +137,11 @@
             <div id="region-main-box" class="col-12 moodle-region">
                 {{#hasregionmainsettingsmenu}}
                     <div id="region-main-settings-menu"
-                         class="hidden-print {{#hasblocks}}has-blocks{{/hasblocks}}">
+                         class="hidden-print">
                         <div> {{{ output.region_main_settings_menu }}} </div>
                     </div>
                 {{/hasregionmainsettingsmenu}}
-                <section id="region-main" class="container-fluid {{#hasblocks}}has-blocks{{/hasblocks}}">
+                <section id="region-main" class="container-fluid">
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
                     {{/hasregionmainsettingsmenu}}
@@ -150,16 +150,11 @@
                     {{{ output.activity_navigation }}}
                     {{{ output.course_content_footer }}}
                 </section>
-                {{#hasblocks}}
-                    <section data-region="blocks-column" class="hidden-print">
-                        {{{ sidepreblocks }}}
-                    </section>
-                {{/hasblocks}}
             </div>
         </div>
+        {{> theme_boost/footer }}
     </div>
     {{{ output.standard_after_main_region_html }}}
-    {{> theme_boost/footer }}
 </div>
 
 </body>

@@ -235,4 +235,8 @@ $string['entercourse'] = 'Enter';
 $string['moodleactivitycompletion']      = "Enable display of moodle activity completion";
 $string['moodleactivitycompletion_desc'] = "This option enables the default display of the activity completion used by moodle";
 
+// Setting show participant tab or no.
+$string['showparticipantscourse']      = "Show participant tab in courses";
+$string['showparticipantscourse_desc'] = "This option allows you to choose whether or not to display the participants tab in the courses.";
+
 $string['totop'] = 'Go to top';

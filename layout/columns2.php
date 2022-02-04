@@ -74,7 +74,7 @@ $primarymenu = $primary->export_for_template($renderer);
 
 $secondarynavigation = false;
 if ($PAGE->has_secondary_navigation()) {
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs');
+    $moremenu = new \theme_pimenko\output\core\navigation\more_menu($PAGE->secondarynav, 'nav-tabs');
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
     //$secondarynavigation = 'toto';
 }
