@@ -58,6 +58,24 @@ if ($ADMIN->fulltree) {
     );
     $page->add($setting);
 
+    // Show or not participants node in course.
+    $name = 'theme_pimenko/showparticipantscourse';
+    $title = get_string(
+        'showparticipantscourse',
+        'theme_pimenko'
+    );
+    $description = get_string(
+        'showparticipantscourse_desc',
+        'theme_pimenko'
+    );
+    $setting = new admin_setting_configcheckbox(
+        $name,
+        $title,
+        $description,
+        true
+    );
+    $page->add($setting);
+
     // Replicate the preset setting from boost.
     $name = 'theme_pimenko/preset';
     $title = get_string('preset', 'theme_pimenko');

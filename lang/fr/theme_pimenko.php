@@ -234,4 +234,8 @@ $string['entercourse'] = 'Entrer';
 $string['moodleactivitycompletion']      = "Activer l'affichage de l'achévement d'activité moodle";
 $string['moodleactivitycompletion_desc'] = "Dans les activités ou les ressources d'un cours, les conditions d'achèvement sont affichées sous la forme d'une étiquette en dessous du titre de l'activité ou de la ressource. Ce réglage permet de masquer l'étiquette qui indique l'état de l'achèvement. Elle ne modifie pas l'affichage du suivi qui apparait au-dessous de chaque activité sur la page de cours et que vous pouvez régler dans les paramètres d'un cours.";
 
+// Setting show participant tab or no.
+$string['showparticipantscourse']      = "Afficher l'onglet participant dans les cours";
+$string['showparticipantscourse_desc'] = "Cette option permet de choisir si l'on veut afficher ou non l'onglet participants dans les cours.";
+
 $string['totop'] = 'Aller en haut';
