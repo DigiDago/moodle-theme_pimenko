@@ -236,7 +236,7 @@ $string['moodleactivitycompletion']      = "Enable display of moodle activity co
 $string['moodleactivitycompletion_desc'] = "This option enables the default display of the activity completion used by moodle";
 
 // Setting show participant tab or no.
-$string['showparticipantscourse']      = "Show participant tab in courses";
-$string['showparticipantscourse_desc'] = "This option allows you to choose whether or not to display the participants tab in the courses.";
+$string['showparticipantscourse']      = "Display the participant section in the secondary menu visible in the courses";
+$string['showparticipantscourse_desc'] = "This option allows you to show or hide the 'Participants' section which is displayed by default in the secondary menu of the home page of a course.";
 
 $string['totop'] = 'Go to top';
