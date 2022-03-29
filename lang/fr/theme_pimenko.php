@@ -28,7 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // A description shown in the admin theme selector.
-$string['choosereadme'] = 'Le thème de la téléformation est un thème enfant de Boost. Il ajoute quelques nouvelles fonctionnalités';
+$string['choosereadme'] = 'Le thème Pimenko est un thème enfant de Boost. Il ajoute quelques nouvelles fonctionnalités';
 // The name of our plugin.
 $string['pluginname'] = 'Pimenko';
 // The name of the second tab in the theme settings.
@@ -165,19 +165,19 @@ $string['settings:regions:frontpageblocksettingscription'] = '';
 $string['settings:regions:frontpageblocksettingscriptiondesc'] =
         'Sur cette page, vous pouvez déterminer la composition de la page d\'accueil, qui peut être divisée en 8 lignes. Pour chaque ligne, vous pouvez déterminer la couleur et si elle doit être composée d\'une ou plusieurs colonnes. Important: après avoir effectué les modifications, rendez-vous sur la page d\'accueil de votre site pour ajouter du contenu à l\'aide de blocs. Vous pouvez trouver la page d\'accueil ici : <a href= ' .
         new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Page d\'accueil</a>.';
-$string['settings:regions:blockrow'] = 'Zone de contenue {$a}';
-$string['settings:regions:blockrowdesc'] = 'Ajouter / définir la mise en page pour la zone de contenue sur la première page.';
+$string['settings:regions:blockrow'] = 'Zone de contenu {$a}';
+$string['settings:regions:blockrowdesc'] = 'Ajouter / définir la mise en page pour la zone de contenu sur la première page.';
 
 // Block Regions colors.
 $string['settings:regions:blockregionrowbackgroundcolor'] = 'Couleur de fond de la zone {$a}';
-$string['settings:regions:blockregionrowbackgroundcolordesc'] = 'Ajoutez / définissez une couleur de fond pour la zone de contenue sur la première page.';
+$string['settings:regions:blockregionrowbackgroundcolordesc'] = 'Ajoutez / définissez une couleur de fond pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowtextcolor'] = 'Couleur de texte de la zone {$a}';
-$string['settings:regions:blockregionrowtextcolordesc'] = 'Ajoutez / définissez une couleur de texte pour la zone de contenue sur la première page.';
+$string['settings:regions:blockregionrowtextcolordesc'] = 'Ajoutez / définissez une couleur de texte pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowlinkcolor'] = 'Couleur des liens de la zone {$a}';
-$string['settings:regions:blockregionrowlinkcolordesc'] = 'Ajoutez / définissez une couleur pour les liens pour la zone de contenue sur la première page.';
+$string['settings:regions:blockregionrowlinkcolordesc'] = 'Ajoutez / définissez une couleur pour les liens pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowlinkhovercolor'] = 'Couleur des liens \'survoler\' de la zone {$a}';
 $string['settings:regions:blockregionrowlinkhovercolordesc'] =
-        'Ajoutez / définissez une couleur pour les liens \'survoler\' pour la zone de contenue sur la première page.';
+        'Ajoutez / définissez une couleur pour les liens \'survoler\' pour la zone de contenu sur la première page.';
 
 // Slide.
 $string['settings:frontslider:enablecarousel'] = 'Activer le carrousel';
@@ -232,4 +232,10 @@ $string['entercourse'] = 'Entrer';
 
 // Moodle activity completion design enabling setting.
 $string['moodleactivitycompletion']      = "Activer l'affichage de l'achévement d'activité moodle";
-$string['moodleactivitycompletion_desc'] = "Cette option active l'affichage par default de l'achévement d'activité utilisé par moodle";
+$string['moodleactivitycompletion_desc'] = "Dans les activités ou les ressources d'un cours, les conditions d'achèvement sont affichées sous la forme d'une étiquette en dessous du titre de l'activité ou de la ressource. Ce réglage permet de masquer l'étiquette qui indique l'état de l'achèvement. Elle ne modifie pas l'affichage du suivi qui apparait au-dessous de chaque activité sur la page de cours et que vous pouvez régler dans les paramètres d'un cours.";
+
+// Setting show participant tab or no.
+$string['showparticipantscourse']      = "Afficher la rubrique participant dans le menu secondaire visible dans les cours";
+$string['showparticipantscourse_desc'] = "Cette option permet d'afficher ou de masquer la rubrique 'Participants' qui s’affiche par défaut dans le menu secondaire de la page d'accueil d'un cours.";
+
+$string['totop'] = 'Aller en haut';

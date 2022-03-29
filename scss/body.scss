@@ -26,11 +26,41 @@ body {
 
     #page {
         margin-top: 0;
+
+        &.drawers {
+            padding-left: 0;
+            padding-right: 0;
+
+            #topofscroll {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+    }
+
+    a.see-all-link {
+        text-decoration: none;
+
+        .popover-region-footer-container {
+            padding: 0;
+
+            .popover-region-seeall-text {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: unquote('brandcolortextbutton');
+            }
+        }
     }
 
     .btn-primary,
     .btn-submit,
+    .simplesearchform .btn-submit,
     .btn-close,
+    #goto-top-link .btn,
+    .popover-region-seeall-text,
     .btn-outline-secondary,
     .btn-secondary {
         background-color: unquote('brandcolorbutton');
@@ -47,9 +77,17 @@ body {
     }
 
     .dropdown-item {
-        &:focus {
+        &:hover,
+        &:active {
+            background-color: unquote('darkenbrandcolorbutton');
+            border-color: unquote('darkenbrandcolorbutton');
+            color: unquote('darkenbrandcolortextbutton') !important;
+        }
+        &:focus,
+        &:focus-within {
             background-color: unquote('brandcolorbutton');
-            color: unquote('brandcolortextbutton');
+            border-color: unquote('brandcolorbutton');
+            color: unquote('brandcolortextbutton') !important;
         }
     }
 
@@ -78,5 +116,32 @@ body {
 
     .block_html {
         background: none;
+    }
+}
+
+body.scrolled #goto-top-link {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s ease 0s, opacity .7s ease .1s;
+}
+
+@include media-breakpoint-down(sm) {
+    #goto-top-link {
+        bottom: 0;
+    }
+}
+
+#goto-top-link {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .7s ease 0s, visibility .1s ease .8s;
+    display: block;
+    position: fixed;
+    bottom: $gototop-bottom-position;
+    right: 0;
+    a {
+        position: absolute;
+        right: 0;
+        transform: translateY(-100%);
     }
 }

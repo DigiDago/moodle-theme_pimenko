@@ -23,10 +23,10 @@
 
 #page-wrapper {
     // This value need to be header height.
-    margin-top: 65px;
+    margin-top: 0;
 }
 
-[data-region=right-hand-drawer].drawer {
-    // This value need to be header height.
-    top: 65px;
+.drawer.drawer-right.show,
+.drawer.drawer-left.show {
+    z-index:1;
 }

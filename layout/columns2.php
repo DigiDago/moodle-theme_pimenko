@@ -29,36 +29,76 @@ require_once($CFG->libdir . '/behat/lib.php');
 
 theme_pimenko_redirect_to_profile_page($PAGE->bodyid);
 
-if (isloggedin()) {
-    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
-} else {
-    $navdraweropen = false;
-}
-
 $extraclasses = [];
-if ($navdraweropen) {
-    $extraclasses[] = 'drawer-open-left';
-}
 
 $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
 $PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+
+// Handle blockDrawer.
+$addblockbutton = $OUTPUT->addblockbutton();
+
+user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
+user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
+
 $blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = strpos($blockshtml, 'data-block=') !== false;
+
+$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+if (!$hasblocks) {
+    $blockdraweropen = false;
+}
+
+if (isloggedin()) {
+    $courseindexopen = (get_user_preferences('drawer-open-index') == true);
+    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
+} else {
+    $courseindexopen = false;
+    $blockdraweropen = false;
+}
+$courseindex = core_course_drawer();
+if (!$courseindex) {
+    $courseindexopen = false;
+}
+$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
+
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+
+$renderer = $PAGE->get_renderer('core');
+$primary = new core\navigation\output\primary($PAGE);
+$primarymenu = $primary->export_for_template($renderer);
+
+$secondarynavigation = false;
+if ($PAGE->has_secondary_navigation()) {
+    $moremenu = new \theme_pimenko\output\core\navigation\more_menu($PAGE->secondarynav, 'nav-tabs');
+    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+    //$secondarynavigation = 'toto';
+}
+
 $templatecontext = [
-        'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-        'output' => $OUTPUT,
-        'sidepreblocks' => $blockshtml,
-        'hasblocks' => $hasblocks,
-        'bodyattributes' => $bodyattributes,
-        'navdraweropen' => $navdraweropen,
-        'regionmainsettingsmenu' => $regionmainsettingsmenu,
-        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
+    'sitename' => format_string($SITE->shortname,
+        true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'output' => $OUTPUT,
+    'sidepreblocks' => $blockshtml,
+    'hasblocks' => $hasblocks,
+    'bodyattributes' => $bodyattributes,
+    'regionmainsettingsmenu' => $regionmainsettingsmenu,
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+    'primarymoremenu' => $primarymenu['moremenu'],
+    'secondarymoremenu' => $secondarynavigation ?: false,
+    'blockdraweropen' => $blockdraweropen,
+    'usermenu' => $primarymenu['user'],
+    'langmenu' => $primarymenu['lang'],
+    'hasfrontpageregions' => !empty($hasfrontpageregions),
+    'courseindexopen' => $courseindexopen,
+    'courseindex' => $courseindex,
+    'mobileprimarynav' => $primarymenu['mobileprimarynav'],
+    'forceblockdraweropen' => $forceblockdraweropen,
+    'addblockbutton' => $addblockbutton
 ];
 
 $nav = $PAGE->flatnav;

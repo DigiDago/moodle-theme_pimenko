@@ -66,3 +66,19 @@
         }
     }
 }
+
+#page-site-index #topofscroll {
+    margin-top: 0;
+    max-width: 100%;
+    padding: 0 !important;
+
+    .carousel-item img {
+        max-height: 600px;
+    }
+
+    .moodle-region {
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

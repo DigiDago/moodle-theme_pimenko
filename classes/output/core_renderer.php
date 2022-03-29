@@ -63,19 +63,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     public function render_login_page($output): string {
         global $SITE;
 
-        // We check if the user is connected and we set the drawer to close.
-        if (isloggedin()) {
-            $navdraweropen = (get_user_preferences(
-                            'drawer-open-nav', 'false'
-                    ) == 'false');
-        } else {
-            $navdraweropen = false;
-        }
-
         $extraclasses = [];
-        if ($navdraweropen) {
-            $extraclasses[] = 'drawer-open-left';
-        }
 
         // Define some needed var for ur template.
         $template = new stdClass();
@@ -641,7 +629,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 $returnstr
         );
         $am->set_action_label(get_string('usermenu'));
-        $am->set_alignment(action_menu::TR, action_menu::BR);
+        $am->set_menu_left(action_menu::TR, action_menu::BR);
         $am->set_nowrap_on_items();
         if ($withlinks) {
             $navitemcount = count($opts->navitems);
