@@ -108,8 +108,6 @@ $templatecontext = [
 $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
 $PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
-$templatecontext['flatnavigation'] = $PAGE->flatnav;
-
 echo $OUTPUT->render_from_template(
         'theme_pimenko/frontpage',
         $templatecontext

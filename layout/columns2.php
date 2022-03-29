@@ -76,7 +76,6 @@ $secondarynavigation = false;
 if ($PAGE->has_secondary_navigation()) {
     $moremenu = new \theme_pimenko\output\core\navigation\more_menu($PAGE->secondarynav, 'nav-tabs');
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
-    //$secondarynavigation = 'toto';
 }
 
 $templatecontext = [
@@ -101,7 +100,4 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton
 ];
 
-$nav = $PAGE->flatnav;
-$templatecontext['flatnavigation'] = $nav;
-$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
 echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);
