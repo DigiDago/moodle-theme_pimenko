@@ -75,9 +75,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         );
         $template->bodyattributes = $output->body_attributes($extraclasses);
 
-        // Define nav for the drawer.
-        $template->flatnavigation = $this->page->flatnav;
-
         // Output content.
         $template->output = $output;
 
