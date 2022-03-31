@@ -22,9 +22,9 @@ use theme_config;
 /**
  * more menu navigation renderable
  *
- * @package     core
+ * @package     theme_pimenko
  * @category    navigation
- * @copyright   2021 onwards Adrian Greeve
+ * @copyright   2021 onwards Adrian Greeve | Pimenko
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class more_menu extends \core\navigation\output\more_menu {
