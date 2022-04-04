@@ -18,6 +18,7 @@ namespace theme_pimenko\output\core\navigation\views;
 
 use navigation_node;
 use format_horizontaltabs;
+use theme_config;
 
 /**
  * custom secondary menu
@@ -53,12 +54,12 @@ class secondary extends \core\navigation\views\secondary {
             $firstnodeidentifier = get_string('learn', 'format_horizontaltabs');
             $pix = new \pix_icon('t/grades', $firstnodeidentifier);
             $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-            $firstnodeidentifier = $system->render_pix_icon($OUTPUT, $pix).$firstnodeidentifier;
+            $firstnodeidentifier = $system->render_pix_icon($OUTPUT, $pix) . $firstnodeidentifier;
         } else if ($course->format == 'digidagotabs') {
             $firstnodeidentifier = get_string('learn', 'format_digidagotabs');
             $pix = new \pix_icon('t/grades', $firstnodeidentifier);
             $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-            $firstnodeidentifier = $system->render_pix_icon($OUTPUT, $pix).$firstnodeidentifier;
+            $firstnodeidentifier = $system->render_pix_icon($OUTPUT, $pix) . $firstnodeidentifier;
         } else {
             $firstnodeidentifier = get_string('course');
         }
@@ -80,7 +81,7 @@ class secondary extends \core\navigation\views\secondary {
                 if ($tab->icon) {
                     $pix = new \pix_icon('t/' . $tab->icon, $tab->name);
                     $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-                    $text = $system->render_pix_icon($OUTPUT, $pix).$tab->name;
+                    $text = $system->render_pix_icon($OUTPUT, $pix) . $tab->name;
                 } else {
                     $text = $tab->name;
                 }
@@ -92,6 +93,12 @@ class secondary extends \core\navigation\views\secondary {
         $nodesordered = $this->get_leaf_nodes($settingsnav, $nodes['settings'] ?? []);
         $nodesordered += $this->get_leaf_nodes($navigation, $nodes['navigation'] ?? []);
         $this->add_ordered_nodes($nodesordered, $rootnode);
+
+        // Hide participants node with theme settings ask for it.
+        $theme = theme_config::load('pimenko');
+        if (!$theme->settings->showparticipantscourse) {
+            $rootnode->children->remove('participants');
+        }
 
         // Try to get any custom nodes defined by a user which may include containers.
         $expectedcourseadmin = $this->get_expected_course_admin_nodes();

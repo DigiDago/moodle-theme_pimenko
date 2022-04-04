@@ -85,38 +85,49 @@ $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 // Define here layout we override.
 // Login page.
 $THEME->layouts = [
-        // Main course page.
-        'course' => array(
-                'file' => 'columns2.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
-                'options' => array('langmenu' => true),
-        ),
-        'login' => array(
-                'file' => 'login.php',
-                'regions' => array(),
-                'options' => array('langmenu' => true),
-        ),
-        // My public page.
-        'mypublic' => array(
-                'file' => 'columns2.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
-        ),
-        // The site home page.
-        'frontpage' => [
-                'file' => 'frontpage.php',
-                'defaultregion' => 'side-pre',
-                'regions' => theme_pimenko_regions(),
+    // Main course page.
+    'course' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+        'options' => array('langmenu' => true),
+    ),
+    // Standard layout with blocks.
+    'standard' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+    ),
+    // Most backwards compatible layout without the blocks.
+    'base' => array(
+        'file' => 'columns2.php',
+        'regions' => array(),
+    ),
+    'login' => array(
+        'file' => 'login.php',
+        'regions' => array(),
+        'options' => array('langmenu' => true),
+    ),
+    // My public page.
+    'mypublic' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+    ),
+    // The site home page.
+    'frontpage' => [
+        'file' => 'frontpage.php',
+        'defaultregion' => 'side-pre',
+        'regions' => theme_pimenko_regions(),
+    ],
+    'pimenkoProfile' => array(
+        'file' => 'columns2.php',
+        'regions' => [
+            'side-pre',
+            'side-post'
         ],
-        'pimenkoProfile' => array(
-                'file' => 'columns2.php',
-                'regions' => [
-                        'side-pre',
-                        'side-post'
-                ],
-                'defaultregion' => 'side-pre',
-        ),
+        'defaultregion' => 'side-pre',
+    ),
 ];
 
 $THEME->haseditswitch = true;
