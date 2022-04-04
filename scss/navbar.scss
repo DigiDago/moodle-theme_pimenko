@@ -33,7 +33,7 @@ nav.navbar.pimenko-navbar.fixed-top {
         align-items: center;
         display: flex;
 
-        li,
+        li:not(.d-none),
         input {
             display: flex !important;
         }
