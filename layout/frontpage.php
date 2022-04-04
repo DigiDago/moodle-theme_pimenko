@@ -71,7 +71,12 @@ $primarymenu = $primary->export_for_template($renderer);
 
 $secondarynavigation = false;
 if ($PAGE->has_secondary_navigation()) {
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs');
+    $customnav = new \theme_pimenko\output\core\navigation\views\secondary($PAGE);
+    $customnav->initialise();
+    $PAGE->set_secondarynav($customnav);
+    $moremenu =
+        new core\navigation\output\more_menu($PAGE->secondarynav,
+            'nav-tabs');
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
 }
 
