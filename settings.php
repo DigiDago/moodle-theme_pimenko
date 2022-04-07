@@ -58,24 +58,6 @@ if ($ADMIN->fulltree) {
     );
     $page->add($setting);
 
-    // Show or not participants node in course.
-    $name = 'theme_pimenko/showparticipantscourse';
-    $title = get_string(
-        'showparticipantscourse',
-        'theme_pimenko'
-    );
-    $description = get_string(
-        'showparticipantscourse_desc',
-        'theme_pimenko'
-    );
-    $setting = new admin_setting_configcheckbox(
-        $name,
-        $title,
-        $description,
-        true
-    );
-    $page->add($setting);
-
     // Replicate the preset setting from boost.
     $name = 'theme_pimenko/preset';
     $title = get_string('preset', 'theme_pimenko');
@@ -168,6 +150,51 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configtextarea('theme_pimenko/scss', get_string('rawscss', 'theme_pimenko'),
         get_string('rawscss_desc', 'theme_pimenko'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Show or not participants node in course.
+    $name = 'theme_pimenko/showparticipantscourse';
+    $title = get_string(
+        'showparticipantscourse',
+        'theme_pimenko'
+    );
+    $description = get_string(
+        'showparticipantscourse_desc',
+        'theme_pimenko'
+    );
+    $setting = new admin_setting_configcheckbox(
+        $name,
+        $title,
+        $description,
+        true
+    );
+    $page->add($setting);
+
+    // Roles tabs for showparticipantscourse permission list.
+
+    global $DB;
+    $roles = $DB->get_records('role');
+    if (!$roles) {
+        $myrolearray = ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'];
+    } else {
+        foreach ($roles as $role) {
+            $myrolearray[$role->shortname] = $role->shortname;
+        }
+    }
+
+    // Show or not participants node in course.
+    $name = 'theme_pimenko/listuserrole';
+    $title = get_string(
+        'listuserrole',
+        'theme_pimenko'
+    );
+    $description = get_string(
+        'listuserrole_desc',
+        'theme_pimenko'
+    );
+    $setting =
+        new admin_setting_configmultiselect($name, $title, $description,
+            ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'], $myrolearray);
     $page->add($setting);
 
     $settings->add($page);
