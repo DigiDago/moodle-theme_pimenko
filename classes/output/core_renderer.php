@@ -53,6 +53,16 @@ defined('MOODLE_INTERNAL') || die;
 final class core_renderer extends \theme_boost\output\core_renderer {
     private $themeconfig;
 
+    /** Render a pix using different system of moodle */
+    public function render_custom_pix($output, string $pixstring): string {
+        // Define some needed var for ur template.
+        $template = new stdClass();
+        $template->pixstring = $pixstring;
+        return $output->render_from_template(
+            'theme_pimenko/pix', $template
+        );
+    }
+
     /**
      * Returns template of login page.
      *
@@ -68,10 +78,10 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         // Define some needed var for ur template.
         $template = new stdClass();
         $template->sitename = format_string(
-                $SITE->shortname, true, [
-                        'context' => context_course::instance(SITEID),
-                        "escape" => false
-                ]
+            $SITE->shortname, true, [
+                'context' => context_course::instance(SITEID),
+                "escape" => false
+            ]
         );
         $template->bodyattributes = $output->body_attributes($extraclasses);
 
@@ -82,7 +92,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $template->maincontent = $output->main_content();
 
         return $output->render_from_template(
-                'theme_pimenko/login', $template
+            'theme_pimenko/login', $template
         );
     }
 
@@ -96,7 +106,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             $sitelogo = $this->themeconfig->setting_file_url(
-                    'sitelogo', 'sitelogo'
+                'sitelogo', 'sitelogo'
             );
         }
         return $sitelogo;
@@ -119,17 +129,17 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $text = "footertext{$i}";
             if (isset($theme->settings->$text) && !empty($theme->settings->$text)) {
                 $space = [
-                        '/ /',
-                        "/\s/",
-                        "/&nbsp;/",
-                        "/\t/",
-                        "/\n/",
-                        "/\r/",
-                        "/<p>/",
-                        "/<\/p>/"
+                    '/ /',
+                    "/\s/",
+                    "/&nbsp;/",
+                    "/\t/",
+                    "/\n/",
+                    "/\r/",
+                    "/<p>/",
+                    "/<\/p>/"
                 ];
                 $textwithoutspace = preg_replace(
-                        $space, '', $theme->settings->$text
+                    $space, '', $theme->settings->$text
                 );
                 if (!empty($textwithoutspace)) {
                     $column = new stdClass();
@@ -137,7 +147,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                     $column->classtext = $text;
                     $column->list = [];
                     $menu = new custom_menu(
-                            $column->text, current_language()
+                        $column->text, current_language()
                     );
                     foreach ($menu->get_children() as $item) {
                         $listitem = new stdClass();
@@ -161,7 +171,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return $this->render_from_template(
-                'theme_pimenko/footercustomcontent', $template
+            'theme_pimenko/footercustomcontent', $template
         );
     }
 
@@ -177,7 +187,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             return $this->themeconfig->setting_file_url(
-                    'favicon', 'favicon'
+                'favicon', 'favicon'
             );
         }
         return parent::favicon();
@@ -224,10 +234,10 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
         $context->logourl = $url;
         $context->sitename = format_string(
-                $SITE->fullname, true, [
-                        'context' => context_course::instance(SITEID),
-                        "escape" => false
-                ]
+            $SITE->fullname, true, [
+                'context' => context_course::instance(SITEID),
+                "escape" => false
+            ]
         );
 
         $context->logintextboxtop = self::get_setting('logintextboxtop', 'format_html');
@@ -274,23 +284,23 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         global $COURSE;
 
         if ($COURSE->enablecompletion != COMPLETION_ENABLED
-                || $this->page->pagelayout == "admin"
-                || $this->page->pagetype == "course-editsection"
-                || $this->page->bodyid == 'page-mod-quiz-attempt'
-                || (isset($this->page->cm->completion) && !$this->page->cm->completion)
-                || !isset($this->page->cm->completion)) {
+            || $this->page->pagelayout == "admin"
+            || $this->page->pagetype == "course-editsection"
+            || $this->page->bodyid == 'page-mod-quiz-attempt'
+            || (isset($this->page->cm->completion) && !$this->page->cm->completion)
+            || !isset($this->page->cm->completion)) {
             return '';
         }
 
         $renderer = $this->page->get_renderer(
-                'core', 'course'
+            'core', 'course'
         );
 
         $completioninfo = new completion_info($COURSE);
 
         // Short-circuit if we are not on a mod page, and allow restful access.
         $pagepath = explode(
-                '-', $this->page->pagetype
+            '-', $this->page->pagetype
         );
         if ($pagepath[0] != 'mod') {
             return '';
@@ -339,14 +349,14 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $template->nextmodurl = $nextmod->url;
         }
 
-        $theme    = theme_config::load('pimenko');
-        $moodlecompletion  = $theme->settings->moodleactivitycompletion;
+        $theme = theme_config::load('pimenko');
+        $moodlecompletion = $theme->settings->moodleactivitycompletion;
         if ($completioninfo->is_enabled($mod) && !$moodlecompletion) {
             $template->completionicon = $renderer->course_section_cm_completion(
-                    $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
+                $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
             );
             return $renderer->render_from_template(
-                    'theme_pimenko/completionfooter', $template
+                'theme_pimenko/completionfooter', $template
             );
         }
         return '';
@@ -367,30 +377,30 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         $output = '';
         $output .= html_writer::start_tag(
-                'div', ['class' => 'managerbtns']
+            'div', ['class' => 'managerbtns']
         );
         $context = context_system::instance();
 
         // Add button create course, we check user capability.
         if (has_capability(
-                'moodle/course:create', $context
+            'moodle/course:create', $context
         )) {
             // Print link to create a new course, for the 1st available category.
             $url = new moodle_url(
-                    '/course/edit.php', [
-                            'category' => $CFG->defaultrequestcategory,
-                            'returnto' => 'topcat'
-                    ]
+                '/course/edit.php', [
+                    'category' => $CFG->defaultrequestcategory,
+                    'returnto' => 'topcat'
+                ]
             );
             $output .= $this->single_button(
-                    $url, get_string('addnewcourse'), 'get'
+                $url, get_string('addnewcourse'), 'get'
             );
         }
 
         // Add button redirect to course list.
         $url = new moodle_url('/course/index.php');
         $output .= $this->single_button(
-                $url, get_string('viewallcourses'), 'get'
+            $url, get_string('viewallcourses'), 'get'
         );
 
         $output .= html_writer::end_tag('div');
@@ -430,7 +440,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         foreach ($fields as $field) {
             $retval .= '<div class="row front-page-row" id="front-page-row-' . ++$i . '">';
             $vals = explode(
-                    '-', $field
+                '-', $field
             );
             foreach ($vals as $val) {
                 if ($val > 0) {
@@ -445,7 +455,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                     }
 
                     $retval .= $this->blocks(
-                            $block, 'block-region-front container-fluid'
+                        $block, 'block-region-front container-fluid'
                     );
                     $retval .= '</div>';
                 }
@@ -466,7 +476,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $this->themeconfig = $theme = theme_config::load('pimenko');
         }
         if (isset($this->themeconfig->settings->enablecarousel)
-                && $this->themeconfig->settings->enablecarousel == 1) {
+            && $this->themeconfig->settings->enablecarousel == 1) {
             return true;
         }
         return false;
@@ -525,18 +535,18 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             if (!$loginpage) {
 
                 $returnstr = "<form action=\"$loginurl\">
-<button class='btn btn-primary' type='submit'>".
-                        get_string('login')."</button></form>";
+<button class='btn btn-primary' type='submit'>" .
+                    get_string('login') . "</button></form>";
             } else {
                 $returnstr = get_string('loggedinnot', 'moodle');
 
             }
             return html_writer::div(
-                    html_writer::span(
-                            $returnstr,
-                            'login'
-                    ),
-                    $usermenuclasses
+                html_writer::span(
+                    $returnstr,
+                    'login'
+                ),
+                $usermenuclasses
             );
 
         }
@@ -545,15 +555,15 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if (isguestuser()) {
             $returnstr = get_string('loggedinasguest');
             if (!$loginpage && $withlinks) {
-                $returnstr .= " (<a href=\"$loginurl\">".get_string('login').'</a>)';
+                $returnstr .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
             }
 
             return html_writer::div(
-                    html_writer::span(
-                            $returnstr,
-                            'login'
-                    ),
-                    $usermenuclasses
+                html_writer::span(
+                    $returnstr,
+                    'login'
+                ),
+                $usermenuclasses
             );
         }
 
@@ -567,21 +577,21 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         // Other user.
         if (!empty($opts->metadata['asotheruser'])) {
             $avatarcontents .= html_writer::span(
-                    $opts->metadata['realuseravatar'],
-                    'avatar realuser'
+                $opts->metadata['realuseravatar'],
+                'avatar realuser'
             );
             $usertextcontents = $opts->metadata['realuserfullname'];
             $usertextcontents .= html_writer::tag(
-                    'span',
-                    get_string(
-                            'loggedinas',
-                            'moodle',
-                            html_writer::span(
-                                    $opts->metadata['userfullname'],
-                                    'value'
-                            )
-                    ),
-                    array('class' => 'meta viewingas')
+                'span',
+                get_string(
+                    'loggedinas',
+                    'moodle',
+                    html_writer::span(
+                        $opts->metadata['userfullname'],
+                        'value'
+                    )
+                ),
+                array('class' => 'meta viewingas')
             );
         }
 
@@ -589,16 +599,16 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if (!empty($opts->metadata['asotherrole'])) {
             $role = core_text::strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['rolename'])));
             $usertextcontents .= html_writer::span(
-                    $opts->metadata['rolename'],
-                    'meta role role-' . $role
+                $opts->metadata['rolename'],
+                'meta role role-' . $role
             );
         }
 
         // User login failures.
         if (!empty($opts->metadata['userloginfail'])) {
             $usertextcontents .= html_writer::span(
-                    $opts->metadata['userloginfail'],
-                    'meta loginfailures'
+                $opts->metadata['userloginfail'],
+                'meta loginfailures'
             );
         }
 
@@ -606,15 +616,15 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         if (!empty($opts->metadata['asmnetuser'])) {
             $mnet = strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['mnetidprovidername'])));
             $usertextcontents .= html_writer::span(
-                    $opts->metadata['mnetidprovidername'],
-                    'meta mnet mnet-' . $mnet
+                $opts->metadata['mnetidprovidername'],
+                'meta mnet mnet-' . $mnet
             );
         }
 
         $returnstr .= html_writer::span(
-                html_writer::span($usertextcontents, 'usertext mr-1') .
-                html_writer::span($avatarcontents, $avatarclasses),
-                'userbutton'
+            html_writer::span($usertextcontents, 'usertext mr-1') .
+            html_writer::span($avatarcontents, $avatarclasses),
+            'userbutton'
         );
 
         // Create a divider (well, a filler).
@@ -623,7 +633,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         $am = new action_menu();
         $am->set_menu_trigger(
-                $returnstr
+            $returnstr
         );
         $am->set_action_label(get_string('usermenu'));
         $am->set_menu_left(action_menu::TR, action_menu::BR);
@@ -650,17 +660,17 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                             $pix = new pix_icon($value->pix, '', null, array('class' => 'iconsmall'));
                         } else if (isset($value->imgsrc) && !empty($value->imgsrc)) {
                             $value->title = html_writer::img(
-                                            $value->imgsrc,
-                                            $value->title,
-                                            array('class' => 'iconsmall')
-                                    ) . $value->title;
+                                    $value->imgsrc,
+                                    $value->title,
+                                    array('class' => 'iconsmall')
+                                ) . $value->title;
                         }
 
                         $al = new action_menu_link_secondary(
-                                $value->url,
-                                $pix,
-                                $value->title,
-                                array('class' => 'icon')
+                            $value->url,
+                            $pix,
+                            $value->title,
+                            array('class' => 'icon')
                         );
                         if (!empty($value->titleidentifier)) {
                             $al->attributes['data-title'] = $value->titleidentifier;
@@ -679,8 +689,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return html_writer::div(
-                $this->render($am),
-                $usermenuclasses
+            $this->render($am),
+            $usermenuclasses
         );
     }
 }

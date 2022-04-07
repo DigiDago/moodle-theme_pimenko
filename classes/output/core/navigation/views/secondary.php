@@ -19,6 +19,7 @@ namespace theme_pimenko\output\core\navigation\views;
 use navigation_node;
 use format_horizontaltabs;
 use theme_config;
+use context_course;
 
 /**
  * custom secondary menu
@@ -39,7 +40,7 @@ class secondary extends \core\navigation\views\secondary {
      *                                       node by default.
      */
     protected function load_course_navigation(?navigation_node $rootnode = null): void {
-        global $SITE, $OUTPUT;
+        global $SITE, $OUTPUT, $USER;
 
         $rootnode = $rootnode ?? $this;
         $course = $this->page->course;
@@ -79,9 +80,7 @@ class secondary extends \core\navigation\views\secondary {
             $tabs = $courseformat->get_tabs();
             foreach ($tabs as $tab) {
                 if ($tab->icon) {
-                    $pix = new \pix_icon('t/' . $tab->icon, $tab->name);
-                    $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-                    $text = $system->render_pix_icon($OUTPUT, $pix) . $tab->name;
+                    $text = $OUTPUT->render_custom_pix($OUTPUT, $tab->icon) . $tab->name;
                 } else {
                     $text = $tab->name;
                 }
@@ -97,7 +96,15 @@ class secondary extends \core\navigation\views\secondary {
         // Hide participants node with theme settings ask for it.
         $theme = theme_config::load('pimenko');
         if (!$theme->settings->showparticipantscourse) {
-            $rootnode->children->remove('participants');
+            $allowedtosee = false;
+            foreach (get_user_roles($this->context, $USER->id) as $role) {
+                if (strpos($theme->settings->listuserrole, $role->shortname)) {
+                    $allowedtosee = true;
+                }
+            }
+            if (!$allowedtosee && !is_siteadmin($USER)) {
+                $rootnode->children->remove('participants');
+            }
         }
 
         // Try to get any custom nodes defined by a user which may include containers.

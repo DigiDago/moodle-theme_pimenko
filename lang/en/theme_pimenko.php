@@ -240,3 +240,6 @@ $string['showparticipantscourse']      = "Display the participant section in the
 $string['showparticipantscourse_desc'] = "This option allows you to show or hide the 'Participants' section which is displayed by default in the secondary menu of the home page of a course.";
 
 $string['totop'] = 'Go to top';
+
+$string['listuserrole'] = 'List of user role';
+$string['listuserrole_desc'] = 'If the option showparticipantscourse is activated define the users who can see the participants tab';

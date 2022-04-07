@@ -239,3 +239,5 @@ $string['showparticipantscourse']      = "Afficher la rubrique participant dans 
 $string['showparticipantscourse_desc'] = "Cette option permet d'afficher ou de masquer la rubrique 'Participants' qui s’affiche par défaut dans le menu secondaire de la page d'accueil d'un cours.";
 
 $string['totop'] = 'Aller en haut';
+$string['listuserrole'] = 'Liste des rôles';
+$string['listuserrole_desc'] = 'Si l\'option showparticipantscourse est activé définisser les utilisateurs pouvant voir l\'onglet participants';
