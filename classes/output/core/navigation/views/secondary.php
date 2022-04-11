@@ -40,7 +40,7 @@ class secondary extends \core\navigation\views\secondary {
      *                                       node by default.
      */
     protected function load_course_navigation(?navigation_node $rootnode = null): void {
-        global $SITE, $OUTPUT, $USER;
+        global $SITE, $OUTPUT, $USER, $DB;
 
         $rootnode = $rootnode ?? $this;
         $course = $this->page->course;
@@ -102,6 +102,16 @@ class secondary extends \core\navigation\views\secondary {
                     $allowedtosee = true;
                 }
             }
+
+            if (is_role_switched($course->id)) {
+                $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
+                if (strpos($theme->settings->listuserrole, $roleswitched->shortname)) {
+                    $allowedtosee = true;
+                } else {
+                    $allowedtosee = false;
+                }
+            }
+
             if (!$allowedtosee && !is_siteadmin($USER)) {
                 $rootnode->children->remove('participants');
             }
