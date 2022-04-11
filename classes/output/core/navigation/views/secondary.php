@@ -97,22 +97,25 @@ class secondary extends \core\navigation\views\secondary {
         $theme = theme_config::load('pimenko');
         if (!$theme->settings->showparticipantscourse) {
             $allowedtosee = false;
-            foreach (get_user_roles($this->context, $USER->id) as $role) {
-                if (strpos($theme->settings->listuserrole, $role->shortname)) {
-                    $allowedtosee = true;
-                }
-            }
 
             if (is_role_switched($course->id)) {
                 $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
                 if (strpos($theme->settings->listuserrole, $roleswitched->shortname)) {
                     $allowedtosee = true;
+                }
+            } else {
+                if (is_siteadmin($USER)) {
+                    $allowedtosee = true;
                 } else {
-                    $allowedtosee = false;
+                    foreach (get_user_roles($this->context, $USER->id) as $role) {
+                        if (strpos($theme->settings->listuserrole, $role->shortname)) {
+                            $allowedtosee = true;
+                        }
+                    }
                 }
             }
 
-            if (!$allowedtosee && !is_siteadmin($USER)) {
+            if (!$allowedtosee) {
                 $rootnode->children->remove('participants');
             }
         }
