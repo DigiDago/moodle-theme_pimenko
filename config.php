@@ -92,6 +92,12 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
+    'incourse' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+        'options' => array('langmenu' => true),
+    ),
     // Standard layout with blocks.
     'standard' => array(
         'file' => 'columns2.php',

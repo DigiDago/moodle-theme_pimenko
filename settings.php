@@ -152,6 +152,24 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Show or not navigation in mod in course.
+    $name = 'theme_pimenko/showactivitynavigation';
+    $title = get_string(
+        'showactivitynavigation',
+        'theme_pimenko'
+    );
+    $description = get_string(
+        'showactivitynavigation_desc',
+        'theme_pimenko'
+    );
+    $setting = new admin_setting_configcheckbox(
+        $name,
+        $title,
+        $description,
+        true
+    );
+    $page->add($setting);
+
     // Show or not participants node in course.
     $name = 'theme_pimenko/showparticipantscourse';
     $title = get_string(
