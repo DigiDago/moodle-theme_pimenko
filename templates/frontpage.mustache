@@ -29,7 +29,6 @@
     * hasblocks - true if there are blocks on this page
     * navdraweropen - true if the nav drawer should be open on page load
     * regionmainsettingsmenu - HTML for the region main settings menu
-    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
 
     Example context (json):
     {
@@ -45,7 +44,6 @@
         "hasblocks":true,
         "navdraweropen":true,
         "regionmainsettingsmenu": "",
-        "hasregionmainsettingsmenu": false
     }
 }}
 {{> theme_boost/head }}
@@ -135,16 +133,7 @@
                 </div>
             {{/hasfrontpageregions}}
             <div id="region-main-box" class="col-12 moodle-region">
-                {{#hasregionmainsettingsmenu}}
-                    <div id="region-main-settings-menu"
-                         class="hidden-print">
-                        <div> {{{ output.region_main_settings_menu }}} </div>
-                    </div>
-                {{/hasregionmainsettingsmenu}}
                 <section id="region-main" class="container-fluid">
-                    {{#hasregionmainsettingsmenu}}
-                        <div class="region_main_settings_menu_proxy"></div>
-                    {{/hasregionmainsettingsmenu}}
                     {{{ output.course_content_header }}}
                     {{{ output.main_content }}}
                     {{{ output.activity_navigation }}}

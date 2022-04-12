@@ -238,6 +238,10 @@ $string['moodleactivitycompletion_desc'] = "Dans les activités ou les ressource
 $string['showparticipantscourse']      = "Afficher la rubrique participant dans le menu secondaire visible dans les cours";
 $string['showparticipantscourse_desc'] = "Cette option permet d'afficher ou de masquer la rubrique 'Participants' qui s’affiche par défaut dans le menu secondaire de la page d'accueil d'un cours.";
 
+// Show or not navigation in mod in course.
+$string['showactivitynavigation']      = "Afficher la navigation précédent/suivant pour les mods";
+$string['showactivitynavigation_desc'] = "Cette option permet d'afficher ou de masquer la navigation précédent/suivant dans les activités";
+
 $string['totop'] = 'Aller en haut';
 $string['listuserrole'] = 'Liste des rôles';
 $string['listuserrole_desc'] = 'Si l\'option showparticipantscourse est activé définisser les utilisateurs pouvant voir l\'onglet participants';
