@@ -70,7 +70,12 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return bool
      */
     public function show_activity_navigation(): bool {
-        return true;
+        $themeconfig = theme_config::load('pimenko');
+        $showactivitynav = false;
+        if ($themeconfig->settings->showactivitynavigation) {
+            $showactivitynav = true;
+        }
+        return $showactivitynav;
     }
 
     /**

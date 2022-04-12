@@ -97,7 +97,6 @@ $templatecontext = [
         'usermenu' => $primarymenu['user'],
         'langmenu' => $primarymenu['lang'],
         'regionmainsettingsmenu' => $regionmainsettingsmenu,
-        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
         'hasfrontpageregions' => !empty($hasfrontpageregions),
         'iscarouselenabled' => $iscarouselenabled,
         'primarymoremenu' => $primarymenu['moremenu'],
