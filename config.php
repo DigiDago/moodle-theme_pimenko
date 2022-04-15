@@ -82,6 +82,10 @@ $THEME->csspostprocess = 'theme_pimenko_process_css';
 
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 
+$THEME->activityheaderconfig = [
+    'notitle' => true
+];
+
 // Define here layout we override.
 // Login page.
 $THEME->layouts = [
@@ -138,3 +142,5 @@ $THEME->layouts = [
 
 $THEME->haseditswitch = true;
 $THEME->usescourseindex = true;
+
+$THEME->extrascsscallback = 'theme_pimenko_get_extra_scss';

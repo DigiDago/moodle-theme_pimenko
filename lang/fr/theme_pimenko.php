@@ -243,5 +243,12 @@ $string['showactivitynavigation']      = "Afficher la navigation précédent/sui
 $string['showactivitynavigation_desc'] = "Cette option permet d'afficher ou de masquer la navigation précédent/suivant dans les activités";
 
 $string['totop'] = 'Aller en haut';
+
 $string['listuserrole'] = 'Liste des rôles';
 $string['listuserrole_desc'] = 'Si l\'option showparticipantscourse est activé définisser les utilisateurs pouvant voir l\'onglet participants';
+
+$string['unaddableblocks'] = 'Blocs inutiles';
+$string['unaddableblocks_desc'] = 'Les blocs spécifiés ne sont pas nécessaires lors de l\'utilisation de ce thème et ne seront pas listés dans le menu \'Ajouter un bloc\'.';
+
+$string['backgroundimage'] = 'Image de fond';
+$string['backgroundimage_desc'] = 'L\'image à afficher en arrière-plan du site.';

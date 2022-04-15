@@ -34,6 +34,7 @@
         ]
     }
 }}
+
 <div class="card dashboard-card" role="listitem"
      data-region="course-content"
      data-course-id="{{{id}}}">
@@ -70,9 +71,11 @@
                     </div>
                 {{/visible}}
             </div>
-            {{$menu}}{{/menu}}
         </div>
     </div>
-    {{$progress}}{{/progress}}
-    {{$other}}{{/other}}
+    <div class="d-flex align-items-start">
+        {{$progress}}{{/progress}}
+        {{$menu}}{{/menu}}
+        {{$other}}{{/other}}
+    </div>
 </div>

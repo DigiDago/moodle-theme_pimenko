@@ -68,6 +68,28 @@ function theme_pimenko_get_main_scss_content($theme): string {
 }
 
 /**
+ * Inject additional SCSS.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return string
+ */
+function theme_pimenko_get_extra_scss($theme) {
+    $content = '';
+    $imageurl = $theme->setting_file_url('backgroundimage', 'backgroundimage');
+
+    // Sets the background image, and its settings.
+    if (!empty($imageurl)) {
+        $content .= '@media (min-width: 768px) {';
+        $content .= 'body { ';
+        $content .= "background-image: url('$imageurl'); background-size: cover;";
+        $content .= ' } }';
+    }
+
+    // Always return the background image with the scss when we have it.
+    return !empty($theme->settings->scss) ? $theme->settings->scss . ' ' . $content : $content;
+}
+
+/**
  * Parses CSS before it is cached.
  * This function can make alterations and replace patterns within the CSS.
  *
@@ -249,6 +271,7 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
             case 'favicon':
             case 'sitelogo':
             case 'pimenkoimages':
+            case 'backgroundimage':
             case strstr($filearea, 'slideimage'):
                 return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
             default:

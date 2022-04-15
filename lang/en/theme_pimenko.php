@@ -247,3 +247,9 @@ $string['totop'] = 'Go to top';
 
 $string['listuserrole'] = 'List of user role';
 $string['listuserrole_desc'] = 'If the option showparticipantscourse is activated define the users who can see the participants tab';
+
+$string['unaddableblocks'] = 'Unneeded blocks';
+$string['unaddableblocks_desc'] = 'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
+
+$string['backgroundimage'] = 'Background image';
+$string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';

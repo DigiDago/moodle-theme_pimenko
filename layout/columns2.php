@@ -63,7 +63,7 @@ if (!$courseindex) {
 }
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()  && !$PAGE->has_secondary_navigation();
 
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
@@ -83,6 +83,9 @@ if ($PAGE->has_secondary_navigation()) {
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
 }
 
+$header = $PAGE->activityheader;
+$headercontent = $header->export_for_template($renderer);
+
 $templatecontext = [
     'sitename' => format_string($SITE->shortname,
         true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -91,6 +94,7 @@ $templatecontext = [
     'hasblocks' => $hasblocks,
     'bodyattributes' => $bodyattributes,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'primarymoremenu' => $primarymenu['moremenu'],
     'secondarymoremenu' => $secondarynavigation ?: false,
     'blockdraweropen' => $blockdraweropen,
@@ -100,6 +104,7 @@ $templatecontext = [
     'courseindexopen' => $courseindexopen,
     'courseindex' => $courseindex,
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
+    'headercontent' => $headercontent,
     'forceblockdraweropen' => $forceblockdraweropen,
     'addblockbutton' => $addblockbutton
 ];
