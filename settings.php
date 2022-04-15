@@ -134,6 +134,14 @@ if ($ADMIN->fulltree) {
         'Verdana'
     );
 
+    // Background image setting.
+    $name = 'theme_pimenko/backgroundimage';
+    $title = get_string('backgroundimage', 'theme_pimenko');
+    $description = get_string('backgroundimage_desc', 'theme_pimenko');
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'backgroundimage');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
     // Must add the page after definiting all the settings!
     $settings->add($page);
 
@@ -150,6 +158,14 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configtextarea('theme_pimenko/scss', get_string('rawscss', 'theme_pimenko'),
         get_string('rawscss_desc', 'theme_pimenko'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Unaddable blocks.
+    // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
+    // Section links.
+    $default = 'navigation,settings,course_list,section_links';
+    $setting = new admin_setting_configtext('theme_pimenko/unaddableblocks',
+        get_string('unaddableblocks', 'theme_pimenko'), get_string('unaddableblocks_desc', 'theme_pimenko'), $default, PARAM_TEXT);
     $page->add($setting);
 
     // Show or not navigation in mod in course.

@@ -26,16 +26,6 @@ body {
 
     #page {
         margin-top: 0;
-
-        &.drawers {
-            padding-left: 0;
-            padding-right: 0;
-
-            #topofscroll {
-                padding-left: 3rem;
-                padding-right: 3rem;
-            }
-        }
     }
 
     a.see-all-link {
@@ -61,7 +51,6 @@ body {
     .btn-close,
     #goto-top-link .btn,
     .popover-region-seeall-text,
-    .btn-outline-secondary,
     .btn-secondary {
         background-color: unquote('brandcolorbutton');
         border-color: unquote('brandcolorbutton');
@@ -104,12 +93,6 @@ body {
                 display: inline-block !important;
                 padding: 1rem;
                 width: 100%;
-            }
-
-            .card-text {
-                padding-bottom: 1rem;
-                padding-left: 1rem;
-                padding-right: 1rem;
             }
         }
     }

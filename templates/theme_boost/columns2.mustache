@@ -130,8 +130,19 @@
             {{/secondarymoremenu}}
             <div id="page-content" class="pb-3 d-print-block">
                 <div id="region-main-box">
+                    {{#hasregionmainsettingsmenu}}
+                        <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
+                            <div> {{{ regionmainsettingsmenu }}} </div>
+                        </div>
+                    {{/hasregionmainsettingsmenu}}
                     <section id="region-main" aria-label="{{#str}}content{{/str}}">
+                        {{#hasregionmainsettingsmenu}}
+                            <div class="region_main_settings_menu_proxy"></div>
+                        {{/hasregionmainsettingsmenu}}
                         {{{ output.course_content_header }}}
+                        {{#headercontent}}
+                            {{> core/activity_header }}
+                        {{/headercontent}}
                         {{{ output.main_content }}}
                         {{#output.show_activity_navigation}}
                             {{{ output.activity_navigation }}}
