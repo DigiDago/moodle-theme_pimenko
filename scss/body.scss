@@ -100,6 +100,10 @@ body {
     .block_html {
         background: none;
     }
+
+    #page.drawers {
+        padding: 0;
+    }
 }
 
 body.scrolled #goto-top-link {
