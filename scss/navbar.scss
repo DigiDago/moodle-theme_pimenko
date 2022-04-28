@@ -24,9 +24,6 @@
 nav.navbar.pimenko-navbar,
 nav.navbar.pimenko-navbar.fixed-top {
     background-color: unquote('navbarcolor') !important;
-    height: 65px;
-    line-height: 65px;
-    max-height: 65px;
     color: unquote('navbartextcolor');
 
     .navbar-nav {
@@ -42,11 +39,11 @@ nav.navbar.pimenko-navbar.fixed-top {
     .navbar-brand {
         padding-bottom: 0;
         padding-top: 0;
-    }
+        display: flex;
 
-    .logo {
-        img {
-            max-height: 50px;
+        .logo,
+        .site-name {
+            margin: auto;
         }
     }
 
@@ -137,36 +134,20 @@ nav.navbar.pimenko-navbar.fixed-top {
 }
 
 .primary-navigation {
+
     .moremenu .nav-link {
+        border-bottom: solid 3px;
+        border-color: transparent;
 
         &:hover,
         &:focus {
             background: none;
         }
-    }
 
-    .moremenu.navigation {
-        height: 100%;
-
-        .nav.more-nav.navbar-nav {
-            height: 100%;
-
-            .nav-item {
-                height: 100%;
-
-                .nav-link {
-                    border-bottom: solid 3px;
-                    border-color: transparent;
-                    height: 100%;
-
-                    &.active {
-                        border-bottom-color: unquote('darkennavcolor') !important;
-                    }
-                }
-            }
+        &.active {
+            border-bottom-color: unquote('darkennavcolor') !important;
         }
     }
-
 }
 
 .moremenu .nav-link.active {
