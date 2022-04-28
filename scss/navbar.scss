@@ -24,7 +24,7 @@
 nav.navbar.pimenko-navbar,
 nav.navbar.pimenko-navbar.fixed-top {
     background-color: unquote('navbarcolor') !important;
-    height: 100%;
+    height: 65px;
     line-height: 65px;
     max-height: 65px;
     color: unquote('navbartextcolor');
@@ -138,14 +138,32 @@ nav.navbar.pimenko-navbar.fixed-top {
 
 .primary-navigation {
     .moremenu .nav-link {
+
         &:hover,
         &:focus {
             background: none;
         }
+    }
 
-        &.active {
-            border: none;
-            color: unquote('darkennavcolor') !important;
+    .moremenu.navigation {
+        height: 100%;
+
+        .nav.more-nav.navbar-nav {
+            height: 100%;
+
+            .nav-item {
+                height: 100%;
+
+                .nav-link {
+                    border-bottom: solid 3px;
+                    border-color: transparent;
+                    height: 100%;
+
+                    &.active {
+                        border-bottom-color: unquote('darkennavcolor') !important;
+                    }
+                }
+            }
         }
     }
 

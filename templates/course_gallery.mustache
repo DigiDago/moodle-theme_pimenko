@@ -1,0 +1,91 @@
+<div id="course-gallery">
+    {{# courses }}
+        <div id="course-gallery-{{ id }}" class="card course-gallery" style="display: {{ display }}">
+            <div class="img-container">
+                <a href="{{ url }}">
+                    <div class="img-course" style="background-image : url('{{ urlimg }}')" alt=""></div>
+                </a>
+            </div>
+
+            <div class="card-block">
+                <h4 class="card-title">
+                    <a href="{{ url }}">{{{ name }}}</a>
+                </h4>
+                <p class="card-text">
+                    <span class="course-category"><a href="{{{ rootpath }}}/course/index.php?categoryid={{ categoryid }}
+                        ">{{{ category }}}</a></span>
+                </p>
+                <div class="card-text">
+                    <div class="course-summary">{{{ summary }}}</div>
+                </div>
+                <div class="card-text">
+                    <div class="course-enrolments">
+                        {{#enroledcount}}
+                            <i class="icon fa fa-user fa-fw"></i>{{ enroledcount }}
+                        {{/enroledcount}}
+                    </div>
+                </div>
+                <div class="card-text custom-fields">
+                    {{# customfields}}
+                        <span>{{{customfield}}}</span><br>
+                    {{/customfields}}
+                </div>
+            </div>
+        </div>
+    {{/courses}}
+    {{#loadmore}}
+        <div class="buttons">
+            <button class="btn btn-lg btn-secondary" id="load-more">Charger plus</button>
+        </div>
+    {{/loadmore}}
+</div>
+
+<script src="{{{ rootpath }}}/theme/pimenko/javascript/geopattern/js/geopattern.min.js"></script>
+{{#js}}
+    (function() {
+    // Generate pictures for the courses without picture
+    var generatePictures = function(courseGallery) {
+    for(var i in courseGallery) {
+    var id = courseGallery.item(i).id;
+    var img = courseGallery.item(i).getElementsByClassName('img-course').item(0);
+    if(img.style['background-image'] == 'url("")') {
+    var pattern = GeoPattern.generate(id);
+    img.style['background-image'] = pattern.toDataUrl();
+    }
+    }
+    }
+
+    var courses = document.getElementsByClassName('course-gallery')
+    var nbCourseMore = 1;
+    var i = 0;
+
+    while(i < courses.length) {
+    if (nbCourseMore <= 12) {
+    courses.item(parseInt(i)).style.display = 'block';
+    if (parseInt(i) === courses.length - 1) {
+    $('#load-more').hide();
+    }
+    }
+    nbCourseMore++;
+    i++;
+    }
+
+    var courseGallery = document.getElementsByClassName('course-gallery');
+    // Generate when the document is loaded
+    if ( courseGallery.length > 0 ) {
+    generatePictures(courseGallery);
+    }
+
+    // And when the gallery changes
+    var gallery = document.getElementById('course-gallery').parentElement;
+    var config = { attributes: false, childList: true, subtree: true };
+    var galleryChange = function(mutationsList, observer) {
+    var courseGallery = document.getElementsByClassName('course-gallery');
+    if ( courseGallery.length > 0 ) {
+    generatePictures(courseGallery);
+    }
+    }
+    var observer = new MutationObserver(galleryChange);
+    observer.observe(gallery, config);
+    })();
+{{/js}}

@@ -19,6 +19,11 @@
 }}
 <nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex pimenko-navbar" aria-label="{{#str}}sitemenubar, admin{{/str}}">
 
+    <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-primary">
+        <span class="navbar-toggler-icon"></span>
+        <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
+    </button>
+
     <a href="{{{ config.wwwroot }}}" class="navbar-brand aabtn {{# output.sitelogo }}has-logo{{/ output.sitelogo }}
         {{^ output.sitelogo }}
                 d-none d-sm-inline
@@ -61,3 +66,5 @@
         {{{ output.edit_switch }}}
     </div>
 </nav>
+
+{{> theme_boost/primary-drawer-mobile }}
