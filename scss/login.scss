@@ -24,14 +24,15 @@
 /* Login Page */
 /* Background Image */
 
-#page-login-index {
+#page-login-index,
+#page-login-forgot_password {
     background: unquote('loginbgimage');
     background-size: unquote('loginbgstyle');
 }
 
 #page-login-index,
-#page-login-signup {
-    height: calc(100% - 65px);
+#page-login-signup,
+#page-login-forgot_password {
 
     .textbox {
         p {
@@ -44,7 +45,7 @@
     }
 
     #page-wrapper {
-        padding-top: 50px;
+        padding-top: 65px;
     }
 
     .outercont {
@@ -55,6 +56,7 @@
         /* Add a top padding to avoid content overlay */
         left: 50%;
         margin: auto 0;
+        padding: 15px;
         position: relative;
         transform: translateX(-50%);
     }
@@ -101,5 +103,17 @@
 
     #page-login-index #page-footer {
         background-color: unquote('loginbgopacity3');
+    }
+}
+
+#page-login-forgot_password {
+    #region-main {
+        max-width: 50%;
+        margin: auto;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.5rem;
+        padding: 15px;
     }
 }

@@ -89,8 +89,26 @@ $THEME->activityheaderconfig = [
 // Define here layout we override.
 // Login page.
 $THEME->layouts = [
+    // Most backwards compatible layout without the blocks.
+    'base' => array(
+        'file' => 'columns2.php',
+        'regions' => array(),
+    ),
+    // Standard layout with blocks.
+    'standard' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+    ),
     // Main course page.
     'course' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+        'options' => array('langmenu' => true),
+    ),
+    // Main course page.
+    'coursecategory' => array(
         'file' => 'columns2.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
@@ -102,17 +120,12 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
-    // Standard layout with blocks.
-    'standard' => array(
-        'file' => 'columns2.php',
-        'regions' => array('side-pre'),
+    // The site home page.
+    'frontpage' => [
+        'file' => 'frontpage.php',
         'defaultregion' => 'side-pre',
-    ),
-    // Most backwards compatible layout without the blocks.
-    'base' => array(
-        'file' => 'columns2.php',
-        'regions' => array(),
-    ),
+        'regions' => theme_pimenko_regions(),
+    ],
     'login' => array(
         'file' => 'login.php',
         'regions' => array(),
@@ -124,12 +137,6 @@ $THEME->layouts = [
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
-    // The site home page.
-    'frontpage' => [
-        'file' => 'frontpage.php',
-        'defaultregion' => 'side-pre',
-        'regions' => theme_pimenko_regions(),
-    ],
     'pimenkoProfile' => array(
         'file' => 'columns2.php',
         'regions' => [

@@ -14,12 +14,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['jquery', 'core/str', 'theme_boost/bootstrap/tooltip'], function($, str, tooltip) {
+define(['jquery', 'core/str', 'theme_boost/bootstrap/tooltip'], function($, str) {
     let completioncheck = $('#completioncheck');
     let modulename = completioncheck.attr("data-modulename");
     let tooltipAjxY = str.get_string('completion-tooltip-manual-y', 'theme_pimenko', modulename);
@@ -27,41 +26,19 @@ define(['jquery', 'core/str', 'theme_boost/bootstrap/tooltip'], function($, str,
 
     let checkbox = document.getElementsByTagName("input");
 
-    let handle_success = function(res) {
-        if (res !== 'OK') {
-            alert('An error occurred when attempting to save your tick mark.\n\n(' + o.responseText + '.)'); // TODO: localize
-
-        } else {
-
+    let handle_success = function(res, o) {
+        if (o !== 'success') {
+            // TODO: localize
+            alert('An error occurred when attempting to save your tick mark.\n\n(' + o.responseText + '.)');
         }
     };
-    let handle_failure = function(id, o, args) {
+    let handle_failure = function(res, o) {
         alert('Failed: An error occurred when attempting to save your tick mark.\n\n(' + o.responseText + '.)');
     };
 
     let toggle = function(e) {
         e.preventDefault();
         let form = e.target;
-        let cmid = 0;
-        let completionstate = 0;
-        let state = null;
-        let image = null;
-        let modulename = null;
-        let inputs = Y.Node.getDOMNode(form).getElementsByTagName('input');
-        for (let i = 0; i < inputs.length; i++) {
-            switch (inputs[i].name) {
-                case 'data-id':
-                    cmid = inputs[i].value;
-                    break;
-                case 'completionstate':
-                    completionstate = inputs[i].value;
-                    state = $(inputs[i]);
-                    break;
-                case 'modulename':
-                    modulename = $(inputs[i]);
-                    break;
-            }
-        }
         $.post({
             url: M.cfg.wwwroot + '/course/togglecompletion.php',
             data: 'id=' + form.getAttribute("data-id") +

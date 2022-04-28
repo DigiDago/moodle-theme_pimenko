@@ -1,4 +1,5 @@
-// This file is part of the Pimenko theme for Moodle
+<?php
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,14 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Pimenko style files.
+ * Plugin administration pages are defined here.
+ *
  * @package    theme_pimenko
- * @copyright  Pimenko 2020
- * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
+ * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-#page-wrapper {
-    // This value need to be header height.
-    margin-top: 0;
-}
+// We defined the web service functions to install.
+$functions = [
+    'search_courses' => [
+        'classname' => 'theme_pimenko\external\search_courses',
+        'description' => 'Pimenko : Search courses by (name, module, block, tag)',
+        'type' => 'read',
+        'ajax' => true,
+        'loginrequired' => false,
+        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+    ]
+];

@@ -25,7 +25,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
+user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
+
 require_once($CFG->libdir . '/behat/lib.php');
+require_once($CFG->dirroot . '/course/lib.php');
 
 theme_pimenko_redirect_to_profile_page($PAGE->bodyid);
 
@@ -34,14 +38,14 @@ $extraclasses = [];
 $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
 $PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
+if (theme_config::load('pimenko')->settings->enablecatalog) {
+    $PAGE->requires->js_call_amd('theme_pimenko/catalog', 'init');
+}
+
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 
 // Handle blockDrawer.
 $addblockbutton = $OUTPUT->addblockbutton();
-
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
-user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 
 $blockshtml = $OUTPUT->blocks('side-pre');
 
@@ -57,13 +61,15 @@ if (isloggedin()) {
     $courseindexopen = false;
     $blockdraweropen = false;
 }
+
 $courseindex = core_course_drawer();
+
 if (!$courseindex) {
     $courseindexopen = false;
 }
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()  && !$PAGE->has_secondary_navigation();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
 
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;

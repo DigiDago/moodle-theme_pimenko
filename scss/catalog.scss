@@ -21,7 +21,57 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+#page-course-index,
 #page-course-index-category {
+
+    #course-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -15px;
+        margin-right: -15px;
+
+        .course-gallery {
+            margin: 15px;
+            padding: 0;
+            width: 350px;
+
+            .img-course {
+                background-position: center;
+                background-size: cover;
+                height: 175px;
+                width: 100%;
+            }
+
+            .card-block {
+                margin: 1rem 1rem 3rem;
+                max-height: 350px;
+                overflow: hidden;
+                padding: 0.5rem;
+                text-overflow: ellipsis;
+
+                .card-title {
+                    h4 {
+                        font-size: 1.3rem;
+                    }
+                }
+
+                .course-category {
+                    font-size: 1rem;
+                    opacity: 0.5;
+                }
+
+                .course-summary {
+                    font-size: 1rem;
+                    opacity: 0.75;
+                }
+            }
+        }
+
+        .buttons {
+            flex: 100%;
+        }
+    }
+
     .buttons {
         margin-top: 10px;
     }
@@ -60,4 +110,96 @@
         background: none;
         padding-left: 21px;
     }
+
+    .tertiary-navigation {
+        label {
+            display: block;
+            margin-bottom: 0;
+            opacity: 0.75;
+        }
+
+        .urlselect,
+        .simplesearchform {
+            &:not(.simplesearchform)::before {
+                border-color: transparent transparent #d1d1d1;
+                border-style: solid;
+                border-width: 0 0 8px 8px;
+                bottom: 5px;
+                content: "";
+                height: 0;
+                pointer-events: none;
+                position: absolute;
+                right: 15px;
+                width: 0;
+                z-index: 1;
+            }
+
+            select,
+            input {
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                background-color: transparent;
+                border-left: 0;
+                border-radius: 0;
+                border-right: 0;
+                border-top: 0;
+                font-size: 1.25rem;
+                line-height: 1.5;
+                padding: .5rem 0;
+                resize: none;
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &:not(:disabled):not([readonly]):focus ~ .form-group__bar:after,
+                &:not(:disabled):not([readonly]):focus ~ .form-group__bar:before {
+                    width: 50%;
+                }
+            }
+
+            .form-group__bar {
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                z-index: 3;
+
+                &:before {
+                    left: 50%;
+                }
+
+                &:after {
+                    right: 50%;
+                }
+
+                &:before,
+                &:after {
+                    background-color: unquote('brandcolor');
+                    bottom: 0;
+                    content: '';
+                    height: 2px;
+                    position: absolute;
+                    transition: all 350ms;
+                    transition-timing-function: ease;
+                    width: 0;
+                }
+            }
+        }
+
+        .loader {
+            display: none;
+            position: absolute;
+            right: 50%;
+
+            .circular {
+                width: 100%;
+            }
+        }
+
+        #category-search-form {
+            margin: 0;
+        }
+    }
+
 }
