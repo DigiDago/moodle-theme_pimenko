@@ -1,0 +1,182 @@
+<?php
+// This file is part of the Pimenko theme for Moodle
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Theme Pimenko settings pimenko feature.
+ *
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2020
+ * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die;
+
+$page = new admin_settingpage('theme_pimenko_pimenkofeature',
+    get_string('pimenkofeature', 'theme_pimenko'));
+
+// Activation of catalog view.
+$name        = 'theme_pimenko/enablecatalog';
+$title       = get_string(
+'enablecatalog',
+'theme_pimenko'
+);
+$description = get_string(
+'enablecatalog_desc',
+'theme_pimenko'
+);
+$setting     = new admin_setting_configcheckbox(
+$name,
+$title,
+$description,
+'0'
+);
+$page->add($setting);
+
+// Activation of titlecatalog.
+$name        = 'theme_pimenko/titlecatalog';
+$title       = get_string(
+    'titlecatalog',
+    'theme_pimenko'
+);
+$description = get_string(
+    'titlecatalog_desc',
+    'theme_pimenko'
+);
+$setting     = new admin_setting_configtext(
+    $name,
+    $title,
+    $description,
+    ''
+);
+$page->add($setting);
+
+$name        = 'theme_pimenko/showsubscriberscount';
+$title       = get_string(
+    'showsubscriberscount',
+    'theme_pimenko'
+);
+$description = get_string(
+    'showsubscriberscount_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
+// View all hidden courses.
+$name        = 'theme_pimenko/viewallhiddencourses';
+$title       = get_string(
+    'viewallhiddencourses',
+    'theme_pimenko'
+);
+$description = get_string(
+    'viewallhiddencourses_desc',
+    'theme_pimenko'
+);
+$setting     = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
+// Active or not moodle activity completion.
+$name = 'theme_pimenko/moodleactivitycompletion';
+$title = get_string(
+    'moodleactivitycompletion',
+    'theme_pimenko'
+);
+$description = get_string(
+    'moodleactivitycompletion_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
+// Show or not navigation in mod in course.
+$name = 'theme_pimenko/showactivitynavigation';
+$title = get_string(
+    'showactivitynavigation',
+    'theme_pimenko'
+);
+$description = get_string(
+    'showactivitynavigation_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    true
+);
+$page->add($setting);
+
+// Show or not participants node in course.
+$name = 'theme_pimenko/showparticipantscourse';
+$title = get_string(
+    'showparticipantscourse',
+    'theme_pimenko'
+);
+$description = get_string(
+    'showparticipantscourse_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    true
+);
+$page->add($setting);
+
+// Roles tabs for showparticipantscourse permission list.
+global $DB;
+$roles = $DB->get_records('role');
+if (!$roles) {
+    $myrolearray = ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'];
+} else {
+    foreach ($roles as $role) {
+        $myrolearray[$role->shortname] = $role->shortname;
+    }
+}
+
+// Show or not participants node in course.
+$name = 'theme_pimenko/listuserrole';
+$title = get_string(
+    'listuserrole',
+    'theme_pimenko'
+);
+$description = get_string(
+    'listuserrole_desc',
+    'theme_pimenko'
+);
+$setting =
+    new admin_setting_configmultiselect($name, $title, $description,
+        ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'], $myrolearray);
+$page->add($setting);
+
+$settings->add($page);

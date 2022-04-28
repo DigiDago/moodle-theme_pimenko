@@ -40,24 +40,6 @@ if ($ADMIN->fulltree) {
     // Each page is a tab - the first is the "General" tab.
     $page = new admin_settingpage('theme_pimenko_general', get_string('generalsettings', 'theme_pimenko'));
 
-    // Active or not moodle activity completion.
-    $name = 'theme_pimenko/moodleactivitycompletion';
-    $title = get_string(
-        'moodleactivitycompletion',
-        'theme_pimenko'
-    );
-    $description = get_string(
-        'moodleactivitycompletion_desc',
-        'theme_pimenko'
-    );
-    $setting = new admin_setting_configcheckbox(
-        $name,
-        $title,
-        $description,
-        '0'
-    );
-    $page->add($setting);
-
     // Replicate the preset setting from boost.
     $name = 'theme_pimenko/preset';
     $title = get_string('preset', 'theme_pimenko');
@@ -168,72 +150,10 @@ if ($ADMIN->fulltree) {
         get_string('unaddableblocks', 'theme_pimenko'), get_string('unaddableblocks_desc', 'theme_pimenko'), $default, PARAM_TEXT);
     $page->add($setting);
 
-    // Show or not navigation in mod in course.
-    $name = 'theme_pimenko/showactivitynavigation';
-    $title = get_string(
-        'showactivitynavigation',
-        'theme_pimenko'
-    );
-    $description = get_string(
-        'showactivitynavigation_desc',
-        'theme_pimenko'
-    );
-    $setting = new admin_setting_configcheckbox(
-        $name,
-        $title,
-        $description,
-        true
-    );
-    $page->add($setting);
-
-    // Show or not participants node in course.
-    $name = 'theme_pimenko/showparticipantscourse';
-    $title = get_string(
-        'showparticipantscourse',
-        'theme_pimenko'
-    );
-    $description = get_string(
-        'showparticipantscourse_desc',
-        'theme_pimenko'
-    );
-    $setting = new admin_setting_configcheckbox(
-        $name,
-        $title,
-        $description,
-        true
-    );
-    $page->add($setting);
-
-    // Roles tabs for showparticipantscourse permission list.
-
-    global $DB;
-    $roles = $DB->get_records('role');
-    if (!$roles) {
-        $myrolearray = ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'];
-    } else {
-        foreach ($roles as $role) {
-            $myrolearray[$role->shortname] = $role->shortname;
-        }
-    }
-
-    // Show or not participants node in course.
-    $name = 'theme_pimenko/listuserrole';
-    $title = get_string(
-        'listuserrole',
-        'theme_pimenko'
-    );
-    $description = get_string(
-        'listuserrole_desc',
-        'theme_pimenko'
-    );
-    $setting =
-        new admin_setting_configmultiselect($name, $title, $description,
-            ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'], $myrolearray);
-    $page->add($setting);
-
     $settings->add($page);
 
     // Login settings.
+    include_once(dirname(__FILE__) . '/settings/pimenkofeature.php');
     include_once(dirname(__FILE__) . '/settings/frontpage.php');
     include_once(dirname(__FILE__) . '/settings/login.php');
     include_once(dirname(__FILE__) . '/settings/navbar.php');

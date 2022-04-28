@@ -32,7 +32,7 @@ $string['choosereadme'] = 'Le thème Pimenko est un thème enfant de Boost. Il a
 // The name of our plugin.
 $string['pluginname'] = 'Pimenko';
 // The name of the second tab in the theme settings.
-$string['advancedsettings'] = 'Options avancées';
+$string['advancedsettings'] = 'Réglages avancés';
 // The brand color setting.
 $string['brandcolor'] = 'Couleur générale';
 // The brand color setting description.
@@ -48,7 +48,7 @@ $string['brandcolortextbuttondesc'] = 'Définir une couleur générale pour les 
 // Name of the settings pages.
 $string['configtitle'] = 'Options Pimenko';
 // Name of the first settings tab.
-$string['generalsettings'] = 'Options générales';
+$string['generalsettings'] = 'Réglages généraux';
 // Preset files setting.
 $string['presetfiles'] = 'Fichier de préréglages du thème';
 // Preset files help text.
@@ -252,3 +252,26 @@ $string['unaddableblocks_desc'] = 'Les blocs spécifiés ne sont pas nécessaire
 
 $string['backgroundimage'] = 'Image de fond';
 $string['backgroundimage_desc'] = 'L\'image à afficher en arrière-plan du site.';
+
+$string['pimenkofeature'] = 'Fonctionnalités Pimenko';
+
+// Catalog enabling setting.
+$string['enablecatalog']      = "Activation du catalogue";
+$string['enablecatalog_desc'] = "Activer le catalogue";
+
+$string['titlecatalog']      = "Titre du catalogue";
+$string['titlecatalog_desc'] = "Modifier le titre du catalogue";
+
+$string['allcategories']     = "Toutes les catégories";
+$string['labelcategory']     = "Filtrer par catégorie";
+$string['labelsearch']       = "Ou rechercher";
+$string['placeholdersearch'] = "Mots clés...";
+$string['search'] = "Rechercher";
+
+// Show the count of subscribers.
+$string['showsubscriberscount']     = 'Affiche le nombre d\'inscrits sur les vignettes de cours';
+$string['showsubscriberscount_desc'] = 'Permet d\'afficher le nombre d\'inscrits sur les vignettes de cours';
+$string['subscribers'] = 'inscrits';
+
+$string['viewallhiddencourses']      = "Afficher les cours cachés sur la page course/index.php pour la méthode d'inscription synopsis";
+$string['viewallhiddencourses_desc'] = "Activer/Désactiver l'affichage des cours cachés";

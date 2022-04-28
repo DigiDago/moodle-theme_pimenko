@@ -253,3 +253,26 @@ $string['unaddableblocks_desc'] = 'The blocks specified are not needed when usin
 
 $string['backgroundimage'] = 'Background image';
 $string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
+
+$string['pimenkofeature'] = 'Pimenko features';
+
+// Catalog enabling setting.
+$string['enablecatalog']      = "Enabling of the catalog";
+$string['enablecatalog_desc'] = "Enable the catalog";
+
+$string['titlecatalog']      = "Title of the catalog";
+$string['titlecatalog_desc'] = "Define catalog title";
+
+$string['allcategories']     = "All categories";
+$string['labelcategory']     = "Filter by category";
+$string['labelsearch']       = "Or search";
+$string['placeholdersearch'] = "Key words...";
+$string['search'] = "Search";
+
+// Show the count of subscribers.
+$string['showsubscriberscount']     = 'Show the count of subscribers';
+$string['showsubscriberscount_desc'] = 'Allows to show the count of subscribers on the cards of courses';
+$string['subscribers'] = 'subscribers';
+
+$string['viewallhiddencourses']      = "Show hidden courses on the 'course/index.php' page for synopsis enrol";
+$string['viewallhiddencourses_desc'] = "Enable / Disable hidden courses";
