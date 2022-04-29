@@ -143,6 +143,13 @@
                         {{#headercontent}}
                             {{> core/activity_header }}
                         {{/headercontent}}
+                        {{#overflow}}
+                            <div class="container-fluid tertiary-navigation">
+                                <div class="navitem">
+                                    {{> core/url_select}}
+                                </div>
+                            </div>
+                        {{/overflow}}
                         {{{ output.main_content }}}
                         {{#output.show_activity_navigation}}
                             {{{ output.activity_navigation }}}

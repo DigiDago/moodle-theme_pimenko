@@ -79,6 +79,7 @@ $primary = new core\navigation\output\primary($PAGE);
 $primarymenu = $primary->export_for_template($renderer);
 
 $secondarynavigation = false;
+$overflow = '';
 if ($PAGE->has_secondary_navigation()) {
     $customnav = new \theme_pimenko\output\core\navigation\views\secondary($PAGE);
     $customnav->initialise();
@@ -87,6 +88,10 @@ if ($PAGE->has_secondary_navigation()) {
         new core\navigation\output\more_menu($PAGE->secondarynav,
             'nav-tabs');
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+    if (!is_null($overflowdata)) {
+        $overflow = $overflowdata->export_for_template($OUTPUT);
+    }
 }
 
 $header = $PAGE->activityheader;
@@ -112,7 +117,8 @@ $templatecontext = [
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'headercontent' => $headercontent,
     'forceblockdraweropen' => $forceblockdraweropen,
-    'addblockbutton' => $addblockbutton
+    'addblockbutton' => $addblockbutton,
+    'overflow' => $overflow,
 ];
 
 echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);
