@@ -26,7 +26,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         categorySelect.attr("disabled", "true");
         categorySearch.attr("disabled", "true");
         $('#course-gallery').attr("style", "opacity: 0.25;");
-        $('#loader-gallery').attr("style", "display: block;");
+        $('#loader-gallery').attr("style", "display: flex;");
     };
 
     let endQuery = function(nbCourses) {
@@ -45,7 +45,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             for (let i in courses) {
                 if (courses.item(parseInt(i)).style.display === 'none') {
                     if (nbCourseMore <= 6) {
-                        courses.item(parseInt(i)).style.display = 'block';
+                        courses.item(parseInt(i)).style.display = 'flex';
                         if (parseInt(i) === courses.length - 1) {
                             $('#load-more').hide();
                         }
@@ -82,7 +82,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
                 }
 
                 if (nbCourse <= 12) {
-                    courses[i].display = "block";
+                    courses[i].display = "flex";
                 } else {
                     courses[i].display = "none";
                 }
@@ -169,7 +169,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             for (let i in courses) {
                 if (courses.item(parseInt(i)).style.display === 'none') {
                     if (nbCourseMore <= 12) {
-                        courses.item(parseInt(i)).style.display = 'block';
+                        courses.item(parseInt(i)).style.display = 'flex';
                         if (parseInt(i) === courses.length - 1) {
                             $('#load-more').hide();
                         }

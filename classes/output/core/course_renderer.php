@@ -495,7 +495,7 @@ class course_renderer extends \core_course_renderer {
         if ($theme->settings->enablecatalog) {
             $editoption = $actionbar->export_for_template($this);
             $allcateg[] = [
-                'name' => 'all',
+                'name' => get_string('allcategories', 'theme_pimenko'),
                 'value' => 'all',
                 'selected' => true
             ];

@@ -1,23 +1,55 @@
-<div id="course-gallery">
+<div id="course-gallery" class="card-deck dashboard-card-deck">
     {{# courses }}
-        <div id="course-gallery-{{ id }}" class="card course-gallery" style="display: {{ display }}">
+        <div id="course-gallery-{{ id }}" class="card course-gallery dashboard-card" style="display: {{ display }}">
             <div class="img-container">
                 <a href="{{ url }}">
                     <div class="img-course" style="background-image : url('{{ urlimg }}')" alt=""></div>
                 </a>
             </div>
-
-            <div class="card-block">
-                <h4 class="card-title">
+            <div class="card-block p-2 card-title">
+                <h4>
                     <a href="{{ url }}">{{{ name }}}</a>
                 </h4>
-                <p class="card-text">
-                    <span class="course-category"><a href="{{{ rootpath }}}/course/index.php?categoryid={{ categoryid }}
+                <div class="course-category">
+                    <div class="card-text d-flex">
+                    <span><a href="{{{ rootpath }}}/course/index.php?categoryid={{ categoryid }}
                         ">{{{ category }}}</a></span>
-                </p>
-                <div class="card-text">
-                    <div class="course-summary">{{{ summary }}}</div>
+                        {{#catalogsummarymodal}}
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary modalbutton ml-auto" data-toggle="modal" data-target="#modal-{{ id }}">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                            </button>
+                        {{/catalogsummarymodal}}
+                    </div>
                 </div>
+            </div>
+            <div class="card-block p-2 course-summary">
+                {{#catalogsummarymodal}}
+                <!-- Modal -->
+                <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{{ name }}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{{ summary }}}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/catalogsummarymodal}}
+                {{^catalogsummarymodal}}
+                    <div class=" card-text">{{{summary}}}</div>
+                {{/catalogsummarymodal}}
+            </div>
+            <div class="card-block p-2 course-data">
                 <div class="card-text">
                     <div class="course-enrolments">
                         {{#enroledcount}}
@@ -61,7 +93,7 @@
 
     while(i < courses.length) {
     if (nbCourseMore <= 12) {
-    courses.item(parseInt(i)).style.display = 'block';
+    courses.item(parseInt(i)).style.display = 'flex';
     if (parseInt(i) === courses.length - 1) {
     $('#load-more').hide();
     }

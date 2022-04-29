@@ -99,6 +99,24 @@ $setting     = new admin_setting_configcheckbox(
 );
 $page->add($setting);
 
+// Activation of titlecatalog.
+$name        = 'theme_pimenko/catalogsummarymodal';
+$title       = get_string(
+    'catalogsummarymodal',
+    'theme_pimenko'
+);
+$description = get_string(
+    'catalogsummarymodal_desc',
+    'theme_pimenko'
+);
+$setting     = new admin_setting_configtext(
+    $name,
+    $title,
+    $description,
+    ''
+);
+$page->add($setting);
+
 // Active or not moodle activity completion.
 $name = 'theme_pimenko/moodleactivitycompletion';
 $title = get_string(
