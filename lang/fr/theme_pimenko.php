@@ -275,3 +275,6 @@ $string['subscribers'] = 'inscrits';
 
 $string['viewallhiddencourses']      = "Afficher les cours cachés sur la page course/index.php pour la méthode d'inscription synopsis";
 $string['viewallhiddencourses_desc'] = "Activer/Désactiver l'affichage des cours cachés";
+
+$string['catalogsummarymodal']      = "Afficher le résumé des cours du catalogue sous forme de modal";
+$string['catalogsummarymodal_desc'] = "Permet l'affichage du résumé des cours du catalogue sous forme d'une modal";

@@ -276,3 +276,6 @@ $string['subscribers'] = 'subscribers';
 
 $string['viewallhiddencourses']      = "Show hidden courses on the 'course/index.php' page for synopsis enrol";
 $string['viewallhiddencourses_desc'] = "Enable / Disable hidden courses";
+
+$string['catalogsummarymodal']      = "";
+$string['catalogsummarymodal_desc'] = "";
