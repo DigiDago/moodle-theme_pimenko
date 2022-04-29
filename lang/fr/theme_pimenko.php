@@ -256,7 +256,9 @@ $string['backgroundimage_desc'] = 'L\'image à afficher en arrière-plan du site
 $string['pimenkofeature'] = 'Fonctionnalités Pimenko';
 
 // Catalog enabling setting.
-$string['enablecatalog']      = "Activation du catalogue";
+$string['catalogsettings'] = "Catalogue";
+$string['catalogsettings_desc'] = "Configuration de la page catalogue";
+$string['enablecatalog'] = "Activation du catalogue";
 $string['enablecatalog_desc'] = "Activer le catalogue";
 
 $string['titlecatalog']      = "Titre du catalogue";
@@ -279,3 +281,7 @@ $string['viewallhiddencourses_desc'] = "Activer/Désactiver l'affichage des cour
 
 $string['catalogsummarymodal']      = "Afficher le résumé des cours du catalogue sous forme de modal";
 $string['catalogsummarymodal_desc'] = "Permet l'affichage du résumé des cours du catalogue sous forme d'une modal";
+
+// Other feature heading.
+$string['otherfeature'] = "Autres fonctionnalités";
+$string['otherfeature_desc'] = "Configurer d'autres fonctionnalités du thème Pimenko";

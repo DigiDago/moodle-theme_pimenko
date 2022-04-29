@@ -53,7 +53,7 @@ $string['generalsettings'] = 'General settings';
 $string['presetfiles'] = 'Additional theme preset files';
 // Preset files help text.
 $string['presetfiles_desc'] =
-        'Preset files can be used to dramatically alter the appearance of the theme. See <a href=https://docs.moodle.org/dev/Boost_Presets>Boost presets</a> for information on creating and sharing your own preset files, and see the <a href=http://moodle.net/boost>Presets repository</a> for presets that others have shared.';
+    'Preset files can be used to dramatically alter the appearance of the theme. See <a href=https://docs.moodle.org/dev/Boost_Presets>Boost presets</a> for information on creating and sharing your own preset files, and see the <a href=http://moodle.net/boost>Presets repository</a> for presets that others have shared.';
 // Preset setting.
 $string['preset'] = 'Theme preset';
 // Preset help text.
@@ -66,7 +66,7 @@ $string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will
 $string['rawscsspre'] = 'Raw initial SCSS';
 // Raw initial SCSS setting help text.
 $string['rawscsspre_desc'] =
-        'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
+    'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 // We need to include a lang string for each block region.
 $string['region-side-pre'] = 'Right';
 
@@ -105,7 +105,7 @@ $string['loginbgstyle'] = 'Login background style';
 $string['loginbgstyledesc'] = 'Select the style for the uploaded image.';
 $string['loginbgopacity'] = 'Login page header, navbar, login box and footer background opacity when there is a background image';
 $string['loginbgopacitydesc'] =
-        'Login background opacity for the header, navbar, login box and footer when there is a background image.';
+    'Login background opacity for the header, navbar, login box and footer when there is a background image.';
 $string['logintextboxtop'] = 'Top text box';
 $string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
 $string['logintextboxbottom'] = 'Bottom text box';
@@ -164,8 +164,8 @@ $string['nextmod'] = 'Next Activity';
 $string['frontpage'] = 'Frontpage Block Settings';
 $string['settings:regions:frontpageblocksettingscription'] = '';
 $string['settings:regions:frontpageblocksettingscriptiondesc'] =
-        'On this page you can determine the composition of the homepage, which can be divided into 8 lines. For each line, you can determine the color and if it should be composed of one or more columns. Important : after making the changes, go to the homepage of your site to add content using blocks. You can find the homepage here : <a href= ' .
-        new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Homepage</a>.';
+    'On this page you can determine the composition of the homepage, which can be divided into 8 lines. For each line, you can determine the color and if it should be composed of one or more columns. Important : after making the changes, go to the homepage of your site to add content using blocks. You can find the homepage here : <a href= ' .
+    new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Homepage</a>.';
 $string['settings:regions:blockrow'] = 'Block Region Row {$a}';
 $string['settings:regions:blockrowdesc'] = 'Add / set layout for block region row on front page.';
 
@@ -178,7 +178,7 @@ $string['settings:regions:blockregionrowlinkcolor'] = 'Row {$a} link color';
 $string['settings:regions:blockregionrowlinkcolordesc'] = 'Add / set a link color for the block region row on front page.';
 $string['settings:regions:blockregionrowlinkhovercolor'] = 'Row {$a} link hover color';
 $string['settings:regions:blockregionrowlinkhovercolordesc'] =
-        'Add / set a link hover color for the block region row on front page.';
+    'Add / set a link hover color for the block region row on front page.';
 
 // Slide.
 $string['settings:frontslider:enablecarousel'] = 'Enable carousel';
@@ -232,51 +232,61 @@ $string['region-side-pre'] = 'Left';
 $string['entercourse'] = 'Enter';
 
 // Moodle activity completion design enabling setting.
-$string['moodleactivitycompletion']      = "Enable display of moodle activity completion";
+$string['moodleactivitycompletion'] = "Enable display of moodle activity completion";
 $string['moodleactivitycompletion_desc'] = "This option enables the default display of the activity completion used by moodle";
 
 // Show or not navigation in mod in course.
-$string['showactivitynavigation']      = "Show previous/next navigation for mods";
+$string['showactivitynavigation'] = "Show previous/next navigation for mods";
 $string['showactivitynavigation_desc'] = "This option allows you to show or hide the previous/next navigation in the activities";
 
 // Setting show participant tab or no.
-$string['showparticipantscourse']      = "Display the participant section in the secondary menu visible in the courses";
-$string['showparticipantscourse_desc'] = "This option allows you to show or hide the 'Participants' section which is displayed by default in the secondary menu of the home page of a course.";
+$string['showparticipantscourse'] = "Display the participant section in the secondary menu visible in the courses";
+$string['showparticipantscourse_desc'] =
+    "This option allows you to show or hide the 'Participants' section which is displayed by default in the secondary menu of the home page of a course.";
 
 $string['totop'] = 'Go to top';
 
 $string['listuserrole'] = 'List of user role';
-$string['listuserrole_desc'] = 'If the option showparticipantscourse is activated define the users who can see the participants tab';
+$string['listuserrole_desc'] =
+    'If the option showparticipantscourse is activated define the users who can see the participants tab';
 
 $string['unaddableblocks'] = 'Unneeded blocks';
-$string['unaddableblocks_desc'] = 'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
+$string['unaddableblocks_desc'] =
+    'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
 
 $string['backgroundimage'] = 'Background image';
-$string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
+$string['backgroundimage_desc'] =
+    'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
 
 $string['pimenkofeature'] = 'Pimenko features';
 
 // Catalog enabling setting.
-$string['enablecatalog']      = "Enabling of the catalog";
+$string['catalogsettings'] = "Catalog";
+$string['catalogsettings_desc'] = "Configuring the catalog page";
+$string['enablecatalog'] = "Enabling of the catalog";
 $string['enablecatalog_desc'] = "Enable the catalog";
 
-$string['titlecatalog']      = "Title of the catalog";
+$string['titlecatalog'] = "Title of the catalog";
 $string['titlecatalog_desc'] = "Define catalog title";
 
-$string['allcategories']     = "All categories";
-$string['labelcategory']     = "Filter by category";
-$string['labelsearch']       = "Or search";
+$string['allcategories'] = "All categories";
+$string['labelcategory'] = "Filter by category";
+$string['labelsearch'] = "Or search";
 $string['placeholdersearch'] = "Key words...";
 $string['search'] = "Search";
 $string['close'] = "Close";
 
 // Show the count of subscribers.
-$string['showsubscriberscount']     = 'Show the count of subscribers';
+$string['showsubscriberscount'] = 'Show the count of subscribers';
 $string['showsubscriberscount_desc'] = 'Allows to show the count of subscribers on the cards of courses';
 $string['subscribers'] = 'subscribers';
 
-$string['viewallhiddencourses']      = "Show hidden courses on the 'course/index.php' page for synopsis enrol";
+$string['viewallhiddencourses'] = "Show hidden courses on the 'course/index.php' page for synopsis enrol";
 $string['viewallhiddencourses_desc'] = "Enable / Disable hidden courses";
 
-$string['catalogsummarymodal']      = "Display catalog course summary as a modal";
+$string['catalogsummarymodal'] = "Display catalog course summary as a modal";
 $string['catalogsummarymodal_desc'] = "Allows the display of the summary of the courses of the catalog in the form of a modal";
+
+// Other feature heading.
+$string['otherfeature'] = "Other features";
+$string['otherfeature_desc'] = "Configuring other features of Pimenko theme";
