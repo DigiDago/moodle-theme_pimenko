@@ -28,6 +28,9 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage('theme_pimenko_pimenkofeature',
     get_string('pimenkofeature', 'theme_pimenko'));
 
+$page->add(new admin_setting_heading('catalogsettings', get_string('catalogsettings', 'theme_pimenko'),
+    get_string('catalogsettings_desc', 'theme_pimenko')));
+
 // Activation of catalog view.
 $name        = 'theme_pimenko/enablecatalog';
 $title       = get_string(
@@ -116,6 +119,9 @@ $setting     = new admin_setting_configcheckbox(
     '0'
 );
 $page->add($setting);
+
+$page->add(new admin_setting_heading('otherfeature', get_string('otherfeature', 'theme_pimenko'),
+    get_string('otherfeature_desc', 'theme_pimenko')));
 
 // Active or not moodle activity completion.
 $name = 'theme_pimenko/moodleactivitycompletion';
