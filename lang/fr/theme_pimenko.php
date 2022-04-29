@@ -267,6 +267,7 @@ $string['labelcategory']     = "Filtrer par catégorie";
 $string['labelsearch']       = "Ou rechercher";
 $string['placeholdersearch'] = "Mots clés...";
 $string['search'] = "Rechercher";
+$string['close'] = "Fermer";
 
 // Show the count of subscribers.
 $string['showsubscriberscount']     = 'Affiche le nombre d\'inscrits sur les vignettes de cours';

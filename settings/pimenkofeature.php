@@ -109,11 +109,11 @@ $description = get_string(
     'catalogsummarymodal_desc',
     'theme_pimenko'
 );
-$setting     = new admin_setting_configtext(
+$setting     = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    ''
+    '0'
 );
 $page->add($setting);
 
