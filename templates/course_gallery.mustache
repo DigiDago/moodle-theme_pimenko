@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="card-block p-2 card-title">
-                <p>
+                <p class="course_title">
                     <a href="{{ url }}">{{{ name }}}</a>
                 </p>
                 <div class="course-category">
@@ -20,11 +20,11 @@
                                 <i class="fa fa-info" aria-hidden="true"></i>
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="{{{ name }}}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">{{{ name }}}</h5>
+                                            <h5 class="modal-title">{{{ name }}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
