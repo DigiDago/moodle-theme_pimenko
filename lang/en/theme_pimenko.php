@@ -268,6 +268,7 @@ $string['labelcategory']     = "Filter by category";
 $string['labelsearch']       = "Or search";
 $string['placeholdersearch'] = "Key words...";
 $string['search'] = "Search";
+$string['close'] = "Close";
 
 // Show the count of subscribers.
 $string['showsubscriberscount']     = 'Show the count of subscribers';
@@ -277,5 +278,5 @@ $string['subscribers'] = 'subscribers';
 $string['viewallhiddencourses']      = "Show hidden courses on the 'course/index.php' page for synopsis enrol";
 $string['viewallhiddencourses_desc'] = "Enable / Disable hidden courses";
 
-$string['catalogsummarymodal']      = "";
-$string['catalogsummarymodal_desc'] = "";
+$string['catalogsummarymodal']      = "Display catalog course summary as a modal";
+$string['catalogsummarymodal_desc'] = "Allows the display of the summary of the courses of the catalog in the form of a modal";

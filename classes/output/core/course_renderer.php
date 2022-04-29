@@ -758,6 +758,8 @@ class course_renderer extends \core_course_renderer {
                 $template->loadmore = true;
             }
 
+            $template->catalogsummarymodal = $theme->settings->catalogsummarymodal;
+
             return $this->render_from_template(
                 'theme_pimenko/course_gallery',
                 $template
