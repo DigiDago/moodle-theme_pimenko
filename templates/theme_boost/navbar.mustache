@@ -34,7 +34,9 @@
                     <img src="{{output.sitelogo}}" alt="{{output.sitelogo}}">
                 </span>
         {{/ output.sitelogo }}
-        <span class="site-name d-none d-md-inline">{{{ sitename }}}</span>
+        {{^hidesitename}}
+            <span class="site-name d-none d-md-inline">{{{ sitename }}}</span>
+        {{/hidesitename}}
     </a>
 
     {{#primarymoremenu}}

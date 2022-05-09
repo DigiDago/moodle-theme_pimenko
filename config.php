@@ -107,6 +107,12 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
+    // Server administration scripts.
+    'admin' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+    ),
     // Main course page.
     'coursecategory' => array(
         'file' => 'columns2.php',

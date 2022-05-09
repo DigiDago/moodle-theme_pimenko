@@ -24,7 +24,7 @@
 
 // We defined the web service functions to install.
 $functions = [
-    'search_courses' => [
+    'theme_pimenko_search_courses' => [
         'classname' => 'theme_pimenko\external\search_courses',
         'description' => 'Pimenko : Search courses by (name, module, block, tag)',
         'type' => 'read',
