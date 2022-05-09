@@ -284,4 +284,20 @@ $string['catalogsummarymodal_desc'] = "Permet l'affichage du résumé des cours 
 
 // Other feature heading.
 $string['otherfeature'] = "Autres fonctionnalités";
-$string['otherfeature_desc'] = "Configurer d'autres fonctionnalités du thème Pimenko";
+$string['otherfeature_desc'] = "Configurez d'autres fonctionnalités du thème Pimenko";
+
+// Slider heading settings.
+$string['slidersettings'] = "Options du carousel";
+$string['slidersettings_desc'] = "Configurez le carousel pour la page d'accueil";
+
+// Front page content settings heading.
+$string['frontpagecontentsettings'] = "Options de la zone de contenu pour la page d'accueil";
+$string['frontpagecontentsettings_desc'] = "Configurez la zone de contenu pour la page d'accueil";
+
+// Card settings heading.
+$string['frontpagecardsettings'] = "Options pour les cards des cours en page d'accueil";
+$string['frontpagecardsettings_desc'] = "Configurez l'affichage des cards en page d'accueil";
+
+// Hide site name setting.
+$string['hidesitename'] = "Cacher le nom du site";
+$string['hidesitename_desc'] = "Cette option permet de cacher le nom du site.";

@@ -36,6 +36,24 @@ $setting = new admin_setting_configstoredfile($name, $title, $description, 'site
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
+// Hide site name.
+$name = 'theme_pimenko/hidesitename';
+$title = get_string(
+    'hidesitename',
+    'theme_pimenko'
+);
+$description = get_string(
+    'hidesitename_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
 // Navbar color.
 $name          = 'theme_pimenko/navbarcolor';
 $title         = get_string(

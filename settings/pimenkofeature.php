@@ -32,26 +32,26 @@ $page->add(new admin_setting_heading('catalogsettings', get_string('catalogsetti
     get_string('catalogsettings_desc', 'theme_pimenko')));
 
 // Activation of catalog view.
-$name        = 'theme_pimenko/enablecatalog';
-$title       = get_string(
-'enablecatalog',
-'theme_pimenko'
+$name = 'theme_pimenko/enablecatalog';
+$title = get_string(
+    'enablecatalog',
+    'theme_pimenko'
 );
 $description = get_string(
-'enablecatalog_desc',
-'theme_pimenko'
+    'enablecatalog_desc',
+    'theme_pimenko'
 );
-$setting     = new admin_setting_configcheckbox(
-$name,
-$title,
-$description,
-'0'
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
 );
 $page->add($setting);
 
 // Activation of titlecatalog.
-$name        = 'theme_pimenko/titlecatalog';
-$title       = get_string(
+$name = 'theme_pimenko/titlecatalog';
+$title = get_string(
     'titlecatalog',
     'theme_pimenko'
 );
@@ -59,7 +59,7 @@ $description = get_string(
     'titlecatalog_desc',
     'theme_pimenko'
 );
-$setting     = new admin_setting_configtext(
+$setting = new admin_setting_configtext(
     $name,
     $title,
     $description,
@@ -67,8 +67,8 @@ $setting     = new admin_setting_configtext(
 );
 $page->add($setting);
 
-$name        = 'theme_pimenko/showsubscriberscount';
-$title       = get_string(
+$name = 'theme_pimenko/showsubscriberscount';
+$title = get_string(
     'showsubscriberscount',
     'theme_pimenko'
 );
@@ -85,8 +85,8 @@ $setting = new admin_setting_configcheckbox(
 $page->add($setting);
 
 // View all hidden courses.
-$name        = 'theme_pimenko/viewallhiddencourses';
-$title       = get_string(
+$name = 'theme_pimenko/viewallhiddencourses';
+$title = get_string(
     'viewallhiddencourses',
     'theme_pimenko'
 );
@@ -94,7 +94,7 @@ $description = get_string(
     'viewallhiddencourses_desc',
     'theme_pimenko'
 );
-$setting     = new admin_setting_configcheckbox(
+$setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
@@ -103,8 +103,8 @@ $setting     = new admin_setting_configcheckbox(
 $page->add($setting);
 
 // Activation of titlecatalog.
-$name        = 'theme_pimenko/catalogsummarymodal';
-$title       = get_string(
+$name = 'theme_pimenko/catalogsummarymodal';
+$title = get_string(
     'catalogsummarymodal',
     'theme_pimenko'
 );
@@ -112,7 +112,7 @@ $description = get_string(
     'catalogsummarymodal_desc',
     'theme_pimenko'
 );
-$setting     = new admin_setting_configcheckbox(
+$setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,

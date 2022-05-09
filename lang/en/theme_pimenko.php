@@ -290,3 +290,19 @@ $string['catalogsummarymodal_desc'] = "Allows the display of the summary of the 
 // Other feature heading.
 $string['otherfeature'] = "Other features";
 $string['otherfeature_desc'] = "Configuring other features of Pimenko theme";
+
+// Slider heading settings.
+$string['slidersettings'] = "Options for slider";
+$string['slidersettings_desc'] = "Configure the carousel for the homepage";
+
+// Front page content settings heading.
+$string['frontpagecontentsettings'] = "Options for front page content ";
+$string['frontpagecontentsettings_desc'] = "Configure the front page content row";
+
+// Card settings heading.
+$string['frontpagecardsettings'] = "Options for course cards on the home page";
+$string['frontpagecardsettings_desc'] = "Configure the display of cards on the home page";
+
+// Hide site name setting.
+$string['hidesitename'] = "Hide site name";
+$string['hidesitename_desc'] = "This option allow to hide the site name";
