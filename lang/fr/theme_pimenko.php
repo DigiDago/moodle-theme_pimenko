@@ -301,3 +301,5 @@ $string['frontpagecardsettings_desc'] = "Configurez l'affichage des cards en pag
 // Hide site name setting.
 $string['hidesitename'] = "Cacher le nom du site";
 $string['hidesitename_desc'] = "Cette option permet de cacher le nom du site.";
+$string['cardlabelformat'] = "Formateur";
+$string['cardlabeldate'] = "Date de début";

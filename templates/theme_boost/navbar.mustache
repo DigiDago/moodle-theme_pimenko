@@ -24,15 +24,9 @@
         <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
     </button>
 
-    <a href="{{{ config.wwwroot }}}" class="navbar-brand aabtn {{# output.sitelogo }}has-logo{{/ output.sitelogo }}
-        {{^ output.sitelogo }}
-                d-none d-sm-inline
-            {{/ output.sitelogo }}
-                ">
+    <a href="{{{ config.homeurl }}}" class="navbar-brand d-none d-md-flex align-items-center m-0 mr-4 p-0 aabtn">
         {{# output.sitelogo }}
-            <span class="logo d-none d-sm-inline">
-                    <img src="{{output.sitelogo}}" alt="{{output.sitelogo}}">
-                </span>
+            <img src="{{output.sitelogo}}" class="logo mr-1" alt="{{sitename}}">
         {{/ output.sitelogo }}
         {{^hidesitename}}
             <span class="site-name d-none d-md-inline">{{{ sitename }}}</span>
