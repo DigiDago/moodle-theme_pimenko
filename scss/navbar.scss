@@ -37,9 +37,9 @@ nav.navbar.pimenko-navbar.fixed-top {
     }
 
     .navbar-brand {
+        display: flex;
         padding-bottom: 0;
         padding-top: 0;
-        display: flex;
 
         .logo,
         .site-name {
@@ -56,6 +56,11 @@ nav.navbar.pimenko-navbar.fixed-top {
         color: unquote('navbartextcolor');
     }
 
+    .editmode-switch-form label.text-primary {
+        color: unquote('navbartextcolor') !important;
+
+    }
+
     .editmode-switch-form .custom-switch .custom-control-input {
         height: 100%;
     }
@@ -67,6 +72,7 @@ nav.navbar.pimenko-navbar.fixed-top {
             color: unquote('darkennavcolor') !important;
         }
     }
+
     .dropdown-menu a,
     .popover-region-container,
     .content-item-container a,
@@ -83,16 +89,18 @@ nav.navbar.pimenko-navbar.fixed-top {
                 border-color: unquote('darkenbrandcolorbutton');
                 color: unquote('darkenbrandcolortextbutton') !important;
             }
+
             &:focus,
             &:focus-within {
                 background-color: unquote('brandcolorbutton');
                 border-color: unquote('brandcolorbutton');
                 color: unquote('brandcolortextbutton') !important;
+
                 &::before {
-                    content: "•"; color: unquote('brandcolortextbutton');
+                    color: unquote('brandcolortextbutton'); content: "•";
                     display: inline-block;
-                    position: absolute;
                     left: 10px;
+                    position: absolute;
                 }
             }
         }
@@ -105,7 +113,7 @@ nav.navbar.pimenko-navbar.fixed-top {
     .dropdown-toggle,
     .popover-region-toggle {
         &::after,
-        &::before{
+        &::before {
             display: none;
         }
     }
@@ -115,12 +123,12 @@ nav.navbar.pimenko-navbar.fixed-top {
     }
 
     .custom-switch .custom-control-label {
+        align-items: center;
+        color: unquote('navbartextcolor');
         display: flex;
         justify-content: center;
         justify-items: center;
         text-align: center;
-        align-items: center;
-        color: unquote('navbartextcolor');
 
         &::after,
         &::before {

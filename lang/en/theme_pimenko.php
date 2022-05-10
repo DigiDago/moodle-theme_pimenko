@@ -306,3 +306,5 @@ $string['frontpagecardsettings_desc'] = "Configure the display of cards on the h
 // Hide site name setting.
 $string['hidesitename'] = "Hide site name";
 $string['hidesitename_desc'] = "This option allow to hide the site name";
+$string['cardlabelformat'] = "Former";
+$string['cardlabeldate'] = "Start date";
