@@ -303,3 +303,10 @@ $string['hidesitename'] = "Cacher le nom du site";
 $string['hidesitename_desc'] = "Cette option permet de cacher le nom du site.";
 $string['cardlabelformat'] = "Formateur";
 $string['cardlabeldate'] = "Date de début";
+
+$string['contactsettings'] = "Nous contacter";
+$string['contactheading'] = "À propos";
+$string['contactus_content'] = "Pimenko est basée en France, à Lyon.<br>
+Nous sommes un acteur engagé auprès des ONG, associations, organismes de formation et dans la communauté OpenSource.<br> 
+Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous !";
+$string['contactus_button_text'] = "Nous envoyer un mail";

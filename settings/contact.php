@@ -1,3 +1,4 @@
+<?php
 // This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -14,28 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Pimenko style files.
+ * Theme Pimenko settings footer file.
+ *
  * @package    theme_pimenko
  * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-@import '../../boost/scss/moodle';
-@import 'variables';
-@import 'body';
-@import 'login';
-@import 'navbar';
-@import 'navbardrawer';
-@import 'content';
-@import 'profile';
-@import 'footer';
-@import 'completioncheck';
-@import 'catalog';
-@import 'settings';
-@import 'frontpage';
-@import 'carousel';
-@import 'coursecard';
-@import 'moodleoverride';
-@import 'admin';
-@import 'contact';
+defined('MOODLE_INTERNAL') || die;
+
+global $OUTPUT;
+
+$page = new admin_settingpage('theme_pimenko_contact', get_string('contactsettings', 'theme_pimenko'));
+$page->add(new admin_setting_heading('contactheading', get_string('contactheading', 'theme_pimenko'),
+    theme_pimenko\output\core_renderer::renderer_contactus($OUTPUT)));
+
+$settings->add($page);

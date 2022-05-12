@@ -120,6 +120,20 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Returns template of login page.
+     *
+     * @param $output
+     *
+     * @return string
+     */
+    public static function renderer_contactus($output): string {
+
+        return $output->render_from_template(
+            'theme_pimenko/contactus', []
+        );
+    }
+
+    /**
      * @return string
      */
     public function sitelogo(): string {
