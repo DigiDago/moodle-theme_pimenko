@@ -346,8 +346,6 @@ class search_courses extends core_course_external {
         $warnings = [];
 
         $context = context_course::instance(SITEID);
-
-        self::validate_context($context);
         $PAGE->set_context($context);
 
         $parameters = [
