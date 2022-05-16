@@ -310,3 +310,18 @@ $string['contactus_content'] = "Pimenko est basée en France, à Lyon.<br>
 Nous sommes un acteur engagé auprès des ONG, associations, organismes de formation et dans la communauté OpenSource.<br> 
 Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous !";
 $string['contactus_button_text'] = "Nous envoyer un mail";
+
+// Custom navbar menu.
+$string['customnavbarmenu'] = "Personnalisation du menu dans la barre de navigation";
+$string['customnavbarmenu_desc'] = "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
+$string['custommenuitemslogin'] = 'Éléments du menu personnalisé en étant authentifié';
+$string['configcustommenuitemslogin'] = "Vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
+<pre>
+Cours
+-Tous les cours|/course/
+-Recherche de cours|/course/search.php
+-###
+-FAQ|https://une-url.xyz/faq
+-Preguntas más frecuentes|https://une-url.xyz/pmf||es
+Mobile app|https://une-url.xyz/app|Téléchargez notre app
+</pre>";

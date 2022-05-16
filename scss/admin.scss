@@ -21,10 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-.pagelayout-admin {
-
-    .expandall,
-    .collapseall {
-        color: unquote(brandcolor);
-    }
+.expandall,
+.collapseall {
+    color: unquote(brandcolor);
 }

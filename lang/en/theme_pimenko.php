@@ -315,3 +315,18 @@ $string['contactus_content'] = "Pimenko is based in France, in Lyon.<br>
 We are a committed player with NGOs, associations, training organizations and in the OpenSource community.<br>
 Want a custom development? Advice tailored to your needs? Contact us !";
 $string['contactus_button_text'] = "Send us a mail";
+
+// Custom navbar menu.
+$string['customnavbarmenu'] = "Customizing the menu in the navigation bar";
+$string['customnavbarmenu_desc'] = "The following options will allow you to change the appearance of the menu in the navigation bar";
+$string['custommenuitemslogin'] = 'Custom menu items on login';
+$string['configcustommenuitemslogin'] = "A custom menu available when you're login may be configured here. Enter each menu item on a new line with format: menu text, a link URL (optional, not for a top menu item with sub-items), a tooltip title (optional) and a language code or comma-separated list of codes (optional, for displaying the line to users of the specified language only), separated by pipe characters. Lines starting with a hyphen will appear as menu items in the previous top level menu and ### makes a divider. For example:
+<pre>
+Courses
+-All courses|/course/
+-Course search|/course/search.php
+-###
+-FAQ|https://someurl.xyz/faq
+-Preguntas más frecuentes|https://someurl.xyz/pmf||es
+Mobile app|https://someurl.xyz/app|Download our app
+</pre>";
