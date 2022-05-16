@@ -40,12 +40,16 @@
     $('.settingsform .nav.nav-tabs .nav-item a').on('click', function(){
         let url = this.href;
         let anchor = url.substring(url.indexOf('#'));
-        console.log(anchor);
 
-    if ( anchor === '#theme_pimenko_contact' ) {
+        if ( anchor === '#theme_pimenko_contact' ) {
             $('.settingsform .btn.btn-primary').addClass('d-none');
         } else {
             $('.settingsform .btn.btn-primary').removeClass('d-none');
         }
+    });
+
+    $('.contactbutton').on('click', function(event){
+        event.preventDefault();
+        event.stopPropagation();
     });
 {{/js}}

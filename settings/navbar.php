@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $page = new admin_settingpage('theme_pimenko_navbar',
-        get_string('navbarsettings', 'theme_pimenko'));
+    get_string('navbarsettings', 'theme_pimenko'));
 
 // Site logo.
 $name = 'theme_pimenko/sitelogo';
@@ -55,61 +55,39 @@ $setting = new admin_setting_configcheckbox(
 $page->add($setting);
 
 // Navbar color.
-$name          = 'theme_pimenko/navbarcolor';
-$title         = get_string(
-        'navbarcolor',
-        'theme_pimenko'
+$name = 'theme_pimenko/navbarcolor';
+$title = get_string(
+    'navbarcolor',
+    'theme_pimenko'
 );
-$description   = get_string(
-        'navbarcolordesc',
-        'theme_pimenko'
+$description = get_string(
+    'navbarcolordesc',
+    'theme_pimenko'
 );
 $previewconfig = null;
-$setting       = new admin_setting_configcolourpicker(
-        $name,
-        $title,
-        $description,
-        '',
-        $previewconfig
+$setting = new admin_setting_configcolourpicker(
+    $name,
+    $title,
+    $description,
+    '',
+    $previewconfig
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Navbar text color.
 
-$name          = 'theme_pimenko/navbartextcolor';
-$title         = get_string(
-        'navbartextcolor',
-        'theme_pimenko'
-);
-$description   = get_string(
-        'navbartextcolordesc',
-        'theme_pimenko'
-);
-$previewconfig = null;
-$setting       = new admin_setting_configcolourpicker(
-        $name,
-        $title,
-        $description,
-        '',
-        $previewconfig
-);
-$setting->set_updatedcallback('theme_reset_all_caches');
-
-$page->add($setting);
-
-// Navbar hoover text color.
-$name          = 'theme_pimenko/hoovernavbarcolor';
-$title         = get_string(
-    'hoovernavbarcolor',
+$name = 'theme_pimenko/navbartextcolor';
+$title = get_string(
+    'navbartextcolor',
     'theme_pimenko'
 );
-$description   = get_string(
-    'hoovernavbarcolordesc',
+$description = get_string(
+    'navbartextcolordesc',
     'theme_pimenko'
 );
 $previewconfig = null;
-$setting       = new admin_setting_configcolourpicker(
+$setting = new admin_setting_configcolourpicker(
     $name,
     $title,
     $description,
@@ -119,5 +97,41 @@ $setting       = new admin_setting_configcolourpicker(
 $setting->set_updatedcallback('theme_reset_all_caches');
 
 $page->add($setting);
+
+// Navbar hoover text color.
+$name = 'theme_pimenko/hoovernavbarcolor';
+$title = get_string(
+    'hoovernavbarcolor',
+    'theme_pimenko'
+);
+$description = get_string(
+    'hoovernavbarcolordesc',
+    'theme_pimenko'
+);
+$previewconfig = null;
+$setting = new admin_setting_configcolourpicker(
+    $name,
+    $title,
+    $description,
+    '',
+    $previewconfig
+);
+$setting->set_updatedcallback('theme_reset_all_caches');
+
+$page->add($setting);
+
+$page->add(new admin_setting_heading('customnavbarmenu', get_string('customnavbarmenu', 'theme_pimenko'),
+    get_string('customnavbarmenu_desc', 'theme_pimenko')));
+
+$page->add(new admin_setting_configtextarea('custommenuitems', new lang_string('custommenuitems', 'admin'),
+    new lang_string('configcustommenuitems', 'admin'), '', PARAM_RAW, '50', '10'));
+
+$page->add(
+    new admin_setting_configtextarea(
+        'theme_pimenko/custommenuitemslogin',
+        new lang_string('custommenuitemslogin', 'theme_pimenko'),
+        new lang_string('configcustommenuitemslogin', 'theme_pimenko'),
+        '',
+        PARAM_RAW, '50', '10'));
 
 $settings->add($page);

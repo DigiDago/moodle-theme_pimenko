@@ -78,7 +78,7 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $PAGE->theme->removedprimarynavitems = ['home'];
 
 $renderer = $PAGE->get_renderer('core');
-$primary = new core\navigation\output\primary($PAGE);
+$primary = new theme_pimenko\output\core\navigation\primary($PAGE);
 $primarymenu = $primary->export_for_template($renderer);
 
 $secondarynavigation = false;
