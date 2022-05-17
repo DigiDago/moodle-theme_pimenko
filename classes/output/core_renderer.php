@@ -54,6 +54,20 @@ defined('MOODLE_INTERNAL') || die;
 final class core_renderer extends \theme_boost\output\core_renderer {
     private $themeconfig;
 
+    /**
+     * Returns template of login page.
+     *
+     * @param $output
+     *
+     * @return string
+     */
+    public static function renderer_contactus($output): string {
+
+        return $output->render_from_template(
+            'theme_pimenko/contactus', []
+        );
+    }
+
     /** Render a pix using different system of moodle */
     public function render_custom_pix($output, string $pixstring): string {
         // Define some needed var for ur template.
@@ -116,20 +130,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         return $output->render_from_template(
             'theme_pimenko/login', $template
-        );
-    }
-
-    /**
-     * Returns template of login page.
-     *
-     * @param $output
-     *
-     * @return string
-     */
-    public static function renderer_contactus($output): string {
-
-        return $output->render_from_template(
-            'theme_pimenko/contactus', []
         );
     }
 
@@ -608,6 +608,22 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $activitynav = new \core_course\output\activity_navigation($prevmod, $nextmod, $activitylist);
         $renderer = $this->page->get_renderer('core', 'course');
         return $renderer->render($activitynav);
+    }
+
+    /**
+     *
+     * Custom navbar primary items
+     *
+     * @return array
+     */
+    public function removedprimarynavitems(): array {
+        $theme = theme_config::load('pimenko');
+
+        if ($theme->settings->removedprimarynavitems) {
+            return explode(',', $theme->settings->removedprimarynavitems);
+        } else {
+            return [];
+        }
     }
 
     /**

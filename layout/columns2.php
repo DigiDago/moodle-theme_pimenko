@@ -75,7 +75,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
 // Remove some primary navigation items.
-$PAGE->theme->removedprimarynavitems = ['home'];
+$PAGE->theme->removedprimarynavitems = $OUTPUT->removedprimarynavitems();
 
 $renderer = $PAGE->get_renderer('core');
 $primary = new theme_pimenko\output\core\navigation\primary($PAGE);

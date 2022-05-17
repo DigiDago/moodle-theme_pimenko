@@ -123,6 +123,14 @@ $page->add($setting);
 $page->add(new admin_setting_heading('customnavbarmenu', get_string('customnavbarmenu', 'theme_pimenko'),
     get_string('customnavbarmenu_desc', 'theme_pimenko')));
 
+// Unaddable blocks.
+// Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
+// Section links.
+$default = '';
+$setting = new admin_setting_configtext('theme_pimenko/removedprimarynavitems',
+    get_string('removedprimarynavitems', 'theme_pimenko'), get_string('removedprimarynavitems_desc', 'theme_pimenko'), $default, PARAM_TEXT);
+$page->add($setting);
+
 $page->add(new admin_setting_configtextarea('custommenuitems', new lang_string('custommenuitems', 'admin'),
     new lang_string('configcustommenuitems', 'admin'), '', PARAM_RAW, '50', '10'));
 

@@ -317,6 +317,10 @@ Want a custom development? Advice tailored to your needs? Contact us !";
 $string['contactus_button_text'] = "Send us a mail";
 
 // Custom navbar menu.
+// Custom navbar menu.
+$string['removedprimarynavitems'] = "Menu tabs to delete";
+$string['removedprimarynavitems_desc'] = "You can also fill in the identifiers of the menus to be removed from the navbar. Each identifier must be separated by a ',' example:<br>
+<pre>myhome,courses,mycourses</pre>";
 $string['customnavbarmenu'] = "Customizing the menu in the navigation bar";
 $string['customnavbarmenu_desc'] = "The following options will allow you to change the appearance of the menu in the navigation bar";
 $string['custommenuitemslogin'] = 'Custom menu items on login';
