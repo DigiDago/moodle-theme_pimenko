@@ -312,6 +312,9 @@ Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? 
 $string['contactus_button_text'] = "Nous envoyer un mail";
 
 // Custom navbar menu.
+$string['removedprimarynavitems'] = "Onglets du menu à supprimer";
+$string['removedprimarynavitems_desc'] = "Vous pouvez renseigner aussi l'identifiants des menus à supprimer de la navbar. Chaque identifiants doit être séparé par une ',' exemple :<br>
+<pre>myhome,courses,mycourses</pre>";
 $string['customnavbarmenu'] = "Personnalisation du menu dans la barre de navigation";
 $string['customnavbarmenu_desc'] = "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
 $string['custommenuitemslogin'] = 'Éléments du menu personnalisé en étant authentifié';

@@ -65,6 +65,10 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $hasfrontpageregions = $OUTPUT->get_block_regions();
 $iscarouselenabled = $OUTPUT->is_carousel_enabled();
 
+// Remove some primary navigation items.
+$PAGE->theme->removedprimarynavitems = $OUTPUT->removedprimarynavitems();
+
+
 $renderer = $PAGE->get_renderer('core');
 $primary = new theme_pimenko\output\core\navigation\primary($PAGE);
 $primarymenu = $primary->export_for_template($renderer);
