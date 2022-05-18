@@ -27,27 +27,21 @@ defined('MOODLE_INTERNAL') || die;
 
 // Frontpage Blocks.
 $page = new admin_settingpage(
-        'theme_pimenko_regions_settings',
-        get_string(
-                'frontpage',
-                'theme_pimenko'
-        ),
-        'theme/pimenko:configure'
-);
-$setting = new theme_pimenko_simple_theme_settings(
-        $page,
-        'theme_pimenko',
-        'settings:frontcoursecard:'
+    'theme_pimenko_regions_settings',
+    get_string(
+        'frontpage',
+        'theme_pimenko'
+    ),
+    'theme/pimenko:configure'
 );
 
-$setting->add_checkbox('showcustomfields');
-$setting->add_checkbox('showcontacts');
-$setting->add_checkbox('showstartdate');
+$page->add(new admin_setting_heading('slidersettings', get_string('slidersettings', 'theme_pimenko'),
+    get_string('slidersettings_desc', 'theme_pimenko')));
 
 $setting = new theme_pimenko_simple_theme_settings(
-        $page,
-        'theme_pimenko',
-        'settings:frontslider:'
+    $page,
+    'theme_pimenko',
+    'settings:frontslider:'
 );
 
 $setting->add_checkbox('enablecarousel');
@@ -57,9 +51,9 @@ for ($i = 1; $i <= 11; $i++) {
     $range[$i] = $i;
 }
 $setting->add_select(
-        'slideimagenr',
-        1,
-        $range
+    'slideimagenr',
+    1,
+    $range
 );
 $config = get_config('theme_pimenko');
 $imagenr = 0;
@@ -68,73 +62,90 @@ if (!empty($config->slideimagenr)) {
 }
 for ($i = 1; $i <= $imagenr; $i++) {
     $setting->add_files(
-            'slideimage',
-            $i
+        'slideimage',
+        $i
     );
     $setting->add_textareas(
-            'slidecaption',
-            $i
+        'slidecaption',
+        $i
     );
 }
 
+$page->add(new admin_setting_heading('frontpagecontentsettings', get_string('frontpagecontentsettings', 'theme_pimenko'),
+    get_string('frontpagecontentsettings_desc', 'theme_pimenko')));
+
 $setting = new theme_pimenko_simple_theme_settings(
-        $page,
-        'theme_pimenko',
-        'settings:regions:'
+    $page,
+    'theme_pimenko',
+    'settings:regions:'
 );
 
 $bootstrap12 = [
-        '0-0-0-0' => 'disabled',
-        '12-0-0-0' => '1',
-        '6-6-0-0' => '6 + 6',
-        '4-4-4-0' => '4 + 4 + 4',
-        '3-3-3-3' => '3 + 3 + 3 + 3',
-        '6-3-3-0' => '6 + 3 + 3',
-        '3-3-6-0' => '3 + 3 + 6',
-        '3-6-3-0' => '3 + 6 + 3',
-        '4-8-0-0' => '4 + 8',
-        '8-4-0-0' => '8 + 4',
-        '3-9-0-0' => '3 + 9',
-        '9-3-0-0' => '9 + 3',
+    '0-0-0-0' => 'disabled',
+    '12-0-0-0' => '1',
+    '6-6-0-0' => '6 + 6',
+    '4-4-4-0' => '4 + 4 + 4',
+    '3-3-3-3' => '3 + 3 + 3 + 3',
+    '6-3-3-0' => '6 + 3 + 3',
+    '3-3-6-0' => '3 + 3 + 6',
+    '3-6-3-0' => '3 + 6 + 3',
+    '4-8-0-0' => '4 + 8',
+    '8-4-0-0' => '8 + 4',
+    '3-9-0-0' => '3 + 9',
+    '9-3-0-0' => '9 + 3',
 ];
 $bootstrap12defaults = [
-        '3-3-3-3',
-        '4-4-4-0',
-        '3-3-3-3',
-        '0-0-0-0',
-        '0-0-0-0',
-        '0-0-0-0',
-        '0-0-0-0',
-        '0-0-0-0',
-        '0-0-0-0',
-        '0-0-0-0'
+    '3-3-3-3',
+    '4-4-4-0',
+    '3-3-3-3',
+    '0-0-0-0',
+    '0-0-0-0',
+    '0-0-0-0',
+    '0-0-0-0',
+    '0-0-0-0',
+    '0-0-0-0',
+    '0-0-0-0'
 ];
 
 $setting->add_checkbox('frontpageblocksettingscription');
 
 for ($i = 1; $i <= 8; $i++) {
     $setting->add_selects(
-            'blockrow',
-            $bootstrap12defaults[$i - 1],
-            $bootstrap12,
-            $i
+        'blockrow',
+        $bootstrap12defaults[$i - 1],
+        $bootstrap12,
+        $i
     );
     $setting->add_colourpickers(
-            'blockregionrowbackgroundcolor',
-            $i
+        'blockregionrowbackgroundcolor',
+        $i
     );
     $setting->add_colourpickers(
-            'blockregionrowtextcolor',
-            $i
+        'blockregionrowtextcolor',
+        $i
     );
     $setting->add_colourpickers(
-            'blockregionrowlinkcolor',
-            $i
+        'blockregionrowlinkcolor',
+        $i
     );
     $setting->add_colourpickers(
-            'blockregionrowlinkhovercolor',
-            $i
+        'blockregionrowlinkhovercolor',
+        $i
     );
 }
+
+$page->add(new admin_setting_heading('frontpagecardsettings', get_string('frontpagecardsettings', 'theme_pimenko'),
+    get_string('frontpagecardsettings_desc', 'theme_pimenko')));
+
+$setting = new theme_pimenko_simple_theme_settings(
+    $page,
+    'theme_pimenko',
+    'settings:frontcoursecard:'
+);
+
+$setting->add_checkbox('showcustomfields');
+$setting->add_checkbox('showcontacts');
+$setting->add_checkbox('showstartdate');
+
 
 $settings->add($page);

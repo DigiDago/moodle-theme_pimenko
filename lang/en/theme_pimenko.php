@@ -290,3 +290,47 @@ $string['catalogsummarymodal_desc'] = "Allows the display of the summary of the 
 // Other feature heading.
 $string['otherfeature'] = "Other features";
 $string['otherfeature_desc'] = "Configuring other features of Pimenko theme";
+
+// Slider heading settings.
+$string['slidersettings'] = "Options for slider";
+$string['slidersettings_desc'] = "Configure the carousel for the homepage";
+
+// Front page content settings heading.
+$string['frontpagecontentsettings'] = "Options for front page content ";
+$string['frontpagecontentsettings_desc'] = "Configure the front page content row";
+
+// Card settings heading.
+$string['frontpagecardsettings'] = "Options for course cards on the home page";
+$string['frontpagecardsettings_desc'] = "Configure the display of cards on the home page";
+
+// Hide site name setting.
+$string['hidesitename'] = "Hide site name";
+$string['hidesitename_desc'] = "This option allow to hide the site name";
+$string['cardlabelformat'] = "Former";
+$string['cardlabeldate'] = "Start date";
+
+$string['contactsettings'] = "Contact us";
+$string['contactheading'] = "About us";
+$string['contactus_content'] = "Pimenko is based in France, in Lyon.<br>
+We are a committed player with NGOs, associations, training organizations and in the OpenSource community.<br>
+Want a custom development? Advice tailored to your needs? Contact us !";
+$string['contactus_button_text'] = "Send us a mail";
+
+// Custom navbar menu.
+// Custom navbar menu.
+$string['removedprimarynavitems'] = "Menu tabs to delete";
+$string['removedprimarynavitems_desc'] = "You can also fill in the identifiers of the menus to be removed from the navbar. Each identifier must be separated by a ',' example:<br>
+<pre>myhome,courses,mycourses</pre>";
+$string['customnavbarmenu'] = "Customizing the menu in the navigation bar";
+$string['customnavbarmenu_desc'] = "The following options will allow you to change the appearance of the menu in the navigation bar";
+$string['custommenuitemslogin'] = 'Custom menu items on login';
+$string['configcustommenuitemslogin'] = "A custom menu available when you're login may be configured here. Enter each menu item on a new line with format: menu text, a link URL (optional, not for a top menu item with sub-items), a tooltip title (optional) and a language code or comma-separated list of codes (optional, for displaying the line to users of the specified language only), separated by pipe characters. Lines starting with a hyphen will appear as menu items in the previous top level menu and ### makes a divider. For example:
+<pre>
+Courses
+-All courses|/course/
+-Course search|/course/search.php
+-###
+-FAQ|https://someurl.xyz/faq
+-Preguntas más frecuentes|https://someurl.xyz/pmf||es
+Mobile app|https://someurl.xyz/app|Download our app
+</pre>";

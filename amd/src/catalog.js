@@ -147,7 +147,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             };
 
             let promises = ajax.call([
-                {methodname: 'search_courses', args: searchargs}
+                {methodname: 'theme_pimenko_search_courses', args: searchargs}
             ]);
 
             startQuery();

@@ -23,34 +23,25 @@
  */
 
 namespace theme_pimenko\external;
-use coding_exception;
+
 use context_course;
 use core_course_category;
-use core_course_list_element;
-use external_api;
+use core_course_external;
 use external_files;
 use external_format_value;
 use external_function_parameters;
 use external_multiple_structure;
 use external_single_structure;
-use external_util;
 use external_value;
 use external_warnings;
 use invalid_parameter_exception;
-use moodle_exception;
-use moodle_url;
 use theme_config;
 use function clean_param;
 use function enrol_get_instances;
 use function enrol_get_my_courses;
-use function external_format_string;
-use function external_format_text;
-use function format_string;
-use function get_course_display_name_for_list;
 use function is_enrolled;
 use function is_siteadmin;
 use function require_capability;
-use const IGNORE_MISSING;
 use const PARAM_ALPHA;
 use const PARAM_BOOL;
 use const PARAM_CAPABILITY;
@@ -65,60 +56,11 @@ use const VALUE_OPTIONAL;
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir . "/externallib.php");
+require_once($CFG->dirroot . '/course/externallib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->libdir . '/filterlib.php');
 
-class search_courses extends external_api {
-
-    /**
-     * Returns description of method parameters
-     *
-     * @return external_function_parameters
-     * @since Moodle 3.0
-     */
-    public static function execute_parameters(): external_function_parameters {
-        return new external_function_parameters(
-            [
-                'criterianame' => new external_value(
-                    PARAM_ALPHA,
-                    'criteria name
-                                                        (search, modulelist (only admins), blocklist (only admins), tagid)'
-                ),
-                'criteriavalue' => new external_value(
-                    PARAM_RAW,
-                    'criteria value'
-                ),
-                'page' => new external_value(
-                    PARAM_INT,
-                    'page number (0 based)',
-                    VALUE_DEFAULT,
-                    0
-                ),
-                'perpage' => new external_value(
-                    PARAM_INT,
-                    'items per page',
-                    VALUE_DEFAULT,
-                    0
-                ),
-                'requiredcapabilities' => new external_multiple_structure(
-                    new external_value(
-                        PARAM_CAPABILITY,
-                        'Capability string used to filter courses by permission'
-                    ),
-                    'Optional list of required capabilities (used to filter the list)',
-                    VALUE_DEFAULT,
-                    []
-                ),
-                'limittoenrolled' => new external_value(
-                    PARAM_BOOL,
-                    'limit to enrolled courses',
-                    VALUE_DEFAULT,
-                    0
-                ),
-            ]
-        );
-    }
+class search_courses extends core_course_external {
 
     /**
      * Returns description of method result value
@@ -398,8 +340,13 @@ class search_courses extends external_api {
         int $perpage = 0,
         array $requiredcapabilities = [],
         int $limittoenrolled = 0): array {
-        global $USER, $DB;
+        confirm_sesskey();
+
+        global $USER, $DB, $PAGE;
         $warnings = [];
+
+        $context = context_course::instance(SITEID);
+        $PAGE->set_context($context);
 
         $parameters = [
             'criterianame' => $criterianame,
@@ -540,141 +487,52 @@ class search_courses extends external_api {
     }
 
     /**
-     * Return the course information that is public (visible by every one)
+     * Returns description of method parameters
      *
-     * @param core_course_list_element $course course in list object
-     * @param context_course $coursecontext course context object
-     *
-     * @return array the course information
-     * @since  Moodle 3.2
-     * @throws coding_exception
-     * @throws moodle_exception
+     * @return external_function_parameters
+     * @since Moodle 3.0
      */
-    private static function get_course_public_information(core_course_list_element $course, context_course $coursecontext): array {
-
-        static $categoriescache = [];
-
-        // Category information.
-        if (!array_key_exists(
-            $course->category,
-            $categoriescache
-        )) {
-            $categoriescache[$course->category] = core_course_category::get(
-                $course->category,
-                IGNORE_MISSING
-            );
-        }
-        $category = $categoriescache[$course->category];
-
-        // Retrieve course overview used files.
-        $files = [];
-        foreach ($course->get_course_overviewfiles() as $file) {
-            $fileurl = moodle_url::make_webservice_pluginfile_url(
-                $file->get_contextid(),
-                $file->get_component(),
-                $file->get_filearea(),
-                null,
-                $file->get_filepath(),
-                $file->get_filename()
-            )->out(false);
-            $files[] = [
-                'filename' => $file->get_filename(),
-                'fileurl' => $fileurl,
-                'filesize' => $file->get_filesize(),
-                'filepath' => $file->get_filepath(),
-                'mimetype' => $file->get_mimetype(),
-                'timemodified' => $file->get_timemodified(),
-            ];
-        }
-
-        // Retrieve the course contacts,
-        // we need here the users fullname since if we are not enrolled can be difficult to obtain them via other Web Services.
-        $coursecontacts = [];
-        foreach ($course->get_course_contacts() as $contact) {
-            $coursecontacts[] = [
-                'id' => $contact['user']->id,
-                'fullname' => $contact['username'],
-                'roles' => array_map(
-                    function($role) {
-                        return [
-                            'id' => $role->id,
-                            'name' => $role->displayname
-                        ];
-                    },
-                    $contact['roles']
+    public static function execute_parameters(): external_function_parameters {
+        return new external_function_parameters(
+            [
+                'criterianame' => new external_value(
+                    PARAM_ALPHA,
+                    'criteria name
+                                                        (search, modulelist (only admins), blocklist (only admins), tagid)'
                 ),
-                'role' => [
-                    'id' => $contact['role']->id,
-                    'name' => $contact['role']->displayname
-                ],
-                'rolename' => $contact['rolename']
-            ];
-        }
-
-        // Allowed enrolment methods (maybe we can self-enrol).
-        $enroltypes = [];
-        $instances = enrol_get_instances(
-            $course->id,
-            true
+                'criteriavalue' => new external_value(
+                    PARAM_RAW,
+                    'criteria value'
+                ),
+                'page' => new external_value(
+                    PARAM_INT,
+                    'page number (0 based)',
+                    VALUE_DEFAULT,
+                    0
+                ),
+                'perpage' => new external_value(
+                    PARAM_INT,
+                    'items per page',
+                    VALUE_DEFAULT,
+                    0
+                ),
+                'requiredcapabilities' => new external_multiple_structure(
+                    new external_value(
+                        PARAM_CAPABILITY,
+                        'Capability string used to filter courses by permission'
+                    ),
+                    'Optional list of required capabilities (used to filter the list)',
+                    VALUE_DEFAULT,
+                    []
+                ),
+                'limittoenrolled' => new external_value(
+                    PARAM_BOOL,
+                    'limit to enrolled courses',
+                    VALUE_DEFAULT,
+                    0
+                ),
+            ]
         );
-        foreach ($instances as $instance) {
-            $enroltypes[] = $instance->enrol;
-        }
-
-        // Format summary.
-        list(
-            $summary, $summaryformat
-            ) = external_format_text(
-            $course->summary,
-            $course->summaryformat,
-            $coursecontext->id,
-            'course',
-            'summary',
-            null
-        );
-
-        $categoryname = '';
-        if (!empty($category)) {
-            $categoryname = external_format_string(
-                $category->get_formatted_name(),
-                $category->get_context()
-            );
-        }
-
-        $displayname = get_course_display_name_for_list($course);
-        $coursereturns = [];
-        $coursereturns['id'] = $course->id;
-        $coursereturns['fullname'] = format_string(
-            $course->fullname,
-            true,
-            array('context' => context_course::instance($course->id))
-        );
-        $coursereturns['displayname'] = format_string(
-            $displayname,
-            true,
-            array('context' => context_course::instance($course->id))
-        );
-        $coursereturns['shortname'] = format_string(
-            $course->shortname,
-            true,
-            array('context' => context_course::instance($course->id))
-        );
-        $coursereturns['categoryid'] = $course->category;
-        $coursereturns['categoryname'] = $categoryname;
-        $coursereturns['summary'] = $summary;
-        $coursereturns['summaryformat'] = $summaryformat;
-        $coursereturns['summaryfiles'] = external_util::get_area_files(
-            $coursecontext->id,
-            'course',
-            'summary',
-            false,
-            false
-        );
-        $coursereturns['overviewfiles'] = $files;
-        $coursereturns['contacts'] = $coursecontacts;
-        $coursereturns['enrollmentmethods'] = $enroltypes;
-        $coursereturns['sortorder'] = $course->sortorder;
-        return $coursereturns;
     }
 
 }

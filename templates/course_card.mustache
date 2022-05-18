@@ -36,13 +36,6 @@
     }
 }}
 {{< core_course/coursecards }}
-    {{$progress}}
-        {{#hasprogress}}
-            <div class="card-footer dashboard-card-footer border-0 bg-white">
-                {{> block_myoverview/progress-bar}}
-            </div>
-        {{/hasprogress}}
-    {{/progress}}
     {{$coursename}}
         <span class="multiline">
             {{#shortentext}}50, {{{coursename}}} {{/shortentext}}
@@ -61,15 +54,15 @@
     {{/divider}}
     {{$other}}
         <div class="fixed media_tag px-3 pb-3 pt-3">
-            <span class="pull-left">
+            <span class="w-100 d-flex">
                 {{#showstartdate}}
-                    {{{startdate}}}
+                    {{#str}}cardlabeldate, theme_pimenko{{/str}} : {{{startdate}}}
                 {{/showstartdate}}
             </span>
-            <span class="pull-right">
+            <span class="w-100 d-flex">
                 {{#showcontacts}}
                     {{#contacts}}
-                        {{{name}}}
+                        {{#str}}cardlabelformat, theme_pimenko{{/str}} : {{{name}}}<br>
                     {{/contacts}}
                 {{/showcontacts}}
             </span>

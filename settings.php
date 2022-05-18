@@ -158,4 +158,5 @@ if ($ADMIN->fulltree) {
     include_once(dirname(__FILE__) . '/settings/login.php');
     include_once(dirname(__FILE__) . '/settings/navbar.php');
     include_once(dirname(__FILE__) . '/settings/footer.php');
+    include_once(dirname(__FILE__) . '/settings/contact.php');
 }

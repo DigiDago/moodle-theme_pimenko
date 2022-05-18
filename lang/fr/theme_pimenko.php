@@ -284,4 +284,47 @@ $string['catalogsummarymodal_desc'] = "Permet l'affichage du résumé des cours 
 
 // Other feature heading.
 $string['otherfeature'] = "Autres fonctionnalités";
-$string['otherfeature_desc'] = "Configurer d'autres fonctionnalités du thème Pimenko";
+$string['otherfeature_desc'] = "Configurez d'autres fonctionnalités du thème Pimenko";
+
+// Slider heading settings.
+$string['slidersettings'] = "Options du carousel";
+$string['slidersettings_desc'] = "Configurez le carousel pour la page d'accueil";
+
+// Front page content settings heading.
+$string['frontpagecontentsettings'] = "Options de la zone de contenu pour la page d'accueil";
+$string['frontpagecontentsettings_desc'] = "Configurez la zone de contenu pour la page d'accueil";
+
+// Card settings heading.
+$string['frontpagecardsettings'] = "Options pour les cards des cours en page d'accueil";
+$string['frontpagecardsettings_desc'] = "Configurez l'affichage des cards en page d'accueil";
+
+// Hide site name setting.
+$string['hidesitename'] = "Cacher le nom du site";
+$string['hidesitename_desc'] = "Cette option permet de cacher le nom du site.";
+$string['cardlabelformat'] = "Formateur";
+$string['cardlabeldate'] = "Date de début";
+
+$string['contactsettings'] = "Nous contacter";
+$string['contactheading'] = "À propos";
+$string['contactus_content'] = "Pimenko est basée en France, à Lyon.<br>
+Nous sommes un acteur engagé auprès des ONG, associations, organismes de formation et dans la communauté OpenSource.<br> 
+Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous !";
+$string['contactus_button_text'] = "Nous envoyer un mail";
+
+// Custom navbar menu.
+$string['removedprimarynavitems'] = "Onglets du menu à supprimer";
+$string['removedprimarynavitems_desc'] = "Vous pouvez renseigner aussi l'identifiants des menus à supprimer de la navbar. Chaque identifiants doit être séparé par une ',' exemple :<br>
+<pre>myhome,courses,mycourses</pre>";
+$string['customnavbarmenu'] = "Personnalisation du menu dans la barre de navigation";
+$string['customnavbarmenu_desc'] = "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
+$string['custommenuitemslogin'] = 'Éléments du menu personnalisé en étant authentifié';
+$string['configcustommenuitemslogin'] = "Vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
+<pre>
+Cours
+-Tous les cours|/course/
+-Recherche de cours|/course/search.php
+-###
+-FAQ|https://une-url.xyz/faq
+-Preguntas más frecuentes|https://une-url.xyz/pmf||es
+Mobile app|https://une-url.xyz/app|Téléchargez notre app
+</pre>";

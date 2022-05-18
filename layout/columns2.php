@@ -28,6 +28,14 @@ user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
 user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 
+if (isloggedin()) {
+    $courseindexopen = (get_user_preferences('drawer-open-index') == true);
+    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
+} else {
+    $courseindexopen = false;
+    $blockdraweropen = false;
+}
+
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
@@ -54,14 +62,6 @@ if (!$hasblocks) {
     $blockdraweropen = false;
 }
 
-if (isloggedin()) {
-    $courseindexopen = (get_user_preferences('drawer-open-index') == true);
-    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
-} else {
-    $courseindexopen = false;
-    $blockdraweropen = false;
-}
-
 $courseindex = core_course_drawer();
 
 if (!$courseindex) {
@@ -74,25 +74,31 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
+// Remove some primary navigation items.
+$PAGE->theme->removedprimarynavitems = $OUTPUT->removedprimarynavitems();
+
 $renderer = $PAGE->get_renderer('core');
-$primary = new core\navigation\output\primary($PAGE);
+$primary = new theme_pimenko\output\core\navigation\primary($PAGE);
 $primarymenu = $primary->export_for_template($renderer);
 
 $secondarynavigation = false;
 $overflow = '';
+
+// Secondary navigation.
 if ($PAGE->has_secondary_navigation()) {
+    $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $customnav = new \theme_pimenko\output\core\navigation\views\secondary($PAGE);
     $customnav->initialise();
     $PAGE->set_secondarynav($customnav);
-    $moremenu =
-        new core\navigation\output\more_menu($PAGE->secondarynav,
-            'nav-tabs');
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
     if (!is_null($overflowdata)) {
         $overflow = $overflowdata->export_for_template($OUTPUT);
     }
 }
+
+$theme = theme_config::load('pimenko');
 
 $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
@@ -119,6 +125,7 @@ $templatecontext = [
     'forceblockdraweropen' => $forceblockdraweropen,
     'addblockbutton' => $addblockbutton,
     'overflow' => $overflow,
+    'hidesitename' => $theme->settings->hidesitename
 ];
 
 echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);
