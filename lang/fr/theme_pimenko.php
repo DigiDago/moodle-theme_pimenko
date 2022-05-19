@@ -308,7 +308,7 @@ $string['contactsettings'] = "Nous contacter";
 $string['contactheading'] = "À propos";
 $string['contactus_content'] = "Pimenko est basée en France, à Lyon.<br>
 Nous sommes un acteur engagé auprès des ONG, associations, organismes de formation et dans la communauté OpenSource.<br> 
-Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous !";
+Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous : support@pimenko.com";
 $string['contactus_button_text'] = "Nous envoyer un mail";
 
 // Custom navbar menu.
