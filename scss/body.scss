@@ -82,10 +82,6 @@ body {
 
     section.block {
 
-        & > .card-body {
-            padding: 0 !important;
-        }
-
         .card-body {
             .card-title {
                 background-color: unquote('brandcolorbutton');

@@ -24,7 +24,7 @@
     <div class="card text-center">
        <p class="p-2">{{#str}} contactus_content, theme_pimenko{{/str}}</p>
     </div>
-    <button class='contactbutton' onclick="location.href='mailto:support@pimenko.com';">
+    <button class='contactbutton'>
         <span>{{#str}} contactus_button_text, theme_pimenko{{/str}}</span>
     </button>
 </div>
@@ -51,5 +51,6 @@
     $('.contactbutton').on('click', function(event){
         event.preventDefault();
         event.stopPropagation();
+        window.open('mailto:support@pimenko.com');
     });
 {{/js}}
