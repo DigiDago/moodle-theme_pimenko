@@ -300,7 +300,7 @@ $string['frontpagecardsettings_desc'] = "Configurez l'affichage des cards en pag
 
 // Hide site name setting.
 $string['hidesitename'] = "Cacher le nom du site";
-$string['hidesitename_desc'] = "Cette option permet de cacher le nom du site.";
+$string['hidesitename_desc'] = "Cette option permet de cacher le nom du site qui apparait dans l’en tête du site, à droite du logo en vue ordinateur.";
 $string['cardlabelformat'] = "Formateur";
 $string['cardlabeldate'] = "Date de début";
 
@@ -317,7 +317,7 @@ $string['removedprimarynavitems_desc'] = "Vous pouvez renseigner aussi l'identif
 <pre>myhome,courses,mycourses</pre>";
 $string['customnavbarmenu'] = "Personnalisation du menu dans la barre de navigation";
 $string['customnavbarmenu_desc'] = "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
-$string['custommenuitemslogin'] = 'Éléments du menu personnalisé en étant authentifié';
+$string['custommenuitemslogin'] = 'Éléments du menu personnalisé qui apparaitra une fois que les utilisateurs sont authentifiés sur le site';
 $string['configcustommenuitemslogin'] = "Vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
 <pre>
 Cours
