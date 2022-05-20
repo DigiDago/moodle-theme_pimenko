@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-user_preference_allow_ajax_update( 'drawer-open-nav', PARAM_ALPHA);
+user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 
 $extraclasses = [];
@@ -59,7 +59,7 @@ if (!$courseindex) {
 }
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()  && !$PAGE->has_secondary_navigation();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $hasfrontpageregions = $OUTPUT->get_block_regions();
@@ -67,7 +67,6 @@ $iscarouselenabled = $OUTPUT->is_carousel_enabled();
 
 // Remove some primary navigation items.
 $PAGE->theme->removedprimarynavitems = $OUTPUT->removedprimarynavitems();
-
 
 $renderer = $PAGE->get_renderer('core');
 $primary = new theme_pimenko\output\core\navigation\primary($PAGE);
@@ -84,32 +83,35 @@ if ($PAGE->has_secondary_navigation()) {
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
 }
 
+$theme = theme_config::load('pimenko');
+
 $templatecontext = [
-        'sitename' => format_string(
-                $SITE->shortname,
-                true,
-                [
-                        'context' => context_course::instance(SITEID),
-                        "escape" => false
-                ]
-        ),
-        'output' => $OUTPUT,
-        'sidepreblocks' => $blockshtml,
-        'hasblocks' => $hasblocks,
-        'blockdraweropen' => $blockdraweropen,
-        'bodyattributes' => $bodyattributes,
-        'usermenu' => $primarymenu['user'],
-        'langmenu' => $primarymenu['lang'],
-        'regionmainsettingsmenu' => $regionmainsettingsmenu,
-        'hasfrontpageregions' => !empty($hasfrontpageregions),
-        'iscarouselenabled' => $iscarouselenabled,
-        'primarymoremenu' => $primarymenu['moremenu'],
-        'secondarymoremenu' => $secondarynavigation ?: false,
-        'courseindexopen' => $courseindexopen,
-        'courseindex' => $courseindex,
-        'mobileprimarynav' => $primarymenu['mobileprimarynav'],
-        'forceblockdraweropen' => $forceblockdraweropen,
-        'addblockbutton' => $addblockbutton
+    'sitename' => format_string(
+        $SITE->shortname,
+        true,
+        [
+            'context' => context_course::instance(SITEID),
+            "escape" => false
+        ]
+    ),
+    'output' => $OUTPUT,
+    'sidepreblocks' => $blockshtml,
+    'hasblocks' => $hasblocks,
+    'blockdraweropen' => $blockdraweropen,
+    'bodyattributes' => $bodyattributes,
+    'usermenu' => $primarymenu['user'],
+    'langmenu' => $primarymenu['lang'],
+    'regionmainsettingsmenu' => $regionmainsettingsmenu,
+    'hasfrontpageregions' => !empty($hasfrontpageregions),
+    'iscarouselenabled' => $iscarouselenabled,
+    'primarymoremenu' => $primarymenu['moremenu'],
+    'secondarymoremenu' => $secondarynavigation ?: false,
+    'courseindexopen' => $courseindexopen,
+    'courseindex' => $courseindex,
+    'mobileprimarynav' => $primarymenu['mobileprimarynav'],
+    'forceblockdraweropen' => $forceblockdraweropen,
+    'addblockbutton' => $addblockbutton,
+    'hidesitename' => $theme->settings->hidesitename
 ];
 
 // Include js module.
@@ -117,6 +119,6 @@ $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
 $PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
 echo $OUTPUT->render_from_template(
-        'theme_pimenko/frontpage',
-        $templatecontext
+    'theme_pimenko/frontpage',
+    $templatecontext
 );
