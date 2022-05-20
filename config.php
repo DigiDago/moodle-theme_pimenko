@@ -169,7 +169,7 @@ $THEME->layouts = [
         'file' => 'columns2.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
-    ),
+    )
 ];
 
 $THEME->haseditswitch = true;

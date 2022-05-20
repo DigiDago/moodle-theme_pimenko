@@ -333,43 +333,6 @@ function theme_pimenko_colorbrightness($hex, $percent) {
 }
 
 /**
- * @param $bodyid
- *
- * @throws coding_exception
- * @throws moodle_exception
- */
-function theme_pimenko_redirect_to_profile_page($bodyid) {
-    global $USER;
-    if (optional_param(
-        'noredir', 0, PARAM_INT
-    )) {
-        return;
-    }
-    if ($bodyid == 'page-user-profile') {
-        $id = optional_param(
-            'id', 0, PARAM_INT
-        );
-        $params = ['userid' => $id];
-        $redirecturl = new moodle_url(
-            '/theme/pimenko/layout/profile.php', $params
-        );
-        if (!empty($id)) {
-            redirect($redirecturl);
-        }
-    } else if ($bodyid == 'page-user-preferences') {
-        $params = [
-            'userid' => $USER->id,
-            'preferences' => 1
-        ];
-        $redirecturl = new moodle_url(
-            '/theme/pimenko/layout/profile.php', $params
-        );
-        redirect($redirecturl);
-    }
-
-}
-
-/**
  * Get icon mapping for font-awesome.
  */
 function theme_pimenko_get_fontawesome_icon_map() {
