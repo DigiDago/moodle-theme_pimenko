@@ -39,8 +39,6 @@ if (isloggedin()) {
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
-theme_pimenko_redirect_to_profile_page($PAGE->bodyid);
-
 $extraclasses = [];
 
 $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
