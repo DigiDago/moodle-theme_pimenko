@@ -170,6 +170,12 @@ $THEME->layouts = [
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
+    // The pagelayout used for safebrowser and securewindow.
+    'pimenkoProfile' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre'
+    )
 ];
 
 $THEME->haseditswitch = true;
