@@ -49,6 +49,24 @@ $setting = new admin_setting_configcheckbox(
 );
 $page->add($setting);
 
+// Activation of catalog view.
+$name = 'theme_pimenko/tagfilter';
+$title = get_string(
+    'tagfilter',
+    'theme_pimenko'
+);
+$description = get_string(
+    'tagfilter_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
 // Activation of titlecatalog.
 $name = 'theme_pimenko/titlecatalog';
 $title = get_string(
