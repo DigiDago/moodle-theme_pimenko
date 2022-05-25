@@ -269,7 +269,11 @@ $string['enablecatalog_desc'] = "Enable the catalog";
 $string['titlecatalog'] = "Title of the catalog";
 $string['titlecatalog_desc'] = "Define catalog title";
 
+$string['tagfilter'] = "Activation of the filter by catalog tags";
+$string['tagfilter_desc'] = "This option allows you to add a filter by tags at the level of the course catalog";
+
 $string['allcategories'] = "All categories";
+$string['alltags'] = "All tags";
 $string['labelcategory'] = "Filter by category";
 $string['labelsearch'] = "Or search";
 $string['placeholdersearch'] = "Key words...";
