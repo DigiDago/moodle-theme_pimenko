@@ -264,7 +264,11 @@ $string['enablecatalog_desc'] = "Activer le catalogue";
 $string['titlecatalog']      = "Titre du catalogue";
 $string['titlecatalog_desc'] = "Modifier le titre du catalogue";
 
+$string['tagfilter'] = "Activation du filtre par tags du catalogue";
+$string['tagfilter_desc'] = "Cette option permet de rajouter un filtre par tags au niveau du catalogue de cours";
+
 $string['allcategories']     = "Toutes les catégories";
+$string['alltags']     = "Tous les tags";
 $string['labelcategory']     = "Filtrer par catégorie";
 $string['labelsearch']       = "Ou rechercher";
 $string['placeholdersearch'] = "Mots clés...";

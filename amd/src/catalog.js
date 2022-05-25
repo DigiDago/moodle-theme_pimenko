@@ -19,11 +19,13 @@
  */
 
 define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, ajax, templates, cfg) {
-    let categorySelect = $('#page-course-index-category .urlselect .custom-select');
+    let categorySelect = $('#page-course-index-category .categoryselect .urlselect .custom-select');
+    let tagSelect = $('#page-course-index-category .tagselect .urlselect .custom-select');
     let categorySearch = $('#page-course-index-category form.simplesearchform input');
 
     let startQuery = function() {
         categorySelect.attr("disabled", "true");
+        tagSelect.attr("disabled", "true");
         categorySearch.attr("disabled", "true");
         $('#course-gallery').attr("style", "opacity: 0.25;");
         $('#loader-gallery').attr("style", "display: flex;");
@@ -31,6 +33,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
 
     let endQuery = function(nbCourses) {
         categorySelect.removeAttr("disabled");
+        tagSelect.removeAttr("disabled");
         categorySearch.removeAttr("disabled");
         $('#course-gallery').attr("style", "opacity: 1;");
         $('#loader-gallery').attr("style", "display: none;");
@@ -131,6 +134,17 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             }
         });
 
+        tagSelect.change(function() {
+            let href = tagSelect.val();
+            categorySearch.val("");
+            // Call the method returning the course having the category selected.
+            if (href !== "all") {
+                document.location.href = href;
+            } else {
+                document.location.href = "/course/index.php";
+            }
+        });
+
         $('#page-course-index-category form.simplesearchform').submit(function(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -154,8 +168,8 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
 
             promises[0].done(function(response) {
                 doQuery(response);
-                doQuery(response);
                 categorySelect.val("all");
+                tagSelect.val('/course/index.php?tagid=0');
             }).fail(function(ex) {
                 /* eslint no-console: "off" */
                 console.log(ex);

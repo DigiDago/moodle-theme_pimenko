@@ -478,7 +478,6 @@ class course_renderer extends \core_course_renderer {
      * @param int|stdClass|core_course_category $category
      */
     public function course_category($category) {
-
         global $CFG;
         $usertop = core_course_category::user_top();
         if (empty($category)) {
@@ -489,7 +488,7 @@ class course_renderer extends \core_course_renderer {
             $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
         }
         $site = get_site();
-        $actionbar = new \core_course\output\category_action_bar($this->page, $coursecat);
+        $actionbar = new \theme_pimenko\output\core\category_action_bar($this->page, $coursecat);
 
         $theme = theme_config::load('pimenko');
         if ($theme->settings->enablecatalog) {
@@ -505,6 +504,17 @@ class course_renderer extends \core_course_renderer {
                 $allcateg[0]['selected'] = true;
             } else {
                 $allcateg[0]['selected'] = false;
+            }
+
+            $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
+            if (isset($editoption['tagselect'])) {
+                foreach ($editoption['tagselect']->options as $key => &$option) {
+                    if ($key == $tagid) {
+                        $option['selected'] = true;
+                    } else {
+                        $option['selected'] = false;
+                    }
+                }
             }
 
             $customtemplate = array_merge($allcateg, $editoption['categoryselect']->options);
@@ -639,8 +649,11 @@ class course_renderer extends \core_course_renderer {
             foreach ($cats as $cat) {
 
                 $coursecategory = core_course_category::get(is_object($cat) ? $cat->id : $cat);
+
+                $params['categoryid'] = $coursecategory->id;
+                $params['tagid'] = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);;
                 // Courses of categories.
-                foreach (self::get_all_courses_by_category($coursecategory->id) as $c) {
+                foreach (self::get_all_courses_by_category($params) as $c) {
 
                     $coursecontext = context_course::instance($c->id);
 
@@ -772,22 +785,34 @@ class course_renderer extends \core_course_renderer {
     /**
      * Return all courses of a category
      *
-     * @param $categoryid Category's id
+     * @param array params
      * @return array Courses of the category
      */
-    public static function get_all_courses_by_category($categoryid): array {
+    public static function get_all_courses_by_category($params): array {
         global $DB;
 
-        $fields = array('id', 'category', 'sortorder',
-            'shortname', 'fullname', 'idnumber',
-            'startdate', 'enddate', 'visible', 'cacherev',
-            'summary', 'summaryformat');
-        $sql = "SELECT " . join(',', $fields) . "
+        $fields = array('c.id', 'c.category', 'c.sortorder',
+            'c.shortname', 'c.fullname', 'c.idnumber',
+            'c.startdate', 'c.enddate', 'c.visible', 'c.cacherev',
+            'c.summary', 'c.summaryformat');
+        if ($params['tagid'] != 0) {
+            $sql = "SELECT " . join(',', $fields) . "
+                FROM {course} c
+                INNER JOIN {tag_instance} ti ON c.id = ti.itemid
+                WHERE c.category = :category
+                AND ti.tagid = :tagid
+                AND ti.itemtype = 'course'
+                AND c.id != 1
+                ORDER BY sortorder";
+        } else {
+            $sql = "SELECT " . join(',', $fields) . "
                 FROM {course} c
                 WHERE c.category = :category
-                AND id != 1
+                AND c.id != 1
                 ORDER BY sortorder";
-        $list = $DB->get_records_sql($sql, ['category' => $categoryid]);
+        }
+
+        $list = $DB->get_records_sql($sql, ['category' => $params['categoryid'], 'tagid' => $params['tagid']]);
 
         $courses = [];
         // Prepare the list of core_course_list_element objects.
