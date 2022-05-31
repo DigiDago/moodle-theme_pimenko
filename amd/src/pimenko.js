@@ -78,7 +78,7 @@ define(['jquery', 'core/ajax'],
                                     },
                                     done: function(response) {
                                         if (response.success) {
-                                            location.reload();
+                                            window.location.reload(true);
                                         }
                                     },
                                     fail: function(response) {
@@ -114,7 +114,7 @@ define(['jquery', 'core/ajax'],
                             },
                             done: function(response) {
                                 if (response.success) {
-                                    location.reload();
+                                    window.location.reload(true);
                                 }
                             },
                             fail: function(response) {

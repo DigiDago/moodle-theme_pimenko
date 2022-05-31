@@ -46,10 +46,10 @@
         </div>
         <div class="d-flex align-items-center courseheader
             {{#coverimagedata}}
-                {{#coverexist}}coverimage position-relative{{/coverexist}}{{/coverimagedata}}"
+            {{#coverexist}}coverimage position-relative{{/coverexist}}{{/coverimagedata}}"
             {{#coverimagedata}}
                 {{^displayasthumbnail}}
-                    style="background-image: url({{{urlcoverimage}}});background-size: cover;background-repeat: no-repeat;background-position: center center;"
+             style="background-image: url({{{urlcoverimage}}});background-size: cover;background-repeat: no-repeat;background-position: center center;"
                 {{/displayasthumbnail}}
             {{/coverimagedata}}>
             {{#coverimagedata}}
@@ -71,15 +71,17 @@
                         <div class="header-action ml-2">{{{.}}}</div>
                     {{/headeractions}}
                     {{#coverimagedata}}
-                        <div class="edit_cover">
-                            <label class="btn btn-sm btn-file btn-secondary state-visible">
-                                <span>{{#str}} editcoverimage, theme_pimenko {{/str}}</span>
-                                <input type="file" data-id="{{{id}}}" class="cover_file d-none" data-name="{{{filename}}}">
-                            </label>
-                            <button class="btn btn-danger delete-cover" type="button" style="display:inline-block;">
-                                <i class="icon fa fa-trash fa-fw " title="delete" role="img" aria-label="delete"></i>
-                            </button>
-                        </div>
+                        {{#seemenu}}
+                            <div class="edit_cover">
+                                <label class="btn btn-sm btn-file btn-secondary state-visible">
+                                    <span>{{#str}} editcoverimage, theme_pimenko {{/str}}</span>
+                                    <input type="file" data-id="{{{id}}}" class="cover_file d-none" data-name="{{{filename}}}">
+                                </label>
+                                <button class="btn btn-danger delete-cover" type="button" style="display:inline-block;">
+                                    <i class="icon fa fa-trash fa-fw " title="delete" role="img" aria-label="delete"></i>
+                                </button>
+                            </div>
+                        {{/seemenu}}
                     {{/coverimagedata}}
                 </div>
             </div>

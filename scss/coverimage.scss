@@ -31,7 +31,6 @@
     label {
         color: unquote('buttontextcolour');
         display: inline-block;
-        height: 35px;
         margin: 0;
 
         input {
@@ -77,6 +76,7 @@
 
     .displaythumbanil {
         max-width: 400px;
+        max-height: 300px;
         display: flex;
         right: 0;
         position: absolute;
