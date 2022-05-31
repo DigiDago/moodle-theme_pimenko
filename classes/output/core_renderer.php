@@ -26,6 +26,7 @@
 namespace theme_pimenko\output;
 
 use core_auth\output\login;
+use fileconverter_googledrive\rest;
 use stdClass;
 use theme_config;
 use context_course;
@@ -450,7 +451,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function get_block_regions(): string {
-
         global $USER;
 
         $settingsname = 'blockrow';
@@ -624,6 +624,88 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         } else {
             return [];
         }
+    }
+
+    /**
+     * Wrapper for header elements.
+     *
+     * @return string HTML to display the main header.
+     */
+    public function full_header() {
+        $theme = theme_config::load('pimenko');
+        $pagetype = $this->page->pagetype;
+        $header = new stdClass();
+
+        // Get cover course file.
+        $files = false;
+        $fs = get_file_storage();
+
+        $filescoverimage = $fs->get_area_files(
+            context_course::instance($this->page->course->id)->id,
+            'theme_pimenko',
+            'coverimage',
+            0,
+            "itemid, filepath, filename",
+            false
+        );
+
+        if ($filescoverimage) {
+
+            $oldfile = array_values($filescoverimage)[0];
+
+            $urlcoverimage = moodle_url::make_pluginfile_url(
+                $oldfile->get_contextid(),
+                $oldfile->get_component(),
+                $oldfile->get_filearea(),
+                $oldfile->get_itemid(),
+                $oldfile->get_filepath(),
+                $oldfile->get_filename()
+            );
+            $header->urlcoverimage = $urlcoverimage;
+        }
+
+        if ($this->page->pagelayout == 'course' ||
+            ($this->page->pagelayout == 'incourse' && $theme->settings->displaycoverallpage)) {
+            $header->coverimagedata = [
+                'id' => $this->page->course->id,
+                'filename' => (isset($oldfile)) ? $oldfile->get_filename() : null,
+                'withgradient' => (bool) $theme->settings->gradientcovercolor,
+                'coverexist' => (bool) $filescoverimage,
+                'displayasthumbnail' => (isset($header->urlcoverimage)) ? $theme->settings->displayasthumbnail : false
+            ];
+        }
+
+        $homepage = get_home_page();
+        $homepagetype = null;
+        // Add a special case since /my/courses is a part of the /my subsystem.
+        if ($homepage == HOMEPAGE_MY || $homepage == HOMEPAGE_MYCOURSES) {
+            $homepagetype = 'my-index';
+        } else if ($homepage == HOMEPAGE_SITE) {
+            $homepagetype = 'site-index';
+        }
+        if ($this->page->include_region_main_settings_in_header_actions() &&
+            !$this->page->blocks->is_block_present('settings')) {
+            // Only include the region main settings if the page has requested it and it doesn't already have
+            // the settings block on it. The region main settings are included in the settings block and
+            // duplicating the content causes behat failures.
+            $this->page->add_header_action(html_writer::div(
+                $this->region_main_settings_menu(),
+                'd-print-none',
+                ['id' => 'region-main-settings-menu']
+            ));
+        }
+
+        $header->settingsmenu = $this->context_header_settings_menu();
+        $header->contextheader = $this->context_header();
+        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
+        $header->navbar = $this->navbar();
+        $header->pageheadingbutton = $this->page_heading_button();
+        $header->courseheader = $this->course_header();
+        $header->headeractions = $this->page->get_header_actions();
+        if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
+            $header->welcomemessage = \core_user::welcome_message();
+        }
+        return $this->render_from_template('core/full_header', $header);
     }
 
     /**

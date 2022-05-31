@@ -338,3 +338,18 @@ Courses
 -Preguntas más frecuentes|https://someurl.xyz/pmf||es
 Mobile app|https://someurl.xyz/app|Download our app
 </pre>";
+
+// Cover image for course.
+$string['coursecover'] = "Course cover";
+$string['coursecoversettings'] = "Course banner options";
+$string['coursecoversettings_desc'] = "Below are a set of options for the course banner";
+$string['editcoverimage'] = "Change cover image";
+$string['gradienttextcolor'] = "Set a color for the text displayed on the banner";
+$string['gradienttextcolor_desc'] = "This option allows you to change the color of the text displayed on the banner";
+$string['displaycoverallpage'] = "Display banner on all course pages";
+$string['displaycoverallpage_desc'] = "If this option is activated, the course banner will be displayed on all course pages";
+$string['displayasthumbnail'] = "Display the banner as a thumbnail";
+$string['displayasthumbnail_desc'] = "If this option is activated, the banner will be displayed as a thumbnail";
+// Options pour la vignette des cours.
+$string['gradientcovercolor'] = "Set mask color for course banner";
+$string['gradientcovercolor_desc'] = "This option will add a color mask to the image used for the course banner";
