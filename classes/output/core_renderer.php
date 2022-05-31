@@ -671,7 +671,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 'filename' => (isset($oldfile)) ? $oldfile->get_filename() : null,
                 'withgradient' => (bool) $theme->settings->gradientcovercolor,
                 'coverexist' => (bool) $filescoverimage,
-                'displayasthumbnail' => (isset($header->urlcoverimage)) ? $theme->settings->displayasthumbnail : false
+                'displayasthumbnail' => (isset($header->urlcoverimage)) ? $theme->settings->displayasthumbnail : false,
+                'seemenu' => $this->page->user_allowed_editing()
             ];
         }
 
