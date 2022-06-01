@@ -26,7 +26,6 @@
 namespace theme_pimenko\output;
 
 use core_auth\output\login;
-use fileconverter_googledrive\rest;
 use stdClass;
 use theme_config;
 use context_course;
@@ -35,14 +34,7 @@ use html_writer;
 use completion_info;
 use context_system;
 use moodle_url;
-use core\navigation\output\primary;
-use action_menu_link_secondary;
-use action_menu;
-use action_menu_filler;
-use core_text;
-use url_select;
-
-defined('MOODLE_INTERNAL') || die;
+use theme_pimenko\output\core\navigation\primary as primary;
 
 /**
  * Class core_renderer extended
@@ -123,10 +115,16 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $template->maincontent = $output->main_content();
 
         $renderer = $this->page->get_renderer('core');
+
         $primary = new primary($this->page);
         $primarymenu = $primary->export_for_template($renderer);
 
         $template->primarymoremenu = $primarymenu['moremenu'];
+
+        // Hide site name option.
+        $theme = theme_config::load('pimenko');
+        $template->hidesitename = $theme->settings->hidesitename;
+
         $template->mobileprimarynav = $primarymenu['mobileprimarynav'];
 
         return $output->render_from_template(
@@ -538,7 +536,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         // First we should check if we want to add navigation.
         $context = $this->page->context;
         if (($this->page->pagelayout !== 'incourse' && $this->page->pagelayout !== 'frametop')
-            || $context->contextlevel != CONTEXT_MODULE) {
+            || $context->contextlevel != CONTEXT_MODULE || $this->page->bodyid == 'page-mod-quiz-attempt') {
             return '';
         }
 
