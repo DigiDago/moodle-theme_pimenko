@@ -317,7 +317,7 @@ $string['contactsettings'] = "Contact us";
 $string['contactheading'] = "About us";
 $string['contactus_content'] = "Pimenko is based in France, in Lyon.<br>
 We are a committed player with NGOs, associations, training organizations and in the OpenSource community.<br>
-Want a custom development? Advice tailored to your needs? Contact us : support@pimenko.com";
+Want a custom development? Advice tailored to your needs? Contact us : <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>";
 $string['contactus_button_text'] = "Send us a mail";
 
 // Custom navbar menu.
