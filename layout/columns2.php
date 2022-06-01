@@ -83,7 +83,7 @@ $secondarynavigation = false;
 $overflow = '';
 
 // Secondary navigation.
-if ($PAGE->has_secondary_navigation()) {
+if ($PAGE->has_secondary_navigation() && strpos($PAGE->bodyclasses, 'path-enrol') == false) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $customnav = new \theme_pimenko\output\core\navigation\views\secondary($PAGE);
     $customnav->initialise();
