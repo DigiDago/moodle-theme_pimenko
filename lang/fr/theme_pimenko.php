@@ -335,15 +335,15 @@ Mobile app|https://une-url.xyz/app|Téléchargez notre app
 
 // Cover image for course.
 $string['coursecover'] = "Bannière de cours";
-$string['coursecoversettings'] = "Options pour la bannière de cours";
-$string['coursecoversettings_desc'] = "Vous trouverez ci dessous un ensembles d'options pour la bannière de cours";
-$string['gradienttextcolor'] = "Définir une couleur pour le texte afficher sur la bannière";
+$string['coursecoversettings'] = "Déterminer les réglages pour l’affichage d’image (vignette) en haut des pages de cours";
+$string['coursecoversettings_desc'] = "Il est possible d’ajouter une image dans l’en tête des pages d’un cours. Les options ci-après permettent de choisir comment ces images qui s’affichent.";
+$string['gradienttextcolor'] = "Si vous indiquez une couleur, elle sera utilisé pour modifier la couleur du titre du cours afficher dans l’en tête. Vous pouvez par exemple mettre le code couleur du blanc (#fff) pour avoir un titre de cours plus visible sur une photo foncée.";
 $string['gradienttextcolor_desc'] = "Cette option permet de modifier la couleur du texte afficher sur la bannière";
 $string['editcoverimage'] = "Changer la vignette";
-$string['displaycoverallpage'] = "Afficher la bannière sur toutes les pages du cours";
-$string['displaycoverallpage_desc'] = "Si cette option est activé, la bannière du cours s'affichera sur toutes les pages du cours";
-$string['displayasthumbnail'] = "Afficher la bannière sous forme de vignette";
-$string['displayasthumbnail_desc'] = "Si cette option est activé, la bannière s'affichera sous forme de vignette";
+$string['displaycoverallpage'] = "Afficher l’image dans l’en-tête de toutes les pages du cours";
+$string['displaycoverallpage_desc'] = "Si cette option est activée, l’image sera affichée à la fois sur la page d’accueil de cours mais aussi dans les activités, les ressources ou les pages d’administration du cours";
+$string['displayasthumbnail'] = "Afficher l’image sous la forme d’une vignette ou sur la pleine largeur de l’en tête du cours";
+$string['displayasthumbnail_desc'] = "Si cette option est activée, l’image sera affichée sous la forme d’une vignette, c’est-à-dire un rectangle d’environ . Si cette option n’est pas activée, l’image sera affichée sous la forme d’une bannière qui occupe l’ensemble de la largeur de l’en tête de cours.";
 // Options pour la vignette des cours.
-$string['gradientcovercolor'] = "Définir une couleur de masque pour la bannière de cours";
-$string['gradientcovercolor_desc'] = "Cette option ajoutera un masque de couleur à l'image utilisé pour la bannière de cours";
+$string['gradientcovercolor'] = "Appliquer une couleur sur l’image";
+$string['gradientcovercolor_desc'] = "Si vous indiquez une couleur, elle sera affichée par-dessus l’image avec une transparence pour donner un effet de masque de couleur au-dessus de l’image";
