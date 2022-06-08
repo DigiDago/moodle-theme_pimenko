@@ -23,6 +23,9 @@
  */
 
 // We defined the web service functions to install.
+
+defined('MOODLE_INTERNAL') || die;
+
 $functions = [
     'theme_pimenko_search_courses' => [
         'classname' => 'theme_pimenko\external\search_courses',
@@ -31,5 +34,12 @@ $functions = [
         'ajax' => true,
         'loginrequired' => false,
         'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
-    ]
+    ],
+    'theme_pimenko_save_cover_file'      => [
+        'classname'   => 'theme_pimenko\external\save_cover_file',
+        'description' => 'Save the course cover file',
+        'type'        => 'write',
+        'ajax'        => true,
+        'loginrequired' => true
+    ],
 ];

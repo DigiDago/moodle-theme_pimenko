@@ -146,6 +146,8 @@ function theme_pimenko_process_css($css, $theme) {
         'blockregionrowlinkhovercolor6' => '',
         'blockregionrowlinkhovercolor7' => '',
         'blockregionrowlinkhovercolor8' => '',
+        'gradienttextcolor' => '#000',
+        'gradientcovercolor' => '',
         'googlefont' => 'Verdana',
         'tooglercolor' => 'rgb(255, 255, 255)'
     ];
@@ -201,6 +203,9 @@ function theme_pimenko_process_css($css, $theme) {
     // Set up svg toggler color.
     $defaults['tooglercolor'] = 'rgba(' . implode(",", theme_pimenko_hex2rgb($defaults['navbartextcolor'])) . ')';
 
+    // Set up gradient for cover.
+    $defaults['gradientcovercolor'] = theme_pimenko_hex2rgba($defaults['gradientcovercolor'], '.6');
+
     // Get all the defined settings for the theme and replace defaults.
 
     return strtr($css, $defaults);
@@ -213,10 +218,16 @@ function theme_pimenko_process_css($css, $theme) {
  * @param string $alpha
  * @return string
  */
-function theme_pimenko_hex2rgba($hex, $alpha) {
-    $rgba = theme_pimenko_hex2rgb($hex);
-    $rgba[] = $alpha;
-    return 'rgba(' . implode(", ", $rgba) . ') !important'; // Returns the rgba values separated by commas.
+function theme_pimenko_hex2rgba(string $hex, string $alpha): string {
+    if ($hex && $alpha) {
+        $rgba = theme_pimenko_hex2rgb($hex);
+        $rgba[] = $alpha;
+        $hexrgba = 'rgba(' . implode(", ", $rgba) . ')'; // Returns the rgba values separated by commas.
+    } else {
+        $hexrgba = 'transparent';
+    }
+
+    return $hexrgba;
 }
 
 /**
@@ -261,12 +272,33 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
         $theme = theme_config::load('pimenko');
     }
 
-    if ($context->contextlevel == CONTEXT_SYSTEM) {
+    if ($context->contextlevel == CONTEXT_SYSTEM || $filearea == 'coverimage') {
         // By default, theme files must be cache-able by both browsers and proxies.  From 'More' theme.
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
         }
+
         switch ($filearea) {
+            case 'coverimage':
+                $revision = array_shift($args);
+                if ($revision < 0) {
+                    $lifetime = 0;
+                } else {
+                    $lifetime = DAYSECS * 60;
+                }
+
+                $filename = end($args);
+                $contextid = $context->id;
+                $fullpath = "/$contextid/theme_pimenko/$filearea/0/$filename";
+                $fs = get_file_storage();
+                $file = $fs->get_file_by_hash(sha1($fullpath));
+                if ($file) {
+                    send_stored_file(
+                        $file, $lifetime, 0, $forcedownload, $options
+                    );
+                    return true;
+                }
+                break;
             case 'loginbgimage':
             case 'favicon':
             case 'sitelogo':

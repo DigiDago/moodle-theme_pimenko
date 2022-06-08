@@ -269,7 +269,11 @@ $string['enablecatalog_desc'] = "Enable the catalog";
 $string['titlecatalog'] = "Title of the catalog";
 $string['titlecatalog_desc'] = "Define catalog title";
 
+$string['tagfilter'] = "Activation of the filter by catalog tags";
+$string['tagfilter_desc'] = "This option allows you to add a filter by tags at the level of the course catalog";
+
 $string['allcategories'] = "All categories";
+$string['alltags'] = "All tags";
 $string['labelcategory'] = "Filter by category";
 $string['labelsearch'] = "Or search";
 $string['placeholdersearch'] = "Key words...";
@@ -313,7 +317,7 @@ $string['contactsettings'] = "Contact us";
 $string['contactheading'] = "About us";
 $string['contactus_content'] = "Pimenko is based in France, in Lyon.<br>
 We are a committed player with NGOs, associations, training organizations and in the OpenSource community.<br>
-Want a custom development? Advice tailored to your needs? Contact us : support@pimenko.com";
+Want a custom development? Advice tailored to your needs? Contact us : <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>";
 $string['contactus_button_text'] = "Send us a mail";
 
 // Custom navbar menu.
@@ -334,3 +338,19 @@ Courses
 -Preguntas más frecuentes|https://someurl.xyz/pmf||es
 Mobile app|https://someurl.xyz/app|Download our app
 </pre>";
+
+// Cover image for course.
+$string['coursecover'] = "Course cover";
+$string['coursecoversettings'] = "Determine the settings for the image display (thumbnail) at the top of the course pages";
+$string['coursecoversettings_desc'] = "It is possible to add an image in the header of the pages of a course. The options below allow you to choose how these images are displayed.";
+$string['editcoverimage'] = "Change cover image";
+$string['gradienttextcolor'] = "
+If you specify a color, it will be used to change the color of the course title displayed in the header. For example, you can put the color code of white (#fff) to have a more visible course title on a dark photo.";
+$string['gradienttextcolor_desc'] = "This option allows you to change the color of the text displayed on the banner";
+$string['displaycoverallpage'] = "Display the image in the header of all course pages";
+$string['displaycoverallpage_desc'] = "If this option is activated, the image will be displayed both on the course home page but also in the activities, resources or administration pages of the course";
+$string['displayasthumbnail'] = "Display the image as a thumbnail or as the full width of the course header";
+$string['displayasthumbnail_desc'] = "If this option is activated, the image will be displayed as a thumbnail, i.e. a rectangle of approximately . If this option is not enabled, the image will be displayed as a banner that takes up the entire width of the course header.";
+// Options pour la vignette des cours.
+$string['gradientcovercolor'] = "Apply a color to the image";
+$string['gradientcovercolor_desc'] = "If you specify a color, it will be displayed over the image with transparency to give a color mask effect above the image";

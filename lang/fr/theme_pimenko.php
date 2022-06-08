@@ -264,7 +264,11 @@ $string['enablecatalog_desc'] = "Activer le catalogue";
 $string['titlecatalog']      = "Titre du catalogue";
 $string['titlecatalog_desc'] = "Modifier le titre du catalogue";
 
+$string['tagfilter'] = "Activation du filtre par tags du catalogue";
+$string['tagfilter_desc'] = "Cette option permet de rajouter un filtre par tags au niveau du catalogue de cours";
+
 $string['allcategories']     = "Toutes les catégories";
+$string['alltags']     = "Tous les tags";
 $string['labelcategory']     = "Filtrer par catégorie";
 $string['labelsearch']       = "Ou rechercher";
 $string['placeholdersearch'] = "Mots clés...";
@@ -308,7 +312,7 @@ $string['contactsettings'] = "Nous contacter";
 $string['contactheading'] = "À propos";
 $string['contactus_content'] = "Pimenko est basée en France, à Lyon.<br>
 Nous sommes un acteur engagé auprès des ONG, associations, organismes de formation et dans la communauté OpenSource.<br> 
-Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous : support@pimenko.com";
+Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous : <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>";
 $string['contactus_button_text'] = "Nous envoyer un mail";
 
 // Custom navbar menu.
@@ -328,3 +332,18 @@ Cours
 -Preguntas más frecuentes|https://une-url.xyz/pmf||es
 Mobile app|https://une-url.xyz/app|Téléchargez notre app
 </pre>";
+
+// Cover image for course.
+$string['coursecover'] = "Bannière de cours";
+$string['coursecoversettings'] = "Déterminer les réglages pour l’affichage d’image (vignette) en haut des pages de cours";
+$string['coursecoversettings_desc'] = "Il est possible d’ajouter une image dans l’en tête des pages d’un cours. Les options ci-après permettent de choisir comment ces images qui s’affichent.";
+$string['gradienttextcolor'] = "Si vous indiquez une couleur, elle sera utilisé pour modifier la couleur du titre du cours afficher dans l’en tête. Vous pouvez par exemple mettre le code couleur du blanc (#fff) pour avoir un titre de cours plus visible sur une photo foncée.";
+$string['gradienttextcolor_desc'] = "Cette option permet de modifier la couleur du texte afficher sur la bannière";
+$string['editcoverimage'] = "Changer la vignette";
+$string['displaycoverallpage'] = "Afficher l’image dans l’en-tête de toutes les pages du cours";
+$string['displaycoverallpage_desc'] = "Si cette option est activée, l’image sera affichée à la fois sur la page d’accueil de cours mais aussi dans les activités, les ressources ou les pages d’administration du cours";
+$string['displayasthumbnail'] = "Afficher l’image sous la forme d’une vignette ou sur la pleine largeur de l’en tête du cours";
+$string['displayasthumbnail_desc'] = "Si cette option est activée, l’image sera affichée sous la forme d’une vignette, c’est-à-dire un rectangle d’environ . Si cette option n’est pas activée, l’image sera affichée sous la forme d’une bannière qui occupe l’ensemble de la largeur de l’en tête de cours.";
+// Options pour la vignette des cours.
+$string['gradientcovercolor'] = "Appliquer une couleur sur l’image";
+$string['gradientcovercolor_desc'] = "Si vous indiquez une couleur, elle sera affichée par-dessus l’image avec une transparence pour donner un effet de masque de couleur au-dessus de l’image";
