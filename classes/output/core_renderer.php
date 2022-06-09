@@ -28,6 +28,7 @@ namespace theme_pimenko\output;
 use core_auth\output\login;
 use stdClass;
 use theme_config;
+use core_course_category;
 use context_course;
 use custom_menu;
 use html_writer;
@@ -243,6 +244,67 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
         // The default font we use if no settings define.
         return 'Verdana';
+    }
+
+    /**
+     * Rendering the category menu in the header
+     *
+     * @return string
+     */
+    public function display_header_categories(): string {
+
+        $theme = theme_config::load('pimenko');
+        if (!empty($theme->settings->menuheadercateg) && $theme->settings->menuheadercateg != "disabled") {
+            $cats = core_course_category::get_all();
+            $template = new stdClass();
+            $template->dropdownname = get_string('menuheadercateg', 'theme_pimenko');
+            $template->dropdownitems = [];
+
+            foreach ($cats as $cat) {
+                if (!($theme->settings->menuheadercateg == 'excludehidden' && $cat->visible == 0) &&
+                    $cat->get_parent_coursecat()->id == 0) {
+                    $dropdownitem = new stdClass();
+                    $dropdownitem->name = $cat->get_formatted_name();
+                    $dropdownitem->url = $cat->get_view_link();
+                    if ($cat->has_children()) {
+                        $dropdownitem->submenu = $this->display_header_categories_recursively($cat);
+                    }
+                    $template->dropdownitems[] = $dropdownitem;
+                }
+            }
+            return $this->render_from_template(
+                'theme_pimenko/header_dropdown',
+                $template);
+        }
+        return "";
+    }
+
+    /**
+     * @param $category core_course_category
+     * @return string
+     */
+    public function display_header_categories_recursively($category): string {
+        $cats = $category->get_children();
+        $template = new stdClass();
+        $template->dropdownitems = [];
+        $theme = theme_config::load('pimenko');
+
+        foreach ($cats as $cat) {
+            if (!($theme->settings->menuheadercateg == 'excludehidden' && $cat->visible == 0)) {
+                $dropdownitem = new stdClass();
+                $dropdownitem->name = $cat->get_formatted_name();
+                $dropdownitem->url = $cat->get_view_link();
+                if ($cat->get_children_count() > 0) {
+                    $dropdownitem->submenu = $this->display_header_categories_recursively($cat);
+                }
+                $template->dropdownitems[] = $dropdownitem;
+            }
+
+        }
+
+        return $this->render_from_template(
+            'theme_pimenko/header_dropdown_recursive',
+            $template);
     }
 
     /**

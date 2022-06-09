@@ -354,3 +354,9 @@ $string['displayasthumbnail_desc'] = "If this option is activated, the image wil
 // Options pour la vignette des cours.
 $string['gradientcovercolor'] = "Apply a color to the image";
 $string['gradientcovercolor_desc'] = "If you specify a color, it will be displayed over the image with transparency to give a color mask effect above the image";
+// Options d'affichage pour le menu des cate.
+$string['menuheadercateg']                    = 'My categories';
+$string['menuheadercategdesc']                = 'Show a dropdown menu with user\'s categories';
+$string['menuheadercateg:excludehidden']      = 'Enable excluding hidden categories';
+$string['menuheadercateg:includehidden']      = 'Enable including hidden categories';
+$string['menuheadercateg:disabled']           = 'Disable';
