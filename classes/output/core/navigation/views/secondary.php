@@ -100,7 +100,7 @@ class secondary extends \core\navigation\views\secondary {
 
             if (is_role_switched($course->id)) {
                 $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
-                if (strpos($theme->settings->listuserrole, $roleswitched->shortname)) {
+                if (strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
                     $allowedtosee = true;
                 }
             } else {
@@ -108,7 +108,7 @@ class secondary extends \core\navigation\views\secondary {
                     $allowedtosee = true;
                 } else {
                     foreach (get_user_roles($this->context, $USER->id) as $role) {
-                        if (strpos($theme->settings->listuserrole, $role->shortname)) {
+                        if (strpos($theme->settings->listuserrole, $role->shortname) !== false) {
                             $allowedtosee = true;
                         }
                     }

@@ -263,6 +263,8 @@ $string['pimenkofeature'] = 'Pimenko features';
 // Catalog enabling setting.
 $string['catalogsettings'] = "Catalog";
 $string['catalogsettings_desc'] = "Configuring the catalog page";
+$string['customfieldfilter'] = "Enabling of the custom field filter";
+$string['customfieldfilter_desc'] = "Enable filters on course custom fields in the catalog";
 $string['enablecatalog'] = "Enabling of the catalog";
 $string['enablecatalog_desc'] = "Enable the catalog";
 
@@ -360,3 +362,6 @@ $string['menuheadercategdesc']                = 'Show a dropdown menu with user\
 $string['menuheadercateg:excludehidden']      = 'Enable excluding hidden categories';
 $string['menuheadercateg:includehidden']      = 'Enable including hidden categories';
 $string['menuheadercateg:disabled']           = 'Disable';
+$string['filterbycustomfilter'] = 'Filter by custom field';
+$string['yes'] = 'Yes';
+$string['no'] = 'No';

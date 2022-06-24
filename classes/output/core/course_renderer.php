@@ -25,6 +25,8 @@
 namespace theme_pimenko\output\core;
 
 use core_completion\progress;
+use core_date;
+use DateTime;
 use stdClass;
 use html_writer;
 use completion_info;
@@ -538,13 +540,13 @@ class course_renderer extends \core_course_renderer {
             $this->page->set_title("$site->shortname: $strfulllistofcourses");
         }
 
-        // Print current category description
+        // Print current category description.
         $chelper = new coursecat_helper();
         if ($description = $chelper->get_category_formatted_description($coursecat)) {
             $output .= $this->box($description, array('class' => 'generalbox info'));
         }
 
-        // Prepare parameters for courses and categories lists in the tree
+        // Prepare parameters for courses and categories lists in the tree.
         $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)
             ->set_attributes(array('class' => 'category-browse category-browse-' . $coursecat->id));
 
@@ -575,7 +577,7 @@ class course_renderer extends \core_course_renderer {
             $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
             $coursedisplayoptions['viewmoretext'] = new lang_string('viewallcourses');
         } else {
-            // we have a category that has both subcategories and courses, display pagination separately
+            // We have a category that has both subcategories and courses, display pagination separately.
             $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses', 'page' => 1));
             $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories', 'page' => 1));
         }
@@ -651,7 +653,14 @@ class course_renderer extends \core_course_renderer {
                 $coursecategory = core_course_category::get(is_object($cat) ? $cat->id : $cat);
 
                 $params['categoryid'] = $coursecategory->id;
-                $params['tagid'] = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);;
+                $params['tagid'] = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
+                $params['customfieldselected'] = filter_input(INPUT_GET, 'customfieldselected', FILTER_SANITIZE_URL);
+                $params['customfieldtext'] = filter_input(INPUT_GET, 'customfieldtext', FILTER_SANITIZE_URL);
+                $params['customfieldvalue'] = filter_input(INPUT_GET, 'customfieldvalue', FILTER_SANITIZE_URL);
+                $params['day'] = filter_input(INPUT_GET, 'day', FILTER_SANITIZE_URL);
+                $params['year'] = filter_input(INPUT_GET, 'year', FILTER_SANITIZE_URL);
+                $params['month'] = filter_input(INPUT_GET, 'month', FILTER_SANITIZE_URL);
+                $params['timestamp'] = filter_input(INPUT_GET, 'timestamp', FILTER_SANITIZE_URL);
                 // Courses of categories.
                 foreach (self::get_all_courses_by_category($params) as $c) {
 
@@ -795,13 +804,50 @@ class course_renderer extends \core_course_renderer {
             'c.shortname', 'c.fullname', 'c.idnumber',
             'c.startdate', 'c.enddate', 'c.visible', 'c.cacherev',
             'c.summary', 'c.summaryformat');
+
         if ($params['tagid'] != 0) {
             $sql = "SELECT " . join(',', $fields) . "
                 FROM {course} c
-                INNER JOIN {tag_instance} ti ON c.id = ti.itemid
-                WHERE c.category = :category
-                AND ti.tagid = :tagid
+                LEFT JOIN {tag_instance} ti ON c.id = ti.itemid
+                WHERE ti.tagid = :tagid
                 AND ti.itemtype = 'course'
+                AND c.category = :category
+                AND c.id != 1
+                ORDER BY sortorder";
+        } else if ($params['customfieldselected'] && $params['day'] && $params['month'] && $params['year']) {
+            $timestamp =
+                new DateTime($params['year'] . '-' . $params['month'] . '-' . $params['day'],
+                    core_date::get_user_timezone_object());
+            $timestamp->setTime(0, 0, 0);
+            $params['timestamp'] = $timestamp->getTimestamp();
+            $sql = "SELECT " . join(',', $fields) . "
+                FROM {course} c
+                LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
+                LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
+                WHERE cf.shortname = :customfieldselected
+                AND cd.value LIKE :timestamp
+                AND c.category = :category
+                AND c.id != 1
+                ORDER BY sortorder";
+        } else if ($params['customfieldselected'] && $params['customfieldvalue'] != 'all') {
+            $sql = "SELECT " . join(',', $fields) . "
+                FROM {course} c
+                LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
+                LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
+                WHERE cf.shortname = :customfieldselected
+                AND cd.value = :customfieldvalue
+                AND c.category = :category
+                AND c.id != 1
+                ORDER BY sortorder";
+        } else if ($params['customfieldtext'] && $params['customfieldvalue'] != 'all') {
+            $params['customfieldvalue'] = '%' . $params['customfieldvalue'] . '%';
+            $sql = "SELECT " . join(',', $fields) . "
+                FROM {course} c
+                LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
+                LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
+                WHERE cf.shortname = :customfieldtext
+                AND cd.value LIKE :customfieldvalue
+                AND c.category = :category
                 AND c.id != 1
                 ORDER BY sortorder";
         } else {
@@ -812,7 +858,14 @@ class course_renderer extends \core_course_renderer {
                 ORDER BY sortorder";
         }
 
-        $list = $DB->get_records_sql($sql, ['category' => $params['categoryid'], 'tagid' => $params['tagid']]);
+        $list = $DB->get_records_sql($sql, [
+            'category' => $params['categoryid'],
+            'tagid' => $params['tagid'],
+            'customfieldtext' => $params['customfieldtext'],
+            'customfieldselected' => $params['customfieldselected'],
+            'customfieldvalue' => $params['customfieldvalue'],
+            'timestamp' => $params['timestamp']
+        ]);
 
         $courses = [];
         // Prepare the list of core_course_list_element objects.
