@@ -673,7 +673,7 @@ class course_renderer extends \core_course_renderer {
                         true,
                         array('context' => context_course::instance($course->id))
                     );
-                    $course->summary = $c->summary;
+                    $course->summary = $chelper->get_course_formatted_summary($c);
                     $course->visible = $c->visible;
                     $course->category = $coursecategory->get_formatted_name();
                     $course->categoryid = $coursecategory->id;

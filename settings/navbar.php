@@ -36,6 +36,14 @@ $setting = new admin_setting_configstoredfile($name, $title, $description, 'site
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
+// Header picture.
+$name = 'theme_pimenko/navbarpicture';
+$title = get_string('navbarpicture', 'theme_pimenko');
+$description = get_string('navbarpicturedesc', 'theme_pimenko');
+$setting = new admin_setting_configstoredfile($name, $title, $description, 'navbarpicture');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
 // Hide site name.
 $name = 'theme_pimenko/hidesitename';
 $title = get_string(

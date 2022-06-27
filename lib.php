@@ -302,6 +302,7 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
             case 'loginbgimage':
             case 'favicon':
             case 'sitelogo':
+            case 'navbarpicture':
             case 'pimenkoimages':
             case 'backgroundimage':
             case strstr($filearea, 'slideimage'):

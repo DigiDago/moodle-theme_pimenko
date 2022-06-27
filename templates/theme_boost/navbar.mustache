@@ -17,7 +17,10 @@
 {{!
     Page navbar.
 }}
-<nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex pimenko-navbar" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+<nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex pimenko-navbar {{# output.navbarpicture }}withnavbarpicture{{/output.navbarpicture}}" aria-label="{{#str}}sitemenubar, admin{{/str}}"
+    {{# output.navbarpicture }}
+        style="background-image: url({{output.navbarpicture}});"
+    {{/output.navbarpicture}}>
 
     <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-primary">
         <span class="navbar-toggler-icon"></span>

@@ -80,6 +80,11 @@ $string['favicondesc'] = 'Add a favicon';
 $string['sitelogo'] = 'Site logo';
 $string['sitelogodesc'] = 'Add a logo for ur site';
 
+// Header picture *******************************************************.
+
+$string['navbarpicture'] = 'Navbar background';
+$string['navbarpicturedesc'] = 'Add a background image to the navigation bar, then you will have to adapt the style to your needs. You can target the "withnavbarpicture" element';
+
 // Navbar *******************************************************.
 $string['navbarsettings'] = 'Navbar';
 $string['navbarcolor'] = 'Navbar color';

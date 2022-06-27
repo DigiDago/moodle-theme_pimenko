@@ -26,6 +26,12 @@ nav.navbar.pimenko-navbar.fixed-top {
     background-color: unquote('navbarcolor') !important;
     color: unquote('navbartextcolor');
 
+
+    &.withnavbarpicture {
+        background-repeat: no-repeat;
+        background-size: auto;
+    }
+
     #header-category-select {
         .dropdown-menu {
             position: absolute;
