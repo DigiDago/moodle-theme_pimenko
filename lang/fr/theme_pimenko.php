@@ -383,3 +383,7 @@ $string['menuheadercateg:disabled'] = 'Désactiver';
 $string['filterbycustomfilter'] = 'Filtrer par champs personnalisés';
 $string['yes'] = 'Oui';
 $string['no'] = 'Non';
+
+// H5P.
+$string['h5pcss'] = 'Fichier CSS pour H5P';
+$string['h5pcss_desc'] = 'Ajouter un fichier CSS qui ne sera chargé que par H5P pour changer de design';

@@ -321,4 +321,28 @@ $setting =
         ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'], $myrolearray);
 $page->add($setting);
 
+// SCSS for H5P.
+$name        = 'theme_pimenko/h5pcss';
+$title       = get_string(
+    'h5pcss',
+    'theme_pimenko'
+);
+$description = get_string(
+    'h5pcss_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configstoredfile(
+    $name,
+    $title,
+    $description,
+    'h5pcss',
+    0,
+    [
+        'maxfiles'       => 1,
+        'accepted_types' => [ '.css' ]
+    ]
+);
+$page->add($setting);
+$setting->set_updatedcallback('theme_reset_all_caches');
+
 $settings->add($page);

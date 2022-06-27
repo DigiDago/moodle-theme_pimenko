@@ -370,3 +370,7 @@ $string['menuheadercateg:disabled']           = 'Disable';
 $string['filterbycustomfilter'] = 'Filter by custom field';
 $string['yes'] = 'Yes';
 $string['no'] = 'No';
+
+// H5P.
+$string['h5pcss'] = 'CSS file for H5P';
+$string['h5pcss_desc'] = 'Add a CSS file that will only be loaded by H5P to change the design';
