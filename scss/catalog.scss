@@ -28,8 +28,8 @@
     #course-gallery {
 
         .course-gallery {
-            padding: 0;
             overflow: hidden;
+            padding: 0;
 
             .img-course {
                 background-position: center;
@@ -55,8 +55,8 @@
 
             .course-summary {
                 font-size: .9375rem;
-                opacity: 0.75;
                 max-height: 350px;
+                opacity: 0.75;
                 overflow: hidden;
             }
 
@@ -130,6 +130,7 @@
     }
 
     .tertiary-navigation {
+
         label {
             display: block;
             margin-bottom: 0;
