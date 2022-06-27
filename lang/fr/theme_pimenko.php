@@ -80,6 +80,10 @@ $string['favicondesc'] = 'Ajouter un favicon';
 $string['sitelogo'] = 'Logo du site';
 $string['sitelogodesc'] = 'Ajouter un logo';
 
+// Header picture *******************************************************.
+$string['navbarpicture'] = 'Arrière-plan de la barre de navigation';
+$string['navbarpicturedesc'] = 'Ajoutez une image de fond à barre de navigation, il vous faudra ensuite adapter le style à vôtre besoin. Vous pouvez cibler l\'élément ".withnavbarpicture"';
+
 // Navbar *******************************************************.
 $string['navbarsettings'] = 'Barre de navigation';
 $string['navbarcolor'] = 'Couleur de la barre de navigation';

@@ -150,6 +150,24 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Return the picture set in theme option.
+     *
+     * @return string
+     */
+    public function navbarpicture(): string {
+        $navbarpicture = '';
+        if (!empty($this->page->theme->settings->navbarpicture)) {
+            if (empty($this->themeconfig)) {
+                $this->themeconfig = $theme = theme_config::load('pimenko');
+            }
+            $navbarpicture = $this->themeconfig->setting_file_url(
+                'navbarpicture', 'navbarpicture'
+            );
+        }
+        return $navbarpicture;
+    }
+
+    /**
      * Render footer
      *
      * @return string footer template
