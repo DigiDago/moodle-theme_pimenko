@@ -128,8 +128,8 @@
         background: none;
         padding-left: 21px;
     }
-
-    .tertiary-navigation {
+    #page-course-index-category .tertiary-navigation .urlselect select
+    .tertiary-navigation :not(.customfieldfilter){
 
         label {
             display: block;
