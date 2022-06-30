@@ -16,12 +16,12 @@
 
 /**
  * Theme Pimenko lang file.
+ *
  * @package    theme_pimenko
  * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 
 // This line protects the file from being accessed by a URL directly.
 // This is the FR Lang package.
@@ -52,7 +52,8 @@ $string['generalsettings'] = 'Réglages généraux';
 // Preset files setting.
 $string['presetfiles'] = 'Fichier de préréglages du thème';
 // Preset files help text.
-$string['presetfiles_desc'] = 'Les fichiers prédéfinis peuvent être utilisés pour modifier radicalement l\'apparence du thème. Voir <a href=https://docs.moodle.org/dev/Boost_Presets>Préréglages Boost</a> pour plus d\'informations sur la création et le partage de vos propres fichiers prédéfinis, et consultez le <a href=http://moodle.net/boost>Dépôt de préréglages</a> pour les préréglages que d\'autres ont partagés.';
+$string['presetfiles_desc'] =
+    'Les fichiers prédéfinis peuvent être utilisés pour modifier radicalement l\'apparence du thème. Voir <a href=https://docs.moodle.org/dev/Boost_Presets>Préréglages Boost</a> pour plus d\'informations sur la création et le partage de vos propres fichiers prédéfinis, et consultez le <a href=http://moodle.net/boost>Dépôt de préréglages</a> pour les préréglages que d\'autres ont partagés.';
 // Preset setting.
 $string['preset'] = 'Préréglages du thème';
 // Preset help text.
@@ -64,7 +65,8 @@ $string['rawscss_desc'] = 'Utilisez ce champ pour fournir du code SCSS ou CSS qu
 // Raw initial SCSS setting.
 $string['rawscsspre'] = 'SCSS initial brut';
 // Raw initial SCSS setting help text.
-$string['rawscsspre_desc'] = 'Dans ce champ, vous pouvez fournir le code SCSS d\'initialisation, il sera injecté avant tout le reste. La plupart du temps, vous utiliserez ce paramètre pour définir des variables.';
+$string['rawscsspre_desc'] =
+    'Dans ce champ, vous pouvez fournir le code SCSS d\'initialisation, il sera injecté avant tout le reste. La plupart du temps, vous utiliserez ce paramètre pour définir des variables.';
 // We need to include a lang string for each block region.
 $string['region-side-pre'] = 'Droite';
 
@@ -77,6 +79,10 @@ $string['favicondesc'] = 'Ajouter un favicon';
 
 $string['sitelogo'] = 'Logo du site';
 $string['sitelogodesc'] = 'Ajouter un logo';
+
+// Header picture *******************************************************.
+$string['navbarpicture'] = 'Arrière-plan de la barre de navigation';
+$string['navbarpicturedesc'] = 'Ajoutez une image de fond à barre de navigation, il vous faudra ensuite adapter le style à vôtre besoin. Vous pouvez cibler l\'élément ".withnavbarpicture"';
 
 // Navbar *******************************************************.
 $string['navbarsettings'] = 'Barre de navigation';
@@ -96,7 +102,8 @@ $string['profile:contactinfo'] = 'Contact';
 // Login *******************************************************.
 $string['loginsettings'] = 'Paramètres de la page de connexion';
 $string['loginsettingsheading'] = 'Personnalisez la page de connexion';
-$string['logindesc'] = 'Personnalisez la page de connexion en ajoutant un arrière-plan d\'image et des textes au-dessus et en dessous de la zone de connexion.';
+$string['logindesc'] =
+    'Personnalisez la page de connexion en ajoutant un arrière-plan d\'image et des textes au-dessus et en dessous de la zone de connexion.';
 $string['loginbgimage'] = 'Image d\'arrière plan';
 $string['loginbgimagedesc'] = 'Ajoutez une image d\'arrière-plan à la page.';
 $string['loginbgstyle'] = 'Style d\'arrière-plan de connexion';
@@ -104,7 +111,7 @@ $string['loginbgstyledesc'] = 'Sélectionnez le style de l\'image téléchargée
 $string['loginbgopacity'] = '
 En-tête de page de connexion, barre de navigation, zone de connexion et opacité d\'arrière-plan du pied de page lorsqu\'il y a une image d\'arrière-plan';
 $string['loginbgopacitydesc'] =
-        'Opacité d\'arrière-plan de connexion pour l\'en-tête, la barre de navigation, la zone de connexion et le pied de page lorsqu\'il y a une image d\'arrière-plan.';
+    'Opacité d\'arrière-plan de connexion pour l\'en-tête, la barre de navigation, la zone de connexion et le pied de page lorsqu\'il y a une image d\'arrière-plan.';
 $string['logintextboxtop'] = 'Zone de texte supérieure';
 $string['logintextboxtopdesc'] = 'Ajoutez un texte personnalisé au-dessus de la zone de connexion.';
 $string['logintextboxbottom'] = 'Zone de texte inférieur';
@@ -163,21 +170,24 @@ $string['nextmod'] = 'Activité suivante';
 $string['frontpage'] = 'Paramètres de la page d\'accueil';
 $string['settings:regions:frontpageblocksettingscription'] = '';
 $string['settings:regions:frontpageblocksettingscriptiondesc'] =
-        'Sur cette page, vous pouvez déterminer la composition de la page d\'accueil, qui peut être divisée en 8 lignes. Pour chaque ligne, vous pouvez déterminer la couleur et si elle doit être composée d\'une ou plusieurs colonnes. Important: après avoir effectué les modifications, rendez-vous sur la page d\'accueil de votre site pour ajouter du contenu à l\'aide de blocs. Vous pouvez trouver la page d\'accueil ici : <a href= ' .
-        new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Page d\'accueil</a>.';
+    'Sur cette page, vous pouvez déterminer la composition de la page d\'accueil, qui peut être divisée en 8 lignes. Pour chaque ligne, vous pouvez déterminer la couleur et si elle doit être composée d\'une ou plusieurs colonnes. Important: après avoir effectué les modifications, rendez-vous sur la page d\'accueil de votre site pour ajouter du contenu à l\'aide de blocs. Vous pouvez trouver la page d\'accueil ici : <a href= ' .
+    new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Page d\'accueil</a>.';
 $string['settings:regions:blockrow'] = 'Zone de contenu {$a}';
 $string['settings:regions:blockrowdesc'] = 'Ajouter / définir la mise en page pour la zone de contenu sur la première page.';
 
 // Block Regions colors.
 $string['settings:regions:blockregionrowbackgroundcolor'] = 'Couleur de fond de la zone {$a}';
-$string['settings:regions:blockregionrowbackgroundcolordesc'] = 'Ajoutez / définissez une couleur de fond pour la zone de contenu sur la première page.';
+$string['settings:regions:blockregionrowbackgroundcolordesc'] =
+    'Ajoutez / définissez une couleur de fond pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowtextcolor'] = 'Couleur de texte de la zone {$a}';
-$string['settings:regions:blockregionrowtextcolordesc'] = 'Ajoutez / définissez une couleur de texte pour la zone de contenu sur la première page.';
+$string['settings:regions:blockregionrowtextcolordesc'] =
+    'Ajoutez / définissez une couleur de texte pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowlinkcolor'] = 'Couleur des liens de la zone {$a}';
-$string['settings:regions:blockregionrowlinkcolordesc'] = 'Ajoutez / définissez une couleur pour les liens pour la zone de contenu sur la première page.';
+$string['settings:regions:blockregionrowlinkcolordesc'] =
+    'Ajoutez / définissez une couleur pour les liens pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowlinkhovercolor'] = 'Couleur des liens \'survoler\' de la zone {$a}';
 $string['settings:regions:blockregionrowlinkhovercolordesc'] =
-        'Ajoutez / définissez une couleur pour les liens \'survoler\' pour la zone de contenu sur la première page.';
+    'Ajoutez / définissez une couleur pour les liens \'survoler\' pour la zone de contenu sur la première page.';
 
 // Slide.
 $string['settings:frontslider:enablecarousel'] = 'Activer le carrousel';
@@ -192,7 +202,8 @@ $string['settings:frontslider:slidecaptiondesc'] = 'Définir un texte pour cette
 
 // Course card frontpage.
 $string['settings:frontcoursecard:showcustomfields'] = 'Afficher les champs personnalisés';
-$string['settings:frontcoursecard:showcustomfieldsdesc'] = 'Afficher les champs personnalisés pour les cours sur la page d\'accueil';
+$string['settings:frontcoursecard:showcustomfieldsdesc'] =
+    'Afficher les champs personnalisés pour les cours sur la page d\'accueil';
 $string['settings:frontcoursecard:showcontacts'] = 'Voir contacts';
 $string['settings:frontcoursecard:showcontactsdesc'] = 'Afficher le contact dans la carte de cours de la page d\'accueil';
 $string['settings:frontcoursecard:showstartdate'] = 'Afficher la date de début';
@@ -200,7 +211,8 @@ $string['settings:frontcoursecard:showstartdatedesc'] = 'Afficher la date de dé
 
 // Fonts.
 $string['settings:font:googlefont'] = 'Police Google';
-$string['settings:font:googlefontdesc'] = 'Veuillez vous référer à la page: https://fonts.google.com/ pour trouver votre typographie';
+$string['settings:font:googlefontdesc'] =
+    'Veuillez vous référer à la page: https://fonts.google.com/ pour trouver votre typographie';
 
 // Frontpage Block Regions name.
 $string['region-theme-front-a'] = 'Pimenko front-a';
@@ -231,24 +243,29 @@ $string['region-side-pre'] = 'Gauche';
 $string['entercourse'] = 'Entrer';
 
 // Moodle activity completion design enabling setting.
-$string['moodleactivitycompletion']      = "Activer l'affichage de l'achévement d'activité moodle";
-$string['moodleactivitycompletion_desc'] = "Dans les activités ou les ressources d'un cours, les conditions d'achèvement sont affichées sous la forme d'une étiquette en dessous du titre de l'activité ou de la ressource. Ce réglage permet de masquer l'étiquette qui indique l'état de l'achèvement. Elle ne modifie pas l'affichage du suivi qui apparait au-dessous de chaque activité sur la page de cours et que vous pouvez régler dans les paramètres d'un cours.";
+$string['moodleactivitycompletion'] = "Activer l'affichage de l'achévement d'activité moodle";
+$string['moodleactivitycompletion_desc'] =
+    "Dans les activités ou les ressources d'un cours, les conditions d'achèvement sont affichées sous la forme d'une étiquette en dessous du titre de l'activité ou de la ressource. Ce réglage permet de masquer l'étiquette qui indique l'état de l'achèvement. Elle ne modifie pas l'affichage du suivi qui apparait au-dessous de chaque activité sur la page de cours et que vous pouvez régler dans les paramètres d'un cours.";
 
 // Setting show participant tab or no.
-$string['showparticipantscourse']      = "Afficher la rubrique participant dans le menu secondaire visible dans les cours";
-$string['showparticipantscourse_desc'] = "Cette option permet d'afficher ou de masquer la rubrique 'Participants' qui s’affiche par défaut dans le menu secondaire de la page d'accueil d'un cours.";
+$string['showparticipantscourse'] = "Afficher la rubrique participant dans le menu secondaire visible dans les cours";
+$string['showparticipantscourse_desc'] =
+    "Cette option permet d'afficher ou de masquer la rubrique 'Participants' qui s’affiche par défaut dans le menu secondaire de la page d'accueil d'un cours.";
 
 // Show or not navigation in mod in course.
-$string['showactivitynavigation']      = "Afficher la navigation précédent/suivant pour les mods";
-$string['showactivitynavigation_desc'] = "Cette option permet d'afficher ou de masquer la navigation précédent/suivant dans les activités";
+$string['showactivitynavigation'] = "Afficher la navigation précédent/suivant pour les mods";
+$string['showactivitynavigation_desc'] =
+    "Cette option permet d'afficher ou de masquer la navigation précédent/suivant dans les activités";
 
 $string['totop'] = 'Aller en haut';
 
 $string['listuserrole'] = 'Liste des rôles';
-$string['listuserrole_desc'] = 'Si l\'option showparticipantscourse est activé définisser les utilisateurs pouvant voir l\'onglet participants';
+$string['listuserrole_desc'] =
+    'Si l\'option showparticipantscourse est activé définisser les utilisateurs pouvant voir l\'onglet participants';
 
 $string['unaddableblocks'] = 'Blocs inutiles';
-$string['unaddableblocks_desc'] = 'Les blocs spécifiés ne sont pas nécessaires lors de l\'utilisation de ce thème et ne seront pas listés dans le menu \'Ajouter un bloc\'.';
+$string['unaddableblocks_desc'] =
+    'Les blocs spécifiés ne sont pas nécessaires lors de l\'utilisation de ce thème et ne seront pas listés dans le menu \'Ajouter un bloc\'.';
 
 $string['backgroundimage'] = 'Image de fond';
 $string['backgroundimage_desc'] = 'L\'image à afficher en arrière-plan du site.';
@@ -258,32 +275,34 @@ $string['pimenkofeature'] = 'Fonctionnalités Pimenko';
 // Catalog enabling setting.
 $string['catalogsettings'] = "Catalogue";
 $string['catalogsettings_desc'] = "Configuration de la page catalogue";
+$string['customfieldfilter'] = "Activation des filtres sur champs personnalisés";
+$string['customfieldfilter_desc'] = "Active les filtres sur les champs personnalisés des cours dans le catalogue";
 $string['enablecatalog'] = "Activation du catalogue";
 $string['enablecatalog_desc'] = "Activer le catalogue";
 
-$string['titlecatalog']      = "Titre du catalogue";
+$string['titlecatalog'] = "Titre du catalogue";
 $string['titlecatalog_desc'] = "Modifier le titre du catalogue";
 
 $string['tagfilter'] = "Activation du filtre par tags du catalogue";
 $string['tagfilter_desc'] = "Cette option permet de rajouter un filtre par tags au niveau du catalogue de cours";
 
-$string['allcategories']     = "Toutes les catégories";
-$string['alltags']     = "Tous les tags";
-$string['labelcategory']     = "Filtrer par catégorie";
-$string['labelsearch']       = "Ou rechercher";
+$string['allcategories'] = "Toutes les catégories";
+$string['alltags'] = "Tous les tags";
+$string['labelcategory'] = "Filtrer par catégorie";
+$string['labelsearch'] = "Ou rechercher";
 $string['placeholdersearch'] = "Mots clés...";
 $string['search'] = "Rechercher";
 $string['close'] = "Fermer";
 
 // Show the count of subscribers.
-$string['showsubscriberscount']     = 'Affiche le nombre d\'inscrits sur les vignettes de cours';
+$string['showsubscriberscount'] = 'Affiche le nombre d\'inscrits sur les vignettes de cours';
 $string['showsubscriberscount_desc'] = 'Permet d\'afficher le nombre d\'inscrits sur les vignettes de cours';
 $string['subscribers'] = 'inscrits';
 
-$string['viewallhiddencourses']      = "Afficher les cours cachés sur la page course/index.php pour la méthode d'inscription synopsis";
+$string['viewallhiddencourses'] = "Afficher les cours cachés sur la page course/index.php pour la méthode d'inscription synopsis";
 $string['viewallhiddencourses_desc'] = "Activer/Désactiver l'affichage des cours cachés";
 
-$string['catalogsummarymodal']      = "Afficher le résumé des cours du catalogue sous forme de modal";
+$string['catalogsummarymodal'] = "Afficher le résumé des cours du catalogue sous forme de modal";
 $string['catalogsummarymodal_desc'] = "Permet l'affichage du résumé des cours du catalogue sous forme d'une modal";
 
 // Other feature heading.
@@ -304,7 +323,8 @@ $string['frontpagecardsettings_desc'] = "Configurez l'affichage des cards en pag
 
 // Hide site name setting.
 $string['hidesitename'] = "Cacher le nom du site";
-$string['hidesitename_desc'] = "Cette option permet de cacher le nom du site qui apparait dans l’en tête du site, à droite du logo en vue ordinateur.";
+$string['hidesitename_desc'] =
+    "Cette option permet de cacher le nom du site qui apparait dans l’en tête du site, à droite du logo en vue ordinateur.";
 $string['cardlabelformat'] = "Formateur";
 $string['cardlabeldate'] = "Date de début";
 
@@ -320,8 +340,10 @@ $string['removedprimarynavitems'] = "Onglets du menu à supprimer";
 $string['removedprimarynavitems_desc'] = "Vous pouvez renseigner aussi l'identifiants des menus à supprimer de la navbar. Chaque identifiants doit être séparé par une ',' exemple :<br>
 <pre>myhome,courses,mycourses</pre>";
 $string['customnavbarmenu'] = "Personnalisation du menu dans la barre de navigation";
-$string['customnavbarmenu_desc'] = "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
-$string['custommenuitemslogin'] = 'Éléments du menu personnalisé qui apparaitra une fois que les utilisateurs sont authentifiés sur le site';
+$string['customnavbarmenu_desc'] =
+    "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
+$string['custommenuitemslogin'] =
+    'Éléments du menu personnalisé qui apparaitra une fois que les utilisateurs sont authentifiés sur le site';
 $string['configcustommenuitemslogin'] = "Vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
 <pre>
 Cours
@@ -336,14 +358,32 @@ Mobile app|https://une-url.xyz/app|Téléchargez notre app
 // Cover image for course.
 $string['coursecover'] = "Bannière de cours";
 $string['coursecoversettings'] = "Déterminer les réglages pour l’affichage d’image (vignette) en haut des pages de cours";
-$string['coursecoversettings_desc'] = "Il est possible d’ajouter une image dans l’en tête des pages d’un cours. Les options ci-après permettent de choisir comment ces images qui s’affichent.";
-$string['gradienttextcolor'] = "Si vous indiquez une couleur, elle sera utilisé pour modifier la couleur du titre du cours afficher dans l’en tête. Vous pouvez par exemple mettre le code couleur du blanc (#fff) pour avoir un titre de cours plus visible sur une photo foncée.";
+$string['coursecoversettings_desc'] =
+    "Il est possible d’ajouter une image dans l’en tête des pages d’un cours. Les options ci-après permettent de choisir comment ces images qui s’affichent.";
+$string['gradienttextcolor'] =
+    "Si vous indiquez une couleur, elle sera utilisé pour modifier la couleur du titre du cours afficher dans l’en tête. Vous pouvez par exemple mettre le code couleur du blanc (#fff) pour avoir un titre de cours plus visible sur une photo foncée.";
 $string['gradienttextcolor_desc'] = "Cette option permet de modifier la couleur du texte afficher sur la bannière";
 $string['editcoverimage'] = "Changer la vignette";
 $string['displaycoverallpage'] = "Afficher l’image dans l’en-tête de toutes les pages du cours";
-$string['displaycoverallpage_desc'] = "Si cette option est activée, l’image sera affichée à la fois sur la page d’accueil de cours mais aussi dans les activités, les ressources ou les pages d’administration du cours";
+$string['displaycoverallpage_desc'] =
+    "Si cette option est activée, l’image sera affichée à la fois sur la page d’accueil de cours mais aussi dans les activités, les ressources ou les pages d’administration du cours";
 $string['displayasthumbnail'] = "Afficher l’image sous la forme d’une vignette ou sur la pleine largeur de l’en tête du cours";
-$string['displayasthumbnail_desc'] = "Si cette option est activée, l’image sera affichée sous la forme d’une vignette, c’est-à-dire un rectangle d’environ . Si cette option n’est pas activée, l’image sera affichée sous la forme d’une bannière qui occupe l’ensemble de la largeur de l’en tête de cours.";
+$string['displayasthumbnail_desc'] =
+    "Si cette option est activée, l’image sera affichée sous la forme d’une vignette, c’est-à-dire un rectangle d’environ . Si cette option n’est pas activée, l’image sera affichée sous la forme d’une bannière qui occupe l’ensemble de la largeur de l’en tête de cours.";
 // Options pour la vignette des cours.
 $string['gradientcovercolor'] = "Appliquer une couleur sur l’image";
-$string['gradientcovercolor_desc'] = "Si vous indiquez une couleur, elle sera affichée par-dessus l’image avec une transparence pour donner un effet de masque de couleur au-dessus de l’image";
+$string['gradientcovercolor_desc'] =
+    "Si vous indiquez une couleur, elle sera affichée par-dessus l’image avec une transparence pour donner un effet de masque de couleur au-dessus de l’image";
+// Options d'affichage pour le menu des cate.
+$string['menuheadercateg'] = 'Mes catégories';
+$string['menuheadercategdesc'] = 'Afficher une liste déroulante avec les catégories des utilisateurs';
+$string['menuheadercateg:excludehidden'] = 'Activer l\'exclusion des catégories cachées';
+$string['menuheadercateg:includehidden'] = 'Activer l\'inclusion des catégories cachées';
+$string['menuheadercateg:disabled'] = 'Désactiver';
+$string['filterbycustomfilter'] = 'Filtrer par champs personnalisés';
+$string['yes'] = 'Oui';
+$string['no'] = 'Non';
+
+// H5P.
+$string['h5pcss'] = 'Fichier CSS pour H5P';
+$string['h5pcss_desc'] = 'Ajouter un fichier CSS qui ne sera chargé que par H5P pour changer de design';

@@ -19,14 +19,25 @@
  */
 
 define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, ajax, templates, cfg) {
+    // General filter.
     let categorySelect = $('#page-course-index-category .categoryselect .urlselect .custom-select');
     let tagSelect = $('#page-course-index-category .tagselect .urlselect .custom-select');
-    let categorySearch = $('#page-course-index-category form.simplesearchform input');
+    let categorySearch = $('#page-course-index-category .searchcourse form.simplesearchform input');
+    let categoryidselect = $("input[name='categoryid']");
+    // Custom field filter.
+    let customfieldSearch = $('#page-course-index-category .customfieldsearch form');
+    let customfieldDate = $('#page-course-index-category .customfielddate form select');
+    let customfieldSelect = $('#page-course-index-category .customfieldselect form select');
+    let resetbutton = $('#page-course-index-category button.btn[data-filteraction=\'reset\']');
 
     let startQuery = function() {
         categorySelect.attr("disabled", "true");
         tagSelect.attr("disabled", "true");
         categorySearch.attr("disabled", "true");
+        customfieldSearch.attr("disabled", "true");
+        customfieldDate.attr("disabled", "true");
+        customfieldSelect.attr("disabled", "true");
+        resetbutton.attr("disabled", "true");
         $('#course-gallery').attr("style", "opacity: 0.25;");
         $('#loader-gallery').attr("style", "display: flex;");
     };
@@ -35,6 +46,10 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         categorySelect.removeAttr("disabled");
         tagSelect.removeAttr("disabled");
         categorySearch.removeAttr("disabled");
+        customfieldSearch.removeAttr("disabled");
+        customfieldDate.removeAttr("disabled");
+        customfieldSelect.removeAttr("disabled");
+        resetbutton.removeAttr("disabled");
         $('#course-gallery').attr("style", "opacity: 1;");
         $('#loader-gallery').attr("style", "display: none;");
         let buttonLoadMore = $('#load-more');
@@ -107,14 +122,13 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             template.courses = courses;
 
             // Rendering of results.
-            templates.render('theme_pimenko/course_gallery', template)
-                .then(function(html) {
-                    let element = document.getElementById('course-gallery');
-                    let parent = element.parentElement;
-                    parent.removeChild(element);
-                    parent.children[parent.children.length - 1].insertAdjacentHTML('beforebegin', html);
-                    endQuery(courses.length);
-                }).fail(function(ex) {
+            templates.render('theme_pimenko/course_gallery', template, 'theme_pimenko').then(function(html) {
+                let element = document.getElementById('course-gallery');
+                let parent = element.parentElement;
+                parent.removeChild(element);
+                parent.insertAdjacentHTML('beforebegin', html);
+                endQuery(courses.length);
+            }).fail(function(ex) {
                 /* eslint no-console: "off" */
                 console.error(ex);
                 endQuery();
@@ -126,7 +140,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         categorySelect.change(function() {
             let href = categorySelect.val();
             categorySearch.val("");
-            // Call the method returning the course having the category selected.
+
             if (href !== "all") {
                 document.location.href = href;
             } else {
@@ -134,28 +148,65 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             }
         });
 
-        tagSelect.change(function() {
-            let href = tagSelect.val();
-            categorySearch.val("");
-            // Call the method returning the course having the category selected.
-            if (href !== "all") {
-                document.location.href = href;
-            } else {
-                document.location.href = "/course/index.php";
-            }
-        });
-
-        $('#page-course-index-category form.simplesearchform').submit(function(event) {
+        customfieldSearch.submit(function(event) {
             event.preventDefault();
             event.stopPropagation();
 
-            if (categorySearch.val() === '') {
-                document.location.href = "/course/index.php";
+            let href = this.action;
+            let value = this.querySelector('input').value;
+
+            if (value === "") {
+                href = href + '&customfieldvalue=all';
+                document.location.href = href;
+            } else {
+                href = href + '&customfieldvalue=' + value;
+                document.location.href = href;
+            }
+        });
+
+        customfieldDate.change(function() {
+
+            let parent = this.form;
+            let datevalues = new FormData(parent);
+            let href = parent.action;
+            let categoryid = false;
+
+            if (categoryidselect) {
+                categoryid = categoryidselect.val();
+            }
+
+            let datatype = parent.closest('.customfielddate').dataset.name;
+
+            href = href + '?customfieldselected=' + datatype + '&day=' +
+                datevalues.get('date_selector[day]') +
+                '&month=' + datevalues.get('date_selector[month]') +
+                '&year=' + datevalues.get('date_selector[year]');
+
+            if (categoryid) {
+                href = href + '&categoryid=' + categoryid;
+            }
+
+            document.location.href = href;
+        });
+
+        resetbutton.click(function() {
+            document.location.href = "/course/index.php";
+        });
+
+        $('#page-course-index-category .searchcourse form.simplesearchform').submit(function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            let categoryid = 0;
+
+            if (categoryidselect) {
+                categoryid = categoryidselect.val();
             }
 
             let searchargs = {
                 criterianame: 'search',
                 criteriavalue: categorySearch.val(),
+                categoryid: categoryid,
                 page: 0,
                 perpage: 100
             };
@@ -167,9 +218,11 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             startQuery();
 
             promises[0].done(function(response) {
+                tagSelect.prop('selectedIndex', 0);
+                customfieldSearch.prop('selectedIndex', 0);
+                customfieldDate.prop('selectedIndex', 0);
+                customfieldSelect.prop('selectedIndex', 0);
                 doQuery(response);
-                categorySelect.val("all");
-                tagSelect.val('/course/index.php?tagid=0');
             }).fail(function(ex) {
                 /* eslint no-console: "off" */
                 console.log(ex);

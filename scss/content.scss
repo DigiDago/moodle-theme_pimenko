@@ -25,3 +25,8 @@
     // This value need to be header height.
     margin-top: 0;
 }
+
+// Add a min height for all ressourcecontent.
+.resourcepdf object {
+    min-height: 700px;
+}

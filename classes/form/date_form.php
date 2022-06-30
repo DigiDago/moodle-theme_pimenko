@@ -15,32 +15,42 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Pimenko version file.
+ * Theme Pimenko date form feature.
+ *
  * @package    theme_pimenko
  * @copyright  Pimenko 2020
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+namespace theme_pimenko\form;
 
-// This line protects the file from being accessed by a URL directly.
-defined('MOODLE_INTERNAL') || die();
+require_once($CFG->libdir."/formslib.php");
 
-// This is the version of the plugin.
-$plugin->version = 2022041229;
+use moodleform;
 
-// This is the version of Moodle this plugin requires.
-$plugin->requires = 2019111800;
+/**
+ * Settings form for the date filter.
+ *
+ * @package     report_digiboard
+ * @category    admin
+ * @copyright   Pimenko 2019
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class date_form extends moodleform {
 
-// This is the component name of the plugin - it always starts with 'theme_'
-// for themes and should be the same as the name of the folder.
-$plugin->component = 'theme_pimenko';
+    public function definition(): void {
+        $mform = $this->_form;
+        $mform->disable_form_change_checker();
 
-// Maturity (do not use ALPHA or BETA versions in production sites).
-$plugin->maturity = MATURITY_RC;
+        if (!$this->_customdata->name) {
+            $name = get_string('datefilter', 'theme_pimenko');
+        } else {
+            $name = $this->_customdata->name;
+        }
 
-$plugin->release = '4.0';
+        $date = $this->_customdata->urlselectedvalue ?? time();
 
-// This is a list of plugins, this plugin depends on (and their versions).
-$plugin->dependencies = [
-        'theme_boost' => 2016102100
-];
+        $mform->addElement('date_selector', 'date_selector', $name);
+        $mform->setDefault('date_selector', $date);
+    }
+}

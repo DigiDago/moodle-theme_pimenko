@@ -36,6 +36,7 @@ function xmldb_theme_pimenko_upgrade($oldversion = 0) {
 
         $courses = $DB->get_records_sql('SELECT * FROM {course}');
 
+        // Check if moockie2 exist.
         if (core_plugin_manager::instance()->get_plugin_info('theme_moockie2')) {
             foreach ($courses as $course) {
                 $context = context_course::instance($course->id);

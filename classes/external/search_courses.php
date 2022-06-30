@@ -1,5 +1,5 @@
 <?php
-// This file is part of the moockie2 theme for Moodle
+// This file is part of the pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -328,6 +328,7 @@ class search_courses extends core_course_external {
      * @param string $criteriavalue Criteria value
      * @param int $page Page number (for pagination)
      * @param int $perpage Items per page
+     * @param int $categoryid Category id
      * @param array $requiredcapabilities Optional list of required capabilities (used to filter the list).
      * @param int $limittoenrolled Limit to only enrolled courses
      *
@@ -338,6 +339,7 @@ class search_courses extends core_course_external {
         string $criteriavalue,
         int $page = 0,
         int $perpage = 0,
+        int $categoryid = 0,
         array $requiredcapabilities = [],
         int $limittoenrolled = 0): array {
         confirm_sesskey();
@@ -353,6 +355,7 @@ class search_courses extends core_course_external {
             'criteriavalue' => $criteriavalue,
             'page' => $page,
             'perpage' => $perpage,
+            'categoryid' => $categoryid,
             'requiredcapabilities' => $requiredcapabilities
         ];
         $params = self::validate_parameters(
@@ -434,7 +437,7 @@ class search_courses extends core_course_external {
 
         $finalcourses = [];
 
-        foreach ($courses as $course) {
+        foreach ($courses as $key => $course) {
             $coursecontext = context_course::instance($course->id);
             $neverhidden = false;
             $neverhiddenpaypal = false;
@@ -451,6 +454,11 @@ class search_courses extends core_course_external {
                     $neverhiddenpaypal = true;
                     break;
                 }
+            }
+
+            // Remove result not in ur categ.
+            if ($categoryid !== 0 && $course->category != $categoryid) {
+                continue;
             }
 
             $categoryvisible = $DB->get_field(
@@ -513,6 +521,12 @@ class search_courses extends core_course_external {
                 'perpage' => new external_value(
                     PARAM_INT,
                     'items per page',
+                    VALUE_DEFAULT,
+                    0
+                ),
+                'categoryid' => new external_value(
+                    PARAM_INT,
+                    'cateory id',
                     VALUE_DEFAULT,
                     0
                 ),

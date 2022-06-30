@@ -87,41 +87,97 @@
     }
 }}
 <div class="container-fluid tertiary-navigation" id="action_bar">
-    <div class="row">
-        {{#categoryselect}}
-            <div class="navitem categoryselect">
-                {{> core/url_select }}
-            </div>
-        {{/categoryselect}}
-        {{#tagselect}}
-            <div class="navitem tagselect">
-                {{> core/url_select }}
-            </div>
-        {{/tagselect}}
-        {{#customfield}}
-            <div class="navitem">
-                {{> core/url_select }}
-            </div>
-        {{/customfield}}
-        {{#search}}
-            <div class="navitem">
-                {{> core/search_input }}
-            </div>
-        {{/search}}
-        {{#additionaloptions}}
-            <div class="ml-auto d-flex">
-                <div class="navitem dropdown">
-                    <button aria-label="{{#str}}moreactions{{/str}}" class="btn btn-secondary dropdown-toggle" id="dropdown-actions" data-toggle="dropdown" aria-haspopup="true" aria-controls="moreactionsmenu">
-                        {{#str}}moremenu{{/str}}
-                    </button>
+    {{#customfieldfilter}}
+        <div class="customfieldfilter">
+            <div class="card">
+                <div class="card-header p-0">
+                    <div class="d-flex align-items-center mb-0 p-1" id="fieldfilter">
+                        <button class="w-100 d-flex btn toggle-card-button"
+                                data-toggle="collapse"
+                                data-target="#collapseOne"
+                                aria-expanded="true"
+                                aria-controls="collapseOne">
+                            <div class="ml-3">
+                                <span class="mr-1">{{#str}}filterbycustomfilter, theme_pimenko{{/str}}</span>
+                            </div>
+                            <span class="collapsed-icon-container ml-auto"><i class="toggle-card-icon fa fa-lg fa-angle-down"></i></span>
+                            <span class="expanded-icon-container ml-auto"><i class="toggle-card-icon fa fa-lg fa-angle-up"></i></span>
+                        </button>
+                    </div>
+                </div>
 
-                    <div id="moreactionsmenu" class="dropdown-menu" aria-labelledby="dropdown-actions" role="menu">
-                        {{#options}}
-                            <a role="menuitem" class="dropdown-item" {{#attributes}}{{name}}="{{value}}"{{/attributes}} href="{{url}}" tabindex="-1">{{string}}</a>
-                        {{/options}}
+                <div id="collapseOne" class="collapse show container" aria-labelledby="fieldfilter" data-parent=".customfieldfilter">
+                    <div class="row card-body p-3">
+                        <div class="customfield d-flex flex-wrap">
+                            {{#customfields}}
+                                {{#.}}
+                                    {{#selecttype}}
+                                        <div class="navitem {{name}} customfieldselect">
+                                            {{> core/url_select }}
+                                        </div>
+                                    {{/selecttype}}
+                                    {{#texttype}}
+                                        <div class="navitem {{name}}">
+                                            {{> core/search_input }}
+                                        </div>
+                                    {{/texttype}}
+                                {{/.}}
+                            {{/customfields}}
+                        </div>
+                    </div>
+                    <div class="customfield d-flex flex-wrap">
+                        {{#customfields}}
+                            {{#.}}
+                                {{#date}}
+                                    <div class="customfielddate" data-name="{{{name}}}">
+                                        {{{date_selector}}}
+                                    </div>
+                                {{/date}}
+                            {{/.}}
+                        {{/customfields}}
                     </div>
                 </div>
             </div>
-        {{/additionaloptions}}
+        </div>
+    {{/customfieldfilter}}
+    <div class="container filter">
+        <input type="hidden" name="categoryid" value="{{{categoryid}}}">
+        <div class="row">
+            <div class="d-flex flex-wrap">
+                {{#categoryselect}}
+                    <div class="navitem categoryselect">
+                        {{> core/url_select }}
+                    </div>
+                {{/categoryselect}}
+                {{#tagselect}}
+                    <div class="navitem tagselect">
+                        {{> core/url_select }}
+                    </div>
+                {{/tagselect}}
+                {{#search}}
+                    <div class="navitem searchcourse">
+                        {{> core/search_input }}
+                    </div>
+                {{/search}}
+                <div class="navitem">
+                    <button data-filteraction="reset" type="button" class="btn btn-secondary ml-auto mr-2">{{#str}}clearfilters, user{{/str}}</button>
+                </div>
+                {{#additionaloptions}}
+                    <div class="ml-auto d-flex">
+                        <div class="navitem dropdown">
+                            <button aria-label="{{#str}}moreactions{{/str}}" class="btn btn-secondary dropdown-toggle" id="dropdown-actions" data-toggle="dropdown" aria-haspopup="true" aria-controls="moreactionsmenu">
+                                {{#str}}moremenu{{/str}}
+                            </button>
+
+                            <div id="moreactionsmenu" class="dropdown-menu" aria-labelledby="dropdown-actions" role="menu">
+                                {{#options}}
+                                    <a role="menuitem" class="dropdown-item" {{#attributes}}{{name}}="{{value}}"{{/attributes}} href="{{url}}" tabindex="-1">{{string}}</a>
+                                {{/options}}
+                            </div>
+                        </div>
+                    </div>
+                {{/additionaloptions}}
+            </div>
+        </div>
     </div>
 </div>

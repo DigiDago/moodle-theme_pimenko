@@ -49,7 +49,7 @@ $setting = new admin_setting_configcheckbox(
 );
 $page->add($setting);
 
-// Activation of catalog view.
+// Activation of tag filter.
 $name = 'theme_pimenko/tagfilter';
 $title = get_string(
     'tagfilter',
@@ -57,6 +57,24 @@ $title = get_string(
 );
 $description = get_string(
     'tagfilter_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
+// Activation of custom field filter.
+$name = 'theme_pimenko/customfieldfilter';
+$title = get_string(
+    'customfieldfilter',
+    'theme_pimenko'
+);
+$description = get_string(
+    'customfieldfilter_desc',
     'theme_pimenko'
 );
 $setting = new admin_setting_configcheckbox(

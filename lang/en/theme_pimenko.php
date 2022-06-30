@@ -80,6 +80,11 @@ $string['favicondesc'] = 'Add a favicon';
 $string['sitelogo'] = 'Site logo';
 $string['sitelogodesc'] = 'Add a logo for ur site';
 
+// Header picture *******************************************************.
+
+$string['navbarpicture'] = 'Navbar background';
+$string['navbarpicturedesc'] = 'Add a background image to the navigation bar, then you will have to adapt the style to your needs. You can target the "withnavbarpicture" element';
+
 // Navbar *******************************************************.
 $string['navbarsettings'] = 'Navbar';
 $string['navbarcolor'] = 'Navbar color';
@@ -263,6 +268,8 @@ $string['pimenkofeature'] = 'Pimenko features';
 // Catalog enabling setting.
 $string['catalogsettings'] = "Catalog";
 $string['catalogsettings_desc'] = "Configuring the catalog page";
+$string['customfieldfilter'] = "Enabling of the custom field filter";
+$string['customfieldfilter_desc'] = "Enable filters on course custom fields in the catalog";
 $string['enablecatalog'] = "Enabling of the catalog";
 $string['enablecatalog_desc'] = "Enable the catalog";
 
@@ -354,3 +361,16 @@ $string['displayasthumbnail_desc'] = "If this option is activated, the image wil
 // Options pour la vignette des cours.
 $string['gradientcovercolor'] = "Apply a color to the image";
 $string['gradientcovercolor_desc'] = "If you specify a color, it will be displayed over the image with transparency to give a color mask effect above the image";
+// Options d'affichage pour le menu des cate.
+$string['menuheadercateg']                    = 'My categories';
+$string['menuheadercategdesc']                = 'Show a dropdown menu with user\'s categories';
+$string['menuheadercateg:excludehidden']      = 'Enable excluding hidden categories';
+$string['menuheadercateg:includehidden']      = 'Enable including hidden categories';
+$string['menuheadercateg:disabled']           = 'Disable';
+$string['filterbycustomfilter'] = 'Filter by custom field';
+$string['yes'] = 'Yes';
+$string['no'] = 'No';
+
+// H5P.
+$string['h5pcss'] = 'CSS file for H5P';
+$string['h5pcss_desc'] = 'Add a CSS file that will only be loaded by H5P to change the design';

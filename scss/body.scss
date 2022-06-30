@@ -81,6 +81,7 @@ body {
     }
 
     section.block {
+        overflow: hidden;
 
         & > .card-body {
             padding: 0 !important;

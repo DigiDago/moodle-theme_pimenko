@@ -28,12 +28,13 @@
     #course-gallery {
 
         .course-gallery {
+            overflow: hidden;
             padding: 0;
 
             .img-course {
                 background-position: center;
                 background-size: cover;
-                height: 175px;
+                height: 7rem;
                 width: 100%;
             }
 
@@ -54,8 +55,8 @@
 
             .course-summary {
                 font-size: .9375rem;
-                opacity: 0.75;
                 max-height: 350px;
+                opacity: 0.75;
                 overflow: hidden;
             }
 
@@ -128,7 +129,8 @@
         padding-left: 21px;
     }
 
-    .tertiary-navigation {
+    .tertiary-navigation div.filter {
+
         label {
             display: block;
             margin-bottom: 0;
@@ -202,6 +204,22 @@
 
         #category-search-form {
             margin: 0;
+        }
+    }
+
+    button {
+        .collapsed-icon-container {
+            display: none;
+        }
+    }
+
+    button.collapsed {
+        .expanded-icon-container {
+            display:none;
+        }
+
+        .collapsed-icon-container {
+            display: block;
         }
     }
 }
