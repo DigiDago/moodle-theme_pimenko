@@ -19,17 +19,25 @@
  */
 
 define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, ajax, templates, cfg) {
+    // General filter.
     let categorySelect = $('#page-course-index-category .categoryselect .urlselect .custom-select');
     let tagSelect = $('#page-course-index-category .tagselect .urlselect .custom-select');
+    let categorySearch = $('#page-course-index-category .searchcourse form.simplesearchform input');
+    let categoryidselect = $("input[name='categoryid']");
+    // Custom field filter.
     let customfieldSearch = $('#page-course-index-category .customfieldsearch form');
     let customfieldDate = $('#page-course-index-category .customfielddate form select');
-    let categorySearch = $('#page-course-index-category .searchcourse form.simplesearchform input');
+    let customfieldSelect = $('#page-course-index-category .customfieldselect form select');
     let resetbutton = $('#page-course-index-category button.btn[data-filteraction=\'reset\']');
 
     let startQuery = function() {
         categorySelect.attr("disabled", "true");
         tagSelect.attr("disabled", "true");
         categorySearch.attr("disabled", "true");
+        customfieldSearch.attr("disabled", "true");
+        customfieldDate.attr("disabled", "true");
+        customfieldSelect.attr("disabled", "true");
+        resetbutton.attr("disabled", "true");
         $('#course-gallery').attr("style", "opacity: 0.25;");
         $('#loader-gallery').attr("style", "display: flex;");
     };
@@ -38,6 +46,10 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         categorySelect.removeAttr("disabled");
         tagSelect.removeAttr("disabled");
         categorySearch.removeAttr("disabled");
+        customfieldSearch.removeAttr("disabled");
+        customfieldDate.removeAttr("disabled");
+        customfieldSelect.removeAttr("disabled");
+        resetbutton.removeAttr("disabled");
         $('#course-gallery').attr("style", "opacity: 1;");
         $('#loader-gallery').attr("style", "display: none;");
         let buttonLoadMore = $('#load-more');
@@ -142,7 +154,6 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
 
             let href = this.action;
             let value = this.querySelector('input').value;
-            console.log(value);
 
             if (value === "") {
                 href = href + '&customfieldvalue=all';
@@ -158,6 +169,11 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             let parent = this.form;
             let datevalues = new FormData(parent);
             let href = parent.action;
+            let categoryid = false;
+
+            if (categoryidselect) {
+                categoryid = categoryidselect.val();
+            }
 
             let datatype = parent.closest('.customfielddate').dataset.name;
 
@@ -165,6 +181,11 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
                 datevalues.get('date_selector[day]') +
                 '&month=' + datevalues.get('date_selector[month]') +
                 '&year=' + datevalues.get('date_selector[year]');
+
+            if (categoryid) {
+                href = href + '&categoryid=' + categoryid;
+            }
+
             document.location.href = href;
         });
 
@@ -176,13 +197,16 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             event.preventDefault();
             event.stopPropagation();
 
-            if (categorySearch.val() === '') {
-                document.location.href = "/course/index.php";
+            let categoryid = 0;
+
+            if (categoryidselect) {
+                categoryid = categoryidselect.val();
             }
 
             let searchargs = {
                 criterianame: 'search',
                 criteriavalue: categorySearch.val(),
+                categoryid: categoryid,
                 page: 0,
                 perpage: 100
             };
@@ -194,8 +218,10 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
             startQuery();
 
             promises[0].done(function(response) {
-                categorySelect.val("all");
-                tagSelect.val('/course/index.php?tagid=0');
+                tagSelect.prop('selectedIndex', 0);
+                customfieldSearch.prop('selectedIndex', 0);
+                customfieldDate.prop('selectedIndex', 0);
+                customfieldSelect.prop('selectedIndex', 0);
                 doQuery(response);
             }).fail(function(ex) {
                 /* eslint no-console: "off" */
