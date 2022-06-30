@@ -56,6 +56,13 @@ class category_action_bar extends \core_course\output\category_action_bar {
         if (isset($theme->settings->customfieldfilter) && $theme->settings->customfieldfilter && $theme->settings->enablecatalog) {
             $template['customfieldfilter'] = $theme->settings->customfieldfilter;
             $template['customfields'] = $this->get_customfield_select($output);
+            $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
+
+            if ($categoryid == null ) {
+                $categoryid = 0;
+            }
+
+            $template['categoryid'] = $categoryid;
         }
 
         return $template;
@@ -229,10 +236,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                         $timestamp->setTime(0, 0, 0);
                         $customfield->urlselectedvalue = $timestamp->getTimestamp();
                     }
-                    if ($categoryid == null) {
-                        $categoryid = 0;
-                    }
-                    $url = new moodle_url($this->page->url->get_path(), ['categoryid' => $categoryid]);
+                    $url = new moodle_url($this->page->url->get_path());
                     $mform = new date_form(
                         $url, $customfield);
                     $template = new \stdClass();
