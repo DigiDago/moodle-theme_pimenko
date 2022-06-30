@@ -698,7 +698,7 @@ class course_renderer extends \core_course_renderer {
                     // Adding of custom fields in the template.
                     foreach ($customfields as $customfield) {
                         $cf = new stdClass();
-                        $cf->customfield = $customfield->get_value();
+                        $cf->customfield = $customfield->export_value();
 
                         if ($cf->customfield != '') {
                             $course->customfields[] = $cf;
