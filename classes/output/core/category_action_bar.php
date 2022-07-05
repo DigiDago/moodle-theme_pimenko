@@ -148,7 +148,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                 if ($customfield->type == 'select') {
                     $urlall = new moodle_url($this->page->url, ['customfieldselected' => $customfield->shortname,
                         'customfieldvalue' => 'all', 'categoryid' => $categoryid]);
-                    $options[$urlall->out(false)] = $customfield->name;
+                    $options[$urlall->out(false)] = format_string($customfield->name);
 
                     // Get options of customfield.
                     $jsconfdata = json_decode($customfield->configdata);
