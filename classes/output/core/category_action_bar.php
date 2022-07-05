@@ -130,7 +130,8 @@ class category_action_bar extends \core_course\output\category_action_bar {
             cf.timemodified
             FROM {customfield_field} cf
             LEFT JOIN {customfield_category} cc ON cc.id = cf.categoryid
-            WHERE cc.area = 'course'");
+            WHERE cc.area = 'course'
+            ORDER BY cf.sortorder");
 
         $templatecustomfields = [];
 
@@ -161,7 +162,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                                 'categoryid' => $categoryid
                             ]
                         );
-                        $options[$url->out(false)] = $customfieldoption;
+                        $options[$url->out(false)] = format_string($customfieldoption);
                     }
 
                     // Get the current url value.
@@ -177,7 +178,6 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     $template->selecttype = true;
                     $template->name = 'customfieldselect_' . $customfield->shortname;
                     $templatecustomfields[] = $template;
-
                 } else if ($customfield->type == 'text' || $customfield->type == 'textarea') {
                     $template = [];
                     $template['action'] = new moodle_url(
