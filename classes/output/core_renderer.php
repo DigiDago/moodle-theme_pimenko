@@ -796,6 +796,11 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     protected function render_context_header(\context_header $contextheader) {
 
         // Generate the heading first and before everything else as we might have to do an early return.
+        if ($this->page->pagelayout == "incourse" || $this->page->pagelayout == "course") {
+            $class = 'h2 pimenkocourseheader';
+        } else {
+            $class = 'h2';
+        }
         if ($this->page->pagelayout == "coursecategory" && $this->themeconfig->settings->enablecatalog &&
             $this->themeconfig->settings->titlecatalog != "") {
             // Heading in the course index page with catalog activated.
@@ -804,9 +809,9 @@ final class core_renderer extends \theme_boost\output\core_renderer {
                 $contextheader->headinglevel
             );
         } else if (!isset($contextheader->heading)) {
-            $heading = $this->heading($this->page->heading, $contextheader->headinglevel, 'h2');
+            $heading = $this->heading($this->page->heading, $contextheader->headinglevel, $class);
         } else {
-            $heading = $this->heading($contextheader->heading, $contextheader->headinglevel, 'h2');
+            $heading = $this->heading($contextheader->heading, $contextheader->headinglevel, $class);
         }
 
         // All the html stuff goes here.

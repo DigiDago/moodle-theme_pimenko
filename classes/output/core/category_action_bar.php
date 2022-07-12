@@ -185,9 +185,9 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     $template['btnclass'] = 'btn-primary';
 
                     if ($customfieldvalue !== 'all' && $customfieldtext) {
-                        $template['searchstring'] = $customfieldvalue;
+                        $template['searchstring'] = format_string($customfieldvalue);
                     } else {
-                        $template['searchstring'] = $customfield->name;
+                        $template['searchstring'] = format_string($customfield->name);
                     }
 
                     $template['inputname'] = 'search_' . $customfield->shortname;
@@ -200,7 +200,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                 } else if ($customfield->type == 'checkbox') {
                     $urlall = new moodle_url($this->page->url, ['customfieldselected' => $customfield->shortname,
                         'customfieldvalue' => 'all', 'categoryid' => $categoryid]);
-                    $options[$urlall->out(false)] = $customfield->name;
+                    $options[$urlall->out(false)] = format_string($customfield->name);
 
                     // Get options of customfield.
                     $customfieldoptions = [
