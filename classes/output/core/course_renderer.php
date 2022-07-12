@@ -482,9 +482,10 @@ class course_renderer extends \core_course_renderer {
     public function course_category($category) {
         global $CFG;
         $usertop = core_course_category::user_top();
+
         if (empty($category)) {
             $coursecat = $usertop;
-        } else if (is_object($category) && $category instanceof core_course_category) {
+        } else if ($category instanceof core_course_category) {
             $coursecat = $category;
         } else {
             $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
@@ -497,11 +498,11 @@ class course_renderer extends \core_course_renderer {
             $editoption = $actionbar->export_for_template($this);
             $allcateg[] = [
                 'name' => get_string('allcategories', 'theme_pimenko'),
-                'value' => 'all',
+                'value' => '/course/index.php',
                 'selected' => true
             ];
 
-            if ($category === 0) {
+            if ($category === 0 || $category === '1') {
                 $editoption['categoryselect']->options[0]['selected'] = false;
                 $allcateg[0]['selected'] = true;
             } else {
