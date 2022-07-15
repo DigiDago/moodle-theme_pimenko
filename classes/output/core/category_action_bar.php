@@ -16,6 +16,8 @@
 
 namespace theme_pimenko\output\core;
 
+use context_system;
+use core_course_category;
 use core_date;
 use DateTime;
 use moodle_url;
@@ -66,6 +68,36 @@ class category_action_bar extends \core_course\output\category_action_bar {
         }
 
         return $template;
+    }
+
+    /**
+     * Gets the url_select to be displayed in the participants page if available.
+     *
+     * @param \renderer_base $output
+     * @return object The content required to render the url_select
+     */
+    public function get_category_select(\renderer_base $output): object {
+        if (!$this->searchvalue) {
+            $categories = core_course_category::get_all();
+            if (count($categories) >= 1) {
+                foreach ($categories as $id => $cat) {
+                    $url = new moodle_url($this->page->url, ['categoryid' => $id]);
+                    $systemcontext = context_system::instance();
+                    if ($cat->visible == 0 && !has_capability('moodle/category:viewhiddencategories', $systemcontext)) {
+                        continue;
+                    }
+                    $options[$url->out()] = format_string($cat->name);
+                }
+
+                $currenturl = new moodle_url($this->page->url, ['categoryid' => $this->category->id]);
+                $select = new \url_select($options, $currenturl, null);
+                $select->set_label(get_string('categories'), ['class' => 'sr-only']);
+                $select->class .= ' text-truncate w-100';
+                return $select->export_for_template($output);
+            }
+        }
+
+        return new \stdClass();
     }
 
     /**

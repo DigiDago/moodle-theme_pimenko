@@ -496,18 +496,6 @@ class course_renderer extends \core_course_renderer {
         $theme = theme_config::load('pimenko');
         if ($theme->settings->enablecatalog) {
             $editoption = $actionbar->export_for_template($this);
-            $allcateg[] = [
-                'name' => get_string('allcategories', 'theme_pimenko'),
-                'value' => '/course/index.php',
-                'selected' => true
-            ];
-
-            if ($category === 0 || $category === '1') {
-                $editoption['categoryselect']->options[0]['selected'] = false;
-                $allcateg[0]['selected'] = true;
-            } else {
-                $allcateg[0]['selected'] = false;
-            }
 
             $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
             if (isset($editoption['tagselect'])) {
@@ -520,9 +508,29 @@ class course_renderer extends \core_course_renderer {
                 }
             }
 
-            $customtemplate = array_merge($allcateg, $editoption['categoryselect']->options);
-            $editoption['categoryselect']->options = $customtemplate;
+            if (!empty((array)$editoption['categoryselect'])) {
+                $allcateg[] = [
+                    'name' => get_string('allcategories', 'theme_pimenko'),
+                    'value' => '/course/index.php',
+                    'selected' => true
+                ];
+
+                if (($category === 0 || $category === '1' || count($editoption['categoryselect']->options) == 1)) {
+                    $editoption['categoryselect']->options[0]['selected'] = false;
+                    $allcateg[0]['selected'] = true;
+                } else {
+                    $allcateg[0]['selected'] = false;
+                }
+
+                $customtemplate = array_merge($allcateg, $editoption['categoryselect']->options);
+                $editoption['categoryselect']->options = $customtemplate;
+            } else {
+                // If no categ we don't display this.
+                unset($editoption['categoryselect']);
+            }
+
             $template = $editoption;
+
         } else {
             $template = $actionbar->export_for_template($this);
         }
