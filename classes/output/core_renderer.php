@@ -487,7 +487,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         global $CFG;
 
         // We display this only if we are on dashboard page.
-        if ($this->page->pagelayout != "mydashboard") {
+        if ($this->page->pagetype != "my-index") {
             return false;
         }
 
@@ -805,7 +805,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
             $this->themeconfig->settings->titlecatalog != "") {
             // Heading in the course index page with catalog activated.
             $heading = $this->heading(
-                $this->themeconfig->settings->titlecatalog,
+                format_string($this->themeconfig->settings->titlecatalog),
                 $contextheader->headinglevel
             );
         } else if (!isset($contextheader->heading)) {
