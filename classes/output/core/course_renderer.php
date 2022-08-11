@@ -482,9 +482,10 @@ class course_renderer extends \core_course_renderer {
     public function course_category($category) {
         global $CFG;
         $usertop = core_course_category::user_top();
+
         if (empty($category)) {
             $coursecat = $usertop;
-        } else if (is_object($category) && $category instanceof core_course_category) {
+        } else if ($category instanceof core_course_category) {
             $coursecat = $category;
         } else {
             $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
@@ -495,18 +496,6 @@ class course_renderer extends \core_course_renderer {
         $theme = theme_config::load('pimenko');
         if ($theme->settings->enablecatalog) {
             $editoption = $actionbar->export_for_template($this);
-            $allcateg[] = [
-                'name' => get_string('allcategories', 'theme_pimenko'),
-                'value' => 'all',
-                'selected' => true
-            ];
-
-            if ($category === 0) {
-                $editoption['categoryselect']->options[0]['selected'] = false;
-                $allcateg[0]['selected'] = true;
-            } else {
-                $allcateg[0]['selected'] = false;
-            }
 
             $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
             if (isset($editoption['tagselect'])) {
@@ -519,9 +508,29 @@ class course_renderer extends \core_course_renderer {
                 }
             }
 
-            $customtemplate = array_merge($allcateg, $editoption['categoryselect']->options);
-            $editoption['categoryselect']->options = $customtemplate;
+            if (!empty((array)$editoption['categoryselect'])) {
+                $allcateg[] = [
+                    'name' => get_string('allcategories', 'theme_pimenko'),
+                    'value' => '/course/index.php',
+                    'selected' => true
+                ];
+
+                if (($category === 0 || $category === '1' || count($editoption['categoryselect']->options) == 1)) {
+                    $editoption['categoryselect']->options[0]['selected'] = false;
+                    $allcateg[0]['selected'] = true;
+                } else {
+                    $allcateg[0]['selected'] = false;
+                }
+
+                $customtemplate = array_merge($allcateg, $editoption['categoryselect']->options);
+                $editoption['categoryselect']->options = $customtemplate;
+            } else {
+                // If no categ we don't display this.
+                unset($editoption['categoryselect']);
+            }
+
             $template = $editoption;
+
         } else {
             $template = $actionbar->export_for_template($this);
         }
@@ -933,16 +942,22 @@ class course_renderer extends \core_course_renderer {
         if ($course instanceof stdClass) {
             $course = new core_course_list_element($course);
         }
-        $content = $this->course_summary($chelper, $course);
+
+        $content = \html_writer::start_tag('div', ['class' => 'd-flex']);
         $content .= $this->course_overview_files($course);
+        $content .= \html_writer::start_tag('div', ['class' => 'flex-grow-1']);
+        $content .= $this->course_summary($chelper, $course);
         $content .= $this->course_contacts($course);
         $content .= $this->course_category_name($chelper, $course);
         $content .= $this->course_custom_fields($course);
+        $content .= \html_writer::end_tag('div');
+        $content .= \html_writer::end_tag('div');
         $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
             get_string(
                 'entercourse',
                 'theme_pimenko'
             ), ['class' => 'entercourse btn btn-secondary']);
+
         return $content;
     }
 

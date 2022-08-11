@@ -85,6 +85,11 @@ class secondary extends \core\navigation\views\secondary {
                     $text = $tab->name;
                 }
                 $rootnode->add($text, $tab->url, self::TYPE_SECTION, null, $tab->name);
+                $sectiontabid = (int) filter_input(INPUT_GET, 'sectiontab', FILTER_SANITIZE_URL);
+                if ($sectiontabid == $tab->url->get_param('sectiontab') && $tab->url->get_param('sectiontab') != null) {
+                    var_dump('pouet');
+                    navigation_node::override_active_url($tab->url);
+                }
             }
         }
 
@@ -95,29 +100,33 @@ class secondary extends \core\navigation\views\secondary {
 
         // Hide participants node with theme settings ask for it.
         $theme = theme_config::load('pimenko');
-        if (!$theme->settings->showparticipantscourse) {
-            $allowedtosee = false;
 
-            if (is_role_switched($course->id)) {
+        $allowedtosee = false;
+
+        if ($theme->settings->showparticipantscourse) {
+
+            if (is_siteadmin($USER) && !is_role_switched($course->id)) {
+                $allowedtosee = true;
+            } else if (is_role_switched($course->id)) {
                 $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
                 if (strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
                     $allowedtosee = true;
                 }
             } else {
-                if (is_siteadmin($USER)) {
-                    $allowedtosee = true;
-                } else {
-                    foreach (get_user_roles($this->context, $USER->id) as $role) {
-                        if (strpos($theme->settings->listuserrole, $role->shortname) !== false) {
-                            $allowedtosee = true;
-                        }
+                foreach (get_user_roles($this->context, $USER->id) as $role) {
+                    if (strpos($theme->settings->listuserrole, $role->shortname) !== false) {
+                        $allowedtosee = true;
                     }
                 }
             }
-
-            if (!$allowedtosee) {
-                $rootnode->children->remove('participants');
+        } else if (is_siteadmin($USER)) {
+            if (!is_role_switched($course->id)) {
+                $allowedtosee = true;
             }
+        }
+
+        if (!$allowedtosee) {
+            $rootnode->children->remove('participants');
         }
 
         // Try to get any custom nodes defined by a user which may include containers.

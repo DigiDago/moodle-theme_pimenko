@@ -81,14 +81,9 @@ body {
     }
 
     section.block {
-        overflow: hidden;
 
         & > .card-body {
             padding: 0 !important;
-
-            .card-text {
-                padding: 1rem!important;
-            }
         }
 
         .card-body {
@@ -135,5 +130,15 @@ body.scrolled #goto-top-link {
         position: absolute;
         right: 0;
         transform: translateY(-100%);
+    }
+}
+
+.block {
+    .block-controls {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .card-text {
+        padding: 10px;
     }
 }

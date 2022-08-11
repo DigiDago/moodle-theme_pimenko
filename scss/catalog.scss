@@ -108,13 +108,13 @@
     .entercourse {
         clear: both;
         display: block;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
-        height: 50px;
-        line-height: 38px;
-        margin: auto;
+        height: 40px;
+        line-height: 28px;
         text-transform: uppercase;
         width: 50%;
+        max-width: 125px;
     }
 
     .coursename a.aalink {
@@ -124,9 +124,13 @@
         }
     }
 
+    .coursebox {
+        margin-top: 10px;
+    }
+
     .coursebox > .info > .coursename a {
         background: none;
-        padding-left: 21px;
+        font-size: 1rem;
     }
 
     .tertiary-navigation div.filter {

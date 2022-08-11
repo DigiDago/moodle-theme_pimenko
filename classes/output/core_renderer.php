@@ -479,51 +479,6 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Returns "add course" and "view all courses" buttons.
-     *
-     * @return string HTML for "add course" and "view all courses" buttons.
-     */
-    public function add_managerbtns(): string {
-        global $CFG;
-
-        // We display this only if we are on dashboard page.
-        if ($this->page->pagelayout != "mydashboard") {
-            return false;
-        }
-
-        $output = '';
-        $output .= html_writer::start_tag(
-            'div', ['class' => 'managerbtns']
-        );
-        $context = context_system::instance();
-
-        // Add button create course, we check user capability.
-        if (has_capability(
-            'moodle/course:create', $context
-        )) {
-            // Print link to create a new course, for the 1st available category.
-            $url = new moodle_url(
-                '/course/edit.php', [
-                    'category' => $CFG->defaultrequestcategory,
-                    'returnto' => 'topcat'
-                ]
-            );
-            $output .= $this->single_button(
-                $url, get_string('addnewcourse'), 'get'
-            );
-        }
-
-        // Add button redirect to course list.
-        $url = new moodle_url('/course/index.php');
-        $output .= $this->single_button(
-            $url, get_string('viewallcourses'), 'get'
-        );
-
-        $output .= html_writer::end_tag('div');
-        return $output;
-    }
-
-    /**
      * Renders block regions on home page
      *
      * @return string
@@ -796,17 +751,22 @@ final class core_renderer extends \theme_boost\output\core_renderer {
     protected function render_context_header(\context_header $contextheader) {
 
         // Generate the heading first and before everything else as we might have to do an early return.
+        if ($this->page->pagelayout == "incourse" || $this->page->pagelayout == "course") {
+            $class = 'h2 pimenkocourseheader';
+        } else {
+            $class = 'h2';
+        }
         if ($this->page->pagelayout == "coursecategory" && $this->themeconfig->settings->enablecatalog &&
             $this->themeconfig->settings->titlecatalog != "") {
             // Heading in the course index page with catalog activated.
             $heading = $this->heading(
-                $this->themeconfig->settings->titlecatalog,
+                format_string($this->themeconfig->settings->titlecatalog),
                 $contextheader->headinglevel
             );
         } else if (!isset($contextheader->heading)) {
-            $heading = $this->heading($this->page->heading, $contextheader->headinglevel, 'h2');
+            $heading = $this->heading($this->page->heading, $contextheader->headinglevel, $class);
         } else {
-            $heading = $this->heading($contextheader->heading, $contextheader->headinglevel, 'h2');
+            $heading = $this->heading($contextheader->heading, $contextheader->headinglevel, $class);
         }
 
         // All the html stuff goes here.
