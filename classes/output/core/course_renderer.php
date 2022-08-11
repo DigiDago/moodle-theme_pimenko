@@ -942,16 +942,22 @@ class course_renderer extends \core_course_renderer {
         if ($course instanceof stdClass) {
             $course = new core_course_list_element($course);
         }
-        $content = $this->course_summary($chelper, $course);
+
+        $content = \html_writer::start_tag('div', ['class' => 'd-flex']);
         $content .= $this->course_overview_files($course);
+        $content .= \html_writer::start_tag('div', ['class' => 'flex-grow-1']);
+        $content .= $this->course_summary($chelper, $course);
         $content .= $this->course_contacts($course);
         $content .= $this->course_category_name($chelper, $course);
         $content .= $this->course_custom_fields($course);
+        $content .= \html_writer::end_tag('div');
+        $content .= \html_writer::end_tag('div');
         $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
             get_string(
                 'entercourse',
                 'theme_pimenko'
             ), ['class' => 'entercourse btn btn-secondary']);
+
         return $content;
     }
 
