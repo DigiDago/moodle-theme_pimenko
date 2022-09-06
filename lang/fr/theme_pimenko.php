@@ -100,21 +100,20 @@ $string['profile:basicinfo'] = 'Informations générales';
 $string['profile:contactinfo'] = 'Contact';
 
 // Login *******************************************************.
-$string['loginsettings'] = 'Paramètres de la page de connexion';
+$string['loginsettings'] = 'Paramètres de la page d\'authentification';
 $string['loginsettingsheading'] = 'Personnalisez la page de connexion';
 $string['logindesc'] =
     'Personnalisez la page de connexion en ajoutant un arrière-plan d\'image et des textes au-dessus et en dessous de la zone de connexion.';
-$string['loginbgimage'] = 'Image d\'arrière plan';
+$string['loginbgimage'] = 'Image en arrière plan';
 $string['loginbgimagedesc'] = 'Ajoutez une image d\'arrière-plan à la page.';
 $string['loginbgstyle'] = 'Style d\'arrière-plan de connexion';
 $string['loginbgstyledesc'] = 'Sélectionnez le style de l\'image téléchargée.';
-$string['loginbgopacity'] = '
-En-tête de page de connexion, barre de navigation, zone de connexion et opacité d\'arrière-plan du pied de page lorsqu\'il y a une image d\'arrière-plan';
+$string['loginbgopacity'] = 'Opacité de la zone de contenu';
 $string['loginbgopacitydesc'] =
     'Opacité d\'arrière-plan de connexion pour l\'en-tête, la barre de navigation, la zone de connexion et le pied de page lorsqu\'il y a une image d\'arrière-plan.';
-$string['logintextboxtop'] = 'Zone de texte supérieure';
+$string['logintextboxtop'] = 'Zone de contenu supérieur';
 $string['logintextboxtopdesc'] = 'Ajoutez un texte personnalisé au-dessus de la zone de connexion.';
-$string['logintextboxbottom'] = 'Zone de texte inférieur';
+$string['logintextboxbottom'] = 'Zone de contenu inférieur';
 $string['logintextboxbottomdesc'] = 'Ajoutez un texte personnalisé au-dessous de la zone de connexion.';
 
 $string['stylecover'] = 'Cover';
@@ -383,6 +382,13 @@ $string['menuheadercateg:disabled'] = 'Désactiver';
 $string['filterbycustomfilter'] = 'Filtrer par champs personnalisés';
 $string['yes'] = 'Oui';
 $string['no'] = 'Non';
+
+$string['optionloginhtmlcontent'] = 'Options spécifiques à la page d\'authentification en mode paysage';
+$string['optionloginhtmlcontentdesc'] = 'Ces réglages s\'affiche quand vous activez l\'affichage de l\'authenfication en mode paysage';
+$string['leftblockloginhtmlcontent'] = 'Zone de contenu à gauche de la page d\'authentification';
+$string['leftblockloginhtmlcontentdesc'] = 'Permet la création d\'une zone de contenu qui sera affiché dans la partie gauche de la page d\authentification';
+$string['rightblockloginhtmlcontent'] = 'Zone de contenu à droite de la page d\'authentification';
+$string['rightblockloginhtmlcontentdesc'] = 'Permet la création d\'une zone de contenu qui sera affiché dans la partie droite de la page d\authentification';
 
 // H5P.
 $string['h5pcss'] = 'Fichier CSS pour H5P';

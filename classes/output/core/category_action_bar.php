@@ -88,8 +88,13 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     }
                     $options[$url->out()] = format_string($cat->name);
                 }
+                $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
+                if ($categoryid) {
+                    $currenturl = new moodle_url($this->page->url, ['categoryid' => $categoryid]);
+                } else {
+                    $currenturl = new moodle_url('/course/index.php', []);
+                }
 
-                $currenturl = new moodle_url($this->page->url, ['categoryid' => $this->category->id]);
                 $select = new \url_select($options, $currenturl, null);
                 $select->set_label(get_string('categories'), ['class' => 'sr-only']);
                 $select->class .= ' text-truncate w-100';
