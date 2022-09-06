@@ -371,6 +371,13 @@ $string['filterbycustomfilter'] = 'Filter by custom field';
 $string['yes'] = 'Yes';
 $string['no'] = 'No';
 
+$string['optionloginhtmlcontent'] = 'Options specific to the login page in landscape';
+$string['optionloginhtmlcontentdesc'] = 'These settings are displayed when you activate the display of authentication in landscape mode';
+$string['leftblockloginhtmlcontent'] = 'Left block for the login page';
+$string['leftblockloginhtmlcontentdesc'] = 'Allows the creation of an HTML content block that will be displayed in the left part of the login page';
+$string['rightblockloginhtmlcontent'] = 'Right block for the login page';
+$string['rightblockloginhtmlcontentdesc'] = 'Allows the creation of an HTML content block that will be displayed in the left part of the login page';
+
 // H5P.
 $string['h5pcss'] = 'CSS file for H5P';
 $string['h5pcss_desc'] = 'Add a CSS file that will only be loaded by H5P to change the design';

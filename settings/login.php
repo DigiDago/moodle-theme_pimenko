@@ -85,7 +85,23 @@ $page->add($setting);
 $name = 'theme_pimenko/logintextboxbottom';
 $title = get_string('logintextboxbottom', 'theme_pimenko');
 $description = get_string('logintextboxbottomdesc', 'theme_pimenko');
-$default = '';
+$setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
+$page->add($setting);
+
+$page->add(new admin_setting_heading('optionloginhtmlcontent', get_string('optionloginhtmlcontent', 'theme_pimenko'),
+    get_string('optionloginhtmlcontentdesc', 'theme_pimenko')));
+
+// HTML block content will appear at the top of the left block.
+$name = 'theme_pimenko/leftblockloginhtmlcontent';
+$title = get_string('leftblockloginhtmlcontent', 'theme_pimenko');
+$description = get_string('leftblockloginhtmlcontentdesc', 'theme_pimenko');
+$setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
+$page->add($setting);
+
+// HTML block content will appear at the top of the right block.
+$name = 'theme_pimenko/rightblockloginhtmlcontent';
+$title = get_string('rightblockloginhtmlcontent', 'theme_pimenko');
+$description = get_string('rightblockloginhtmlcontentdesc', 'theme_pimenko');
 $setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
 

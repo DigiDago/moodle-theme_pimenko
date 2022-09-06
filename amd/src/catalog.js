@@ -190,7 +190,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         });
 
         resetbutton.click(function() {
-            document.location.href = "/course/index.php";
+            document.location.href = "/course/index.php?categoryid=" + categoryidselect.val();
         });
 
         $('#page-course-index-category .searchcourse form.simplesearchform').submit(function(event) {

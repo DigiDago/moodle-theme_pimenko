@@ -24,6 +24,59 @@
 #page-course-index,
 #page-course-index-category {
 
+    .searchcourse {
+
+        select,
+        input {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            border-left: 0;
+            border-radius: 0;
+            border-right: 0;
+            border-top: 0;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            resize: none;
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            &:not(:disabled):not([readonly]):focus ~ .form-group__bar:after,
+            &:not(:disabled):not([readonly]):focus ~ .form-group__bar:before {
+                width: 50%;
+            }
+        }
+
+        .form-group__bar {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            z-index: 3;
+
+            &:before {
+                left: 50%;
+            }
+
+            &:after {
+                right: 50%;
+            }
+
+            &:before,
+            &:after {
+                background-color: unquote('brandcolor');
+                bottom: 0;
+                content: '';
+                height: 2px;
+                position: absolute;
+                transition: all 350ms;
+                transition-timing-function: ease;
+                width: 0;
+            }
+        }
+    }
 
     #course-gallery {
 

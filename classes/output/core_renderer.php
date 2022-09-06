@@ -125,6 +125,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         // Hide site name option.
         $theme = theme_config::load('pimenko');
         $template->hidesitename = $theme->settings->hidesitename;
+        $template->langmenu = $primarymenu['lang'];
 
         $template->mobileprimarynav = $primarymenu['mobileprimarynav'];
 
@@ -358,6 +359,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
 
         $context->logintextboxtop = self::get_setting('logintextboxtop', 'format_html');
         $context->logintextboxbottom = self::get_setting('logintextboxbottom', 'format_html');
+        $context->rightblockloginhtmlcontent = self::get_setting('rightblockloginhtmlcontent', 'format_html');
+        $context->leftblockloginhtmlcontent = self::get_setting('leftblockloginhtmlcontent', 'format_html');
 
         return $this->render_from_template('core/loginform', $context);
     }
