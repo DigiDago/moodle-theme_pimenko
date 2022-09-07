@@ -87,6 +87,11 @@
     }
 }}
 <div class="container-fluid tertiary-navigation" id="action_bar">
+    {{#search}}
+        <div class="navitem searchcourse">
+            {{> core/search_input }}
+        </div>
+    {{/search}}
     {{#customfieldfilter}}
         <div class="customfieldfilter">
             <div class="card">
@@ -140,7 +145,7 @@
             </div>
         </div>
     {{/customfieldfilter}}
-    <div class="container filter">
+    <div class="container filter p-3">
         <input type="hidden" name="categoryid" value="{{{categoryid}}}">
         <div class="row">
             <div class="d-flex flex-wrap">
@@ -154,11 +159,6 @@
                         {{> core/url_select }}
                     </div>
                 {{/tagselect}}
-                {{#search}}
-                    <div class="navitem searchcourse">
-                        {{> core/search_input }}
-                    </div>
-                {{/search}}
                 <div class="navitem">
                     <button data-filteraction="reset" type="button" class="btn btn-secondary ml-auto mr-2">{{#str}}clearfilters, user{{/str}}</button>
                 </div>
