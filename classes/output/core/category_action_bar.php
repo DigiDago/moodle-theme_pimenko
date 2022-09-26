@@ -48,6 +48,13 @@ class category_action_bar extends \core_course\output\category_action_bar {
             'search' => $this->get_search_form(),
             'additionaloptions' => $this->get_additional_category_options()
         ];
+        
+        $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
+        $template['categoryid'] = $categoryid;
+
+        if ($categoryid == null ) {
+            $categoryid = 0;
+        }
 
         $theme = theme_config::load('pimenko');
 
@@ -58,13 +65,6 @@ class category_action_bar extends \core_course\output\category_action_bar {
         if (isset($theme->settings->customfieldfilter) && $theme->settings->customfieldfilter && $theme->settings->enablecatalog) {
             $template['customfieldfilter'] = $theme->settings->customfieldfilter;
             $template['customfields'] = $this->get_customfield_select($output);
-            $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
-
-            if ($categoryid == null ) {
-                $categoryid = 0;
-            }
-
-            $template['categoryid'] = $categoryid;
         }
 
         return $template;
