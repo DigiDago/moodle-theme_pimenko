@@ -58,6 +58,7 @@ class primary extends \core\navigation\output\primary {
         $nodes = [];
         foreach ($custommenunodes as $node) {
             $nodes[] = $node->export_for_template($output);
+
         }
 
         return $nodes;
