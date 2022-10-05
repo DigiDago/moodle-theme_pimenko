@@ -30,3 +30,8 @@
 .resourcepdf object {
     min-height: 700px;
 }
+
+// Fix a min-height for H5P content editor.
+.cke_contents {
+    min-height: 150px;
+}

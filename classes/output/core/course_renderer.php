@@ -508,7 +508,7 @@ class course_renderer extends \core_course_renderer {
                 }
             }
 
-            if (!empty((array)$editoption['categoryselect'])) {
+            if (!empty((array) $editoption['categoryselect'])) {
                 $allcateg[] = [
                     'name' => get_string('allcategories', 'theme_pimenko'),
                     'value' => '/course/index.php',
@@ -952,11 +952,14 @@ class course_renderer extends \core_course_renderer {
         $content .= $this->course_custom_fields($course);
         $content .= \html_writer::end_tag('div');
         $content .= \html_writer::end_tag('div');
-        $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
-            get_string(
-                'entercourse',
-                'theme_pimenko'
-            ), ['class' => 'entercourse btn btn-secondary']);
+
+        if ($this->page->pagetype !== 'enrol-index') {
+            $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
+                get_string(
+                    'entercourse',
+                    'theme_pimenko'
+                ), ['class' => 'entercourse btn btn-secondary']);
+        }
 
         return $content;
     }

@@ -48,7 +48,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
             'search' => $this->get_search_form(),
             'additionaloptions' => $this->get_additional_category_options()
         ];
-        
+
         $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
         $template['categoryid'] = $categoryid;
 
