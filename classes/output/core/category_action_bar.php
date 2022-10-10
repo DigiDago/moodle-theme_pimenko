@@ -50,11 +50,12 @@ class category_action_bar extends \core_course\output\category_action_bar {
         ];
 
         $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
-        $template['categoryid'] = $categoryid;
 
         if ($categoryid == null ) {
             $categoryid = 0;
         }
+
+        $template['categoryid'] = $categoryid;
 
         $theme = theme_config::load('pimenko');
 
