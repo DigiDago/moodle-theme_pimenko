@@ -508,6 +508,7 @@ class course_renderer extends \core_course_renderer {
                 }
             }
 
+
             if (!empty((array) $editoption['categoryselect'])) {
                 $allcateg[] = [
                     'name' => get_string('allcategories', 'theme_pimenko'),
@@ -515,7 +516,7 @@ class course_renderer extends \core_course_renderer {
                     'selected' => true
                 ];
 
-                if (($category === 0 || $category === '1' || count($editoption['categoryselect']->options) == 1)) {
+                if (($category === 0 || $category === '1' || count($editoption['categoryselect']->options) < 1)) {
                     $editoption['categoryselect']->options[0]['selected'] = false;
                     $allcateg[0]['selected'] = true;
                 } else {
