@@ -500,14 +500,15 @@ class course_renderer extends \core_course_renderer {
             $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
             if (isset($editoption['tagselect'])) {
                 foreach ($editoption['tagselect']->options as $key => &$option) {
-                    if ($key == $tagid) {
+                    $url = parse_url($option['value']);
+                    parse_str($url['query'], $params);
+                    if ($params['tagid'] == $tagid) {
                         $option['selected'] = true;
                     } else {
                         $option['selected'] = false;
                     }
                 }
             }
-
 
             if (!empty((array) $editoption['categoryselect'])) {
                 $allcateg[] = [

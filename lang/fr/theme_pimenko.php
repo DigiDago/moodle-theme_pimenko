@@ -393,3 +393,6 @@ $string['rightblockloginhtmlcontentdesc'] = 'Permet la création d\'une zone de 
 // H5P.
 $string['h5pcss'] = 'Fichier CSS pour H5P';
 $string['h5pcss_desc'] = 'Ajouter un fichier CSS qui ne sera chargé que par H5P pour changer de design';
+
+// Add deprecated Moodle.
+$string['clearfilters'] = 'Réinitialiser les filtres';
