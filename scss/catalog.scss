@@ -280,3 +280,9 @@
         }
     }
 }
+
+// Remember to remove this at 4.1
+.tertiary-navigation .navitem:not(:last-child),
+.tertiary-navigation .navitem-divider:not(:last-child) {
+    margin-right: 20px;
+}
