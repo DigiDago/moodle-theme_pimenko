@@ -159,6 +159,24 @@ $page->add($setting);
 $page->add(new admin_setting_heading('coursecoversettings', get_string('coursecoversettings', 'theme_pimenko'),
     get_string('coursecoversettings_desc', 'theme_pimenko')));
 
+// Display or not course cover option.
+$name = 'theme_pimenko/displaycoverallpage';
+$title = get_string(
+    'displaycoverallpage',
+    'theme_pimenko'
+);
+$description = get_string(
+    'displaycoverallpage_desc',
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
 // Display cover as a thumbnail.
 $name = 'theme_pimenko/displayasthumbnail';
 $title = get_string(
@@ -218,24 +236,6 @@ $setting = new admin_setting_configcolourpicker(
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
-$page->add($setting);
-
-// Display or not course cover option.
-$name = 'theme_pimenko/displaycoverallpage';
-$title = get_string(
-    'displaycoverallpage',
-    'theme_pimenko'
-);
-$description = get_string(
-    'displaycoverallpage_desc',
-    'theme_pimenko'
-);
-$setting = new admin_setting_configcheckbox(
-    $name,
-    $title,
-    $description,
-    '0'
-);
 $page->add($setting);
 
 $page->add(new admin_setting_heading('otherfeature', get_string('otherfeature', 'theme_pimenko'),
