@@ -649,11 +649,22 @@ class course_renderer extends \core_course_renderer {
                 $template
             );
         } else {
-            $cats = $DB->get_records(
-                'course_categories',
-                ['visible' => 1],
-                'sortorder'
-            );
+
+            // If there is a category id filter then get only this category.
+            if ($coursecat->id > 0) {
+                $cats = $DB->get_records(
+                    'course_categories',
+                    ['visible' => 1, 'id' => $coursecat->id],
+                    'sortorder'
+                );
+            } else { // Else get all categories.
+                $cats = $DB->get_records(
+                    'course_categories',
+                    ['visible' => 1],
+                    'sortorder'
+                );
+            }
+
             $template->courses = [];
             $categories = [];
 
@@ -771,16 +782,13 @@ class course_renderer extends \core_course_renderer {
                     }
 
                     // Show course or not in catalog.
-                    if (($coursecat->id > 0 && $coursecat->id == $coursecategory->id) || $coursecat->id == 0) {
-                        if ($course->visible == 1 || (theme_config::load(
-                                    'pimenko'
-                                )->settings->viewallhiddencourses == 1 && ($neverhidden || $neverhiddenpaypal)) || is_enrolled(
-                                $coursecontext,
-                                $USER
-                            ) || is_siteadmin($USER)) {
-
-                            $template->courses[] = $course;
-                        }
+                    if ($course->visible == 1 || (theme_config::load(
+                                'pimenko'
+                            )->settings->viewallhiddencourses == 1 && ($neverhidden || $neverhiddenpaypal)) || is_enrolled(
+                            $coursecontext,
+                            $USER
+                        ) || is_siteadmin($USER)) {
+                        $template->courses[] = $course;
                     }
                 }
             }
@@ -836,7 +844,7 @@ class course_renderer extends \core_course_renderer {
                 LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
                 LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
                 WHERE cf.shortname = :customfieldselected
-                AND cd.value LIKE :timestamp
+                AND cd.value = :timestamp
                 AND c.category = :category
                 AND c.id != 1
                 ORDER BY sortorder";
