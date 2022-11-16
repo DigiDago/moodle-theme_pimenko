@@ -28,6 +28,9 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage('theme_pimenko_navbar',
     get_string('navbarsettings', 'theme_pimenko'));
 
+$page->add(new admin_setting_heading('navbarsettings', get_string('navbarsettings', 'theme_pimenko'),
+    ''));
+
 // Site logo.
 $name = 'theme_pimenko/sitelogo';
 $title = get_string('sitelogo', 'theme_pimenko');

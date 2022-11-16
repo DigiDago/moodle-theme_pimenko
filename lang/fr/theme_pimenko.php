@@ -79,21 +79,21 @@ $string['favicondesc'] = 'Charger une favicon à utiliser sur le site';
 // Site logo *******************************************************.
 
 $string['sitelogo'] = 'Logo du site';
-$string['sitelogodesc'] = 'Ajouter un logo';
+$string['sitelogodesc'] = 'Ajouter un logo dans la barre navigation.';
 
 // Header picture *******************************************************.
 $string['navbarpicture'] = 'Arrière-plan de la barre de navigation';
 $string['navbarpicturedesc'] =
-    'Ajoutez une image de fond à barre de navigation, il vous faudra ensuite adapter le style à vôtre besoin. Vous pouvez cibler l\'élément ".withnavbarpicture"';
+    'Ajoutez une image en arrière plan dans la barre de navigation. Il est généralement nécessaire d\'adapter le style (par exemple la hauteur de la barre de navigation).';
 
 // Navbar *******************************************************.
 $string['navbarsettings'] = 'Barre de navigation';
 $string['navbarcolor'] = 'Couleur de la barre de navigation';
-$string['navbarcolordesc'] = 'Couleur de fond de la barre de navigation';
+$string['navbarcolordesc'] = 'Définir une couleur de fond de la barre de navigation';
 $string['navbartextcolor'] = 'Couleur du texte pour la barre de navigation';
 $string['navbartextcolordesc'] = 'Définir une couleur pour le texte de la barre de navigation';
-$string['hoovernavbarcolor'] = 'Définir la couleur de surbrillance pour les liens dans la barre de navigation';
-$string['hoovernavbarcolordesc'] = 'Couleur de surbrillance des liens dans la bare de navigation';
+$string['hoovernavbarcolor'] = 'Couleur pour les liens dans la barre de navigation';
+$string['hoovernavbarcolordesc'] = 'Définir une couleur pour les liens de la barre de navigation';
 
 // Profile page.
 $string['profile:joinedon'] = 'Inscrit le ';
@@ -107,16 +107,16 @@ $string['loginsettingsheading'] = 'Personnalisez la page de connexion';
 $string['logindesc'] =
     'Personnalisez la page de connexion en ajoutant un arrière-plan d\'image et des textes au-dessus et en dessous de la zone de connexion.';
 $string['loginbgimage'] = 'Image en arrière plan';
-$string['loginbgimagedesc'] = 'Ajoutez une image d\'arrière-plan à la page.';
+$string['loginbgimagedesc'] = 'Ajouter une image d\'arrière-plan à la page.';
 $string['loginbgstyle'] = 'Style d\'arrière-plan de connexion';
-$string['loginbgstyledesc'] = 'Sélectionnez le style de l\'image téléchargée.';
+$string['loginbgstyledesc'] = 'Sélectionner le style de l\'image téléchargée.';
 $string['loginbgopacity'] = 'Opacité de la zone de contenu';
 $string['loginbgopacitydesc'] =
     'Opacité d\'arrière-plan de connexion pour l\'en-tête, la barre de navigation, la zone de connexion et le pied de page lorsqu\'il y a une image d\'arrière-plan.';
-$string['logintextboxtop'] = 'Zone de contenu supérieur';
-$string['logintextboxtopdesc'] = 'Ajoutez un texte personnalisé au-dessus de la zone de connexion.';
-$string['logintextboxbottom'] = 'Zone de contenu inférieur';
-$string['logintextboxbottomdesc'] = 'Ajoutez un texte personnalisé au-dessous de la zone de connexion.';
+$string['logintextboxtop'] = 'Zone de contenu supérieure';
+$string['logintextboxtopdesc'] = 'Ajouter un contenu personnalisé ( texte, image ... ) en haut du bloc d\' authentification. Il sera affiché sur la pleine du bloc.';
+$string['logintextboxbottom'] = 'Zone de contenu inférieure';
+$string['logintextboxbottomdesc'] = 'Ajouter un contenu personnalisé ( texte, image ... ) en bas du bloc d\' authentification. Il sera affiché sur la pleine du bloc.';
 
 $string['stylecover'] = 'Cover';
 $string['stylestretch'] = 'Stretch';
@@ -126,18 +126,18 @@ $string['show'] = 'Afficher';
 
 // Footer *******************************************************.
 $string['footersettings'] = 'Pied de page';
-$string['settings:footer:footercolumn'] = 'Pied de page colonne {$a}';
-$string['settings:footer:footerheading'] = 'Pied de page entête {$a}';
-$string['settings:footer:footertext'] = 'Pied de page texte {$a}';
-$string['settings:footer:footerheadingdesc'] = 'h3 de la colonne';
+$string['settings:footer:footercolumn'] = 'Personnaliser le pied de page de la colonne {$a}';
+$string['settings:footer:footerheading'] = 'Titre du pied de page colonne {$a}';
+$string['settings:footer:footertext'] = 'Zone de contenu du pied de page colonne {$a}';
+$string['settings:footer:footerheadingdesc'] = 'Ajouter un titre (il sera de niveau h3)';
 $string['settings:footer:footertextdesc'] = 'Ajouter du contenu pour le pied de page.';
 $string['settings:footer:footercolumndesc'] = '';
-$string['footercolor'] = 'Pied de page couleur';
+$string['footercolor'] = 'Couleur du pied de page';
 $string['footercolordesc'] = 'Définir la couleur de fond pour le pied de page';
-$string['footertextcolor'] = 'Pied de page couleur texte';
+$string['footertextcolor'] = 'Couleur du texte dans le pied de page';
 $string['footertextcolordesc'] = 'Définir la couleur pour le texte du pied de page';
-$string['hooverfootercolor'] = 'Définir la couleur de surbrillance pour les liens en pied de page';
-$string['hooverfootercolordesc'] = 'Pied de page couleur de surbrillance des liens';
+$string['hooverfootercolor'] = 'Couleur de surbrillance des liens dans le pied de page';
+$string['hooverfootercolordesc'] = 'Définir la couleur de surbrillance pour les liens du pied de page';
 
 // Completion.
 $string['completion-alt-manual-n'] = 'Incomplet';
@@ -245,7 +245,7 @@ $string['entercourse'] = 'Entrer';
 
 // Moodle activity completion design enabling setting.
 $string['moodleactivitycompletion'] =
-    "Activation de l’achèvement d’activité de Moodle en haut de la page des ressources et activités";
+    "Active l’achèvement d’activité de Moodle en haut de la page des ressources et activités";
 $string['moodleactivitycompletion_desc'] =
     "Par défaut, le thème Pimenko affiche les conditions d’achèvement d’activité sous la forme d’une pastille en bas de chaque ressource ou activité. Cette option permet de reprendre le fonctionnement par défaut de Moodle : les conditions d’achèvement d’activités s’affichent en haut de la page sous la forme d’une étiquette.";
 
@@ -279,10 +279,10 @@ $string['pimenkofeature'] = 'Fonctionnalités Pimenko';
 $string['catalogsettings'] = "Catalogue";
 $string['catalogsettings_desc'] =
     'Modifier le fonctionnement de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ces réglages sont effectif après avoir activé l\'option catalogue';
-$string['customfieldfilter'] = "Activation des filtres sur champs personnalisés";
+$string['customfieldfilter'] = "Affiche des filtres sur les champs personnalisés";
 $string['customfieldfilter_desc'] =
-    "Cette option permet d\'ajouter des filtres qui sont liés aux champs personnalisés des cours. Les champs personnalisés doivent être paramétrés au niveau du site et complété dans les paramètres de cours.";
-$string['enablecatalog'] = "Activation du catalogue";
+    "Cette option permet d'ajouter des filtres qui sont liés aux champs personnalisés des cours. Les champs personnalisés doivent être paramétrés au niveau du site et complété dans les paramètres de cours.";
+$string['enablecatalog'] = "Active l'affichage catalogue";
 $string['enablecatalog_desc'] =
     'Cette option transforme l\'affichage par défaut de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ils apparaissent sous la forme d\'une vignette avec le titre du cours et la description si elle est renseignée. Si vous avez ajoutez une image de cours, elle apparait en haut de la vignette.';
 
@@ -290,7 +290,7 @@ $string['titlecatalog'] = "Titre du catalogue";
 $string['titlecatalog_desc'] =
     'Cette option modifie le titre de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>.';
 
-$string['tagfilter'] = "Activation d’un système de filtre lié à la fonctionnalité des tags de cours";
+$string['tagfilter'] = "Affiche un système de filtre lié à la fonctionnalité des tags de cours";
 $string['tagfilter_desc'] =
     "Cette option ajoute un menu déroulant pour filtrer les cours par tags. Ils doivent être ajoutées dans les paramètres d’un cours (rubrique <strong>Tags</strong>).";
 
@@ -329,13 +329,13 @@ $string['frontpagecontentsettings'] = "Options des zones de contenu de la page d
 $string['frontpagecontentsettings_desc'] = "Configurer la zone de contenu pour la page d'accueil";
 
 // Card settings heading.
-$string['frontpagecardsettings'] = "Options pour la présentation des cours sur la page d’accueil";
-$string['frontpagecardsettings_desc'] = "Si vous activez l’affichage de la liste des cours dans les réglages de la page d’accueil, les cours apparaissent pour tous les utilisateurs. Ces options permettent de déterminer les informations à afficher dans les vignettes de cours.";
+$string['frontpagecardsettings'] = "Options pour la présentation des vignettes de cours sur la page d’accueil";
+$string['frontpagecardsettings_desc'] = "Si vous affichez les cours sur la page d\'accueil du site, ils apparaissent sous la forme de vignettes. Ces options permettent de déterminer les informations à afficher.";
 
 // Hide site name setting.
 $string['hidesitename'] = "Cacher le nom du site";
 $string['hidesitename_desc'] =
-    "Cette option permet de cacher le nom du site qui apparait dans l’en tête du site, à droite du logo en vue ordinateur.";
+    "Cette option permet de cacher le nom du site qui apparait dans la barre de navigation.";
 $string['cardlabelformat'] = "Formateur";
 $string['cardlabeldate'] = "Date de début";
 
@@ -347,15 +347,15 @@ Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? 
 $string['contactus_button_text'] = "Nous envoyer un mail";
 
 // Custom navbar menu.
-$string['removedprimarynavitems'] = "Onglets du menu à supprimer";
-$string['removedprimarynavitems_desc'] = "Vous pouvez renseigner aussi l'identifiants des menus à supprimer de la navbar. Chaque identifiants doit être séparé par une ',' exemple :<br>
-<pre>myhome,courses,mycourses</pre>";
-$string['customnavbarmenu'] = "Personnalisation du menu dans la barre de navigation";
+$string['removedprimarynavitems'] = "Liens du menu à supprimer";
+$string['removedprimarynavitems_desc'] = 'Indiquer les identifiants des liens à supprimer de la barre de navigation. Les identifiants doivent être séparés par une "," Par exemple pour supprimer la page d’accueil et la page mes cours, utilisez :<br>
+<pre>home,mycourses</pre>';
+$string['customnavbarmenu'] = "Personnalisation des liens et des menus de la barre de navigation";
 $string['customnavbarmenu_desc'] =
-    "Les options suivantes vous permettront de modifier l'aspect du menu dans la barre de navigation";
+    "Ces options permettent de modifier les liens et menus dans la barre de navigation";
 $string['custommenuitemslogin'] =
-    'Éléments du menu personnalisé qui apparaitra une fois que les utilisateurs sont authentifiés sur le site';
-$string['configcustommenuitemslogin'] = "Vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
+    'Éléments du menu personnalisé après authentification';
+$string['configcustommenuitemslogin'] = "Si vous souhaitez afficher des liens différents après authentification, vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
 <pre>
 Cours
 -Tous les cours|/course/
@@ -387,7 +387,7 @@ $string['gradientcovercolor_desc'] =
     "Si vous indiquez une couleur, elle sera affichée au premier plan c’est-à-dire par-dessus l’image. Une transparence est automatiquement appliquée pour apporter un effet de filtre.";
 // Options d'affichage pour le menu des cate.
 $string['menuheadercateg'] = 'Mes catégories';
-$string['menuheadercategdesc'] = 'Afficher une liste déroulante avec les catégories des utilisateurs';
+$string['menuheadercategdesc'] = 'Afficher dans un menu les catégories et les sous catégories du site.';
 $string['menuheadercateg:excludehidden'] = 'Activer l\'exclusion des catégories cachées';
 $string['menuheadercateg:includehidden'] = 'Activer l\'inclusion des catégories cachées';
 $string['menuheadercateg:disabled'] = 'Désactiver';
@@ -395,15 +395,17 @@ $string['filterbycustomfilter'] = 'Filtrer par champs personnalisés';
 $string['yes'] = 'Oui';
 $string['no'] = 'Non';
 
-$string['optionloginhtmlcontent'] = 'Options spécifiques à la page d\'authentification en mode paysage';
+$string['optionloginhtmlcontent'] = 'Options spécifiques à l\'affichage en deux colonnes';
 $string['optionloginhtmlcontentdesc'] =
-    'Ces réglages s\'affiche quand vous activez l\'affichage de l\'authenfication en mode paysage';
+    'Cette mise en forme dispose de zones de contenu personnalisables.
+     Elle a aussi la particularité d’afficher les méthodes d’authentification sur deux colonnes.
+      Dans le cas où vous utilisez plusieurs méthodes d’authentification sur votre site (manuelle, SSO, LDAP, Auth2, etc.), l\'authentification manuelle est affichée dans la colonne de gauche et les autres méthodes d\'authentification sont affichées dans la colonne de droite.';
 $string['leftblockloginhtmlcontent'] = 'Zone de contenu à gauche de la page d\'authentification';
 $string['leftblockloginhtmlcontentdesc'] =
-    'Permet la création d\'une zone de contenu qui sera affiché dans la partie gauche de la page d\authentification';
+    'Ajouter du contenu qui sera affiché au dessus de la colonne de gauche.';
 $string['rightblockloginhtmlcontent'] = 'Zone de contenu à droite de la page d\'authentification';
 $string['rightblockloginhtmlcontentdesc'] =
-    'Permet la création d\'une zone de contenu qui sera affiché dans la partie droite de la page d\authentification';
+    'Ajouter du contenu qui sera affiché au dessus de la colonne de droite.';
 
 // H5P.
 $string['h5pcss'] = 'Fichier CSS pour H5P';
