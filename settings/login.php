@@ -28,6 +28,9 @@ defined('MOODLE_INTERNAL') || die;
 // Some parts there are from 'adaptable' theme.
 $page = new admin_settingpage('theme_pimenko_login', get_string('loginsettings', 'theme_pimenko'));
 
+$page->add(new admin_setting_heading('optionlogint', get_string('loginsettings', 'theme_pimenko'),
+    ''));
+
 // Login page background image.
 $name = 'theme_pimenko/loginbgimage';
 $title = get_string('loginbgimage', 'theme_pimenko');
@@ -73,6 +76,9 @@ $setting = new admin_setting_configselect($name, $title, $description, $default,
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
+$page->add(new admin_setting_heading('optionloginhtmlcontent', get_string('optionloginhtmlcontent', 'theme_pimenko'),
+    get_string('optionloginhtmlcontentdesc', 'theme_pimenko')));
+
 // Top text.
 $name = 'theme_pimenko/logintextboxtop';
 $title = get_string('logintextboxtop', 'theme_pimenko');
@@ -87,9 +93,6 @@ $title = get_string('logintextboxbottom', 'theme_pimenko');
 $description = get_string('logintextboxbottomdesc', 'theme_pimenko');
 $setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
-
-$page->add(new admin_setting_heading('optionloginhtmlcontent', get_string('optionloginhtmlcontent', 'theme_pimenko'),
-    get_string('optionloginhtmlcontentdesc', 'theme_pimenko')));
 
 // HTML block content will appear at the top of the left block.
 $name = 'theme_pimenko/leftblockloginhtmlcontent';
