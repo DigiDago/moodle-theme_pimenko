@@ -25,6 +25,7 @@
 
 namespace theme_pimenko\output;
 
+use context_header;
 use core_auth\output\login;
 use stdClass;
 use theme_config;
@@ -45,7 +46,7 @@ use theme_pimenko\output\core\navigation\primary as primary;
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class core_renderer extends \theme_boost\output\core_renderer {
+class core_renderer extends \theme_boost\output\core_renderer {
     private $themeconfig;
 
     /**
@@ -752,6 +753,9 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string HTML for the header bar.
      */
     protected function render_context_header(\context_header $contextheader) {
+        if (!$this->themeconfig) {
+            $this->themeconfig = theme_config::load('pimenko');
+        }
 
         // Generate the heading first and before everything else as we might have to do an early return.
         if ($this->page->pagelayout == "incourse" || $this->page->pagelayout == "course") {
@@ -759,6 +763,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         } else {
             $class = 'h2';
         }
+
         if ($this->page->pagelayout == "coursecategory" && $this->themeconfig->settings->enablecatalog &&
             $this->themeconfig->settings->titlecatalog != "") {
             // Heading in the course index page with catalog activated.

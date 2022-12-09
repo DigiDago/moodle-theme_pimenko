@@ -278,7 +278,7 @@ $string['pimenkofeature'] = 'Fonctionnalités Pimenko';
 // Catalog enabling setting.
 $string['catalogsettings'] = "Catalogue";
 $string['catalogsettings_desc'] =
-    'Modifier le fonctionnement de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ces réglages sont effectif après avoir activé l\'option catalogue';
+    'Modifier le fonctionnement de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ces réglages sont effectifs après avoir activé l\'option catalogue';
 $string['customfieldfilter'] = "Affiche des filtres sur les champs personnalisés";
 $string['customfieldfilter_desc'] =
     "Cette option permet d'ajouter des filtres qui sont liés aux champs personnalisés des cours. Les champs personnalisés doivent être paramétrés au niveau du site et complété dans les paramètres de cours.";
@@ -330,7 +330,7 @@ $string['frontpagecontentsettings_desc'] = "Configurer la zone de contenu pour l
 
 // Card settings heading.
 $string['frontpagecardsettings'] = "Options pour la présentation des vignettes de cours sur la page d’accueil";
-$string['frontpagecardsettings_desc'] = "Si vous affichez les cours sur la page d\'accueil du site, ils apparaissent sous la forme de vignettes. Ces options permettent de déterminer les informations à afficher.";
+$string['frontpagecardsettings_desc'] = "Si vous affichez les cours sur la page d'accueil du site, ils apparaissent sous la forme de vignettes. Ces options permettent de déterminer les informations à afficher.";
 
 // Hide site name setting.
 $string['hidesitename'] = "Cacher le nom du site";
