@@ -25,6 +25,7 @@
 
 namespace theme_pimenko\output;
 
+use context_header;
 use core_auth\output\login;
 use stdClass;
 use theme_config;
@@ -45,7 +46,7 @@ use theme_pimenko\output\core\navigation\primary as primary;
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class core_renderer extends \theme_boost\output\core_renderer {
+class core_renderer extends \theme_boost\output\core_renderer {
     private $themeconfig;
 
     /**
@@ -139,7 +140,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function sitelogo(): string {
         $sitelogo = '';
-        if (!empty($this->page->theme->settings->sitelogo)) {
+        $theme = theme_config::load('pimenko');
+        if (!empty($theme->settings->sitelogo)) {
             if (empty($this->themeconfig)) {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
@@ -157,7 +159,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function navbarpicture(): string {
         $navbarpicture = '';
-        if (!empty($this->page->theme->settings->navbarpicture)) {
+        $theme = theme_config::load('pimenko');
+        if (!empty($theme->settings->navbarpicture)) {
             if (empty($this->themeconfig)) {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
@@ -237,7 +240,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string The favicon URL
      */
     public function favicon(): string {
-        if (!empty($this->page->theme->settings->favicon)) {
+        $theme = theme_config::load('pimenko');
+        if (!empty($theme->settings->favicon)) {
 
             if (empty($this->themeconfig)) {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
@@ -255,11 +259,12 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string Google font
      */
     public function googlefont(): string {
-        if (!empty($this->page->theme->settings->googlefont)) {
+        $theme = theme_config::load('pimenko');
+        if (!empty($theme->settings->googlefont)) {
             if (empty($this->themeconfig)) {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
-            return $this->page->theme->settings->googlefont;
+            return $theme->settings->googlefont;
         }
         // The default font we use if no settings define.
         return 'Verdana';
@@ -496,6 +501,8 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         $style = '';
         $adminediting = false;
 
+        $theme = theme_config::load('pimenko');
+
         if (is_siteadmin() && isset($USER->editing) && $USER->editing == 1) {
             $style = '" style="display: block; background: #EEEEEE; min-height: 50px;
         border: 2px dashed #BFBDBD; margin-top: 5px';
@@ -503,7 +510,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         }
         for ($i = 1; $i <= 8; $i++) {
             $blocksrow = "{$settingsname}{$i}";
-            $blocksrow = $this->page->theme->settings->$blocksrow;
+            $blocksrow = $theme->settings->$blocksrow;
             if ($blocksrow != '0-0-0-0') {
                 $fields[] = $blocksrow;
             }
@@ -752,6 +759,9 @@ final class core_renderer extends \theme_boost\output\core_renderer {
      * @return string HTML for the header bar.
      */
     protected function render_context_header(\context_header $contextheader) {
+        if (!$this->themeconfig) {
+            $this->themeconfig = theme_config::load('pimenko');
+        }
 
         // Generate the heading first and before everything else as we might have to do an early return.
         if ($this->page->pagelayout == "incourse" || $this->page->pagelayout == "course") {
@@ -759,6 +769,7 @@ final class core_renderer extends \theme_boost\output\core_renderer {
         } else {
             $class = 'h2';
         }
+
         if ($this->page->pagelayout == "coursecategory" && $this->themeconfig->settings->enablecatalog &&
             $this->themeconfig->settings->titlecatalog != "") {
             // Heading in the course index page with catalog activated.

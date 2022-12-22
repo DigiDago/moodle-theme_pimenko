@@ -27,6 +27,9 @@ defined('MOODLE_INTERNAL') || die;
 
 $page = new admin_settingpage('theme_pimenko_footer', get_string('footersettings', 'theme_pimenko'));
 
+$page->add(new admin_setting_heading('footersettings', get_string('footersettings', 'theme_pimenko'),
+    ''));
+
 // Footer color.
 $name          = 'theme_pimenko/footercolor';
 $title         = get_string(
