@@ -169,7 +169,20 @@ $THEME->layouts = [
         'file' => 'columns2.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
-    )
+    ),
+    'popup' => array(
+        'file' => 'columns2.php',
+        'regions' => array(),
+        'options' => array(
+            'nofooter' => true,
+            'nonavbar' => true,
+            'activityheader' => [
+                'notitle' => true,
+                'nocompletion' => true,
+                'nodescription' => true
+            ]
+        )
+    ),
 ];
 
 $THEME->haseditswitch = true;
