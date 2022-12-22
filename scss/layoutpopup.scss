@@ -21,23 +21,25 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-@import '../../boost/scss/moodle';
-@import 'variables';
-@import 'body';
-@import 'login';
-@import 'navbar';
-@import 'navbardrawer';
-@import 'content';
-@import 'profile';
-@import 'footer';
-@import 'completioncheck';
-@import 'catalog';
-@import 'settings';
-@import 'frontpage';
-@import 'carousel';
-@import 'coursecard';
-@import 'moodleoverride';
-@import 'admin';
-@import 'contact';
-@import 'coverimage';
-@import 'layoutpopup';
+/* Layout popup */
+.path-admin-reportbuilder.pagelayout-popup {
+
+    #dynamictabs-tabs {
+        position: relative;
+    }
+
+    #dynamictabs-content {
+        padding-top: 0;
+    }
+
+    .reportbuilder-sidebar-menu,
+    .reportbuilder-sidebar-settings {
+        position: initial;
+    }
+
+    .reportbuilder-report[data-editing] .reportbuilder-report-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
