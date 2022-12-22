@@ -39,32 +39,29 @@
     }
 }}
 
-{{{ output.doctype }}}
-<html {{{ output.htmlattributes }}}>
-    {{> theme_boost/head }}
+{{> theme_boost/head }}
 
-    <body {{{ bodyattributes }}}>
+<body {{{ bodyattributes }}}>
     {{> core/local/toast/wrapper}}
-        <div id="page-wrapper">
-            {{{ output.standard_top_of_body_html }}}
-            <!-- Default navbar. -->
-            {{> theme_boost/navbar }}
-            <!-- Default nav-drawer. -->
-            <div class="container outercont">
-                <div id="page-content" class="row justify-content-center">
-                    <section id="region-main" class="col-xl-6 col-sm-8">
-                        {{{maincontent}}}
-                    </section>
-                </div>
+    <div id="page-wrapper">
+        {{{ output.standard_top_of_body_html }}}
+        <!-- Default navbar. -->
+        {{> theme_boost/navbar }}
+        <!-- Default nav-drawer. -->
+        <div id="page" class="container outercont">
+            <div id="page-content" class="row justify-content-center">
+                <section id="region-main" class="col-xl-6 col-sm-8">
+                    {{{maincontent}}}
+                </section>
             </div>
-            <!-- Default footer. -->
-            {{> theme_boost/footer }}
         </div>
-    </body>
-</html>
+        <!-- Default footer. -->
+        {{> theme_boost/footer }}
+    </div>
+</body>
 {{#js}}
     require(['theme_boost/loader']);
     require(['theme_boost/drawer'], function(mod) {
-        mod.init();
+    mod.init();
     });
 {{/js}}
