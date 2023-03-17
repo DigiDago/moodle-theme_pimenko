@@ -29,14 +29,13 @@ user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
 user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 
 if (isloggedin()) {
-    $courseindexopen = (get_user_preferences('drawer-open-index') == true);
-    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
+    $courseindexopen = (get_user_preferences('drawer-open-index'));
+    $blockdraweropen = (get_user_preferences('drawer-open-block'));
 } else {
     $courseindexopen = false;
     $blockdraweropen = false;
 }
 
-require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
 $extraclasses = [];
@@ -67,7 +66,8 @@ if (!$courseindex) {
 }
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()
+    && !$PAGE->has_secondary_navigation();
 
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
@@ -83,7 +83,9 @@ $secondarynavigation = false;
 $overflow = '';
 
 // Secondary navigation.
-if ($PAGE->has_secondary_navigation() && strpos($PAGE->bodyclasses, 'path-enrol') == false) {
+if ($PAGE->has_secondary_navigation() &&
+    (!strpos($PAGE->bodyclasses, 'path-enrol')
+        || strpos($PAGE->bodyclasses, 'pagelayout-admin') > 0)) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $customnav = new \theme_pimenko\output\core\navigation\views\secondary($PAGE);
     $customnav->initialise();
@@ -102,8 +104,11 @@ $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
 
 $templatecontext = [
-    'sitename' => format_string($SITE->shortname,
-        true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'sitename' => format_string(
+        $SITE->shortname,
+        true,
+        ['context' => context_course::instance(SITEID), "escape" => false]
+    ),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,
