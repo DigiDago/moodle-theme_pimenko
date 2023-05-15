@@ -1,125 +1,73 @@
-<div class="card-body p-0">
-    <div class="card-text content mt-3 p-3">
-        <div id="course-gallery" class="card-deck dashboard-card-deck">
-            {{# courses }}
-                <div id="course-gallery-{{ id }}" class="card course-gallery dashboard-card" style="display: {{ display }}">
-                    <div class="img-container">
-                        <a href="{{ url }}">
-                            <div class="img-course" style="background-image : url('{{ urlimg }}')" alt=""></div>
-                        </a>
-                    </div>
-                    <div class="card-block p-2 card-title">
-                        <p class="course_title">
-                            <a href="{{ url }}">{{{ name }}}</a>
-                        </p>
-                        <div class="course-category">
-                            <div class="card-text d-flex">
+<div class="card-text content mt-3 p-3">
+    <div id="course-gallery" class="card-deck dashboard-card-deck">
+        {{# courses }}
+            <div id="course-gallery-{{ id }}" class="card course-gallery dashboard-card" style="display: {{ display }}">
+                <div class="img-container">
+                    <a href="{{ url }}">
+                        <div class="img-course" style="background-image : url('{{ urlimg }}')"></div>
+                    </a>
+                </div>
+                <div class="card-block p-2 card-title">
+                    <p class="course_title">
+                        <a href="{{ url }}">{{{ name }}}</a>
+                    </p>
+                    <div class="course-category">
+                        <div class="card-text d-flex">
                     <span><a href="{{{ rootpath }}}/course/index.php?categoryid={{ categoryid }}
                         ">{{{ category }}}</a></span>
-                                {{#catalogsummarymodal}}
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary modalbutton ml-auto" data-toggle="modal" data-target="#modal-{{ id }}">
-                                        <i class="fa fa-info" aria-hidden="true"></i>
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="{{{ name }}}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">{{{ name }}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    {{{ summary }}}
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{#str}}close, theme_pimenko{{/str}}</button>
-                                                </div>
+                            {{#catalogsummarymodal}}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary modalbutton ml-auto" data-toggle="modal" data-target="#modal-{{ id }}">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="{{{ name }}}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{{ name }}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{{ summary }}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{#str}}close, theme_pimenko{{/str}}</button>
                                             </div>
                                         </div>
                                     </div>
-                                {{/catalogsummarymodal}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-block p-2 course-summary">
-                        {{^catalogsummarymodal}}
-                            <div class=" card-text">{{{summary}}}</div>
-                        {{/catalogsummarymodal}}
-                    </div>
-                    <div class="card-block p-2 course-data">
-                        <div class="card-text">
-                            <div class="course-enrolments">
-                                {{#enroledcount}}
-                                    <i class="icon fa fa-user fa-fw"></i>{{ enroledcount }}
-                                {{/enroledcount}}
-                            </div>
-                        </div>
-                        <div class="card-text custom-fields">
-                            {{# customfields}}
-                                <span>{{{customfield}}}</span><br>
-                            {{/customfields}}
+                                </div>
+                            {{/catalogsummarymodal}}
                         </div>
                     </div>
                 </div>
-            {{/courses}}
-            {{#loadmore}}
-                <div class="buttons">
-                    <button class="btn btn-lg btn-secondary" id="load-more">Charger plus</button>
+                <div class="card-block p-2 course-summary">
+                    {{^catalogsummarymodal}}
+                        <div class=" card-text">{{{summary}}}</div>
+                    {{/catalogsummarymodal}}
                 </div>
-            {{/loadmore}}
-        </div>
+                <div class="card-block p-2 course-data">
+                    <div class="card-text">
+                        <div class="course-enrolments">
+                            {{#enroledcount}}
+                                <i class="icon fa fa-user fa-fw"></i>{{ enroledcount }}
+                            {{/enroledcount}}
+                        </div>
+                    </div>
+                    <div class="card-text custom-fields">
+                        {{# customfields}}
+                            <span>{{{customfield}}}</span><br>
+                        {{/customfields}}
+                    </div>
+                </div>
+            </div>
+        {{/courses}}
+        {{#loadmore}}
+            <div class="buttons">
+                <button class="btn btn-lg btn-secondary" id="load-more">{{#str}}loadmore, theme_pimenko{{/str}}</button>
+            </div>
+        {{/loadmore}}
     </div>
 </div>
-
-<script src="{{{ rootpath }}}/theme/pimenko/javascript/geopattern/js/geopattern.min.js"></script>
-{{#js}}
-    (function() {
-    // Generate pictures for the courses without picture
-    var generatePictures = function(courseGallery) {
-    for(var i in courseGallery) {
-    var id = courseGallery.item(i).id;
-    var img = courseGallery.item(i).getElementsByClassName('img-course').item(0);
-    if(img.style['background-image'] == 'url("")') {
-    var pattern = GeoPattern.generate(id);
-    img.style['background-image'] = pattern.toDataUrl();
-    }
-    }
-    }
-
-    var courses = document.getElementsByClassName('course-gallery')
-    var nbCourseMore = 1;
-    var i = 0;
-
-    while(i < courses.length) {
-    if (nbCourseMore <= 12) {
-    courses.item(parseInt(i)).style.display = 'flex';
-    if (parseInt(i) === courses.length - 1) {
-    $('#load-more').hide();
-    }
-    }
-    nbCourseMore++;
-    i++;
-    }
-
-    var courseGallery = document.getElementsByClassName('course-gallery');
-    // Generate when the document is loaded
-    if ( courseGallery.length > 0 ) {
-    generatePictures(courseGallery);
-    }
-
-    // And when the gallery changes
-    var gallery = document.getElementById('course-gallery').parentElement;
-    var config = { attributes: false, childList: true, subtree: true };
-    var galleryChange = function(mutationsList, observer) {
-    var courseGallery = document.getElementsByClassName('course-gallery');
-    if ( courseGallery.length > 0 ) {
-    generatePictures(courseGallery);
-    }
-    }
-    var observer = new MutationObserver(galleryChange);
-    observer.observe(gallery, config);
-    })();
-{{/js}}

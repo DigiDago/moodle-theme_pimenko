@@ -142,6 +142,9 @@
                         {{/customfields}}
                     </div>
                 </div>
+                <div class="navitem">
+                    <button data-filteraction="reset" type="button" class="btn btn-secondary ml-auto mr-2">{{#str}}clearfilters, theme_pimenko{{/str}}</button>
+                </div>
             </div>
         </div>
     {{/customfieldfilter}}
@@ -159,9 +162,6 @@
                         {{> core/url_select }}
                     </div>
                 {{/tagselect}}
-                <div class="navitem">
-                    <button data-filteraction="reset" type="button" class="btn btn-secondary ml-auto mr-2">{{#str}}clearfilters, theme_pimenko{{/str}}</button>
-                </div>
                 {{#additionaloptions}}
                     <div class="ml-auto d-flex">
                         <div class="navitem dropdown">

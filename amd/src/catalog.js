@@ -20,17 +20,17 @@
 
 define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, ajax, templates, cfg) {
     // General filter.
-    let categorySelect = $('#page-course-index-category .categoryselect .urlselect .custom-select');
-    let tagSelect = $('#page-course-index-category .tagselect .urlselect .custom-select');
-    let categorySearch = $('#page-course-index-category .searchcourse form.simplesearchform input');
-    let categoryidselect = $("input[name='categoryid']");
+    const categorySelect = $('#page-course-index-category .categoryselect .urlselect .custom-select');
+    const tagSelect = $('#page-course-index-category .tagselect .urlselect .custom-select');
+    const categorySearch = $('#page-course-index-category .searchcourse form.simplesearchform input');
+    const categoryidselect = $("input[name='categoryid']");
     // Custom field filter.
-    let customfieldSearch = $('#page-course-index-category .customfieldsearch form');
-    let customfieldDate = $('#page-course-index-category .customfielddate form select');
-    let customfieldSelect = $('#page-course-index-category .customfieldselect form select');
-    let resetbutton = $('#page-course-index-category button.btn[data-filteraction=\'reset\']');
+    const customfieldSearch = $('#page-course-index-category .customfieldsearch form');
+    const customfieldDate = $('#page-course-index-category .customfielddate form select');
+    const customfieldSelect = $('#page-course-index-category .customfieldselect form select');
+    const resetbutton = $('#page-course-index-category button.btn[data-filteraction=\'reset\']');
 
-    let startQuery = function() {
+    const startQuery = function() {
         categorySelect.attr("disabled", "true");
         tagSelect.attr("disabled", "true");
         categorySearch.attr("disabled", "true");
@@ -42,7 +42,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         $('#loader-gallery').attr("style", "display: flex;");
     };
 
-    let endQuery = function(nbCourses) {
+    const endQuery = function(nbCourses) {
         categorySelect.removeAttr("disabled");
         tagSelect.removeAttr("disabled");
         categorySearch.removeAttr("disabled");
@@ -76,7 +76,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         });
     };
 
-    let doQuery = function(response) {
+    const doQuery = function(response) {
         if (typeof (response) != 'undefined') {
             let courses = response.courses;
             let toDestroy;
@@ -123,12 +123,10 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
 
             // Rendering of results.
             templates.render('theme_pimenko/course_gallery', template, 'theme_pimenko').then(function(html) {
-                let element = document.getElementById('course-gallery');
-                let parent = element.parentElement;
-                parent.removeChild(element);
-                parent.insertAdjacentHTML('beforebegin', html);
+                let element = document.getElementsByClassName('course-gallery-container')[0];
+                element.innerHTML = String(html);
                 endQuery(courses.length);
-            }).fail(function(ex) {
+            }).catch(function(ex) {
                 /* eslint no-console: "off" */
                 console.error(ex);
                 endQuery();
@@ -136,7 +134,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
         }
     };
 
-    let eventcatalog = function() {
+    const eventcatalog = function() {
         categorySelect.change(function() {
             let href = categorySelect.val();
             categorySearch.val("");
@@ -225,8 +223,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/config'], function($, aja
                 doQuery(response);
             }).fail(function(ex) {
                 /* eslint no-console: "off" */
-                console.log(ex);
-                console.error('search_courses : ' + ex.exception.message);
+                console.error('search_courses : ' + ex);
             });
         });
 

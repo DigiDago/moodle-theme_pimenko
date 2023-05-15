@@ -24,9 +24,10 @@
 
 namespace theme_pimenko\external;
 
-use external_function_parameters;
-use external_single_structure;
-use external_value;
+use core_external\external_api;
+use core_external\external_function_parameters;
+use core_external\external_single_structure;
+use core_external\external_value;
 use stored_file;
 use theme_config;
 
@@ -39,7 +40,7 @@ require_once($CFG->libdir . '/filterlib.php');
 /**
  * external function for pimenko
  */
-class save_cover_file extends \external_api {
+class save_cover_file extends external_api {
 
     /**
      * Save course cover file in moodle storage.

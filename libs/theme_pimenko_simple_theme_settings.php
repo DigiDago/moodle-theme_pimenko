@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 class theme_pimenko_simple_theme_settings {
     private $settingspage;
     private $strprefix;

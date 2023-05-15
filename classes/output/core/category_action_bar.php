@@ -16,6 +16,7 @@
 
 namespace theme_pimenko\output\core;
 
+use context_course;
 use context_system;
 use core_course_category;
 use core_date;
@@ -79,15 +80,16 @@ class category_action_bar extends \core_course\output\category_action_bar {
      */
     public function get_category_select(\renderer_base $output): object {
         if (!$this->searchvalue) {
-            $categories = core_course_category::get_all();
+            $categories = core_course_category::make_categories_list();
+
             if (count($categories) >= 1) {
                 foreach ($categories as $id => $cat) {
-                    $url = new moodle_url($this->page->url, ['categoryid' => $id]);
-                    $systemcontext = context_system::instance();
-                    if ($cat->visible == 0 && !has_capability('moodle/category:viewhiddencategories', $systemcontext)) {
-                        continue;
+                    $category = core_course_category::get($id);
+                    if ($category->visible ||
+                        has_capability('moodle/course:viewhiddencourses', context_course::instance($category->id))) {
+                        $url = new moodle_url($this->page->url, ['categoryid' => $id]);
+                        $options[$url->out()] = $cat;
                     }
-                    $options[$url->out()] = format_string($cat->name);
                 }
                 $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
                 if ($categoryid) {
@@ -174,7 +176,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
         $templatecustomfields = [];
 
         if (count($customfields) >= 1) {
-            foreach ($customfields as $id => $customfield) {
+            foreach ($customfields as $customfield) {
 
                 $options = [];
                 $customfieldselected = filter_input(

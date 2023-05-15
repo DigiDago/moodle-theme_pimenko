@@ -73,10 +73,12 @@ class profile_renderer extends \renderer_base {
             }
 
             $this->user->seeemail = false;
-            if (($isadmin)
-                    or ($currentuser)
-                    or ($user->maildisplay == 1)
-                    or ($user->maildisplay == 2 and enrol_sharing_course($user, $USER))) {
+            if (
+                $isadmin
+                || $currentuser
+                || $user->maildisplay == 1
+                || ($user->maildisplay == 2 && enrol_sharing_course($user, $USER))
+            ) {
                 $this->user->seeemail = true;
             }
 

@@ -321,7 +321,7 @@ class course_renderer extends \core_course_renderer {
             if ($course instanceof stdClass) {
                 $course = new core_course_list_element($course);
             }
-            if (array_key_exists($course->id, $mycourses) or $this->page->pagetype == "site-index") {
+            if ($this->page->pagetype == "site-index" || array_key_exists($course->id, $mycourses)) {
                 $rendercourse = new stdClass();
                 // Get course name.
                 $rendercourse->coursename = $chelper->get_course_formatted_name($course);
@@ -490,6 +490,7 @@ class course_renderer extends \core_course_renderer {
         } else {
             $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
         }
+
         $site = get_site();
         $actionbar = new \theme_pimenko\output\core\category_action_bar($this->page, $coursecat);
 
@@ -499,7 +500,7 @@ class course_renderer extends \core_course_renderer {
 
             $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
             if (isset($editoption['tagselect'])) {
-                foreach ($editoption['tagselect']->options as $key => &$option) {
+                foreach ($editoption['tagselect']->options as &$option) {
                     $url = parse_url($option['value']);
                     parse_str($url['query'], $params);
                     if ($params['tagid'] == $tagid) {
@@ -649,24 +650,40 @@ class course_renderer extends \core_course_renderer {
                 $template
             );
         } else {
+            $context = context_system::instance();
+
+            $where = has_capability('moodle/category:viewhiddencategories', $context) ? '' : 'AND cc.visible = 1';
+
+            // Define the base SQL query.
+            $basesql = "WITH RECURSIVE category_tree(id, name, parent, sortorder) AS (
+                            SELECT id, name, parent, sortorder
+                            FROM {course_categories} cc
+                            WHERE id = :category_id $where
+                            UNION ALL
+                            SELECT cc.id, cc.name, cc.parent, cc.sortorder
+                            FROM {course_categories} cc
+                            JOIN category_tree ct ON ct.id = cc.parent
+                        )
+                        SELECT id, name, parent
+                        FROM category_tree
+                        ORDER BY sortorder
+                    ";
+
+            // Set the default parameters for the SQL query.
+            $params = array(
+                'category_id' => $coursecat->id,
+            );
 
             // If there is a category id filter then get only this category.
             if ($coursecat->id > 0) {
-                $cats = $DB->get_records(
-                    'course_categories',
-                    ['visible' => 1, 'id' => $coursecat->id],
-                    'sortorder'
-                );
-            } else { // Else get all categories.
-                $cats = $DB->get_records(
-                    'course_categories',
-                    ['visible' => 1],
-                    'sortorder'
-                );
+                $cats = $DB->get_records_sql($basesql, $params);
+            } else {
+                // Else get all categories.
+                $where = has_capability('moodle/category:viewhiddencategories', $context) ? '' : 'visible = 1';
+                $cats = $DB->get_records_select('course_categories', $where, array(), 'sortorder');
             }
 
             $template->courses = [];
-            $categories = [];
 
             $nbcourse = 1;
             // Categories.
@@ -802,7 +819,7 @@ class course_renderer extends \core_course_renderer {
             $template->catalogsummarymodal = $theme->settings->catalogsummarymodal;
 
             return $this->render_from_template(
-                'theme_pimenko/course_gallery',
+                'theme_pimenko/course_gallery_container',
                 $template
             );
         }
@@ -813,80 +830,77 @@ class course_renderer extends \core_course_renderer {
     /**
      * Return all courses of a category
      *
-     * @param array params
+     * @param array $params params
      * @return array Courses of the category
      */
     public static function get_all_courses_by_category($params): array {
         global $DB;
 
-        $fields = array('c.id', 'c.category', 'c.sortorder',
-            'c.shortname', 'c.fullname', 'c.idnumber',
-            'c.startdate', 'c.enddate', 'c.visible', 'c.cacherev',
-            'c.summary', 'c.summaryformat');
+        $fields = [
+            'c.id',
+            'c.category',
+            'c.sortorder',
+            'c.shortname',
+            'c.fullname',
+            'c.idnumber',
+            'c.startdate',
+            'c.enddate',
+            'c.visible',
+            'c.cacherev',
+            'c.summary',
+            'c.summaryformat'
+        ];
+
+        // Define base SQL query.
+        $sql = "SELECT " . implode(',', $fields) . " FROM {course} c
+        WHERE c.category = :category AND c.id != 1";
+
+        // Define conditions for WHERE clause.
+        $where = [];
 
         if ($params['tagid'] != 0) {
-            $sql = "SELECT " . join(',', $fields) . "
-                FROM {course} c
-                LEFT JOIN {tag_instance} ti ON c.id = ti.itemid
-                WHERE ti.tagid = :tagid
-                AND ti.itemtype = 'course'
-                AND c.category = :category
-                AND c.id != 1
-                ORDER BY sortorder";
+            $where[] = "c.id IN (SELECT ti.itemid FROM {tag_instance} ti
+                 WHERE ti.tagid = :tagid AND ti.itemtype = 'course')";
         } else if ($params['customfieldselected'] && $params['day'] && $params['month'] && $params['year']) {
-            $timestamp =
-                new DateTime($params['year'] . '-' . $params['month'] . '-' . $params['day'],
-                    core_date::get_user_timezone_object());
-            $timestamp->setTime(0, 0, 0);
+            $timestamp = DateTime::createFromFormat('Y-m-d H:i:s',
+                $params['year'] . '-' . $params['month'] . '-' . $params['day'] . ' 00:00:00',
+                core_date::get_user_timezone_object());
             $params['timestamp'] = $timestamp->getTimestamp();
-            $sql = "SELECT " . join(',', $fields) . "
-                FROM {course} c
-                LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
-                LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
-                WHERE cf.shortname = :customfieldselected
-                AND cd.value = :timestamp
-                AND c.category = :category
-                AND c.id != 1
-                ORDER BY sortorder";
+            $where[] = "c.id IN (SELECT cd.instanceid FROM {customfield_data} cd
+                 LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
+                 WHERE cf.shortname = :customfieldselected AND cd.value = :timestamp)";
         } else if ($params['customfieldselected'] && $params['customfieldvalue'] != 'all') {
-            $sql = "SELECT " . join(',', $fields) . "
-                FROM {course} c
-                LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
-                LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
-                WHERE cf.shortname = :customfieldselected
-                AND cd.value = :customfieldvalue
-                AND c.category = :category
-                AND c.id != 1
-                ORDER BY sortorder";
+            $where[] = "c.id IN (SELECT cd.instanceid FROM {customfield_data} cd
+                 LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
+                 WHERE cf.shortname = :customfieldselected AND cd.value = :customfieldvalue)";
         } else if ($params['customfieldtext'] && $params['customfieldvalue'] != 'all') {
             $params['customfieldvalue'] = '%' . $params['customfieldvalue'] . '%';
-            $sql = "SELECT " . join(',', $fields) . "
-                FROM {course} c
-                LEFT JOIN {customfield_data} cd ON c.id = cd.instanceid
-                LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
-                WHERE cf.shortname = :customfieldtext
-                AND cd.value LIKE :customfieldvalue
-                AND c.category = :category
-                AND c.id != 1
-                ORDER BY sortorder";
-        } else {
-            $sql = "SELECT " . join(',', $fields) . "
-                FROM {course} c
-                WHERE c.category = :category
-                AND c.id != 1
-                ORDER BY sortorder";
+            $where[] = "c.id IN (SELECT cd.instanceid FROM {customfield_data} cd
+                 LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
+                 WHERE cf.shortname = :customfieldtext AND cd.value LIKE :customfieldvalue)";
         }
 
-        $list = $DB->get_records_sql($sql, [
+        // Add conditions to the SQL query.
+        if (!empty($where)) {
+            $sql .= ' AND ' . implode(' AND ', $where);
+        }
+
+        // Add ORDER BY clause.
+        $sql .= " ORDER BY sortorder";
+
+        $parameters = [
             'category' => $params['categoryid'],
             'tagid' => $params['tagid'],
             'customfieldtext' => $params['customfieldtext'],
             'customfieldselected' => $params['customfieldselected'],
             'customfieldvalue' => $params['customfieldvalue'],
             'timestamp' => $params['timestamp']
-        ]);
+        ];
+
+        $list = $DB->get_records_sql($sql, $parameters);
 
         $courses = [];
+
         // Prepare the list of core_course_list_element objects.
         foreach ($list as $record) {
             $courses[$record->id] = new core_course_list_element($record);
