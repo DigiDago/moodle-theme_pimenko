@@ -411,5 +411,7 @@ $string['rightblockloginhtmlcontentdesc'] =
 $string['h5pcss'] = 'Fichier CSS pour H5P';
 $string['h5pcss_desc'] = 'Ajouter un fichier CSS qui sera chargé et modifie le design des activités H5P de votre site.';
 
+$string['loadmore'] = 'Charger plus';
+
 // Add deprecated Moodle.
 $string['clearfilters'] = 'Réinitialiser les filtres';

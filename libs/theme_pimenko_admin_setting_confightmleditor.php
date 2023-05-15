@@ -87,7 +87,7 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
         $default = $this->get_defaultsetting();
 
         $defaultinfo = $default;
-        if (!is_null($default) and $default !== '') {
+        if (!is_null($default) && $default !== '') {
             $defaultinfo = "\n" . $default;
         }
 
@@ -222,7 +222,7 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
     public function write_setting($data) {
         global $CFG;
 
-        if ($this->paramtype === PARAM_INT and $data === '') {
+        if ($this->paramtype === PARAM_INT && $data === '') {
             // ... do not complain if '' used instead of 0 !
             $data = 0;
         }

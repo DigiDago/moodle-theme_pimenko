@@ -24,41 +24,25 @@
 
 namespace theme_pimenko\external;
 
-use context_course;
-use core_course_category;
-use core_course_external;
-use external_files;
-use external_format_value;
-use external_function_parameters;
-use external_multiple_structure;
-use external_single_structure;
-use external_value;
-use external_warnings;
-use invalid_parameter_exception;
-use theme_config;
-use function clean_param;
-use function enrol_get_instances;
-use function enrol_get_my_courses;
-use function is_enrolled;
-use function is_siteadmin;
-use function require_capability;
-use const PARAM_ALPHA;
-use const PARAM_BOOL;
-use const PARAM_CAPABILITY;
-use const PARAM_INT;
-use const PARAM_NOTAGS;
-use const PARAM_PLUGIN;
-use const PARAM_RAW;
-use const PARAM_SAFEDIR;
-use const PARAM_TEXT;
-use const VALUE_DEFAULT;
-use const VALUE_OPTIONAL;
-
 defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/course/externallib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->libdir . '/filterlib.php');
+
+use context_course;
+use context_system;
+use core_course_category;
+use core_course_external;
+use core_external\external_files;
+use core_external\external_format_value;
+use core_external\external_function_parameters;
+use core_external\external_multiple_structure;
+use core_external\external_single_structure;
+use core_external\external_value;
+use core_external\external_warnings;
+use invalid_parameter_exception;
+use theme_config;
 
 class search_courses extends core_course_external {
 
@@ -90,10 +74,10 @@ class search_courses extends core_course_external {
      * @param boolean $onlypublicdata set to true, to retrieve only fields viewable by anyone when the course is
      *                                 visible
      *
-     * @return external_single_structure|array the course structure
+     * @return external_single_structure the course structure
      * @since  Moodle 3.2
      */
-    protected static function get_course_structure(bool $onlypublicdata = true) {
+    protected static function get_course_structure($onlypublicdata = true) {
         $coursestructure = [
             'id' => new external_value(
                 PARAM_INT,
@@ -334,7 +318,7 @@ class search_courses extends core_course_external {
      *
      * @return array of course objects and warnings
      */
-    public function execute(
+    public static function execute(
         string $criterianame,
         string $criteriavalue,
         int $page = 0,
@@ -382,7 +366,7 @@ class search_courses extends core_course_external {
             );
         }
 
-        if ($params['criterianame'] == 'modulelist' or $params['criterianame'] == 'blocklist') {
+        if ($params['criterianame'] == 'modulelist' || $params['criterianame'] == 'blocklist') {
             require_capability(
                 'moodle/site:config',
                 context_system::instance()
@@ -437,7 +421,7 @@ class search_courses extends core_course_external {
 
         $finalcourses = [];
 
-        foreach ($courses as $key => $course) {
+        foreach ($courses as $course) {
             $coursecontext = context_course::instance($course->id);
             $neverhidden = false;
             $neverhiddenpaypal = false;
@@ -505,8 +489,7 @@ class search_courses extends core_course_external {
             [
                 'criterianame' => new external_value(
                     PARAM_ALPHA,
-                    'criteria name
-                                                        (search, modulelist (only admins), blocklist (only admins), tagid)'
+                    'criteria name (search, modulelist (only admins), blocklist (only admins), tagid)'
                 ),
                 'criteriavalue' => new external_value(
                     PARAM_RAW,
