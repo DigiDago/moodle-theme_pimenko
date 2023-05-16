@@ -102,6 +102,8 @@ $string['profile:basicinfo'] = 'Informations générales';
 $string['profile:contactinfo'] = 'Contact';
 
 // Login *******************************************************.
+$string['settings:loginsettings:vanillalogintemplate'] = 'Page d\'authentification Moodle';
+$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Affiche la page d\'authentification de Moodle';
 $string['loginsettings'] = 'Paramètres de la page d\'authentification';
 $string['loginsettingsheading'] = 'Personnalisez la page de connexion';
 $string['logindesc'] =

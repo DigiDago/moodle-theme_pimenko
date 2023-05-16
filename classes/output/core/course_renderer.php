@@ -652,30 +652,31 @@ class course_renderer extends \core_course_renderer {
         } else {
             $context = context_system::instance();
 
-            $where = has_capability('moodle/category:viewhiddencategories', $context) ? '' : 'AND cc.visible = 1';
+            // If there is a category id filter then get only this category.
+            if ($coursecat->id > 0) {
+                $where = has_capability('moodle/category:viewhiddencategories', $context) ? '' : 'WHERE visible = 1';
 
-            // Define the base SQL query.
-            $basesql = "WITH RECURSIVE category_tree(id, name, parent, sortorder) AS (
-                            SELECT id, name, parent, sortorder
+                // Define the base SQL query.
+                $basesql = "WITH RECURSIVE category_tree(id, name, parent, sortorder, visible) AS (
+                            SELECT id, name, parent, sortorder, visible
                             FROM {course_categories} cc
-                            WHERE id = :category_id $where
+                            WHERE id = :category_id
                             UNION ALL
-                            SELECT cc.id, cc.name, cc.parent, cc.sortorder
+                            SELECT cc.id, cc.name, cc.parent, cc.sortorder, cc.visible
                             FROM {course_categories} cc
                             JOIN category_tree ct ON ct.id = cc.parent
                         )
-                        SELECT id, name, parent
+                        SELECT id, name, parent, visible
                         FROM category_tree
+                        $where
                         ORDER BY sortorder
                     ";
 
-            // Set the default parameters for the SQL query.
-            $params = array(
-                'category_id' => $coursecat->id,
-            );
+                // Set the default parameters for the SQL query.
+                $params = array(
+                    'category_id' => $coursecat->id,
+                );
 
-            // If there is a category id filter then get only this category.
-            if ($coursecat->id > 0) {
                 $cats = $DB->get_records_sql($basesql, $params);
             } else {
                 // Else get all categories.
@@ -701,6 +702,7 @@ class course_renderer extends \core_course_renderer {
                 $params['month'] = filter_input(INPUT_GET, 'month', FILTER_SANITIZE_URL);
                 $params['timestamp'] = filter_input(INPUT_GET, 'timestamp', FILTER_SANITIZE_URL);
                 // Courses of categories.
+
                 foreach (self::get_all_courses_by_category($params) as $c) {
 
                     $coursecontext = context_course::instance($c->id);

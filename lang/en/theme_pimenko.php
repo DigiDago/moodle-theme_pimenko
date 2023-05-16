@@ -101,6 +101,8 @@ $string['profile:basicinfo'] = 'Basic Information';
 $string['profile:contactinfo'] = 'Contact Information';
 
 // Login *******************************************************.
+$string['settings:loginsettings:vanillalogintemplate'] = 'Moodle login page';
+$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Display the default Moodle login page';
 $string['loginsettings'] = 'Login Page';
 $string['loginsettingsheading'] = 'Customize the login page';
 $string['logindesc'] = 'Customize the login page with adding an image background and texts above and below the login box.';

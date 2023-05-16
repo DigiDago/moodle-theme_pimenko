@@ -10,14 +10,5 @@
         if($('.categoryname')) {
             $('.categoryname').click();
         }
-
-        <!-- Change default event click action. -->
-        $('body').on('click', '.coursename a.aalink', function(event) {
-            if($(this).data('summary') == true) {
-                event.preventDefault();
-                let selectormoreinfo = '#' + $(this).data('moreinfoid') + ' i';
-                $(selectormoreinfo).click();
-            }
-        });
     });
 {{/js}}

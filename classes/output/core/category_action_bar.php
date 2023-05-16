@@ -16,7 +16,7 @@
 
 namespace theme_pimenko\output\core;
 
-use context_course;
+use context_coursecat;
 use context_system;
 use core_course_category;
 use core_date;
@@ -86,7 +86,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                 foreach ($categories as $id => $cat) {
                     $category = core_course_category::get($id);
                     if ($category->visible ||
-                        has_capability('moodle/course:viewhiddencourses', context_course::instance($category->id))) {
+                        has_capability('moodle/course:viewhiddencourses', context_coursecat::instance($category->id))) {
                         $url = new moodle_url($this->page->url, ['categoryid' => $id]);
                         $options[$url->out()] = $cat;
                     }
