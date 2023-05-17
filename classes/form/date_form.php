@@ -24,6 +24,9 @@
  */
 namespace theme_pimenko\form;
 
+// This line protects the file from being accessed by a URL directly.
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->libdir."/formslib.php");
 
 use moodleform;

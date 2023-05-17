@@ -102,6 +102,8 @@ $string['profile:basicinfo'] = 'Informations générales';
 $string['profile:contactinfo'] = 'Contact';
 
 // Login *******************************************************.
+$string['settings:loginsettings:vanillalogintemplate'] = 'Page d\'authentification Moodle';
+$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Utiliser la page d’authentification classique du thème officiel de Moodle "Boost"';
 $string['loginsettings'] = 'Paramètres de la page d\'authentification';
 $string['loginsettingsheading'] = 'Personnalisez la page de connexion';
 $string['logindesc'] =
@@ -410,6 +412,8 @@ $string['rightblockloginhtmlcontentdesc'] =
 // H5P.
 $string['h5pcss'] = 'Fichier CSS pour H5P';
 $string['h5pcss_desc'] = 'Ajouter un fichier CSS qui sera chargé et modifie le design des activités H5P de votre site.';
+
+$string['loadmore'] = 'Charger plus';
 
 // Add deprecated Moodle.
 $string['clearfilters'] = 'Réinitialiser les filtres';

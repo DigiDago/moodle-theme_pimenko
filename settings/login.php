@@ -31,6 +31,13 @@ $page = new admin_settingpage('theme_pimenko_login', get_string('loginsettings',
 $page->add(new admin_setting_heading('optionlogint', get_string('loginsettings', 'theme_pimenko'),
     ''));
 
+$setting = new theme_pimenko_simple_theme_settings(
+    $page,
+    'theme_pimenko',
+    'settings:loginsettings:'
+);
+$setting->add_checkbox('vanillalogintemplate');
+
 // Login page background image.
 $name = 'theme_pimenko/loginbgimage';
 $title = get_string('loginbgimage', 'theme_pimenko');

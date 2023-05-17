@@ -98,6 +98,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function render_login_page($output): string {
         global $SITE;
 
+        $theme = theme_config::load('pimenko');
+
         $extraclasses = [];
 
         // Define some needed var for ur template.
@@ -124,11 +126,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $template->primarymoremenu = $primarymenu['moremenu'];
 
         // Hide site name option.
-        $theme = theme_config::load('pimenko');
         $template->hidesitename = $theme->settings->hidesitename;
         $template->langmenu = $primarymenu['lang'];
 
         $template->mobileprimarynav = $primarymenu['mobileprimarynav'];
+
+        if ($theme->settings->vanillalogintemplate) {
+            return $output->render_from_template(
+                'theme_boost/login', $template
+            );
+        }
 
         return $output->render_from_template(
             'theme_pimenko/login', $template
@@ -366,6 +373,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $context->logintextboxbottom = self::get_setting('logintextboxbottom', 'format_html');
         $context->rightblockloginhtmlcontent = self::get_setting('rightblockloginhtmlcontent', 'format_html');
         $context->leftblockloginhtmlcontent = self::get_setting('leftblockloginhtmlcontent', 'format_html');
+
+        $theme = theme_config::load('pimenko');
+
+        if (!$theme->settings->vanillalogintemplate) {
+            return $this->render_from_template('theme_pimenko/loginform', $context);
+        }
 
         return $this->render_from_template('core/loginform', $context);
     }
