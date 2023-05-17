@@ -102,7 +102,7 @@ $string['profile:contactinfo'] = 'Contact Information';
 
 // Login *******************************************************.
 $string['settings:loginsettings:vanillalogintemplate'] = 'Moodle login page';
-$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Display the default Moodle login page';
+$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Use the classic authentication page in the official Moodle "Boost" theme';
 $string['loginsettings'] = 'Login Page';
 $string['loginsettingsheading'] = 'Customize the login page';
 $string['logindesc'] = 'Customize the login page with adding an image background and texts above and below the login box.';
