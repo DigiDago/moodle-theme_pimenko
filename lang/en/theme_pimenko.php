@@ -388,3 +388,4 @@ $string['loadmore'] = 'Load more';
 
 // Add deprecated Moodle.
 $string['clearfilters'] = 'Clear filters';
+$string['courseimage'] = 'Course image';

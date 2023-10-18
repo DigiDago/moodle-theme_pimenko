@@ -24,10 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
-user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
-
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index'));
     $blockdraweropen = (get_user_preferences('drawer-open-block'));
@@ -103,6 +99,13 @@ $theme = theme_config::load('pimenko');
 $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
 
+$theme = theme_config::load('pimenko');
+if ($this->page->pagelayout == 'course') {
+    $moodlecompletion = true;
+} else {
+    $moodlecompletion = $theme->settings->moodleactivitycompletion;
+}
+
 $templatecontext = [
     'sitename' => format_string(
         $SITE->shortname,
@@ -128,7 +131,8 @@ $templatecontext = [
     'forceblockdraweropen' => $forceblockdraweropen,
     'addblockbutton' => $addblockbutton,
     'overflow' => $overflow,
-    'hidesitename' => $theme->settings->hidesitename
+    'hidesitename' => $theme->settings->hidesitename,
+    'moodlecompletion' => $moodlecompletion
 ];
 
 echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);
