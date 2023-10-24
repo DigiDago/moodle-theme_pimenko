@@ -59,6 +59,9 @@
     {{#courseindex}}
         {{< theme_boost/drawer }}
             {{$id}}theme_boost-drawers-courseindex{{/id}}
+            {{$drawerheadercontent}}
+                {{> theme_boost/courseindexdrawercontrols}}
+            {{/drawerheadercontent}}
             {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
             {{$drawercontent}}
                 {{{courseindex}}}
@@ -66,6 +69,7 @@
             {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
             {{$drawerstate}}show-drawer-left{{/drawerstate}}
             {{$tooltipplacement}}right{{/tooltipplacement}}
+            {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
         {{/ theme_boost/drawer}}
     {{/courseindex}}
     {{#hasblocks}}
@@ -83,6 +87,7 @@
             {{$drawerstate}}show-drawer-right{{/drawerstate}}
             {{$tooltipplacement}}left{{/tooltipplacement}}
             {{$drawercloseonresize}}1{{/drawercloseonresize}}
+            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
         {{/ theme_boost/drawer}}
     {{/hasblocks}}
 
@@ -169,13 +174,8 @@
 </html>
 {{#js}}
     M.util.js_pending('theme_boost/loader');
-    require(['theme_boost/loader'], function() {
+    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    Drawer.init();
     M.util.js_complete('theme_boost/loader');
-    });
-
-    M.util.js_pending('theme_boost/drawer');
-    require(['theme_boost/drawer'], function(drawer) {
-    drawer.init();
-    M.util.js_complete('theme_boost/drawer');
     });
 {{/js}}

@@ -29,9 +29,9 @@
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
-    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-    7px 7px 20px 0px rgba(0,0,0,.1),
-    4px 4px 5px 0px rgba(0,0,0,.1);
+    box-shadow:inset 2px 2px 2px 0 rgba(255,255,255,.5),
+    7px 7px 20px 0 rgba(0,0,0,.1),
+    4px 4px 5px 0 rgba(0,0,0,.1);
     outline: none;
     margin: 10px auto auto;
     background: rgb(0,172,238);
@@ -59,11 +59,11 @@
     transition: all 0.3s ease;
 }
 .contactbutton:before {
-    height: 0%;
+    height: 0;
     width: 2px;
 }
 .contactbutton:after {
-    width: 0%;
+    width: 0;
     height: 2px;
 }
 .contactbutton:hover{
@@ -90,10 +90,10 @@
 }
 .contactbutton span:before {
     width: 2px;
-    height: 0%;
+    height: 0;
 }
 .contactbutton span:after {
-    width: 0%;
+    width: 0;
     height: 2px;
 }
 .contactbutton span:hover:before {

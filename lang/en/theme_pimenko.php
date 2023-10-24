@@ -53,7 +53,7 @@ $string['generalsettings'] = 'General settings';
 $string['presetfiles'] = 'Additional theme preset files';
 // Preset files help text.
 $string['presetfiles_desc'] =
-    'Preset files can be used to dramatically alter the appearance of the theme. See <a href=https://docs.moodle.org/dev/Boost_Presets>Boost presets</a> for information on creating and sharing your own preset files, and see the <a href=http://moodle.net/boost>Presets repository</a> for presets that others have shared.';
+    'Preset files can be used to dramatically alter the appearance of the theme. See <a href=https://docs.moodle.org/dev/Boost_Presets>Boost presets</a> for information on creating and sharing your own preset files, and see the <a href=https://moodle.net/boost>Presets repository</a> for presets that others have shared.';
 // Preset setting.
 $string['preset'] = 'Theme preset';
 // Preset help text.

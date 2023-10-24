@@ -43,6 +43,13 @@ $togglercolor: unquote('tooglercolor');
     }
 }
 
+.drawerheader {
+    padding: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
 .navbar-light .navbar-toggler {
     border: none;
     color: unquote('navbartextcolor');

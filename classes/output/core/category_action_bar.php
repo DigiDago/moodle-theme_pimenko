@@ -196,7 +196,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     foreach ($customfieldoptions as $key => $customfieldoption) {
                         $url = new moodle_url($this->page->url->get_path(),
                             [
-                                'customfieldselected' => $customfield->shortname,
+                                'customfieldselected' => format_string($customfield->shortname),
                                 // Key value +1 for select since it not start with 0.
                                 'customfieldvalue' => $key + 1,
                                 'categoryid' => $categoryid
