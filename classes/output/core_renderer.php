@@ -420,15 +420,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function render_completion_footer(): string {
         global $COURSE;
 
-        if ($COURSE->enablecompletion != COMPLETION_ENABLED
-            || $this->page->pagelayout == "admin"
-            || $this->page->pagetype == "course-editsection"
-            || $this->page->bodyid == 'page-mod-quiz-attempt'
-            || (isset($this->page->cm->completion) && !$this->page->cm->completion)
-            || !isset($this->page->cm->completion)) {
-            return '';
-        }
-
         $renderer = $this->page->get_renderer(
             'core', 'course'
         );
@@ -439,15 +430,18 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $pagepath = explode(
             '-', $this->page->pagetype
         );
-        if ($pagepath[0] != 'mod') {
-            return '';
-        }
-        if ($pagepath[2] == 'index') {
-            return '';
-        }
-        // Make sure we have a mod object.
+
         $mod = $this->page->cm;
-        if (!is_object($mod)) {
+
+        if ($COURSE->enablecompletion != COMPLETION_ENABLED
+            || $this->page->pagelayout == "admin"
+            || $this->page->pagetype == "course-editsection"
+            || $this->page->bodyid == 'page-mod-quiz-attempt'
+            || (isset($this->page->cm->completion) && !$this->page->cm->completion)
+            || !isset($this->page->cm->completion)
+            || $pagepath[0] != 'mod'
+            || $pagepath[2] == 'index'
+            || !is_object($mod)) {
             return '';
         }
 
@@ -489,7 +483,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $theme = theme_config::load('pimenko');
         $moodlecompletion = $theme->settings->moodleactivitycompletion;
         if ($completioninfo->is_enabled($mod) && !$moodlecompletion) {
-            $template->completionicon = $renderer->course_section_cm_completion(
+            $template->completionicon = $renderer->pimenko_completionicon(
                 $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
             );
             return $renderer->render_from_template(

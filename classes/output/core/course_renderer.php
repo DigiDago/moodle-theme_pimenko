@@ -69,154 +69,119 @@ class course_renderer extends \core_course_renderer {
      *
      * @return string
      */
-    public function course_section_cm_completion($course, &$completioninfo, cm_info $mod, $displayoptions = []) {
+    public function pimenko_completionicon($course, &$completioninfo, cm_info $mod, $displayoptions = []) {
         $content = '';
-        if (!empty($displayoptions['hidecompletion']) || !isloggedin() || isguestuser() || !$mod->uservisible) {
+
+        // Vérification des conditions d'affichage.
+        if ($this->shouldHideCompletion($displayoptions, $mod)) {
             return $content;
         }
+
+        // Initialisation de $completioninfo si nécessaire.
         if ($completioninfo === null) {
             $completioninfo = new completion_info($course);
         }
+
+        // Obtention du type de complétion.
         $completion = $completioninfo->is_enabled($mod);
-        if ($completion == COMPLETION_TRACKING_NONE) {
-            if ($this->page->user_is_editing()) {
-                $content .= html_writer::span(
-                    '&nbsp;',
-                    'filler'
-                );
-            }
-            return $content;
+
+        // Génération de l'icône de complétion en fonction du type et de l'état.
+        $completionicon = $this->getCompletionIcon($completion, $completioninfo, $mod);
+
+        // Génération du contenu HTML.
+        if ($completionicon) {
+            $content = $this->generateCompletionHtml($completionicon, $mod, $displayoptions, $completioninfo, $completion);
         }
 
-        $completiondata = $completioninfo->get_data(
-            $mod,
-            true
-        );
-        $completionicon = '';
-        $completioniconop = '';
+        return $content;
+    }
 
+    // Méthode pour vérifier les conditions d'affichage.
+    private function shouldHideCompletion($displayoptions, $mod) {
+        return !empty($displayoptions['hidecompletion']) ||
+            !isloggedin() ||
+            isguestuser() ||
+            !$mod->uservisible;
+    }
+
+    // Méthode pour obtenir l'icône de complétion en fonction du type et de l'état.
+    private function getCompletionIcon($completion, $completioninfo, $mod) {
         if ($this->page->user_is_editing()) {
-            switch ($completion) {
-                case COMPLETION_TRACKING_MANUAL :
-                    $completionicon = 'manual-enabled';
-                    break;
-                case COMPLETION_TRACKING_AUTOMATIC :
-                    $completionicon = 'auto-enabled';
-                    break;
-            }
+            return ($completion == COMPLETION_TRACKING_MANUAL) ? 'manual-enabled' : 'auto-enabled';
         } else if ($completion == COMPLETION_TRACKING_MANUAL) {
-            switch ($completiondata->completionstate) {
+            switch ($completioninfo->get_data($mod, true)->completionstate) {
                 case COMPLETION_INCOMPLETE:
-                    $completionicon = 'manual-n';
-                    $completioniconop = 'manual-y';
-                    break;
+                    return 'manual-n';
                 case COMPLETION_COMPLETE:
-                    $completionicon = 'manual-y';
-                    $completioniconop = 'manual-n';
-                    break;
+                    return 'manual-y';
             }
         } else {
-            // Automatic.
-            switch ($completiondata->completionstate) {
+            switch ($completioninfo->get_data($mod, true)->completionstate) {
                 case COMPLETION_INCOMPLETE:
-                    $completionicon = 'auto-n';
-                    break;
+                    return 'auto-n';
                 case COMPLETION_COMPLETE:
-                    $completionicon = 'auto-y';
-                    break;
+                    return 'auto-y';
                 case COMPLETION_COMPLETE_PASS:
-                    $completionicon = 'auto-pass';
-                    break;
+                    return 'auto-pass';
                 case COMPLETION_COMPLETE_FAIL:
-                    $completionicon = 'auto-fail';
-                    break;
+                    return 'auto-fail';
             }
         }
+    }
 
+    // Méthode pour générer le contenu HTML en fonction de l'icône de complétion.
+    private function generateCompletionHtml($completionicon, $mod, $displayoptions, $completioninfo, $completion) {
         $modtemplate = new stdClass();
+        $modtemplate->completionicon = $completionicon;
+        $modtemplate->modid = $mod->id;
+        $modtemplate->modname = format_string($mod->name);
+        $modtemplate->status = null;
 
-        if ($completionicon) {
-            $modtemplate->completionicon = $completionicon;
-            $modtemplate->modid = $mod->id;
-            $modtemplate->modname = format_string($mod->name);
-            $modtemplate->status = null;
-            if ($this->page->pagelayout == 'incourse') {
-                $modtemplate->displayicon = true;
+        if ($this->page->pagelayout == 'incourse') {
+            $modtemplate->displayicon = true;
+        }
+
+        $formattedname = $mod->get_formatted_name();
+
+        if (!empty($displayoptions['showcompletiontext'])) {
+            $modtemplate->completetext = format_string(
+                get_string('completion-alt-' . $completionicon, 'theme_pimenko', $formattedname)
+            );
+            $modtemplate->tooltiptext = format_string(
+                get_string('completion-tooltip-' . $completionicon, 'theme_pimenko')
+            );
+        }
+
+        if ($this->page->user_is_editing()) {
+            $modtemplate->useredit = 1;
+            $modtemplate->state = 1;
+
+            if ($completioninfo->get_data($mod, true)->completionstate == COMPLETION_COMPLETE) {
+                $modtemplate->status = 'checked';
+                $modtemplate->state = 0;
             }
 
-            $formattedname = $mod->get_formatted_name();
+            $modtemplate->class = 'completioncheck';
+        } else if ($completion == COMPLETION_TRACKING_MANUAL) {
+            $modtemplate->state = 1;
 
-            if (!empty($displayoptions['showcompletiontext'])) {
-                $modtemplate->completetext = format_string(
-                    get_string(
-                        'completion-alt-' . $completionicon,
-                        'theme_pimenko',
-                        $formattedname
-                    )
-                );
-                $modtemplate->tooltiptext = format_string(
-                    get_string(
-                        'completion-tooltip-' . $completionicon,
-                        'theme_pimenko'
-                    )
-                );
-                if (!empty($completioniconop)) {
-                    $modtemplate->changetext = get_string(
-                        'completion-alt-' . $completioniconop,
-                        'completion',
-                        $formattedname
-                    );
-                }
+            if ($completioninfo->get_data($mod, true)->completionstate == COMPLETION_COMPLETE) {
+                $modtemplate->status = 'checked';
+                $modtemplate->state = 0;
             }
 
-            if ($this->page->user_is_editing()) {
-                $modtemplate->useredit = 1;
-                $modtemplate->state = 1;
-                if ($completiondata->completionstate == COMPLETION_COMPLETE) {
-                    $modtemplate->status = 'checked';
-                    $modtemplate->state = 0;
-                }
-                $modtemplate->class = 'completioncheck';
-                $content .= $this->output->render_from_template(
-                    'theme_pimenko/completioncheck',
-                    $modtemplate
-                );
-            } else if ($completion == COMPLETION_TRACKING_MANUAL) {
-
-                $modtemplate->state = 1;
-                if ($completiondata->completionstate == COMPLETION_COMPLETE) {
-                    $modtemplate->status = 'checked';
-                    $modtemplate->state = 0;
-                }
-                $modtemplate->class = 'completioncheck';
-                $content .= $this->output->render_from_template(
-                    'theme_pimenko/completioncheck',
-                    $modtemplate
-                );
-
+            $modtemplate->class = 'completioncheck';
+        } else {
+            if ($completionicon == 'auto-y' || $completionicon == 'auto-pass') {
+                $modtemplate->status = 'checked disabled';
+                $modtemplate->class = 'autocompletioncheck';
             } else {
-                // In auto mode, the icon is just an image.
-                if ($completionicon == 'auto-y' || $completionicon == 'auto-pass') {
-
-                    $modtemplate->status = 'checked disabled';
-                    $modtemplate->class = 'autocompletioncheck';
-
-                    $content .= $this->output->render_from_template(
-                        'theme_pimenko/completioncheck',
-                        $modtemplate
-                    );
-
-                } else {
-                    $modtemplate->status = 'disabled';
-                    $modtemplate->class = 'autocompletioncheck';
-                    $content .= $this->output->render_from_template(
-                        'theme_pimenko/completioncheck',
-                        $modtemplate
-                    );
-                }
+                $modtemplate->status = 'disabled';
+                $modtemplate->class = 'autocompletioncheck';
             }
         }
-        return $content;
+
+        return $this->output->render_from_template('theme_pimenko/completioncheck', $modtemplate);
     }
 
     /**
@@ -439,37 +404,6 @@ class course_renderer extends \core_course_renderer {
             $percentage = 0;
         }
         return $percentage;
-    }
-
-    /**
-     * Renders the activity information.
-     *
-     * Defer to template.
-     *
-     * @param \core_course\output\activity_information $page
-     * @return string html for the page
-     */
-    public function render_activity_information(\core_course\output\activity_information $page) {
-        global $COURSE;
-
-        $theme = theme_config::load('pimenko');
-        if ($this->page->pagelayout == 'course') {
-            $moodlecompletion = true;
-        } else {
-            $moodlecompletion = $theme->settings->moodleactivitycompletion;
-        }
-
-        $data = $page->export_for_template($this->output);
-        $data->showdates = $COURSE->showactivitydates;
-
-        if (!$moodlecompletion) {
-            $data->showcompletionconditions = $COURSE->showcompletionconditions == COMPLETION_SHOW_CONDITIONS;
-            $data->showmanualcompletion = $data->showcompletionconditions;
-        } else {
-            $data->moodlecompletion = $moodlecompletion;
-        }
-
-        return $this->output->render_from_template('theme_pimenko/activity_info', $data);
     }
 
     /**

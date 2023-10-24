@@ -17,14 +17,13 @@
 /**
  * A two column layout for the boost theme.
  *
- * @package    theme_pimenko2
+ * @package    theme_pimenko
  * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 
 $extraclasses = [];
@@ -38,10 +37,6 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 $addblockbutton = $OUTPUT->addblockbutton();
 
 $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
-
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
-user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index') == true);

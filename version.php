@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection Annotator */
 // This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
