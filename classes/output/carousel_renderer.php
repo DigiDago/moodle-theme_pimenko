@@ -77,7 +77,7 @@ final class carousel_renderer extends plugin_renderer_base {
                         $image,
                         $image
                 );
-                $slide->caption = $this->themeconf->settings->$caption;
+                $slide->caption = format_string($this->themeconf->settings->$caption);
                 $this->slides[] = $slide;
             }
         }
