@@ -350,8 +350,8 @@ $string['contactus_button_text'] = "Nous envoyer un mail";
 
 // Custom navbar menu.
 $string['removedprimarynavitems'] = "Liens du menu à supprimer";
-$string['removedprimarynavitems_desc'] = 'Indiquer les identifiants des liens à supprimer de la barre de navigation. Les identifiants doivent être séparés par une "," Par exemple pour supprimer la page d’accueil et la page mes cours, utilisez :<br>
-<pre>home,mycourses</pre>';
+$string['removedprimarynavitems_desc'] = 'Indiquer les identifiants des liens à supprimer de la barre de navigation. Les identifiants doivent être séparés par une "," Par exemple pour supprimer la page d’accueil et la page mes cours, le tableau de bord, administration utilisez :<br>
+<pre>home,courses,myhome,siteadmin</pre>';
 $string['customnavbarmenu'] = "Personnalisation des liens et des menus de la barre de navigation";
 $string['customnavbarmenu_desc'] =
     "Ces options permettent de modifier les liens et menus dans la barre de navigation";
