@@ -96,7 +96,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function render_login_page($output): string {
-        global $SITE;
+        global $SITE, $USER, $CFG;
 
         $theme = theme_config::load('pimenko');
 
@@ -130,6 +130,20 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $template->langmenu = $primarymenu['lang'];
 
         $template->mobileprimarynav = $primarymenu['mobileprimarynav'];
+
+        // sets the username cookie
+        if (!empty($CFG->nolastloggedin)) {
+            // do not store last logged in user in cookie
+            // auth plugins can temporarily override this from loginpage_hook()
+            // do not save $CFG->nolastloggedin in database!
+
+        } else if (empty($CFG->rememberusername)) {
+            // no permanent cookies, delete old one if exists
+            set_moodle_cookie('');
+
+        } else {
+            set_moodle_cookie($USER->username);
+        }
 
         if ($theme->settings->vanillalogintemplate) {
             return $output->render_from_template(
@@ -373,6 +387,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $context->logintextboxbottom = self::get_setting('logintextboxbottom', 'format_html');
         $context->rightblockloginhtmlcontent = self::get_setting('rightblockloginhtmlcontent', 'format_html');
         $context->leftblockloginhtmlcontent = self::get_setting('leftblockloginhtmlcontent', 'format_html');
+        $context->rememberusername = $CFG->rememberusername;
 
         $theme = theme_config::load('pimenko');
 
