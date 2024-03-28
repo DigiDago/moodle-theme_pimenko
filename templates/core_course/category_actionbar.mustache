@@ -102,18 +102,20 @@
                                 data-target="#collapseOne"
                                 aria-expanded="true"
                                 aria-controls="collapseOne">
-                            <div class="ml-3">
-                                <span class="mr-1">{{#str}}filterbycustomfilter, theme_pimenko{{/str}}</span>
-                            </div>
+
+                            <span class="mr-1">{{#str}}filterbycustomfilter, theme_pimenko{{/str}}</span>
+
                             <span class="collapsed-icon-container ml-auto"><i class="toggle-card-icon fa fa-lg fa-angle-down"></i></span>
                             <span class="expanded-icon-container ml-auto"><i class="toggle-card-icon fa fa-lg fa-angle-up"></i></span>
                         </button>
                     </div>
                 </div>
 
+
+
                 <div id="collapseOne" class="collapse show container" aria-labelledby="fieldfilter" data-parent=".customfieldfilter">
-                    <div class="row card-body p-3">
-                        <div class="customfield d-flex flex-wrap">
+                    <div class="row card-body d-flex ">
+                        <div class="customfield d-flex flex-wrap ">
                             {{#customfields}}
                                 {{#.}}
                                     {{#selecttype}}
@@ -129,24 +131,33 @@
                                 {{/.}}
                             {{/customfields}}
                         </div>
+
+
+                        <div class="customfield btn-block mt-n1">
+                            {{#customfields}}
+                                {{#.}}
+                                    {{#date}}
+                                        <div class="customfielddate mt-n2" data-name="{{{name}}}">
+                                            {{{date_selector}}}
+                                        </div>
+                                    {{/date}}
+                                {{/.}}
+                            {{/customfields}}
+                        </div>
+
+
+                        <div class="mt-2">
+                            <button data-filteraction="reset" type="button" class="btn btn-secondary mr-auto ">{{#str}}
+                                clearfilters, theme_pimenko{{/str}}</button>
+                        </div>
+
+
                     </div>
-                    <div class="customfield d-flex flex-wrap">
-                        {{#customfields}}
-                            {{#.}}
-                                {{#date}}
-                                    <div class="customfielddate" data-name="{{{name}}}">
-                                        {{{date_selector}}}
-                                    </div>
-                                {{/date}}
-                            {{/.}}
-                        {{/customfields}}
-                    </div>
-                </div>
-                <div class="navitem">
-                    <button data-filteraction="reset" type="button" class="btn btn-secondary ml-auto mr-2">{{#str}}clearfilters, theme_pimenko{{/str}}</button>
+
                 </div>
             </div>
         </div>
+
     {{/customfieldfilter}}
     <div class="container filter p-3">
         <input type="hidden" name="categoryid" value="{{{categoryid}}}">
@@ -165,13 +176,15 @@
                 {{#additionaloptions}}
                     <div class="ml-auto d-flex">
                         <div class="navitem dropdown">
-                            <button aria-label="{{#str}}moreactions{{/str}}" class="btn btn-secondary dropdown-toggle" id="dropdown-actions" data-toggle="dropdown" aria-haspopup="true" aria-controls="moreactionsmenu">
+                            <button aria-label="{{#str}}moreactions{{/str}}" class="btn btn-secondary dropdown-toggle" id="dropdown-actions"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-controls="moreactionsmenu">
                                 {{#str}}moremenu{{/str}}
                             </button>
 
                             <div id="moreactionsmenu" class="dropdown-menu" aria-labelledby="dropdown-actions" role="menu">
                                 {{#options}}
-                                    <a role="menuitem" class="dropdown-item" {{#attributes}}{{name}}="{{value}}"{{/attributes}} href="{{url}}" tabindex="-1">{{string}}</a>
+                                    <a role="menuitem" class="dropdown-item" {{#attributes}}{{name}}="{{value}}"{{/attributes}} href="{{url}}"
+                                    tabindex="-1">{{string}}</a>
                                 {{/options}}
                             </div>
                         </div>
