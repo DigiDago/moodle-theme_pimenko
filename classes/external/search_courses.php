@@ -334,7 +334,7 @@ class search_courses extends core_course_external {
      *
      * @return array of course objects and warnings
      */
-    public function execute(
+    public static function execute(
         string $criterianame,
         string $criteriavalue,
         int $page = 0,
