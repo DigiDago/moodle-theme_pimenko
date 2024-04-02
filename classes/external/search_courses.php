@@ -93,7 +93,7 @@ class search_courses extends core_course_external {
      * @return external_single_structure|array the course structure
      * @since  Moodle 3.2
      */
-    protected static function get_course_structure(bool $onlypublicdata = true) {
+    protected static function get_course_structure($onlypublicdata = true) {
         $coursestructure = [
             'id' => new external_value(
                 PARAM_INT,
