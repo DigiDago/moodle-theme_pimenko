@@ -78,7 +78,7 @@ function theme_pimenko_get_extra_scss($theme) {
     if (!empty($imageurl)) {
         $content .= '@media (min-width: 768px) {';
         $content .= 'body { ';
-        $content .= "background-image: url('$imageurl'); background-size: cover;";
+        $content .= "background-image: url('$imageurl'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;";
         $content .= ' } }';
     }
 
