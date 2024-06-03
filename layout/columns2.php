@@ -62,9 +62,7 @@ if (!$courseindex) {
 }
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()
-    && !$PAGE->has_secondary_navigation();
-
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()  && !$PAGE->has_secondary_navigation();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
@@ -72,6 +70,7 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $PAGE->theme->removedprimarynavitems = $OUTPUT->removedprimarynavitems();
 
 $renderer = $PAGE->get_renderer('core');
+
 $primary = new theme_pimenko\output\core\navigation\primary($PAGE);
 $primarymenu = $primary->export_for_template($renderer);
 
@@ -95,16 +94,18 @@ if ($PAGE->has_secondary_navigation() &&
 }
 
 $theme = theme_config::load('pimenko');
-
-$header = $PAGE->activityheader;
-$headercontent = $header->export_for_template($renderer);
-
-$theme = theme_config::load('pimenko');
 if ($this->page->pagelayout == 'course') {
     $moodlecompletion = true;
 } else {
     $moodlecompletion = $theme->settings->moodleactivitycompletion;
 }
+
+$headercontent = '';
+if ($moodlecompletion) {
+    $header = $PAGE->activityheader;
+    $headercontent = $header->export_for_template($renderer);
+}
+
 
 $templatecontext = [
     'sitename' => format_string(
