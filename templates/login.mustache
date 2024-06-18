@@ -42,26 +42,27 @@
 {{> theme_boost/head }}
 
 <body {{{ bodyattributes }}}>
-    {{> core/local/toast/wrapper}}
-    <div id="page-wrapper">
-        {{{ output.standard_top_of_body_html }}}
-        <!-- Default navbar. -->
-        {{> theme_boost/navbar }}
-        <!-- Default nav-drawer. -->
-        <div id="page" class="container outercont">
-            <div id="page-content" class="row justify-content-center">
-                <section id="region-main" class="col-xl-6 col-sm-8">
-                    {{{maincontent}}}
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper">
+    {{{ output.standard_top_of_body_html }}}
+    {{> theme_boost/navbar }}
+    <div id="page" class="container-fluid">
+        <div id="page-content" class="row justify-content-center">
+            <div id="region-main-box" class="col-12">
+                <section id="region-main" class="col-xl-6 col-sm-8 m-auto" aria-label="{{#str}}content{{/str}}">
+                    {{{ output.main_content }}}
                 </section>
             </div>
         </div>
-        <!-- Default footer. -->
-        {{> theme_boost/footer }}
     </div>
+    {{> theme_boost/footer }}
+</div>
+
 </body>
+</html>
 {{#js}}
-    require(['theme_boost/loader']);
-    require(['theme_boost/drawer'], function(mod) {
-    mod.init();
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
     });
 {{/js}}

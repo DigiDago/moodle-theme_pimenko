@@ -115,9 +115,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         // Output content.
         $template->output = $output;
 
-        // Main login content.
-        $template->maincontent = $output->main_content();
-
         $renderer = $this->page->get_renderer('core');
 
         $primary = new primary($this->page);
