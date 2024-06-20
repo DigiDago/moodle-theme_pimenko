@@ -94,18 +94,20 @@ if ($PAGE->has_secondary_navigation() &&
 }
 
 $theme = theme_config::load('pimenko');
+
+$header = $PAGE->activityheader;
+$headercontent = $header->export_for_template($renderer);
+
 if ($this->page->pagelayout == 'course') {
     $moodlecompletion = true;
 } else {
     $moodlecompletion = $theme->settings->moodleactivitycompletion;
-}
 
-$headercontent = '';
-if ($moodlecompletion) {
-    $header = $PAGE->activityheader;
-    $headercontent = $header->export_for_template($renderer);
+    // Remove completion if we use pimenko completion.
+    if (!$moodlecompletion) {
+        $headercontent['completion'] = '';
+    }
 }
-
 
 $templatecontext = [
     'sitename' => format_string(
