@@ -373,6 +373,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $theme = theme_config::load('pimenko');
 
+        if ($theme->settings->hidemanuelauth) {
+            $context->adminpage = optional_param('adminpage', false, PARAM_BOOL);
+        } else {
+            $context->adminpage = true;
+        }
+
         if (!$theme->settings->vanillalogintemplate) {
             return $this->render_from_template('theme_pimenko/loginform', $context);
         }
