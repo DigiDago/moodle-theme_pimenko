@@ -45,26 +45,26 @@
             </div>
         </div>
         <div class="d-flex align-items-center courseheader
-            {{#coverimagedata}}
-            {{#coverexist}}coverimage position-relative{{/coverexist}}{{/coverimagedata}}"
-            {{#coverimagedata}}
-                {{^displayasthumbnail}}
+            {{#coverimagedata}}{{#coverexist}}coverimage position-relative{{/coverexist}}{{/coverimagedata}}"
+            {{#coverimagedata}}{{^displayasthumbnail}}
              style="background-image: url({{{urlcoverimage}}});background-size: cover;background-repeat: no-repeat;background-position: center center;"
-                {{/displayasthumbnail}}
-            {{/coverimagedata}}>
+            {{/displayasthumbnail}}{{/coverimagedata}}
+        >
             {{#coverimagedata}}
                 {{#displayasthumbnail}}
                     <img class='displaythumbanil' alt='{{#str}}coursecover, theme_pimenko{{/str}}' src="{{{urlcoverimage}}}">
                 {{/displayasthumbnail}}
             {{/coverimagedata}}
             <div class="w-100 h-100 d-flex {{#coverimagedata}} {{#coverexist}} {{#withgradient}}position-absolute withgradient{{/withgradient}} {{/coverexist}} {{/coverimagedata}}">
-                {{^welcomemessage}}
-                    {{#contextheader}}
-                        <div class="mr-auto d-flex mt-auto mb-auto">
-                            {{{contextheader}}}
-                        </div>
-                    {{/contextheader}}
-                {{/welcomemessage}}
+                {{^displaytitlecourseunderimage}}
+                    {{^welcomemessage}}
+                        {{#contextheader}}
+                            <div class="mr-auto d-flex mt-auto mb-auto">
+                                {{{contextheader}}}
+                            </div>
+                        {{/contextheader}}
+                    {{/welcomemessage}}
+                {{/displaytitlecourseunderimage}}
                 {{> core/welcome }}
                 <div class="header-actions-container ml-auto d-flex mt-auto mb-auto" data-region="header-actions-container">
                     {{#headeractions}}
@@ -86,5 +86,14 @@
                 </div>
             </div>
         </div>
+        {{#displaytitlecourseunderimage}}
+            {{^welcomemessage}}
+                {{#contextheader}}
+                    <div class="mr-auto d-flex mt-auto mb-auto">
+                        {{{contextheader}}}
+                    </div>
+                {{/contextheader}}
+            {{/welcomemessage}}
+        {{/displaytitlecourseunderimage}}
     </div>
 </header>

@@ -418,3 +418,6 @@ $string['loadmore'] = 'Charger plus';
 // Add deprecated Moodle.
 $string['clearfilters'] = 'Réinitialiser les filtres';
 $string['courseimage'] = 'Image du cours';
+
+$string['displaytitlecourseunderimage'] = 'Afficher le titre du cours sous l\'image';
+$string['displaytitlecourseunderimage_desc'] = 'Si activée, le titre du cours sera affiché sous l\'image.';
