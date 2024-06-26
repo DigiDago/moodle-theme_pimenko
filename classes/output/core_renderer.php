@@ -373,6 +373,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $theme = theme_config::load('pimenko');
 
+        if ($theme->settings->hidemanuelauth) {
+            $context->adminpage = optional_param('adminpage', false, PARAM_BOOL);
+        } else {
+            $context->adminpage = true;
+        }
+
         if (!$theme->settings->vanillalogintemplate) {
             return $this->render_from_template('theme_pimenko/loginform', $context);
         }
@@ -750,6 +756,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         $header->headeractions = $this->page->get_header_actions();
+        $header->displaytitlecourseunderimage = $theme->settings->displaytitlecourseunderimage;
         if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
             $header->welcomemessage = \core_user::welcome_message();
         }

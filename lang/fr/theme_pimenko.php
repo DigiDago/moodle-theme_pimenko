@@ -418,3 +418,10 @@ $string['loadmore'] = 'Charger plus';
 // Add deprecated Moodle.
 $string['clearfilters'] = 'Réinitialiser les filtres';
 $string['courseimage'] = 'Image du cours';
+
+$string['displaytitlecourseunderimage'] = 'Afficher le titre du cours sous l\'image';
+$string['displaytitlecourseunderimage_desc'] = 'Si activée, le titre du cours sera affiché sous l\'image.';
+
+$string['hidemanuelauth'] = 'Cacher l\'authentification manuel';
+$string['hidemanuelauth_desc'] = "Si activée, l'authentification manuel sera caché.Cependant,
+ si le paramètre adminpage est défini sur true, l'affichage peut toujours être forcé.";

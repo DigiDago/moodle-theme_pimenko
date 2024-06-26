@@ -195,6 +195,24 @@ $setting = new admin_setting_configcheckbox(
 );
 $page->add($setting);
 
+// Option to control displaying course title under image.
+$name = 'theme_pimenko/displaytitlecourseunderimage';
+$title = get_string(
+    'displaytitlecourseunderimage', // Updated option name
+    'theme_pimenko'
+);
+$description = get_string(
+    'displaytitlecourseunderimage_desc', // Corresponding description
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
 // Gradient for course cover.
 $name = 'theme_pimenko/gradientcovercolor';
 $title = get_string(
