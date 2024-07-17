@@ -115,4 +115,22 @@ $description = get_string('rightblockloginhtmlcontentdesc', 'theme_pimenko');
 $setting = new theme_pimenko_admin_setting_confightmleditor($name, $title, $description, $default);
 $page->add($setting);
 
+// Option to control displaying course title under image.
+$name = 'theme_pimenko/hidemanuelauth';
+$title = get_string(
+    'hidemanuelauth', // Updated option name
+    'theme_pimenko'
+);
+$description = get_string(
+    'hidemanuelauth_desc', // Corresponding description
+    'theme_pimenko'
+);
+$setting = new admin_setting_configcheckbox(
+    $name,
+    $title,
+    $description,
+    '0'
+);
+$page->add($setting);
+
 $settings->add($page);
