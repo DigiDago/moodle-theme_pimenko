@@ -22,26 +22,25 @@
 
 <div class="container d-flex flex-column">
     <div class="card text-center">
-       <p class="p-2">{{#str}} contactus_content, theme_pimenko{{/str}}</p>
+        <p class="p-2">{{#str}} contactus_content, theme_pimenko{{/str}}</p>
     </div>
 </div>
 
 {{#js}}
+    require(['jquery'], function($) {
     // Hide or show save button for setting page.
-
     let anchor = $(location).prop('hash').substr(1);
     if ( anchor === '#theme_pimenko_contact' ) {
-        $('.settingsform .btn.btn-primary').addClass('d-none');
+    $('.settingsform .btn.btn-primary').addClass('d-none');
     }
-
     $('.settingsform .nav.nav-tabs .nav-item a').on('click', function(){
-        let url = this.href;
-        let anchor = url.substring(url.indexOf('#'));
-
-        if ( anchor === '#theme_pimenko_contact' ) {
-            $('.settingsform .btn.btn-primary').addClass('d-none');
-        } else {
-            $('.settingsform .btn.btn-primary').removeClass('d-none');
-        }
+    let url = this.href;
+    let anchor = url.substring(url.indexOf('#'));
+    if ( anchor === '#theme_pimenko_contact' ) {
+    $('.settingsform .btn.btn-primary').addClass('d-none');
+    } else {
+    $('.settingsform .btn.btn-primary').removeClass('d-none');
+    }
+    });
     });
 {{/js}}
