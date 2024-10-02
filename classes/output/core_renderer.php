@@ -59,7 +59,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public static function renderer_contactus($output): string {
 
         return $output->render_from_template(
-            'theme_pimenko/contactus', []
+            'theme_pimenko/contactus',
+            [],
         );
     }
 
@@ -69,7 +70,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $template = new stdClass();
         $template->pixstring = $pixstring;
         return $output->render_from_template(
-            'theme_pimenko/pix', $template
+            'theme_pimenko/pix',
+            $template,
         );
     }
 
@@ -105,10 +107,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
         // Define some needed var for ur template.
         $template = new stdClass();
         $template->sitename = format_string(
-            $SITE->shortname, true, [
+            $SITE->shortname,
+            true,
+            [
                 'context' => context_course::instance(SITEID),
                 "escape" => false
-            ]
+            ],
         );
         $template->bodyattributes = $output->body_attributes($extraclasses);
 
@@ -130,12 +134,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         if ($theme->settings->vanillalogintemplate) {
             return $output->render_from_template(
-                'theme_boost/login', $template
+                'theme_boost/login',
+                $template,
             );
         }
 
         return $output->render_from_template(
-            'theme_pimenko/login', $template
+            'theme_pimenko/login',
+            $template,
         );
     }
 
@@ -150,7 +156,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             $sitelogo = $this->themeconfig->setting_file_url(
-                'sitelogo', 'sitelogo'
+                'sitelogo',
+                'sitelogo',
             );
         }
         return $sitelogo;
@@ -169,7 +176,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             $navbarpicture = $this->themeconfig->setting_file_url(
-                'navbarpicture', 'navbarpicture'
+                'navbarpicture',
+                'navbarpicture',
             );
         }
         return $navbarpicture;
@@ -202,15 +210,21 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     "/<\/p>/"
                 ];
                 $textwithoutspace = preg_replace(
-                    $space, '', $theme->settings->$text
+                    $space,
+                    '',
+                    $theme->settings->$text,
                 );
                 if (!empty($textwithoutspace)) {
                     $column = new stdClass();
-                    $column->text = format_text($theme->settings->$text, FORMAT_HTML);
+                    $column->text = format_text(
+                        $theme->settings->$text,
+                        FORMAT_HTML,
+                    );
                     $column->classtext = $text;
                     $column->list = [];
                     $menu = new custom_menu(
-                        $column->text, current_language()
+                        $column->text,
+                        current_language(),
                     );
                     foreach ($menu->get_children() as $item) {
                         $listitem = new stdClass();
@@ -219,7 +233,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         $column->list[] = $listitem;
                     }
                     if (isset($theme->settings->$heading)) {
-                        $column->heading = format_text($theme->settings->$heading, FORMAT_HTML);
+                        $column->heading = format_text(
+                            $theme->settings->$heading,
+                            FORMAT_HTML,
+                        );
                         $column->classheading = $heading;
                     }
                     $template->columns[] = $column;
@@ -234,7 +251,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return $this->render_from_template(
-            'theme_pimenko/footercustomcontent', $template
+            'theme_pimenko/footercustomcontent',
+            $template,
         );
     }
 
@@ -251,7 +269,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $this->themeconfig = $theme = theme_config::load('pimenko');
             }
             return $this->themeconfig->setting_file_url(
-                'favicon', 'favicon'
+                'favicon',
+                'favicon',
             );
         }
         return parent::favicon();
@@ -285,7 +304,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if (!empty($theme->settings->menuheadercateg) && $theme->settings->menuheadercateg != "disabled") {
             $cats = core_course_category::get_all();
             $template = new stdClass();
-            $template->dropdownname = get_string('menuheadercateg', 'theme_pimenko');
+            $template->dropdownname = get_string(
+                'menuheadercateg',
+                'theme_pimenko',
+            );
             $template->dropdownitems = [];
 
             foreach ($cats as $cat) {
@@ -302,7 +324,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             }
             return $this->render_from_template(
                 'theme_pimenko/header_dropdown',
-                $template);
+                $template,
+            );
         }
         return "";
     }
@@ -332,7 +355,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $this->render_from_template(
             'theme_pimenko/header_dropdown_recursive',
-            $template);
+            $template,
+        );
     }
 
     /**
@@ -360,30 +384,54 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         $context->logourl = $url;
         $context->sitename = format_string(
-            $SITE->fullname, true, [
+            $SITE->fullname,
+            true,
+            [
                 'context' => context_course::instance(SITEID),
                 "escape" => false
-            ]
+            ],
         );
 
-        $context->logintextboxtop = self::get_setting('logintextboxtop', 'format_html');
-        $context->logintextboxbottom = self::get_setting('logintextboxbottom', 'format_html');
-        $context->rightblockloginhtmlcontent = self::get_setting('rightblockloginhtmlcontent', 'format_html');
-        $context->leftblockloginhtmlcontent = self::get_setting('leftblockloginhtmlcontent', 'format_html');
+        $context->logintextboxtop = self::get_setting(
+            'logintextboxtop',
+            'format_html',
+        );
+        $context->logintextboxbottom = self::get_setting(
+            'logintextboxbottom',
+            'format_html',
+        );
+        $context->rightblockloginhtmlcontent = self::get_setting(
+            'rightblockloginhtmlcontent',
+            'format_html',
+        );
+        $context->leftblockloginhtmlcontent = self::get_setting(
+            'leftblockloginhtmlcontent',
+            'format_html',
+        );
 
         $theme = theme_config::load('pimenko');
 
         if ($theme->settings->hidemanuelauth) {
-            $context->adminpage = optional_param('adminpage', false, PARAM_BOOL);
+            $context->adminpage = optional_param(
+                'adminpage',
+                false,
+                PARAM_BOOL,
+            );
         } else {
             $context->adminpage = true;
         }
 
         if (!$theme->settings->vanillalogintemplate) {
-            return $this->render_from_template('theme_pimenko/loginform', $context);
+            return $this->render_from_template(
+                'theme_pimenko/loginform',
+                $context,
+            );
         }
 
-        return $this->render_from_template('core/loginform', $context);
+        return $this->render_from_template(
+            'core/loginform',
+            $context,
+        );
     }
 
     /**
@@ -405,9 +453,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
         } else if (!$format) {
             return $theme->settings->$setting;
         } else if ($format === 'format_text') {
-            return format_text($theme->settings->$setting, FORMAT_PLAIN);
+            return format_text(
+                $theme->settings->$setting,
+                FORMAT_PLAIN,
+            );
         } else if ($format === 'format_html') {
-            return format_text($theme->settings->$setting, FORMAT_HTML, ['trusted' => true]);
+            return format_text(
+                $theme->settings->$setting,
+                FORMAT_HTML,
+                [ 'trusted' => true ],
+            );
         } else {
             return format_string($theme->settings->$setting);
         }
@@ -424,27 +479,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
         global $COURSE;
 
         $renderer = $this->page->get_renderer(
-            'core', 'course'
+            'core',
+            'course',
         );
 
         $completioninfo = new completion_info($COURSE);
 
         // Short-circuit if we are not on a mod page, and allow restful access.
         $pagepath = explode(
-            '-', $this->page->pagetype
+            '-',
+            $this->page->pagetype,
         );
 
         $mod = $this->page->cm;
 
-        if ($COURSE->enablecompletion != COMPLETION_ENABLED
-            || $this->page->pagelayout == "admin"
-            || $this->page->pagetype == "course-editsection"
-            || $this->page->bodyid == 'page-mod-quiz-attempt'
-            || (isset($this->page->cm->completion) && !$this->page->cm->completion)
-            || !isset($this->page->cm->completion)
-            || $pagepath[0] != 'mod'
-            || $pagepath[2] == 'index'
-            || !is_object($mod)) {
+        if ($COURSE->enablecompletion != COMPLETION_ENABLED || $this->page->pagelayout == "admin" ||
+            $this->page->pagetype == "course-editsection" || $this->page->bodyid == 'page-mod-quiz-attempt' ||
+            (isset($this->page->cm->completion) && !$this->page->cm->completion) || !isset($this->page->cm->completion) ||
+            $pagepath[0] != 'mod' || $pagepath[2] == 'index' || !is_object($mod)) {
             return '';
         }
 
@@ -487,10 +539,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $moodlecompletion = $theme->settings->moodleactivitycompletion;
         if ($completioninfo->is_enabled($mod) && !$moodlecompletion) {
             $template->completionicon = $renderer->pimenko_completionicon(
-                $COURSE, $completioninfo, $mod, ['showcompletiontext' => true]
+                $COURSE,
+                $completioninfo,
+                $mod,
+                [ 'showcompletiontext' => true ],
             );
             return $renderer->render_from_template(
-                'theme_pimenko/completionfooter', $template
+                'theme_pimenko/completionfooter',
+                $template,
             );
         }
         return '';
@@ -530,7 +586,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         foreach ($fields as $field) {
             $retval .= '<div class="row front-page-row" id="front-page-row-' . ++$i . '">';
             $vals = explode(
-                '-', $field
+                '-',
+                $field,
             );
             foreach ($vals as $val) {
                 if ($val > 0) {
@@ -545,7 +602,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     }
 
                     $retval .= $this->blocks(
-                        $block, 'block-region-front container-fluid'
+                        $block,
+                        'block-region-front container-fluid',
                     );
                     $retval .= '</div>';
                 }
@@ -565,8 +623,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if (empty($this->themeconfig)) {
             $this->themeconfig = $theme = theme_config::load('pimenko');
         }
-        if (isset($this->themeconfig->settings->enablecarousel)
-            && $this->themeconfig->settings->enablecarousel == 1) {
+        if (isset($this->themeconfig->settings->enablecarousel) && $this->themeconfig->settings->enablecarousel == 1) {
             return true;
         }
         return false;
@@ -578,7 +635,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function carousel(): string {
-        $carousel = $this->page->get_renderer('theme_pimenko', 'carousel');
+        $carousel = $this->page->get_renderer(
+            'theme_pimenko',
+            'carousel',
+        );
         return $carousel->output();
     }
 
@@ -588,79 +648,120 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string the navigation HTML.
      */
     public function activity_navigation() {
-        // First we should check if we want to add navigation.
-        $context = $this->page->context;
-        if (($this->page->pagelayout !== 'incourse' && $this->page->pagelayout !== 'frametop')
-            || $context->contextlevel != CONTEXT_MODULE || $this->page->bodyid == 'page-mod-quiz-attempt') {
-            return '';
-        }
-
-        // If the activity is in stealth mode, show no links.
-        if ($this->page->cm->is_stealth()) {
+        if ($this->should_add_navigation()) {
             return '';
         }
 
         $course = $this->page->cm->get_course();
-        $courseformat = course_get_format($course);
-
-        // Get a list of all the activities in the course.
         $modules = get_fast_modinfo($course->id)->get_cms();
-
-        // Put the modules into an array in order by the position they are shown in the course.
         $mods = [];
         $activitylist = [];
-        foreach ($modules as $module) {
-            // Only add activities the user can access, aren't in stealth mode and have a url (eg. mod_label does not).
-            if (!$module->uservisible || $module->is_stealth() || empty($module->url)) {
-                continue;
-            }
-            $mods[$module->id] = $module;
 
-            // No need to add the current module to the list for the activity dropdown menu.
-            if ($module->id == $this->page->cm->id) {
-                continue;
+        foreach ($modules as $module) {
+            if ($module->modname === 'subsection') {
+                $this->handle_subsection(
+                    $mods,
+                    $activitylist,
+                    $course,
+                    $module,
+                );
+            } else {
+                $this->add_to_list(
+                    $mods,
+                    $activitylist,
+                    $module,
+                );
             }
-            // Module name.
-            $modname = $module->get_formatted_name();
-            // Display the hidden text if necessary.
-            if (!$module->visible) {
-                $modname .= ' ' . get_string('hiddenwithbrackets');
-            }
-            // Module URL.
-            $linkurl = new moodle_url($module->url, array('forceview' => 1));
-            // Add module URL (as key) and name (as value) to the activity list array.
-            $activitylist[$linkurl->out(false)] = $modname;
         }
 
-        $nummods = count($mods);
-
-        // If there is only one mod then do nothing.
-        if ($nummods == 1) {
+        if (count($mods) === 1) {
             return '';
         }
 
-        // Get an array of just the course module ids used to get the cmid value based on their position in the course.
         $modids = array_keys($mods);
+        $position = array_search(
+            $this->page->cm->id,
+            $modids,
+        );
+        $prevmod = ($position > 0) ? $mods[$modids[$position - 1]] : null;
+        $nextmod = ($position < (count($mods) - 1)) ? $mods[$modids[$position + 1]] : null;
 
-        // Get the position in the array of the course module we are viewing.
-        $position = array_search($this->page->cm->id, $modids);
-
-        $prevmod = null;
-        $nextmod = null;
-
-        // Check if we have a previous mod to show.
-        if ($position > 0) {
-            $prevmod = $mods[$modids[$position - 1]];
-        }
-
-        // Check if we have a next mod to show.
-        if ($position < ($nummods - 1)) {
-            $nextmod = $mods[$modids[$position + 1]];
-        }
-
-        $activitynav = new \core_course\output\activity_navigation($prevmod, $nextmod, $activitylist);
-        $renderer = $this->page->get_renderer('core', 'course');
+        $activitynav = new \core_course\output\activity_navigation(
+            $prevmod,
+            $nextmod,
+            $activitylist,
+        );
+        $renderer = $this->page->get_renderer(
+            'core',
+            'course',
+        );
         return $renderer->render($activitynav);
+    }
+
+    /**
+     * Determines whether navigation should be added to the page
+     *
+     * @return bool Returns true if navigation should be added, otherwise false
+     */
+    private function should_add_navigation() {
+        $context = $this->page->context;
+        return (($this->page->pagelayout !== 'incourse' && $this->page->pagelayout !== 'frametop') ||
+                $context->contextlevel != CONTEXT_MODULE || $this->page->bodyid == 'page-mod-quiz-attempt') ||
+            $this->page->cm->is_stealth();
+    }
+
+    /**
+     * Handles subsection information
+     *
+     * @param array $mods
+     * @param array $activitylist
+     * @param object $course
+     * @param object $module
+     *
+     * @return void
+     */
+    private function handle_subsection(&$mods, &$activitylist, $course, $module) {
+        $sectionid = $module->get_custom_data()['sectionid'];
+        $sectionnum = get_fast_modinfo($course->id)->get_section_info_by_id($sectionid);
+        $sectionmods = $sectionnum->get_sequence_cm_infos();
+
+        foreach ($sectionmods as $mod) {
+            $this->add_to_list(
+                $mods,
+                $activitylist,
+                $mod,
+            );
+        }
+    }
+
+    /**
+     * Adds a module to the list of modules and activities.
+     *
+     * @param array $mods The list of modules.
+     * @param array $activitylist The list of activities.
+     * @param object $module The module to be added.
+     * @return void
+     */
+    private function add_to_list(&$mods, &$activitylist, $module) {
+        if (!$module->uservisible || $module->is_stealth() || empty($module->url)) {
+            return;
+        }
+
+        $mods[$module->id] = $module;
+        if ($module->id == $this->page->cm->id) {
+            return;
+        }
+
+        $modname = $module->get_formatted_name();
+        if (!$module->visible) {
+            $modname .= ' ' . get_string('hiddenwithbrackets');
+        }
+
+        $linkurl = new moodle_url(
+            $module->url,
+            [ 'forceview' => 1 ],
+        );
+        $activitylist[$linkurl->out(false)] = $modname;
     }
 
     /**
@@ -673,7 +774,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $theme = theme_config::load('pimenko');
 
         if ($theme->settings->removedprimarynavitems) {
-            return explode(',', $theme->settings->removedprimarynavitems);
+            return explode(
+                ',',
+                $theme->settings->removedprimarynavitems,
+            );
         } else {
             return [];
         }
@@ -699,7 +803,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'coverimage',
             0,
             "itemid, filepath, filename",
-            false
+            false,
         );
 
         if ($filescoverimage) {
@@ -712,7 +816,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $oldfile->get_filearea(),
                 $oldfile->get_itemid(),
                 $oldfile->get_filepath(),
-                $oldfile->get_filename()
+                $oldfile->get_filename(),
             );
             $header->urlcoverimage = $urlcoverimage;
         }
@@ -737,16 +841,17 @@ class core_renderer extends \theme_boost\output\core_renderer {
         } else if ($homepage == HOMEPAGE_SITE) {
             $homepagetype = 'site-index';
         }
-        if ($this->page->include_region_main_settings_in_header_actions() &&
-            !$this->page->blocks->is_block_present('settings')) {
+        if ($this->page->include_region_main_settings_in_header_actions() && !$this->page->blocks->is_block_present('settings')) {
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    [ 'id' => 'region-main-settings-menu' ],
+                ),
+            );
         }
 
         $header->settingsmenu = $this->context_header_settings_menu();
@@ -760,7 +865,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
             $header->welcomemessage = \core_user::welcome_message();
         }
-        return $this->render_from_template('core/full_header', $header);
+        return $this->render_from_template(
+            'core/full_header',
+            $header,
+        );
     }
 
     /**
@@ -786,12 +894,20 @@ class core_renderer extends \theme_boost\output\core_renderer {
             // Heading in the course index page with catalog activated.
             $heading = $this->heading(
                 format_string($this->themeconfig->settings->titlecatalog),
-                $contextheader->headinglevel
+                $contextheader->headinglevel,
             );
         } else if (!isset($contextheader->heading)) {
-            $heading = $this->heading($this->page->heading, $contextheader->headinglevel, $class);
+            $heading = $this->heading(
+                $this->page->heading,
+                $contextheader->headinglevel,
+                $class,
+            );
         } else {
-            $heading = $this->heading($contextheader->heading, $contextheader->headinglevel, $class);
+            $heading = $this->heading(
+                $contextheader->heading,
+                $contextheader->headinglevel,
+                $class,
+            );
         }
 
         // All the html stuff goes here.
@@ -800,15 +916,25 @@ class core_renderer extends \theme_boost\output\core_renderer {
         // Image data.
         if (isset($contextheader->imagedata)) {
             // Header specific image.
-            $html .= html_writer::div($contextheader->imagedata, 'page-header-image mr-2');
+            $html .= html_writer::div(
+                $contextheader->imagedata,
+                'page-header-image mr-2',
+            );
         }
 
         // Headings.
         if (isset($contextheader->prefix)) {
-            $prefix = html_writer::div($contextheader->prefix, 'text-muted text-uppercase small line-height-3');
+            $prefix = html_writer::div(
+                $contextheader->prefix,
+                'text-muted text-uppercase small line-height-3',
+            );
             $heading = $prefix . $heading;
         }
-        $html .= html_writer::tag('div', $heading, array('class' => 'page-header-headings'));
+        $html .= html_writer::tag(
+            'div',
+            $heading,
+            [ 'class' => 'page-header-headings' ],
+        );
 
         // Buttons.
         if (isset($contextheader->additionalbuttons)) {
@@ -822,18 +948,36 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     if ($button['buttontype'] === 'message') {
                         \core_message\helper::messageuser_requirejs();
                     }
-                    $image = $this->pix_icon($button['formattedimage'], $button['title'], 'moodle', array(
-                        'class' => 'iconsmall',
-                        'role' => 'presentation'
-                    ));
-                    $image .= html_writer::span($button['title'], 'header-button-title');
+                    $image = $this->pix_icon(
+                        $button['formattedimage'],
+                        $button['title'],
+                        'moodle',
+                        [
+                            'class' => 'iconsmall',
+                            'role' => 'presentation'
+                        ],
+                    );
+                    $image .= html_writer::span(
+                        $button['title'],
+                        'header-button-title',
+                    );
                 } else {
-                    $image = html_writer::empty_tag('img', array(
-                        'src' => $button['formattedimage'],
-                        'role' => 'presentation'
-                    ));
+                    $image = html_writer::empty_tag(
+                        'img',
+                        [
+                            'src' => $button['formattedimage'],
+                            'role' => 'presentation'
+                        ],
+                    );
                 }
-                $html .= html_writer::link($button['url'], html_writer::tag('span', $image), $button['linkattributes']);
+                $html .= html_writer::link(
+                    $button['url'],
+                    html_writer::tag(
+                        'span',
+                        $image,
+                    ),
+                    $button['linkattributes'],
+                );
             }
             $html .= html_writer::end_div();
         }
