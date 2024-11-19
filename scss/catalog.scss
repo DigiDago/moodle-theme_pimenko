@@ -89,6 +89,7 @@
             padding: 0;
             // Need this to force display card on layer.
             flex-basis: calc((100% / 3) - 20px);
+            max-width: calc((100% / 3) - 20px);
             margin-bottom: 0.25rem;
 
             .img-course {
