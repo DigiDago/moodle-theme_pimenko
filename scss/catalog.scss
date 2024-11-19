@@ -91,6 +91,10 @@
             flex-basis: calc((100% / 3) - 20px);
             margin-bottom: 0.25rem;
 
+            &.dashboard-card {
+                max-width: calc((100% / 3) - 20px);
+            }
+
             .img-course {
                 background-position: center;
                 background-size: cover;
