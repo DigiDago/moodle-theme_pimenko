@@ -42,7 +42,6 @@
     let gallery = document.getElementsByClassName('course-gallery-container')[0];
     let config = { attributes: false, childList: true, subtree: true };
     let galleryChange = function(mutationsList, observer) {
-    console.log('pouet');
     let courseGallery = document.getElementsByClassName('course-gallery');
     if ( courseGallery.length > 0 ) {
     generatePictures(courseGallery);
