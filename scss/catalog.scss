@@ -88,12 +88,25 @@
             overflow: hidden;
             padding: 0;
             // Need this to force display card on layer.
-            flex-basis: calc((100% / 3) - 20px);
-            max-width: calc((100% / 3) - 20px);
+            flex: 0 0 calc(33.333% - 15px); /* 3 éléments par ligne */
             margin-bottom: 0.25rem;
 
-            &.dashboard-card {
-                max-width: calc((100% / 3) - 20px);
+            @media (max-width: 1024px) {
+                &.dashboard-card {
+                    flex: 0 0 calc(33.333% - 15px); /* 3 éléments par ligne */
+                }
+            }
+
+            @media (max-width: 768px) {
+                &.dashboard-card {
+                    flex: 0 0 calc(50% - 15px); /* 2 éléments par ligne */
+                }
+            }
+
+            @media (max-width: 480px) {
+                &.dashboard-card {
+                    flex: 0 0 100%; /* 1 élément par ligne */
+                }
             }
 
             .img-course {
