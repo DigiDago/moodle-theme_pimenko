@@ -337,11 +337,10 @@ class search_courses extends core_course_external {
         $parameters = [
             'criterianame' => $criterianame,
             'criteriavalue' => $criteriavalue,
-            'page' => $page,
-            'perpage' => $perpage,
             'categoryid' => $categoryid,
             'requiredcapabilities' => $requiredcapabilities
         ];
+
         $params = self::validate_parameters(
             self::execute_parameters(),
             $parameters
@@ -389,13 +388,6 @@ class search_courses extends core_course_external {
         $searchcriteria[$params['criterianame']] = $params['criteriavalue'];
 
         $options = [];
-        if ($params['perpage'] != 0) {
-            $offset = $params['page'] * $params['perpage'];
-            $options = [
-                'offset' => $offset,
-                'limit' => $params['perpage']
-            ];
-        }
 
         // Search the courses.
         $courses = core_course_category::search_courses(
