@@ -54,7 +54,7 @@
 }
 
 .courseheader {
-    min-height: 80px;
+   margin: 10px 0 10px 0;
 }
 
 .coverimage {
@@ -66,6 +66,7 @@
 
         .page-context-header {
             padding-left: 15px;
+            display: flex;
 
             .page-header-headings {
                 .text-muted {
