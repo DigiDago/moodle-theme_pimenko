@@ -259,18 +259,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Returns the URL for the favicon.
      *
-     * @return string The favicon URL
+     * @return moodle_url The favicon URL
      */
-    public function favicon(): string {
-        $theme = theme_config::load('pimenko');
-        if (!empty($theme->settings->favicon)) {
+    public function favicon(): moodle_url {
+        global $CFG;
 
-            if (empty($this->themeconfig)) {
-                $this->themeconfig = $theme = theme_config::load('pimenko');
-            }
-            return $this->themeconfig->setting_file_url(
-                'favicon',
-                'favicon',
+        if (empty($this->themeconfig)) {
+            $this->themeconfig = theme_config::load('pimenko');
+        }
+
+        if (!empty($this->themeconfig->settings->favicon)) {
+            $component = 'theme_pimenko';
+            $itemid = theme_get_revision();
+            $filepath = $this->themeconfig->settings->favicon;
+            $syscontext = context_system::instance();
+
+            return moodle_url::make_file_url(
+                "$CFG->wwwroot/pluginfile.php",
+                "/$syscontext->id/$component/favicon/$itemid" . $filepath,
             );
         }
         return parent::favicon();
