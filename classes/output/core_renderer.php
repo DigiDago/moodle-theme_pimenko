@@ -911,7 +911,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         // All the html stuff goes here.
-        $html = html_writer::start_div('page-context-header d-flex');
+        $html = html_writer::start_div('page-context-header d-flex align-items-center');
 
         // Image data.
         if (isset($contextheader->imagedata)) {
