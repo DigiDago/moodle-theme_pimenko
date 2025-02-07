@@ -23,7 +23,6 @@
 
 #page-wrapper {
     margin-top: 0;
-    padding-top: 65px;
 
     #page {
         height: auto;
@@ -39,4 +38,8 @@
 // Fix a min-height for H5P content editor.
 .cke_contents {
     min-height: 150px;
+}
+
+#page-login-index #page-wrapper #page {
+    margin-top: $navbar-height;
 }
