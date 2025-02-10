@@ -21,6 +21,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+.courseheader .header-action {
+    z-index: 1;
+}
+
 .edit_cover {
     bottom: 0;
     display: flex;
