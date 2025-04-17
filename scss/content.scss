@@ -42,4 +42,8 @@
 
 #page-login-index #page-wrapper #page {
     margin-top: $navbar-height;
+
+    @media (max-width: 767px) {
+        margin-top: 60px;
+    }
 }

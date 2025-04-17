@@ -274,6 +274,7 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
         }
+
         switch ($filearea) {
             case 'coverimage':
                 $revision = array_shift($args);

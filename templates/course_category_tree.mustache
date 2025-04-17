@@ -5,10 +5,12 @@
     <div class="content">{{{categorycontent}}}</div>
 </div>
 {{#js}}
-    <!--   We open all 1st rank category by default. -->
-    $(document).ready(function() {
-        if($('.categoryname')) {
+    require(['jquery'], function($) {
+        <!--   We open all 1st rank category by default. -->
+        $(document).ready(function() {
+            if($('.categoryname')) {
             $('.categoryname').click();
-        }
+            }
+        });
     });
 {{/js}}
