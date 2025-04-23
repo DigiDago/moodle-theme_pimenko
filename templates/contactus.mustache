@@ -27,21 +27,23 @@
 </div>
 
 {{#js}}
-    // Hide or show save button for setting page.
+    require(['jquery'], function($) {
+        // Hide or show save button for setting page.
 
-    let anchor = $(location).prop('hash').substr(1);
-    if ( anchor === '#theme_pimenko_contact' ) {
-        $('.settingsform .btn.btn-primary').addClass('d-none');
-    }
-
-    $('.settingsform .nav.nav-tabs .nav-item a').on('click', function(){
-        let url = this.href;
-        let anchor = url.substring(url.indexOf('#'));
-
+        let anchor = $(location).prop('hash').substr(1);
         if ( anchor === '#theme_pimenko_contact' ) {
             $('.settingsform .btn.btn-primary').addClass('d-none');
-        } else {
-            $('.settingsform .btn.btn-primary').removeClass('d-none');
         }
+
+        $('.settingsform .nav.nav-tabs .nav-item a').on('click', function(){
+            let url = this.href;
+            let anchor = url.substring(url.indexOf('#'));
+
+            if ( anchor === '#theme_pimenko_contact' ) {
+                $('.settingsform .btn.btn-primary').addClass('d-none');
+            } else {
+                $('.settingsform .btn.btn-primary').removeClass('d-none');
+            }
+        });
     });
 {{/js}}

@@ -60,8 +60,10 @@
     </div>
 </body>
 {{#js}}
+    require(['jquery'], function($) {
     require(['theme_boost/loader']);
     require(['theme_boost/drawer'], function(mod) {
     mod.init();
+    });
     });
 {{/js}}

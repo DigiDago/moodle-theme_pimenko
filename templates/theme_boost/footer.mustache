@@ -69,7 +69,9 @@
     </div>
 </footer>
 {{#js}}
+    require(['jquery'], function($) {
     require(['theme_boost/footer-popover'], function(FooterPopover) {
     FooterPopover.init();
+    });
     });
 {{/js}}

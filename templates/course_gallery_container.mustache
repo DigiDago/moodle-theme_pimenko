@@ -4,6 +4,7 @@
 
 <script src="{{{ rootpath }}}/theme/pimenko/javascript/geopattern/js/geopattern.min.js"></script>
 {{#js}}
+    require(['jquery'], function($) {
     (function() {
     // Generate pictures for the courses without picture
     let generatePictures = function(courseGallery) {
@@ -50,4 +51,5 @@
     let observer = new MutationObserver(galleryChange);
     observer.observe(gallery, config);
     })();
+    });
 {{/js}}
