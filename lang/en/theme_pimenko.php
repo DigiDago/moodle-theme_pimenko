@@ -395,3 +395,7 @@ $string['displaytitlecourseunderimage_desc'] = 'If enabled, the course title wil
 
 $string['hidemanuelauth'] = 'Hide manual authentification';
 $string['hidemanuelauth_desc'] = 'If enabled, manual authentification will be hidden. Use param ?adminpage=true if you want to display it.';
+
+// File: lang/en/theme_pimenko.php
+$string['enablegooglefont'] = 'Enable Google Fonts';
+$string['enablegooglefont_desc'] = 'Enable this option to allow the use of Google Fonts in this theme.';

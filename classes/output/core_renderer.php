@@ -289,14 +289,19 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function googlefont(): string {
         $theme = theme_config::load('pimenko');
-        if (!empty($theme->settings->googlefont)) {
-            if (empty($this->themeconfig)) {
-                $this->themeconfig = $theme = theme_config::load('pimenko');
+        if ($theme->settings->enablegooglefont) {
+
+            if (!empty($theme->settings->googlefont)) {
+                if (empty($this->themeconfig)) {
+                    $this->themeconfig = $theme = theme_config::load('pimenko');
+                }
+                return $theme->settings->googlefont;
             }
-            return $theme->settings->googlefont;
+            // The default font we use if no settings define.
+            return 'Verdana';
+        } else {
+            return false;
         }
-        // The default font we use if no settings define.
-        return 'Verdana';
     }
 
     /**

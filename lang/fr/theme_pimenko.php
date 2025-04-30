@@ -425,3 +425,7 @@ $string['displaytitlecourseunderimage_desc'] = 'Si activée, le titre du cours s
 $string['hidemanuelauth'] = 'Cacher l\'authentification manuel';
 $string['hidemanuelauth_desc'] = "Si activée, l'authentification manuel sera caché.Cependant,
  si le paramètre adminpage est défini sur true, l'affichage peut toujours être forcé.";
+
+// Fichier lang/en/theme_pimenko.php
+$string['enablegooglefont'] = 'Activer Google Fonts';
+$string['enablegooglefont_desc'] = 'Activez cette option pour permettre l\'utilisation des polices Google Fonts dans ce thème.';
