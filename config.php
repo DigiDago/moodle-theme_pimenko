@@ -133,6 +133,11 @@ $THEME->layouts = [
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
+    'secure' => array(
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+    ),
     'incourse' => array(
         'file' => 'columns2.php',
         'regions' => array('side-pre'),

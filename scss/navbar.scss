@@ -27,6 +27,7 @@ nav.navbar.pimenko-navbar.fixed-top {
     color: unquote('navbartextcolor');
     position: fixed;
     z-index: 1030;
+    padding: 0 16px;
 
     .popover-region {
         height: 100%;
