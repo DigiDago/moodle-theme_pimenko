@@ -37,7 +37,7 @@ $string['advancedsettings'] = 'Réglages avancés';
 $string['brandcolor'] = 'Couleur principale';
 // The brand color setting description.
 $string['brandcolor_desc'] =
-    'La couleur principale du thème qui sera appliquée automatiquement sur une partie du site (iens, titre des blocs, etc.).';
+    'Définissez la couleur principale du thème. Cette couleur sera utilisée pour les éléments clés de l’interface (liens, titres de blocs, etc.).';
 // The button brand color setting.
 $string['brandcolorbutton'] = 'Couleur des boutons';
 // The button brand color setting description.
@@ -58,7 +58,7 @@ $string['presetfiles_desc'] =
 // Preset setting.
 $string['preset'] = 'Préréglages du thème';
 // Preset help text.
-$string['preset_desc'] = 'Veuillez choisir un préréglage pour modifier l’aspect du thème.';
+$string['preset_desc'] = 'Sélectionner un préréglage pour modifier l’aspect du thème.';
 // Raw SCSS setting.
 $string['rawscss'] = 'SCSS brut';
 // Raw SCSS setting help text.
@@ -74,12 +74,12 @@ $string['region-side-pre'] = 'Droite';
 // Favicon *******************************************************.
 
 $string['favicon'] = 'Favicon';
-$string['favicondesc'] = 'Charger une favicon à utiliser sur le site';
+$string['favicondesc'] = 'Ajoutez une favicon personnalisée qui sera affichée dans l’onglet du navigateur.';
 
 // Site logo *******************************************************.
 
 $string['sitelogo'] = 'Logo du site';
-$string['sitelogodesc'] = 'Ajouter un logo dans la barre navigation.';
+$string['sitelogodesc'] = 'Ajoutez un logo qui sera affiché dans l\'en tête du site.';
 
 // Header picture *******************************************************.
 $string['navbarpicture'] = 'Arrière-plan de la barre de navigation';
@@ -172,8 +172,7 @@ $string['nextmod'] = 'Activité suivante';
 // Block Regions.
 $string['frontpage'] = 'Paramètres de la page d\'accueil';
 $string['settings:regions:frontpageblocksettingscription'] = '';
-$string['settings:regions:frontpageblocksettingscriptiondesc'] =
-    'Vous pouvez composer la page d’accueil : elle peut être divisée en 8 lignes pour vous permettre d’ajouter votre contenu. Pour chaque ligne, des options permettent de choisir les couleurs et le nombre de colonnes.
+$string['settings:regions:frontpageblocksettingscriptiondesc'] = 'Vous pouvez composer la page d’accueil : elle peut être divisée en 8 lignes pour vous permettre d’ajouter votre contenu. Pour chaque ligne, des options permettent de choisir les couleurs et le nombre de colonnes.
 Important : pour ajouter du contenu dans les zones, vous devez activer le mode édition sur la page d’accueil. Vous pourrez ensuite glisser/déposer des blocs dans les zones créées. Vous pouvez trouver la page d\'accueil ici : <a href= ' .
     new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Page d\'accueil</a>.';
 $string['settings:regions:blockrow'] = 'Zone de contenu {$a}';
@@ -181,14 +180,11 @@ $string['settings:regions:blockrowdesc'] = 'Définir la mise en page pour la zon
 
 // Block Regions colors.
 $string['settings:regions:blockregionrowbackgroundcolor'] = 'Couleur de fond de la zone {$a}';
-$string['settings:regions:blockregionrowbackgroundcolordesc'] =
-    'Définir une couleur de fond pour la zone de contenu sur la première page.';
+$string['settings:regions:blockregionrowbackgroundcolordesc'] = 'Définir une couleur de fond pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowtextcolor'] = 'Couleur de texte de la zone {$a}';
-$string['settings:regions:blockregionrowtextcolordesc'] =
-    'Définir une couleur de texte pour la zone de contenu sur la première page.';
+$string['settings:regions:blockregionrowtextcolordesc'] = 'Définir une couleur de texte pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowlinkcolor'] = 'Couleur des liens de la zone {$a}';
-$string['settings:regions:blockregionrowlinkcolordesc'] =
-    'Définir une couleur pour les liens pour la zone de contenu sur la première page.';
+$string['settings:regions:blockregionrowlinkcolordesc'] = 'Définir une couleur pour les liens pour la zone de contenu sur la première page.';
 $string['settings:regions:blockregionrowlinkhovercolor'] = 'Couleur des liens \'survoler\' de la zone {$a}';
 $string['settings:regions:blockregionrowlinkhovercolordesc'] =
     'Définir une couleur pour les liens \'survoler\' pour la zone de contenu sur la première page.';
@@ -205,8 +201,7 @@ $string['settings:frontslider:slidecaptiondesc'] = 'Définir un texte pour l\'im
 
 // Course card frontpage.
 $string['settings:frontcoursecard:showcustomfields'] = 'Affiche les champs personnalisés';
-$string['settings:frontcoursecard:showcustomfieldsdesc'] =
-    'Afficher les champs personnalisés dans la vignette de cours';
+$string['settings:frontcoursecard:showcustomfieldsdesc'] = 'Afficher les champs personnalisés dans la vignette de cours';
 $string['settings:frontcoursecard:showcontacts'] = 'Affiche les enseignants';
 $string['settings:frontcoursecard:showcontactsdesc'] = 'Afficher les enseignants dans la vignette de cours';
 $string['settings:frontcoursecard:showstartdate'] = 'Affiche la date de début';
@@ -215,7 +210,7 @@ $string['settings:frontcoursecard:showstartdatedesc'] = 'Afficher la date de dé
 // Fonts.
 $string['settings:font:googlefont'] = 'Police Google';
 $string['settings:font:googlefontdesc'] =
-    'Utiliser une GoogleFont. Voir la documentation sur <a href="https://fonts.google.com/">https://fonts.google.com/</a>';
+    'Choisissez une GoogleFont. Voir la documentation sur <a href="https://fonts.google.com/">https://fonts.google.com/</a>';
 
 // Frontpage Block Regions name.
 $string['region-theme-front-a'] = 'Pimenko front-a';
@@ -246,118 +241,101 @@ $string['region-side-pre'] = 'Gauche';
 $string['entercourse'] = 'Entrer';
 
 // Moodle activity completion design enabling setting.
-$string['moodleactivitycompletion'] =
-    "Active l’achèvement d’activité de Moodle en haut de la page des ressources et activités";
-$string['moodleactivitycompletion_desc'] =
-    "Par défaut, le thème Pimenko affiche les conditions d’achèvement d’activité sous la forme d’une pastille en bas de chaque ressource ou activité. Cette option permet de reprendre le fonctionnement par défaut de Moodle : les conditions d’achèvement d’activités s’affichent en haut de la page sous la forme d’une étiquette.";
+$string['moodleactivitycompletion'] = 'Achèvement d’activité en haut de page';
+$string['moodleactivitycompletion_desc'] = 'Par défaut, le thème Pimenko affiche les conditions d’achèvement d’activité sous la forme d’une pastille en bas de chaque ressource ou activité. Cette option permet de reprendre le fonctionnement par défaut de Moodle : les conditions d’achèvement d’activités s’affichent en haut de la page sous la forme d’une étiquette.';
 
 // Setting show participant tab or no.
-$string['showparticipantscourse'] = "Affiche le lien participant dans le menu secondaire du cours aux utilisateurs de son choix";
-$string['showparticipantscourse_desc'] =
-    "Cette option permet de choisir les utilisateurs pour lesquels le lien « Participants » s’affiche dans le menu secondaire des cours. Vous devez déterminer les rôles qui voient le lien dans le menu ci-après.
-Si cette option n’est pas activée, seul les administrateurs verront le lien « participant ».";
+$string['showparticipantscourse'] = 'Affiche le lien participant dans le menu secondaire du cours aux utilisateurs de son choix';
+$string['showparticipantscourse_desc'] = 'Cette option permet de choisir les utilisateurs pour lesquels le lien « Participants » s’affiche dans le menu secondaire des cours. Vous devez déterminer les rôles qui voient le lien dans le menu ci-après.
+Si cette option n’est pas activée, seul les administrateurs verront le lien « participant ».';
 
 // Show or not navigation in mod in course.
-$string['showactivitynavigation'] = "Active des fonctionnalités de navigation dans chaque activité et ressource";
-$string['showactivitynavigation_desc'] =
-    "Depuis Moodle 4.0, la navigation entre les activités et les ressources n’est plus disponible en bas de page. Cette option permet d’afficher un lien vers l’activité ou la ressource précédente et suivante. Elle affiche également un menu déroulant pour accéder à n’importe quel contenu du cours.";
+$string['showactivitynavigation'] = 'Navigation entre les activités et ressources dans un cours';
+$string['showactivitynavigation_desc'] = 'Depuis Moodle 4.0, la navigation entre les activités et les ressources n’est plus disponible en bas de page. Cette option permet d’afficher un lien vers l’activité ou la ressource précédente et suivante. Elle affiche également un menu déroulant pour accéder à n’importe quel contenu du cours.';
 
 $string['totop'] = 'Aller en haut';
 
 $string['listuserrole'] = 'Liste des rôles qui voit le lien "Participant"';
-$string['listuserrole_desc'] =
-    'Si l\'option "showparticipantscourse" est activée, choissisez les utilisateurs qui voient le lien "Participants" dans le menu secondaire des cours. Cela vous permet par exemple de masquer ce lien aux apprenants/étudiants.';
+$string['listuserrole_desc'] = 'Si l\'option "showparticipantscourse" est activée, choissisez les utilisateurs qui voient le lien "Participants" dans le menu secondaire des cours. Cela vous permet par exemple de masquer ce lien aux apprenants/étudiants.';
 
 $string['unaddableblocks'] = 'Blocs inutiles';
-$string['unaddableblocks_desc'] =
-    'Les blocs spécifiés ne sont pas nécessaires lors de l\'utilisation de ce thème et ne seront pas listés dans le menu \'Ajouter un bloc\'.';
+$string['unaddableblocks_desc'] = 'Listez les blocs qui ne doivent pas être proposés dans le menu \'Ajouter un bloc\'. Séparez les identifiants par une virgule.';
 
 $string['backgroundimage'] = 'Image de fond';
-$string['backgroundimage_desc'] = 'Ajouter une image à afficher en arrière-plan sur l’ensemble site. ';
+$string['backgroundimage_desc'] = 'Ajoutez une image qui sera affichée en arrière-plan sur l\'ensemble du site.';
 
 $string['pimenkofeature'] = 'Fonctionnalités Pimenko';
 
 // Catalog enabling setting.
 $string['catalogsettings'] = "Catalogue";
-$string['catalogsettings_desc'] =
-    'Modifier le fonctionnement de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ces réglages sont effectifs après avoir activé l\'option catalogue';
+$string['catalogsettings_desc'] = 'Modifier le fonctionnement de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ces réglages sont effectifs après avoir activé l\'option catalogue';
 $string['customfieldfilter'] = "Affiche des filtres sur les champs personnalisés";
-$string['customfieldfilter_desc'] =
-    "Cette option permet d'ajouter des filtres qui sont liés aux champs personnalisés des cours. Les champs personnalisés doivent être paramétrés au niveau du site et complété dans les paramètres de cours.";
-$string['enablecatalog'] = "Active l'affichage catalogue";
-$string['enablecatalog_desc'] =
-    'Cette option transforme l\'affichage par défaut de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>. Ils apparaissent sous la forme d\'une vignette avec le titre du cours et la description si elle est renseignée. Si vous avez ajoutez une image de cours, elle apparait en haut de la vignette.';
+$string['customfieldfilter_desc'] = 'Permet de filtrer les cours dans le catalogue à partir des champs personnalisés définis au niveau du site et renseignés dans chaque cours.';
+$string['enablecatalog'] = 'Active l\'affichage catalogue';
+$string['enablecatalog_desc'] = 'Transforme la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a> en un catalogue visuel : chaque cours apparaît sous forme de vignette avec son titre, voire sa description. Activez cette option pour une navigation plus visuel dans le catalogue.';
 
-$string['titlecatalog'] = "Titre du catalogue";
-$string['titlecatalog_desc'] =
-    'Cette option modifie le titre de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>.';
+$string['titlecatalog'] = 'Titre du catalogue';
+$string['titlecatalog_desc'] = 'Cette option modifie le titre de la page avec la <a href="/course/index.php" target="_blank">liste complète des cours</a>.';
 
-$string['tagfilter'] = "Affiche un système de filtre lié à la fonctionnalité des tags de cours";
-$string['tagfilter_desc'] =
-    "Cette option ajoute un menu déroulant pour filtrer les cours par tags. Ils doivent être ajoutées dans les paramètres d’un cours (rubrique <strong>Tags</strong>).";
+$string['tagfilter'] = 'Affiche un système de filtre lié à la fonctionnalité des tags de cours';
+$string['tagfilter_desc'] = 'Ajoute un menu déroulant pour filtrer les cours par tags. Les tags doivent être définis dans les paramètres d’un cours (rubrique <strong>Tags</strong>).';
 
-$string['allcategories'] = "Toutes les catégories";
-$string['alltags'] = "Tous les tags";
-$string['labelcategory'] = "Filtrer par catégorie";
-$string['labelsearch'] = "Ou rechercher";
-$string['placeholdersearch'] = "Mots clés...";
-$string['search'] = "Rechercher";
-$string['close'] = "Fermer";
+$string['allcategories'] = 'Toutes les catégories';
+$string['alltags'] = 'Tous les tags';
+$string['labelcategory'] = 'Filtrer par catégorie';
+$string['labelsearch'] = 'Ou rechercher';
+$string['placeholdersearch'] = 'Mots clés...';
+$string['search'] = 'Rechercher';
+$string['close'] = 'Fermer';
 
 // Show the count of subscribers.
 $string['showsubscriberscount'] = 'Affiche le nombre d\'inscrits sur les vignettes de cours';
-$string['showsubscriberscount_desc'] = 'Cette option afficher automatiquement le nombre d\'inscrits sur les vignettes de cours';
+$string['showsubscriberscount_desc'] = 'Affiche automatiquement le nombre d’inscrits sur chaque vignette de cours dans le catalogue.';
 $string['subscribers'] = 'inscrits';
 
-$string['viewallhiddencourses'] = 'Affiche les cours en visibilité "cacher" pour la méthode d’inscription synopsis';
-$string['viewallhiddencourses_desc'] =
-    'Si la visibilité du cours est sur "cacher", cette option permet quand même aux participants de voir la vignette du cours dans le catalogue. Attention : cette option fonctionne uniquement avec la méthode d\'inscription "enrol synopsis" développée par Pimenko. Lorsqu\'un participant clique sur le cours, il accède à la page la description et peut s\'inscrire en attendant son ouverture.';
+$string['viewallhiddencourses'] = 'Affiche les cours en visibilité "cacher" avec la méthode d’inscription synopsis';
+$string['viewallhiddencourses_desc'] = 'Permet aux participants de voir les vignettes des cours dont la visibilité est sur \'caché\', uniquement si la méthode d’inscription \'enrol synopsis\' de Pimenko est utilisée. Les participants peuvent consulter la description et demander l’inscription.';
 
-$string['catalogsummarymodal'] = "Affiche le résumé des cours dans une fenêtre surgissante";
-$string['catalogsummarymodal_desc'] =
-    'Cette option masque le résumé de cours au niveau de la vignette. En cliquant sur l\'icône "i", le résumé apparait dans une fenêtre surgissante';
+$string['catalogsummarymodal'] = 'Résumé de cours en fenêtre surgissante';
+$string['catalogsummarymodal_desc'] = 'Masque le résumé en dessous de la vignette du cours. Un clic sur l’icône 'i' ouvre le résumé dans une fenêtre surgissante.';
 
 // Other feature heading.
-$string['otherfeature'] = "Options pour transformer le fonctionnement de Moodle";
-$string['otherfeature_desc'] =
-    "Il est parfois nécessaire de modifier ou enrichir le fonctionnement classique de Moodle. Ces options permettent d’adapter finement la plateforme à vos besoins.";
+$string['otherfeature'] = 'Options pour transformer le fonctionnement de Moodle';
+$string['otherfeature_desc'] = 'Il est parfois nécessaire de modifier ou enrichir le fonctionnement classique de Moodle. Ces options permettent d’adapter finement la plateforme à vos besoins.';
 
 // Slider heading settings.
-$string['slidersettings'] = "Diaporama de la page d'accueil";
-$string['slidersettings_desc'] = "Configurez le diaporama pour la page d'accueil";
+$string['slidersettings'] = 'Diaporama de la page d\'accueil';
+$string['slidersettings_desc'] = 'Configurez le diaporama pour la page d\'accueil';
 
 // Front page content settings heading.
-$string['frontpagecontentsettings'] = "Options des zones de contenu de la page d’accueil";
-$string['frontpagecontentsettings_desc'] = "Configurer la zone de contenu pour la page d'accueil";
+$string['frontpagecontentsettings'] = 'Options des zones de contenu de la page d’accueil';
+$string['frontpagecontentsettings_desc'] = 'Configurer la zone de contenu pour la page d\'accueil';
 
 // Card settings heading.
-$string['frontpagecardsettings'] = "Options pour la présentation des vignettes de cours sur la page d’accueil";
-$string['frontpagecardsettings_desc'] = "Si vous affichez les cours sur la page d'accueil du site, ils apparaissent sous la forme de vignettes. Ces options permettent de déterminer les informations à afficher.";
+$string['frontpagecardsettings'] = 'Options pour la présentation des vignettes de cours sur la page d’accueil';
+$string['frontpagecardsettings_desc'] = 'Si vous affichez les cours sur la page d\'accueil du site, ils apparaissent sous la forme de vignettes. Ces options permettent de déterminer les informations à afficher.';
 
 // Hide site name setting.
-$string['hidesitename'] = "Cacher le nom du site";
-$string['hidesitename_desc'] =
-    "Cette option permet de cacher le nom du site qui apparait dans la barre de navigation.";
-$string['cardlabelformat'] = "Formateur";
-$string['cardlabeldate'] = "Date de début";
+$string['hidesitename'] = 'Cacher le nom du site';
+$string['hidesitename_desc'] = 'Cette option permet de cacher le nom du site qui apparait par défaut dans l\'en tête du site.';
+$string['cardlabelformat'] = 'Formateur';
+$string['cardlabeldate'] = 'Date de début';
 
-$string['contactsettings'] = "Nous contacter";
-$string['contactheading'] = "À propos";
-$string['contactus_content'] = "Pimenko est basée en France, à Lyon.<br>
+$string['contactsettings'] = 'Nous contacter';
+$string['contactheading'] = 'À propos';
+$string['contactus_content'] = 'Pimenko est basée en France, à Lyon.<br>
 Nous sommes un acteur engagé auprès des ONG, associations, organismes de formation et dans la communauté OpenSource.<br>
-Envie d'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous : <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>";
-$string['contactus_button_text'] = "Nous envoyer un mail";
+Envie d\'un développement sur mesure ? Des conseils adaptés à votre besoins ? Contacter nous : <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>';
+$string['contactus_button_text'] = 'Nous envoyer un mail';
 
 // Custom navbar menu.
-$string['removedprimarynavitems'] = "Liens du menu à supprimer";
+$string['removedprimarynavitems'] = 'Liens du menu à supprimer';
 $string['removedprimarynavitems_desc'] = 'Indiquer les identifiants des liens à supprimer de la barre de navigation. Les identifiants doivent être séparés par une "," Par exemple pour supprimer la page d’accueil et la page mes cours, le tableau de bord, administration utilisez :<br>
 <pre>home,courses,myhome,siteadmin</pre>';
 $string['customnavbarmenu'] = "Personnalisation des liens et des menus de la barre de navigation";
-$string['customnavbarmenu_desc'] =
-    "Ces options permettent de modifier les liens et menus dans la barre de navigation";
-$string['custommenuitemslogin'] =
-    'Éléments du menu personnalisé après authentification';
-$string['configcustommenuitemslogin'] = "Si vous souhaitez afficher des liens différents après authentification, vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d'un texte du menu, d'une URL (optionnelle) et d'un texte (optionnel) à afficher dans une infobulle et d'un code de langue ou d'une liste de tels codes séparés par des virgules (optionnel, pour permettre l'affichage d'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l'aide de ###. Exemple :
+$string['customnavbarmenu_desc'] = 'Ces options permettent de modifier les liens et menus dans la barre de navigation';
+$string['custommenuitemslogin'] = 'Éléments du menu personnalisé après authentification';
+$string['configcustommenuitemslogin'] = 'Si vous souhaitez afficher des liens différents après authentification, vous pouvez définir ici un menu personnalisé qui sera affiché par le theme quand vous êtes authentifié. Chaque ligne est constituée d\'un texte du menu, d\'une URL (optionnelle) et d\'un texte (optionnel) à afficher dans une infobulle et d\'un code de langue ou d\'une liste de tels codes séparés par des virgules (optionnel, pour permettre l\'affichage d\'éléments en fonction de la langue). Ces éléments sont séparés par des caractères « trait vertical » (|). Une structure hiérarchique peut être définie à l\'aide de tirets au début des lignes, et des lignes de séparation peuvent être indiquées à l\'aide de ###. Exemple :
 <pre>
 Cours
 -Tous les cours|/course/
@@ -366,27 +344,22 @@ Cours
 -FAQ|https://une-url.xyz/faq
 -Preguntas más frecuentes|https://une-url.xyz/pmf||es
 Mobile app|https://une-url.xyz/app|Téléchargez notre app
-</pre>";
+</pre>';
 
 // Cover image for course.
-$string['coursecover'] = "Bannière de cours";
+$string['coursecover'] = 'Bannière de cours';
 $string['coursecoversettings'] = 'Vignettes sur les pages d\'accueil des cours';
 $string['coursecoversettings_desc'] = 'Ces options permettent d’ajuster comment l\'image dans l\'en tête des cours s\'affiche.';
-$string['gradienttextcolor'] =
-    "Modifie la couleur du titre des cours";
-$string['gradienttextcolor_desc'] =
-    "Si vous indiquez une couleur, elle est utilisée comme couleur pour le titre des cours. Vous pouvez par exemple mettre le code couleur blanc (#fff) pour avoir un titre de cours plus visible sur une image avec une teinte foncée.";
+$string['gradienttextcolor'] = 'Couleur du titre sur l\'image d’en-tête';
+$string['gradienttextcolor_desc'] = 'Définissez la couleur du titre du cours affiché sur l’image d\'en-tête. Utilisez par exemple #fff pour un titre blanc sur fond sombre.';
 $string['editcoverimage'] = "Changer la vignette";
 $string['displaycoverallpage'] = 'Affiche l’image dans l’en-tête des pages d\'accueil des cours, des ressources et des activités';
-$string['displaycoverallpage_desc'] =
-    'Si cette option est activée, l\'image sera affichée à la fois sur la page d\'accueil de cours mais aussi dans les ressources, les activités et les pages d’administration du cours.';
+$string['displaycoverallpage_desc'] ='Affiche la vignette d\'en-tête du cours que vous pouvez ajouter sur toutes les pages associées (accueil, ressources, activités, administration du cours).';
 $string['displayasthumbnail'] = 'Affiche l\'image sous forme d\'une vignette';
-$string['displayasthumbnail_desc'] =
-    'Si cette option est activée, l\'image sera affichée sous la forme d’une vignette de maximum 400px de largeur à droite de l\'en-tête du cours. Si cette option n\'est pas activée, l\'image sera affichée sous la forme d\'une bannière qui occupe l\'ensemble de la largeur de l\'en-tête du cours.';
+$string['displayasthumbnail_desc'] = 'Affiche la vignette d’en-tête du cours sous forme d\'image positionnée à droite du titre du cours (max 400px de large). Si désactivé, l’image s’affiche en bannière sur toute la largeur.';
 // Options pour la vignette des cours.
-$string['gradientcovercolor'] = "Affiche une couleur de premier plan";
-$string['gradientcovercolor_desc'] =
-    "Si vous indiquez une couleur, elle sera affichée au premier plan c’est-à-dire par-dessus l’image. Une transparence est automatiquement appliquée pour apporter un effet de filtre.";
+$string['gradientcovercolor'] = 'Couleur de premier plan sur l\'image d’en-tête';
+$string['gradientcovercolor_desc'] = 'Ajoutez une couleur qui sera affichée en surimpression sur l\'image d’en-tête, avec une transparence pour un effet de filtre.';
 // Options d'affichage pour le menu des cate.
 $string['menuheadercateg'] = 'Mes catégories';
 $string['menuheadercategdesc'] = 'Afficher dans un menu les catégories et les sous catégories du site.';
@@ -422,9 +395,11 @@ $string['courseimage'] = 'Image du cours';
 $string['displaytitlecourseunderimage'] = 'Afficher le titre du cours sous l\'image';
 $string['displaytitlecourseunderimage_desc'] = 'Si activée, le titre du cours sera affiché sous l\'image.';
 
-$string['hidemanuelauth'] = 'Cacher l\'authentification manuel';
-$string['hidemanuelauth_desc'] = "Si activée, l'authentification manuel sera caché.Cependant,
- si le paramètre adminpage est défini sur true, l'affichage peut toujours être forcé.";
+$string['hidemanuelauth'] = 'Masquer le formulaire d\'authentification manuel';
+$string['hidemanuelauth_desc'] = 'Si cette option est activée, le formulaire de connexion classique (nom d\'utilisateur et mot de passe) n\'apparaît plus sur la page d\'authentification.
+Cette fonctionnalité est utile pour privilégier un autre mode d’authentification (par exemple ENT ou SSO).
+Pour accéder malgré tout au formulaire d’authentification manuel (par exemple pour un dépannage), ajoutez <strong>?adminpage=true</strong> à l’URL de la page de connexion :
+https://monsite.com/login/index.php?adminpage=true';
 
 // Fichier lang/en/theme_pimenko.php
 $string['enablegooglefont'] = 'Activer Google Fonts';
