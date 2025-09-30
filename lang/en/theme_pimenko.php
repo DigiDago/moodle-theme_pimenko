@@ -394,7 +394,7 @@ $string['displaytitlecourseunderimage'] = 'Display course title under image';
 $string['displaytitlecourseunderimage_desc'] = 'If enabled, the course title will be displayed under the image.';
 
 $string['hidemanuelauth'] = 'Hide manual authentification';
-$string['hidemanuelauth_desc'] = 'If enabled, manual authentification will be hidden. Use param ?adminpage=true if you want to display it.';
+$string['hidemanuelauth_desc'] = "If enabled, manual authentication will be hidden. Use yoursite/login/index.php?adminpage=true to access manual authentication.";
 
 // File: lang/en/theme_pimenko.php
 $string['enablegooglefont'] = 'Enable Google Fonts';
