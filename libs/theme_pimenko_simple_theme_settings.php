@@ -25,6 +25,7 @@
 class theme_pimenko_simple_theme_settings {
     private $settingspage;
     private $strprefix;
+    private $themename;
 
     public function __construct($settingspage, $themename, $strprefix = null) {
         $this->themename = $themename;

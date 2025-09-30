@@ -111,7 +111,7 @@
         margin: auto;
         background-color: #fff;
         background-clip: border-box;
-        border: 1px solid rgba(0,0,0,.125);
+        border: 1px solid rgba(0, 0, 0, .125);
         border-radius: 0.5rem;
         padding: 15px;
     }
@@ -120,7 +120,29 @@
 .signupform {
     background: white;
     padding: 15px;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 0.5rem;
 }
 
+.pagelayout-login {
+
+    #page-wrapper {
+
+        #page {
+            margin-top: $navbar-height;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+
+            @media (max-width: 767px) {
+                margin-top: 60px;
+            }
+        }
+    }
+}
+
+.pagelayout-secure #page.drawers .main-inner {
+    max-width: 1000px;
+    padding: 15px;
+    border: 1px solid rgb(0 0 0 / .125);
+    border-radius: .5rem;
+}

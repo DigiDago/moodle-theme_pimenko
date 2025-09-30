@@ -423,8 +423,7 @@ $string['displaytitlecourseunderimage'] = 'Afficher le titre du cours sous l\'im
 $string['displaytitlecourseunderimage_desc'] = 'Si activée, le titre du cours sera affiché sous l\'image.';
 
 $string['hidemanuelauth'] = 'Cacher l\'authentification manuel';
-$string['hidemanuelauth_desc'] = "Si activée, l'authentification manuel sera caché.Cependant,
- si le paramètre adminpage est défini sur true, l'affichage peut toujours être forcé.";
+$string['hidemanuelauth_desc'] = "Si activée, l'authentification manuel sera caché. Utiliser urldusite/login/index.php?adminpage=true pour accéder à l’authentification manuel.";
 
 // Fichier lang/en/theme_pimenko.php
 $string['enablegooglefont'] = 'Activer Google Fonts';
