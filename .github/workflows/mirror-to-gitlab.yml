@@ -7,7 +7,7 @@ on:
     branches:
       - MOODLE_405_STABLE
       - dev
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
