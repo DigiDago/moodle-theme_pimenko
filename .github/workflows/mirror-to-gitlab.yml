@@ -1,0 +1,29 @@
+name: Mirror to GitLab
+
+on:
+  schedule:
+    - cron: "5 * * * *"
+  push:
+    branches:
+      - MOODLE_405_STABLE
+      - dev
+      - master
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push branches and tags to GitLab
+        run: |
+          git remote add gitlab ${{ secrets.ESNbyUM }}
+          # Pousser toutes les branches (sans les refs internes)
+          git push gitlab --all --force
+          # Pousser tous les tags
+          git push gitlab --tags --force
