@@ -88,24 +88,25 @@
             overflow: hidden;
             padding: 0;
             // Need this to force display card on layer.
-            flex: 0 0 calc(33.333% - 15px); /* 3 éléments par ligne */
+            // Subtract both left and right margins added by .card-deck (.card) => 2 * 15px
+            flex: 0 0 calc(33.333% - 30px); /* 3 éléments par ligne */
             margin-bottom: 0.25rem;
 
             @media (max-width: 1024px) {
                 &.dashboard-card {
-                    flex: 0 0 calc(33.333% - 15px); /* 3 éléments par ligne */
+                    flex: 0 0 calc(33.333% - 30px); /* 3 éléments par ligne */
                 }
             }
 
             @media (max-width: 768px) {
                 &.dashboard-card {
-                    flex: 0 0 calc(50% - 15px); /* 2 éléments par ligne */
+                    flex: 0 0 calc(50% - 30px); /* 2 éléments par ligne */
                 }
             }
 
             @media (max-width: 480px) {
                 &.dashboard-card {
-                    flex: 0 0 100%; /* 1 élément par ligne */
+                    flex: 0 0 calc(100% - 30px); /* 1 élément par ligne */
                 }
             }
 
