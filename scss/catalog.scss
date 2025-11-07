@@ -83,30 +83,36 @@
     }
 
     #course-gallery {
+        /* cards .25rem to keep 3 columns without changing visual ratios. */
+        @media (min-width: 576px) {
+            > .card {
+                margin-right: .25rem;
+                margin-left: .25rem;
+            }
+        }
 
         .course-gallery {
             overflow: hidden;
             padding: 0;
-            // Need this to force display card on layer.
-            // Subtract both left and right margins added by .card-deck (.card) => 2 * 15px
-            flex: 0 0 calc(33.333% - 30px); /* 3 éléments par ligne */
-            margin-bottom: 0.25rem;
+            /* Fixed basis with gutters (.25rem left + .25rem right = .5rem) */
+            flex: 0 0 calc(33.333% - .5rem); /* 3 éléments par ligne */
+            margin-bottom: 0.5rem;
 
             @media (max-width: 1024px) {
                 &.dashboard-card {
-                    flex: 0 0 calc(33.333% - 30px); /* 3 éléments par ligne */
+                    flex: 0 0 calc(33.333% - .5rem); /* 3 éléments par ligne */
                 }
             }
 
             @media (max-width: 768px) {
                 &.dashboard-card {
-                    flex: 0 0 calc(50% - 30px); /* 2 éléments par ligne */
+                    flex: 0 0 calc(50% - .5rem); /* 2 éléments par ligne */
                 }
             }
 
             @media (max-width: 480px) {
                 &.dashboard-card {
-                    flex: 0 0 calc(100% - 30px); /* 1 élément par ligne */
+                    flex: 0 0 calc(100% - .5rem); /* 1 élément par ligne */
                 }
             }
 
