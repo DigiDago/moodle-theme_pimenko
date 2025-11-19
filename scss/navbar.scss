@@ -12,7 +12,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Theme Pimenko style files.
  * @package    theme_pimenko
@@ -21,13 +20,33 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// Variables de couleurs
+$navbar-bg-color: unquote('navbarcolor');
+$navbar-text-color: unquote('navbartextcolor');
+$navbar-hover-color: unquote('darkennavcolor');
+$brand-button-color: unquote('brandcolorbutton');
+$brand-button-text-color: unquote('brandcolortextbutton');
+$brand-button-hover-color: unquote('darkenbrandcolorbutton');
+$brand-button-hover-text-color: unquote('darkenbrandcolortextbutton');
+
+// Variables de dimensions
+$navbar-z-index: 1030;
+$navbar-padding: 0 16px;
+$navbar-height: 60px !default;
+$navbar-logo-max-height: calc(#{$navbar-height} - (0.25rem * 2));
+$popover-top-offset: 38px;
+$dropdown-submenu-top-offset: -6px;
+
+// Couleur par défaut pour les éléments du menu
+$dropdown-default-text-color: #333;
+
 nav.navbar.pimenko-navbar,
 nav.navbar.pimenko-navbar.fixed-top {
-    background-color: unquote('navbarcolor') !important;
-    color: unquote('navbartextcolor');
+    background-color: $navbar-bg-color !important;
+    color: $navbar-text-color;
     position: fixed;
-    z-index: 1030;
-    padding: 0 16px;
+    z-index: $navbar-z-index;
+    padding: $navbar-padding;
 
     .popover-region {
         height: 100%;
@@ -38,6 +57,7 @@ nav.navbar.pimenko-navbar.fixed-top {
         background-size: auto;
     }
 
+    // Header category select
     #header-category-select {
         .dropdown-menu {
             position: absolute;
@@ -48,39 +68,41 @@ nav.navbar.pimenko-navbar.fixed-top {
 
             .dropdown-submenu {
                 position: relative;
+
+                > .dropdown-menu {
+                    left: 100%;
+                    margin-top: $dropdown-submenu-top-offset;
+                    top: 0;
+                }
             }
 
-            .dropdown-submenu > .dropdown-menu {
-                left: 100%;
-                margin-top: -6px;
-                top: 0;
-            }
+            & > li > a {
+                &:after {
+                    border-bottom: 0;
+                    border-left: 0.3em solid transparent;
+                    border-right: 0.3em solid transparent;
+                    border-top: 0.3em solid;
+                    content: "";
+                    display: inline-block;
+                    font-size: 15px;
+                    margin-left: 0.255em;
+                    vertical-align: 0.255em;
+                }
 
-            & > li > a:after {
-                border-bottom: 0;
-                border-left: 0.3em solid transparent;
-                border-right: 0.3em solid transparent;
-                border-top: 0.3em solid;
-                content: "";
-                display: inline-block;
-                font-size: 15px;
-                margin-left: 0.255em;
-                vertical-align: 0.255em;
-            }
-
-            /* rotate caret on hover */
-            & > li > a:hover:after {
-                text-decoration: underline;
-                transform: rotate(-90deg);
+                &:hover:after {
+                    text-decoration: underline;
+                    transform: rotate(-90deg);
+                }
             }
         }
     }
 
+    // Navigation elements
     .navbar-nav {
         align-items: center;
         display: flex;
 
-        li:not(.d-none),
+        li:not(.d-none):not(.dropdown.nav-item),
         input {
             display: flex !important;
         }
@@ -97,72 +119,42 @@ nav.navbar.pimenko-navbar.fixed-top {
         }
     }
 
+    .nav-item:not(.dropdown.nav-item) {
+        display: flex;
+    }
+
+    // Text colors
     .site-name,
     .editmode-switch-form label,
     .nav-item,
     :not(button).nav-link,
     .simplesearchform .btn,
     a {
-        color: unquote('navbartextcolor');
+        color: $navbar-text-color;
     }
 
-    .editmode-switch-form label.text-primary {
-        color: unquote('navbartextcolor') !important;
+    .editmode-switch-form {
+        label.text-primary {
+            color: $navbar-text-color !important;
+        }
+
+        .custom-switch .custom-control-input {
+            height: 100%;
+        }
+
+        position: relative;
     }
 
-    .editmode-switch-form .custom-switch .custom-control-input {
-        height: 100%;
-    }
-
+    // Hover and focus states
     a,
     .popover-region-toggle {
         &:hover,
         &:focus {
-            color: unquote('darkennavcolor') !important;
+            color: $navbar-hover-color !important;
         }
     }
 
-    .popover-region-container {
-        top: 38px;
-    }
-
-    .dropdown-menu a,
-    .popover-region-container,
-    .content-item-container a,
-    .popover-region-header-actions a {
-        color: #333;
-        line-height: initial;
-
-        &.dropdown-item {
-            padding-left: 1.75em;
-
-            &:hover,
-            &:active {
-                background-color: unquote('darkenbrandcolorbutton');
-                border-color: unquote('darkenbrandcolorbutton');
-                color: unquote('darkenbrandcolortextbutton') !important;
-            }
-
-            &:focus,
-            &:focus-within {
-                background-color: unquote('brandcolorbutton');
-                border-color: unquote('brandcolorbutton');
-                color: unquote('brandcolortextbutton') !important;
-
-                &::before {
-                    color: unquote('brandcolortextbutton'); content: "•";
-                    display: inline-block;
-                    left: 10px;
-                    position: absolute;
-                }
-            }
-        }
-    }
-
-    .nav-item {
-        display: flex;
-    }
-
+    // Dropdown toggles
     .dropdown-toggle,
     .popover-region-toggle {
         &::after,
@@ -171,13 +163,55 @@ nav.navbar.pimenko-navbar.fixed-top {
         }
     }
 
-    .simplesearchform .btn-submit {
-        background-color: unquote('brandcolorbutton');
+    // Popover region
+    .popover-region-container {
+        top: $popover-top-offset;
     }
 
+    // Dropdown menu items
+    .dropdown-menu a,
+    .popover-region-container,
+    .content-item-container a,
+    .popover-region-header-actions a {
+        color: $dropdown-default-text-color;
+        line-height: initial;
+
+        &.dropdown-item {
+            padding-left: 1.75em;
+
+            &:hover,
+            &:active {
+                background-color: $brand-button-hover-color;
+                border-color: $brand-button-hover-color;
+                color: $brand-button-hover-text-color !important;
+            }
+
+            &:focus,
+            &:focus-within {
+                background-color: $brand-button-color;
+                border-color: $brand-button-color;
+                color: $brand-button-text-color !important;
+
+                &::before {
+                    color: $brand-button-text-color;
+                    content: "•";
+                    display: inline-block;
+                    left: 10px;
+                    position: absolute;
+                }
+            }
+        }
+    }
+
+    // Search form
+    .simplesearchform .btn-submit {
+        background-color: $brand-button-color;
+    }
+
+    // Custom switch
     .custom-switch .custom-control-label {
         align-items: center;
-        color: unquote('navbartextcolor');
+        color: $navbar-text-color;
         display: flex;
         justify-content: center;
         justify-items: center;
@@ -192,14 +226,10 @@ nav.navbar.pimenko-navbar.fixed-top {
     .custom-control {
         display: flex;
     }
-
-    .editmode-switch-form {
-        position: relative;
-    }
 }
 
+// Primary navigation
 .primary-navigation {
-
     .moremenu .nav-link {
         border-bottom: solid 3px;
         border-color: transparent;
@@ -210,20 +240,20 @@ nav.navbar.pimenko-navbar.fixed-top {
         }
 
         &.active {
-            border-bottom-color: unquote('darkennavcolor') !important;
+            border-bottom-color: $navbar-hover-color !important;
         }
     }
 }
 
 .moremenu .nav-link.active {
-    border-bottom-color: unquote('brandcolorbutton');
+    border-bottom-color: $brand-button-color;
 }
 
 .navbar.fixed-top #header-category-select .dropdown .dropdown-menu {
     overflow-y: visible;
 }
 
-// Force size logo.
+// Force logo size
 .navbar.fixed-top .navbar-brand .logo {
-    max-height: calc(60px - (0.25rem * 2));
+    max-height: $navbar-logo-max-height;
 }
