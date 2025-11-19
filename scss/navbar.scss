@@ -32,7 +32,7 @@ $brand-button-hover-text-color: unquote('darkenbrandcolortextbutton');
 // Variables de dimensions
 $navbar-z-index: 1030;
 $navbar-padding: 0 16px;
-$navbar-height: 60px;
+$navbar-height: 60px !default;
 $navbar-logo-max-height: calc(#{$navbar-height} - (0.25rem * 2));
 $popover-top-offset: 38px;
 $dropdown-submenu-top-offset: -6px;
