@@ -244,57 +244,59 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
             );
         }
 
-        $draftitemid = $_REQUEST[$this->get_full_name() . '_draftitemid'];
-        $draftfiles = $fs->get_area_files(
-                $options['context']->id,
-                'user',
-                'draft',
-                $draftitemid,
-                'id'
-        );
-        foreach ($draftfiles as $file) {
-            if (!$file->is_directory()) {
-                $strtosearch =
-                        "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . $file->get_filename();
-                if (stripos(
-                                $data,
-                                $strtosearch
-                        ) !== false) {
-                    $filerecord = [
-                            'contextid' => context_system::instance()->id,
-                            'component' => $component,
-                            'filearea' => $this->filearea,
-                            'filename' => $file->get_filename(),
-                            'filepath' => '/',
-                            'itemid' => 0,
-                            'timemodified' => time()
-                    ];
-                    if (!$filerec = $fs->get_file(
-                            $filerecord['contextid'],
-                            $filerecord['component'],
-                            $filerecord['filearea'],
-                            $filerecord['itemid'],
-                            $filerecord['filepath'],
-                            $filerecord['filename']
-                    )) {
-                        $filerec = $fs->create_file_from_storedfile(
-                                $filerecord,
-                                $file
+        $draftitemid = isset($_REQUEST[$this->get_full_name() . '_draftitemid']) ? $_REQUEST[$this->get_full_name() . '_draftitemid'] : null;
+        if ($draftitemid) {
+            $draftfiles = $fs->get_area_files(
+                    $options['context']->id,
+                    'user',
+                    'draft',
+                    $draftitemid,
+                    'id'
+            );
+            foreach ($draftfiles as $file) {
+                if (!$file->is_directory()) {
+                    $strtosearch =
+                            "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . $file->get_filename();
+                    if (stripos(
+                                    $data,
+                                    $strtosearch
+                            ) !== false) {
+                        $filerecord = [
+                                'contextid' => context_system::instance()->id,
+                                'component' => $component,
+                                'filearea' => $this->filearea,
+                                'filename' => $file->get_filename(),
+                                'filepath' => '/',
+                                'itemid' => 0,
+                                'timemodified' => time()
+                        ];
+                        if (!$filerec = $fs->get_file(
+                                $filerecord['contextid'],
+                                $filerecord['component'],
+                                $filerecord['filearea'],
+                                $filerecord['itemid'],
+                                $filerecord['filepath'],
+                                $filerecord['filename']
+                        )) {
+                            $filerec = $fs->create_file_from_storedfile(
+                                    $filerecord,
+                                    $file
+                            );
+                        }
+                        $url = moodle_url::make_pluginfile_url(
+                                $filerec->get_contextid(),
+                                $filerec->get_component(),
+                                $filerec->get_filearea(),
+                                $filerec->get_itemid(),
+                                $filerec->get_filepath(),
+                                $filerec->get_filename()
+                        );
+                        $data = str_ireplace(
+                                $strtosearch,
+                                $url,
+                                $data
                         );
                     }
-                    $url = moodle_url::make_pluginfile_url(
-                            $filerec->get_contextid(),
-                            $filerec->get_component(),
-                            $filerec->get_filearea(),
-                            $filerec->get_itemid(),
-                            $filerec->get_filepath(),
-                            $filerec->get_filename()
-                    );
-                    $data = str_ireplace(
-                            $strtosearch,
-                            $url,
-                            $data
-                    );
                 }
             }
         }

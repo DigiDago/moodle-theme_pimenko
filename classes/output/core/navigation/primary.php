@@ -50,7 +50,7 @@ class primary extends \core\navigation\output\primary {
         }
 
         $custommenuitems = $CFG->custommenuitems;
-        if ($theme->settings->custommenuitemslogin && isloggedin()) {
+        if (!empty($theme->settings->custommenuitemslogin) && isloggedin()) {
             $custommenuitems = $theme->settings->custommenuitemslogin;
         }
         $currentlang = current_language();

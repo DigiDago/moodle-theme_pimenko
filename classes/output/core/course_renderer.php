@@ -53,6 +53,8 @@ require_once($CFG->dirroot . '/course/renderer.php');
  */
 class course_renderer extends \core_course_renderer {
     private $collapsecontainerid;
+    protected $categories;
+    protected $categoryexpandedonload;
 
     /**
      * Renders html for completion box on course page

@@ -102,18 +102,18 @@ class secondary extends \core\navigation\views\secondary {
 
         $allowedtosee = false;
 
-        if ($theme->settings->showparticipantscourse) {
+        if (!empty($theme->settings->showparticipantscourse)) {
 
             if (is_siteadmin($USER) && !is_role_switched($course->id)) {
                 $allowedtosee = true;
             } else if (is_role_switched($course->id)) {
                 $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
-                if (strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
+                if (!empty($theme->settings->listuserrole) && strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
                     $allowedtosee = true;
                 }
             } else {
                 foreach (get_user_roles($this->context, $USER->id) as $role) {
-                    if (strpos($theme->settings->listuserrole, $role->shortname) !== false) {
+                    if (!empty($theme->settings->listuserrole) && strpos($theme->settings->listuserrole, $role->shortname) !== false) {
                         $allowedtosee = true;
                     }
                 }

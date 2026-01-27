@@ -32,7 +32,7 @@ use stdClass;
 
 final class carousel_renderer extends plugin_renderer_base {
     public $themeconf;
-    public $slides;
+    public $slides = [];
     public $layout;
 
     /**
