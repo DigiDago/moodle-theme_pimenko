@@ -122,4 +122,3 @@ Feature: Check if all setings are working.
   Scenario: Verify that the Contact tab is accessible
     Given I click on "Contact us" "link"
     Then I should see "Contact us"
-
