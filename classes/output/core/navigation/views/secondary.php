@@ -85,7 +85,7 @@ class secondary extends \core\navigation\views\secondary {
                     $text = $tab->name;
                 }
                 $rootnode->add($text, $tab->url, self::TYPE_SECTION, null, $tab->name);
-                $sectiontabid = (int) filter_input(INPUT_GET, 'sectiontab', FILTER_SANITIZE_URL);
+                $sectiontabid = optional_param('sectiontab', 0, PARAM_INT);
                 if ($sectiontabid == $tab->url->get_param('sectiontab') && $tab->url->get_param('sectiontab') != null) {
                     navigation_node::override_active_url($tab->url);
                 }
