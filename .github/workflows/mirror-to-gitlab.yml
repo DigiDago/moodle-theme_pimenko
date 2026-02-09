@@ -1,13 +1,14 @@
 name: Mirror to GitLab
 
 on:
-  schedule:
-    - cron: "5 * * * *"
-  push:
+  workflow_run:
+    workflows: ["Moodle Plugin CI"]
+    types:
+      - completed
     branches:
       - MOODLE_405_STABLE
       - dev
-      - main
+      - master
   workflow_dispatch:
 
 jobs:

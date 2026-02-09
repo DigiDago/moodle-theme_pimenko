@@ -42,6 +42,7 @@ use context_course;
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
 require_once($CFG->dirroot . '/course/renderer.php');
 
 /**
@@ -53,6 +54,8 @@ require_once($CFG->dirroot . '/course/renderer.php');
  */
 class course_renderer extends \core_course_renderer {
     private $collapsecontainerid;
+    protected $categories;
+    protected $categoryexpandedonload;
 
     /**
      * Renders html for completion box on course page
@@ -414,7 +417,7 @@ class course_renderer extends \core_course_renderer {
      * @param int|stdClass|core_course_category $category
      */
     public function course_category($category) {
-        global $CFG;
+        global $CFG, $OUTPUT;
         $usertop = core_course_category::user_top();
 
         if (empty($category)) {
@@ -432,7 +435,7 @@ class course_renderer extends \core_course_renderer {
         if ($theme->settings->enablecatalog) {
             $editoption = $actionbar->export_for_template($this);
 
-            $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
+            $tagid = optional_param('tagid', 0, PARAM_INT);
             if (isset($editoption['tagselect'])) {
                 foreach ($editoption['tagselect']->options as &$option) {
                     $url = parse_url($option['value']);
@@ -627,14 +630,14 @@ class course_renderer extends \core_course_renderer {
                 $coursecategory = core_course_category::get(is_object($cat) ? $cat->id : $cat);
 
                 $params['categoryid'] = $coursecategory->id;
-                $params['tagid'] = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
-                $params['customfieldselected'] = filter_input(INPUT_GET, 'customfieldselected', FILTER_SANITIZE_URL);
-                $params['customfieldtext'] = filter_input(INPUT_GET, 'customfieldtext', FILTER_SANITIZE_URL);
-                $params['customfieldvalue'] = filter_input(INPUT_GET, 'customfieldvalue', FILTER_SANITIZE_URL);
-                $params['day'] = filter_input(INPUT_GET, 'day', FILTER_SANITIZE_URL);
-                $params['year'] = filter_input(INPUT_GET, 'year', FILTER_SANITIZE_URL);
-                $params['month'] = filter_input(INPUT_GET, 'month', FILTER_SANITIZE_URL);
-                $params['timestamp'] = filter_input(INPUT_GET, 'timestamp', FILTER_SANITIZE_URL);
+                $params['tagid'] = optional_param('tagid', 0, PARAM_INT);
+                $params['customfieldselected'] = optional_param('customfieldselected', '', PARAM_ALPHANUMEXT);
+                $params['customfieldtext'] = optional_param('customfieldtext', '', PARAM_ALPHANUMEXT);
+                $params['customfieldvalue'] = optional_param('customfieldvalue', '', PARAM_RAW);
+                $params['day'] = optional_param('day', 0, PARAM_INT);
+                $params['year'] = optional_param('year', 0, PARAM_INT);
+                $params['month'] = optional_param('month', 0, PARAM_INT);
+                $params['timestamp'] = optional_param('timestamp', 0, PARAM_INT);
                 // Courses of categories.
 
                 foreach (self::get_all_courses_by_category($params) as $c) {
