@@ -50,11 +50,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
             'additionaloptions' => $this->get_additional_category_options()
         ];
 
-        $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
-
-        if ($categoryid == null ) {
-            $categoryid = 0;
-        }
+        $categoryid = optional_param('categoryid', 0, PARAM_INT);
 
         $template['categoryid'] = $categoryid;
 
@@ -91,7 +87,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
                         $options[$url->out()] = $cat;
                     }
                 }
-                $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
+                $categoryid = optional_param('categoryid', 0, PARAM_INT);
                 if ($categoryid) {
                     $currenturl = new moodle_url($this->page->url, ['categoryid' => $categoryid]);
                 } else {
@@ -128,13 +124,13 @@ class category_action_bar extends \core_course\output\category_action_bar {
 
         if (count($tags) >= 1) {
             $options = [];
-            $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
+            $categoryid = optional_param('categoryid', 0, PARAM_INT);
 
             foreach ($tags as $id => $tag) {
                 $url = new moodle_url($this->page->url->get_path(), ['tagid' => $tag->id, 'categoryid' => $categoryid]);
                 $options[$url->out(false)] = $tag->rawname;
             }
-            $tagid = filter_input(INPUT_GET, 'tagid', FILTER_SANITIZE_URL);
+            $tagid = optional_param('tagid', 0, PARAM_INT);
             $currenturl = new moodle_url($this->page->url->get_path(), ['tagid' => $tagid, 'categoryid' => $categoryid]);
             $currenturl = $currenturl->out(false);
             $select = new \url_select($options, $currenturl, null);
@@ -179,11 +175,10 @@ class category_action_bar extends \core_course\output\category_action_bar {
             foreach ($customfields as $customfield) {
 
                 $options = [];
-                $customfieldselected = filter_input(
-                    INPUT_GET, 'customfieldselected', FILTER_SANITIZE_URL);
-                $customfieldvalue = filter_input(INPUT_GET, 'customfieldvalue', FILTER_SANITIZE_URL);
-                $customfieldtext = filter_input(INPUT_GET, 'customfieldtext', FILTER_SANITIZE_URL);
-                $categoryid = filter_input(INPUT_GET, 'categoryid', FILTER_SANITIZE_URL);
+                $customfieldselected = optional_param('customfieldselected', '', PARAM_ALPHANUMEXT);
+                $customfieldvalue = optional_param('customfieldvalue', '', PARAM_RAW);
+                $customfieldtext = optional_param('customfieldtext', '', PARAM_ALPHANUMEXT);
+                $categoryid = optional_param('categoryid', 0, PARAM_INT);
 
                 if ($customfield->type == 'select') {
                     $urlall = new moodle_url($this->page->url, ['customfieldselected' => $customfield->shortname,
@@ -266,9 +261,9 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     $template->name = 'customfieldselect_' . $customfield->shortname;
                     $templatecustomfields[] = $template;
                 } else if ($customfield->type == 'date') {
-                    $day = filter_input(INPUT_GET, 'day', FILTER_SANITIZE_URL);
-                    $year = filter_input(INPUT_GET, 'year', FILTER_SANITIZE_URL);
-                    $month = filter_input(INPUT_GET, 'month', FILTER_SANITIZE_URL);
+                    $day = optional_param('day', 0, PARAM_INT);
+                    $year = optional_param('year', 0, PARAM_INT);
+                    $month = optional_param('month', 0, PARAM_INT);
                     if ($day && $year && $month) {
                         $timestamp =
                             new DateTime($year . '-' . $month . '-' . $day,

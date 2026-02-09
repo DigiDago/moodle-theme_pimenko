@@ -35,8 +35,8 @@ use core_user\output\myprofile\manager;
 
 class profile_renderer extends \renderer_base {
 
-    private $carddetails;
-    private $profileblocks;
+    private $carddetails = [];
+    private $profileblocks = [];
     private $user;
 
     public function userprofile($userid) {

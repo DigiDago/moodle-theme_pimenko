@@ -52,7 +52,7 @@ class theme_pimenko_simple_theme_settings {
         );
     }
 
-    public function add_checkbox($setting, $default = '0', $checked = '1', $unchecked = '0') {
+    public function add_checkbox($setting, $default = 0, $checked = 1, $unchecked = 0) {
         $checkbox = new admin_setting_configcheckbox(
                 $this->name_for($setting),
                 $this->title_for($setting),
@@ -65,7 +65,7 @@ class theme_pimenko_simple_theme_settings {
         $this->settingspage->add($checkbox);
     }
 
-    public function add_checkboxes($setting, $instance, $default = '0', $checked = '1', $unchecked = '0') {
+    public function add_checkboxes($setting, $instance, $default = 0, $checked = 1, $unchecked = 0) {
         $checkbox = new admin_setting_configcheckbox(
                 $this->name_for($setting . $instance),
                 $this->title_for(

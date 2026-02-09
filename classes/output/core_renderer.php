@@ -84,7 +84,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function show_activity_navigation(): bool {
         $themeconfig = theme_config::load('pimenko');
         $showactivitynav = false;
-        if ($themeconfig->settings->showactivitynavigation) {
+        if (!empty($themeconfig->settings->showactivitynavigation)) {
             $showactivitynav = true;
         }
         return $showactivitynav;
@@ -127,12 +127,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $template->primarymoremenu = $primarymenu['moremenu'];
 
         // Hide site name option.
-        $template->hidesitename = $theme->settings->hidesitename;
+        $template->hidesitename = !empty($theme->settings->hidesitename) ? $theme->settings->hidesitename : false;
         $template->langmenu = $primarymenu['lang'];
 
         $template->mobileprimarynav = $primarymenu['mobileprimarynav'];
 
-        if ($theme->settings->vanillalogintemplate) {
+        if (!empty($theme->settings->vanillalogintemplate)) {
             return $output->render_from_template(
                 'theme_boost/login',
                 $template,
@@ -289,7 +289,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function googlefont(): string {
         $theme = theme_config::load('pimenko');
-        if ($theme->settings->enablegooglefont) {
+        if (!empty($theme->settings->enablegooglefont)) {
 
             if (!empty($theme->settings->googlefont)) {
                 if (empty($this->themeconfig)) {
@@ -422,7 +422,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $theme = theme_config::load('pimenko');
 
-        if ($theme->settings->hidemanuelauth) {
+        if (!empty($theme->settings->hidemanuelauth)) {
             $context->adminpage = optional_param(
                 'adminpage',
                 false,
@@ -432,7 +432,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $context->adminpage = true;
         }
 
-        if (!$theme->settings->vanillalogintemplate) {
+        if (empty($theme->settings->vanillalogintemplate)) {
             return $this->render_from_template(
                 'theme_pimenko/loginform',
                 $context,
@@ -547,7 +547,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         $theme = theme_config::load('pimenko');
-        $moodlecompletion = $theme->settings->moodleactivitycompletion;
+        $moodlecompletion = !empty($theme->settings->moodleactivitycompletion) ? $theme->settings->moodleactivitycompletion : false;
         if ($completioninfo->is_enabled($mod) && !$moodlecompletion) {
             $template->completionicon = $renderer->pimenko_completionicon(
                 $COURSE,
@@ -587,7 +587,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         for ($i = 1; $i <= 8; $i++) {
             $blocksrow = "{$settingsname}{$i}";
-            $blocksrow = $theme->settings->$blocksrow;
+            $blocksrow = !empty($theme->settings->$blocksrow) ? $theme->settings->$blocksrow : '0-0-0-0';
             if ($blocksrow != '0-0-0-0') {
                 $fields[] = $blocksrow;
             }
@@ -784,7 +784,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function removedprimarynavitems(): array {
         $theme = theme_config::load('pimenko');
 
-        if ($theme->settings->removedprimarynavitems) {
+        if (!empty($theme->settings->removedprimarynavitems)) {
             return explode(
                 ',',
                 $theme->settings->removedprimarynavitems,
@@ -833,13 +833,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         if ($this->page->pagelayout == 'course' ||
-            ($this->page->pagelayout == 'incourse' && $theme->settings->displaycoverallpage)) {
+            ($this->page->pagelayout == 'incourse' && !empty($theme->settings->displaycoverallpage))) {
             $header->coverimagedata = [
                 'id' => $this->page->course->id,
                 'filename' => (isset($oldfile)) ? $oldfile->get_filename() : null,
-                'withgradient' => (bool) $theme->settings->gradientcovercolor,
+                'withgradient' => (bool) (!empty($theme->settings->gradientcovercolor) ? $theme->settings->gradientcovercolor : false),
                 'coverexist' => (bool) $filescoverimage,
-                'displayasthumbnail' => (isset($header->urlcoverimage)) ? $theme->settings->displayasthumbnail : false,
+                'displayasthumbnail' => (isset($header->urlcoverimage)) ? (!empty($theme->settings->displayasthumbnail) ? $theme->settings->displayasthumbnail : false) : false,
                 'seemenu' => $this->page->user_allowed_editing()
             ];
         }
@@ -872,7 +872,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         $header->headeractions = $this->page->get_header_actions();
-        $header->displaytitlecourseunderimage = $theme->settings->displaytitlecourseunderimage;
+        $header->displaytitlecourseunderimage = !empty($theme->settings->displaytitlecourseunderimage) ? $theme->settings->displaytitlecourseunderimage : false;
         if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
             $header->welcomemessage = \core_user::welcome_message();
         }

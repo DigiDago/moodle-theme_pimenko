@@ -85,7 +85,7 @@ class secondary extends \core\navigation\views\secondary {
                     $text = $tab->name;
                 }
                 $rootnode->add($text, $tab->url, self::TYPE_SECTION, null, $tab->name);
-                $sectiontabid = (int) filter_input(INPUT_GET, 'sectiontab', FILTER_SANITIZE_URL);
+                $sectiontabid = optional_param('sectiontab', 0, PARAM_INT);
                 if ($sectiontabid == $tab->url->get_param('sectiontab') && $tab->url->get_param('sectiontab') != null) {
                     navigation_node::override_active_url($tab->url);
                 }
@@ -102,18 +102,18 @@ class secondary extends \core\navigation\views\secondary {
 
         $allowedtosee = false;
 
-        if ($theme->settings->showparticipantscourse) {
+        if (!empty($theme->settings->showparticipantscourse)) {
 
             if (is_siteadmin($USER) && !is_role_switched($course->id)) {
                 $allowedtosee = true;
             } else if (is_role_switched($course->id)) {
                 $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
-                if (strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
+                if (!empty($theme->settings->listuserrole) && strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
                     $allowedtosee = true;
                 }
             } else {
                 foreach (get_user_roles($this->context, $USER->id) as $role) {
-                    if (strpos($theme->settings->listuserrole, $role->shortname) !== false) {
+                    if (!empty($theme->settings->listuserrole) && strpos($theme->settings->listuserrole, $role->shortname) !== false) {
                         $allowedtosee = true;
                     }
                 }

@@ -26,10 +26,6 @@ namespace theme_pimenko\external;
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/course/externallib.php');
-require_once($CFG->dirroot . '/course/lib.php');
-require_once($CFG->libdir . '/filterlib.php');
-
 use context_course;
 use context_system;
 use core_course_category;
@@ -349,6 +345,7 @@ class search_courses extends core_course_external {
 
         $allowedcriterianames = [
             'search',
+            'categoryname',
             'modulelist',
             'blocklist',
             'tagid'
@@ -375,6 +372,7 @@ class search_courses extends core_course_external {
 
         $paramtype = [
             'search' => PARAM_RAW,
+            'categoryname' => PARAM_RAW,
             'modulelist' => PARAM_PLUGIN,
             'blocklist' => PARAM_INT,
             'tagid' => PARAM_INT
@@ -386,7 +384,18 @@ class search_courses extends core_course_external {
 
         // Prepare the search API options.
         $searchcriteria = [];
-        $searchcriteria[$params['criterianame']] = $params['criteriavalue'];
+        if ($params['criterianame'] === 'categoryname') {
+            $category = $DB->get_record('course_categories', ['name' => $params['criteriavalue']], '*', IGNORE_MISSING);
+            if ($category) {
+                $searchcriteria['ctx'] = \context_coursecat::instance($category->id)->id;
+                $searchcriteria['rec'] = true;
+            }
+            // Even if category not found, we want to perform a search that returns nothing or matches the name.
+            // Moodle's search_courses requires a 'search' key usually, or one of the others.
+            $searchcriteria['search'] = '';
+        } else {
+            $searchcriteria[$params['criterianame']] = $params['criteriavalue'];
+        }
 
         $options = [];
         if ($params['perpage'] != 0) {
@@ -398,12 +407,12 @@ class search_courses extends core_course_external {
         }
 
         // Search the courses.
+        if ($params['criterianame'] === 'search' && $categoryid !== 0) {
+            $searchcriteria['ctx'] = \context_coursecat::instance($categoryid)->id;
+            $searchcriteria['rec'] = true;
+        }
+
         $courses = core_course_category::search_courses(
-            $searchcriteria,
-            $options,
-            $params['requiredcapabilities']
-        );
-        $totalcount = core_course_category::search_courses_count(
             $searchcriteria,
             $options,
             $params['requiredcapabilities']
@@ -460,7 +469,6 @@ class search_courses extends core_course_external {
                 if (!empty($limittoenrolled)) {
                     // Filter out not enrolled courses.
                     if (!isset($enrolled[$course->id])) {
-                        $totalcount--;
                         continue;
                     }
                 }
@@ -472,7 +480,7 @@ class search_courses extends core_course_external {
         }
 
         return [
-            'total' => $totalcount,
+            'total' => count($finalcourses),
             'courses' => $finalcourses,
             'warnings' => $warnings
         ];

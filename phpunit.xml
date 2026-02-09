@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../lib/phpunit/phpunit.xsd"
+        bootstrap="../../lib/phpunit/bootstrap.php"
+        beStrictAboutOutputDuringTests="true"
+        colors="true"
+        testdox="true"
+>
+
+    <testsuites>
+        <testsuite name="theme_pimenko">
+            <directory suffix="_test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

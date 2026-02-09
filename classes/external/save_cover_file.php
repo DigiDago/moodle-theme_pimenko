@@ -33,10 +33,6 @@ use theme_config;
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir . "/externallib.php");
-require_once($CFG->dirroot . '/course/lib.php');
-require_once($CFG->libdir . '/filterlib.php');
-
 /**
  * external function for pimenko
  */

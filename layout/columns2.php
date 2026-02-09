@@ -39,7 +39,7 @@ $extraclasses = [];
 $PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
 $PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
 
-if (theme_config::load('pimenko')->settings->enablecatalog) {
+if (!empty(theme_config::load('pimenko')->settings->enablecatalog)) {
     $PAGE->requires->js_call_amd('theme_pimenko/catalog', 'init');
 }
 
@@ -101,7 +101,7 @@ $headercontent = $header->export_for_template($renderer);
 if ($this->page->pagelayout == 'course') {
     $moodlecompletion = true;
 } else {
-    $moodlecompletion = $theme->settings->moodleactivitycompletion;
+    $moodlecompletion = !empty($theme->settings->moodleactivitycompletion) ? $theme->settings->moodleactivitycompletion : false;
 
     // Remove completion if we use pimenko completion.
     if (!$moodlecompletion) {
