@@ -26,7 +26,12 @@ namespace theme_pimenko\external;
 
 defined('MOODLE_INTERNAL') || die;
 
+require_once($CFG->dirroot . '/course/externallib.php');
+require_once($CFG->dirroot . '/course/lib.php');
+require_once($CFG->libdir . '/filterlib.php');
+
 use context_course;
+use context_coursecat;
 use context_system;
 use core_course_category;
 use core_course_external;
@@ -41,26 +46,26 @@ use invalid_parameter_exception;
 use theme_config;
 
 class search_courses extends core_course_external {
-
     /**
-     * Returns description of method result value
+     * Defines the structure of the return value for the execute function.
      *
-     * @return external_single_structure
-     * @since Moodle 3.0
+     * @return external_single_structure The structure includes the total course count,
+     *                                    details about courses as a multiple structure,
+     *                                    and any relevant warnings.
      */
     public static function execute_returns(): external_single_structure {
         return new external_single_structure(
             [
                 'total' => new external_value(
                     PARAM_INT,
-                    'total course count'
+                    'total course count',
                 ),
                 'courses' => new external_multiple_structure(
                     self::get_course_structure(),
-                    'course'
+                    'course',
                 ),
-                'warnings' => new external_warnings()
-            ]
+                'warnings' => new external_warnings(),
+            ],
         );
     }
 
@@ -77,41 +82,41 @@ class search_courses extends core_course_external {
         $coursestructure = [
             'id' => new external_value(
                 PARAM_INT,
-                'course id'
+                'course id',
             ),
             'fullname' => new external_value(
                 PARAM_TEXT,
-                'course full name'
+                'course full name',
             ),
             'displayname' => new external_value(
                 PARAM_TEXT,
-                'course display name'
+                'course display name',
             ),
             'shortname' => new external_value(
                 PARAM_TEXT,
-                'course short name'
+                'course short name',
             ),
             'categoryid' => new external_value(
                 PARAM_INT,
-                'category id'
+                'category id',
             ),
             'categoryname' => new external_value(
                 PARAM_TEXT,
-                'category name'
+                'category name',
             ),
             'sortorder' => new external_value(
                 PARAM_INT,
                 'Sort order in the category',
-                VALUE_OPTIONAL
+                VALUE_OPTIONAL,
             ),
             'summary' => new external_value(
                 PARAM_RAW,
-                'summary'
+                'summary',
             ),
             'summaryformat' => new external_format_value('summary'),
             'summaryfiles' => new external_files(
                 'summary files in the summary field',
-                VALUE_OPTIONAL
+                VALUE_OPTIONAL,
             ),
             'overviewfiles' => new external_files('additional overview files attached to this course'),
             'contacts' => new external_multiple_structure(
@@ -119,22 +124,22 @@ class search_courses extends core_course_external {
                     [
                         'id' => new external_value(
                             PARAM_INT,
-                            'contact user id'
+                            'contact user id',
                         ),
                         'fullname' => new external_value(
                             PARAM_NOTAGS,
-                            'contact user fullname'
+                            'contact user fullname',
                         ),
-                    ]
+                    ],
                 ),
-                'contact users'
+                'contact users',
             ),
             'enrollmentmethods' => new external_multiple_structure(
                 new external_value(
                     PARAM_PLUGIN,
-                    'enrollment method'
+                    'enrollment method',
                 ),
-                'enrollment methods list'
+                'enrollment methods list',
             ),
         ];
 
@@ -143,158 +148,158 @@ class search_courses extends core_course_external {
                 'idnumber' => new external_value(
                     PARAM_RAW,
                     'Id number',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'format' => new external_value(
                     PARAM_PLUGIN,
                     'Course format: weeks, topics, social, site,..',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'showgrades' => new external_value(
                     PARAM_INT,
                     '1 if grades are shown, otherwise 0',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'newsitems' => new external_value(
                     PARAM_INT,
                     'Number of recent items appearing on the course page',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'startdate' => new external_value(
                     PARAM_INT,
                     'Timestamp when the course start',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'enddate' => new external_value(
                     PARAM_INT,
                     'Timestamp when the course end',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'maxbytes' => new external_value(
                     PARAM_INT,
                     'Largest size of file that can be uploaded into',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'showreports' => new external_value(
                     PARAM_INT,
                     'Are activity report shown (yes = 1, no =0)',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'visible' => new external_value(
                     PARAM_INT,
                     '1: available to student, 0:not available',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'groupmode' => new external_value(
                     PARAM_INT,
                     'no group, separate, visible',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'groupmodeforce' => new external_value(
                     PARAM_INT,
                     '1: yes, 0: no',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'defaultgroupingid' => new external_value(
                     PARAM_INT,
                     'default grouping id',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'enablecompletion' => new external_value(
                     PARAM_INT,
                     'Completion enabled? 1: yes 0: no',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'completionnotify' => new external_value(
                     PARAM_INT,
                     '1: yes 0: no',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'lang' => new external_value(
                     PARAM_SAFEDIR,
                     'Forced course language',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'theme' => new external_value(
                     PARAM_PLUGIN,
                     'Fame of the forced theme',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'marker' => new external_value(
                     PARAM_INT,
                     'Current course marker',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'legacyfiles' => new external_value(
                     PARAM_INT,
                     'If legacy files are enabled',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'calendartype' => new external_value(
                     PARAM_PLUGIN,
                     'Calendar type',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'timecreated' => new external_value(
                     PARAM_INT,
                     'Time when the course was created',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'timemodified' => new external_value(
                     PARAM_INT,
                     'Last time  the course was updated',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'requested' => new external_value(
                     PARAM_INT,
                     'If is a requested course',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'cacherev' => new external_value(
                     PARAM_INT,
                     'Cache revision number',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'filters' => new external_multiple_structure(
                     new external_single_structure(
                         [
                             'filter' => new external_value(
                                 PARAM_PLUGIN,
-                                'Filter plugin name'
+                                'Filter plugin name',
                             ),
                             'localstate' => new external_value(
                                 PARAM_INT,
-                                'Filter state: 1 for on, -1 for off, 0 if inherit'
+                                'Filter state: 1 for on, -1 for off, 0 if inherit',
                             ),
                             'inheritedstate' => new external_value(
                                 PARAM_INT,
-                                '1 or 0 to use when localstate is set to inherit'
+                                '1 or 0 to use when localstate is set to inherit',
                             ),
-                        ]
+                        ],
                     ),
                     'Course filters',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
                 'courseformatoptions' => new external_multiple_structure(
                     new external_single_structure(
                         [
                             'name' => new external_value(
                                 PARAM_RAW,
-                                'Course format option name.'
+                                'Course format option name.',
                             ),
                             'value' => new external_value(
                                 PARAM_RAW,
-                                'Course format option value.'
+                                'Course format option value.',
                             ),
-                        ]
+                        ],
                     ),
                     'Additional options for particular course format.',
-                    VALUE_OPTIONAL
+                    VALUE_OPTIONAL,
                 ),
             ];
             $coursestructure = array_merge(
                 $coursestructure,
-                $extra
+                $extra,
             );
         }
         return new external_single_structure($coursestructure);
@@ -306,11 +311,11 @@ class search_courses extends core_course_external {
      * @param string $criterianame Criteria name (search, modulelist (only admins), blocklist (only admins),
      *                                     tagid)
      * @param string $criteriavalue Criteria value
-     * @param int $page Page number (for pagination)
-     * @param int $perpage Items per page
-     * @param int $categoryid Category id
-     * @param array $requiredcapabilities Optional list of required capabilities (used to filter the list).
-     * @param int $limittoenrolled Limit to only enrolled courses
+     * @param int    $page Page number (for pagination)
+     * @param int    $perpage Items per page
+     * @param int    $categoryid Category id
+     * @param array  $requiredcapabilities Optional list of required capabilities (used to filter the list).
+     * @param int    $limittoenrolled Limit to only enrolled courses
      *
      * @return array of course objects and warnings
      */
@@ -321,7 +326,8 @@ class search_courses extends core_course_external {
         int $perpage = 0,
         int $categoryid = 0,
         array $requiredcapabilities = [],
-        int $limittoenrolled = 0): array {
+        int $limittoenrolled = 0,
+    ): array {
         confirm_sesskey();
 
         global $USER, $DB, $PAGE;
@@ -336,11 +342,11 @@ class search_courses extends core_course_external {
             'page' => $page,
             'perpage' => $perpage,
             'categoryid' => $categoryid,
-            'requiredcapabilities' => $requiredcapabilities
+            'requiredcapabilities' => $requiredcapabilities,
         ];
         $params = self::validate_parameters(
             self::execute_parameters(),
-            $parameters
+            $parameters,
         );
 
         $allowedcriterianames = [
@@ -348,25 +354,27 @@ class search_courses extends core_course_external {
             'categoryname',
             'modulelist',
             'blocklist',
-            'tagid'
+            'tagid',
         ];
-        if (!in_array(
-            $params['criterianame'],
-            $allowedcriterianames
-        )) {
+        if (
+            !in_array(
+                $params['criterianame'],
+                $allowedcriterianames,
+            )
+        ) {
             throw new invalid_parameter_exception(
                 'Invalid value for criterianame parameter (value: ' . $params['criterianame'] . '),' . 'allowed values are: ' .
                 implode(
                     ',',
-                    $allowedcriterianames
-                )
+                    $allowedcriterianames,
+                ),
             );
         }
 
         if ($params['criterianame'] == 'modulelist' || $params['criterianame'] == 'blocklist') {
             require_capability(
                 'moodle/site:config',
-                context_system::instance()
+                context_system::instance(),
             );
         }
 
@@ -375,19 +383,24 @@ class search_courses extends core_course_external {
             'categoryname' => PARAM_RAW,
             'modulelist' => PARAM_PLUGIN,
             'blocklist' => PARAM_INT,
-            'tagid' => PARAM_INT
+            'tagid' => PARAM_INT,
         ];
         $params['criteriavalue'] = clean_param(
             $params['criteriavalue'],
-            $paramtype[$params['criterianame']]
+            $paramtype[$params['criterianame']],
         );
 
         // Prepare the search API options.
         $searchcriteria = [];
         if ($params['criterianame'] === 'categoryname') {
-            $category = $DB->get_record('course_categories', ['name' => $params['criteriavalue']], '*', IGNORE_MISSING);
+            $category = $DB->get_record(
+                'course_categories',
+                ['name' => $params['criteriavalue']],
+                '*',
+                IGNORE_MISSING,
+            );
             if ($category) {
-                $searchcriteria['ctx'] = \context_coursecat::instance($category->id)->id;
+                $searchcriteria['ctx'] = context_coursecat::instance($category->id)->id;
                 $searchcriteria['rec'] = true;
             }
             // Even if category not found, we want to perform a search that returns nothing or matches the name.
@@ -402,20 +415,20 @@ class search_courses extends core_course_external {
             $offset = $params['page'] * $params['perpage'];
             $options = [
                 'offset' => $offset,
-                'limit' => $params['perpage']
+                'limit' => $params['perpage'],
             ];
         }
 
         // Search the courses.
         if ($params['criterianame'] === 'search' && $categoryid !== 0) {
-            $searchcriteria['ctx'] = \context_coursecat::instance($categoryid)->id;
+            $searchcriteria['ctx'] = context_coursecat::instance($categoryid)->id;
             $searchcriteria['rec'] = true;
         }
 
         $courses = core_course_category::search_courses(
             $searchcriteria,
             $options,
-            $params['requiredcapabilities']
+            $params['requiredcapabilities'],
         );
 
         if (!empty($limittoenrolled)) {
@@ -423,8 +436,8 @@ class search_courses extends core_course_external {
             $enrolled = enrol_get_my_courses(
                 [
                     'id',
-                    'cacherev'
-                ]
+                    'cacherev',
+                ],
             );
         }
 
@@ -436,7 +449,7 @@ class search_courses extends core_course_external {
             $neverhiddenpaypal = false;
             $enrolmethod = enrol_get_instances(
                 $course->id,
-                true
+                true,
             );
             foreach ($enrolmethod as $enrol) {
                 if ($enrol->enrol == 'synopsis') {
@@ -457,15 +470,17 @@ class search_courses extends core_course_external {
             $categoryvisible = $DB->get_field(
                 'course_categories',
                 'visible',
-                ['id' => $course->category]
+                ['id' => $course->category],
             );
-            if ((theme_config::load(
-                        'pimenko'
+            if (
+                (theme_config::load(
+                        'pimenko',
                     )->settings->viewallhiddencourses == 1 && ($neverhidden || $neverhiddenpaypal) &&
                     $categoryvisible == 1) || ($course->visible == 1 && $categoryvisible == 1) || is_enrolled(
                     $coursecontext,
-                    $USER
-                ) || is_siteadmin($USER)) {
+                    $USER,
+                ) || is_siteadmin($USER)
+            ) {
                 if (!empty($limittoenrolled)) {
                     // Filter out not enrolled courses.
                     if (!isset($enrolled[$course->id])) {
@@ -474,7 +489,7 @@ class search_courses extends core_course_external {
                 }
                 $finalcourses[] = self::get_course_public_information(
                     $course,
-                    $coursecontext
+                    $coursecontext,
                 );
             }
         }
@@ -482,7 +497,7 @@ class search_courses extends core_course_external {
         return [
             'total' => count($finalcourses),
             'courses' => $finalcourses,
-            'warnings' => $warnings
+            'warnings' => $warnings,
         ];
     }
 
@@ -497,46 +512,46 @@ class search_courses extends core_course_external {
             [
                 'criterianame' => new external_value(
                     PARAM_ALPHA,
-                    'criteria name (search, modulelist (only admins), blocklist (only admins), tagid)'
+                    'criteria name (search, modulelist (only admins), blocklist (only admins), tagid)',
                 ),
                 'criteriavalue' => new external_value(
                     PARAM_RAW,
-                    'criteria value'
+                    'criteria value',
                 ),
                 'page' => new external_value(
                     PARAM_INT,
                     'page number (0 based)',
                     VALUE_DEFAULT,
-                    0
+                    0,
                 ),
                 'perpage' => new external_value(
                     PARAM_INT,
                     'items per page',
                     VALUE_DEFAULT,
-                    0
+                    0,
                 ),
                 'categoryid' => new external_value(
                     PARAM_INT,
                     'cateory id',
                     VALUE_DEFAULT,
-                    0
+                    0,
                 ),
                 'requiredcapabilities' => new external_multiple_structure(
                     new external_value(
                         PARAM_CAPABILITY,
-                        'Capability string used to filter courses by permission'
+                        'Capability string used to filter courses by permission',
                     ),
                     'Optional list of required capabilities (used to filter the list)',
                     VALUE_DEFAULT,
-                    []
+                    [],
                 ),
                 'limittoenrolled' => new external_value(
                     PARAM_BOOL,
                     'limit to enrolled courses',
                     VALUE_DEFAULT,
-                    0
+                    0,
                 ),
-            ]
+            ],
         );
     }
 
