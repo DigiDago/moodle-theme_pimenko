@@ -26,6 +26,7 @@ namespace theme_pimenko\external;
 
 defined('MOODLE_INTERNAL') || die;
 
+global $CFG;
 require_once($CFG->dirroot . '/course/externallib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->libdir . '/filterlib.php');
@@ -42,7 +43,7 @@ use core_external\external_multiple_structure;
 use core_external\external_single_structure;
 use core_external\external_value;
 use core_external\external_warnings;
-use invalid_parameter_exception;
+use Exception;
 use theme_config;
 
 class search_courses extends core_course_external {
@@ -362,7 +363,7 @@ class search_courses extends core_course_external {
                 $allowedcriterianames,
             )
         ) {
-            throw new invalid_parameter_exception(
+            throw new Exception(
                 'Invalid value for criterianame parameter (value: ' . $params['criterianame'] . '),' . 'allowed values are: ' .
                 implode(
                     ',',
@@ -443,6 +444,27 @@ class search_courses extends core_course_external {
 
         $finalcourses = [];
 
+        // Pre-compute allowed category ids when filtering by a category: include the category and all its descendants.
+        $allowedcategoryids = null;
+        if ($categoryid !== 0) {
+            try {
+                $parentcategory = core_course_category::get($categoryid, IGNORE_MISSING);
+                if (!empty($parentcategory)) {
+                    $allowedcategoryids = [$categoryid];
+                    $children = $parentcategory->get_all_children_ids();
+                    if (!empty($children)) {
+                        $allowedcategoryids = array_merge($allowedcategoryids, $children);
+                    }
+                } else {
+                    // Fallback: restrict to provided category id only if category not found (unlikely).
+                    $allowedcategoryids = [$categoryid];
+                }
+            } catch (Exception $e) {
+                // If category retrieval fails, fall back to filtering by the provided id only.
+                $allowedcategoryids = [$categoryid];
+            }
+        }
+
         foreach ($courses as $course) {
             $coursecontext = context_course::instance($course->id);
             $neverhidden = false;
@@ -462,8 +484,8 @@ class search_courses extends core_course_external {
                 }
             }
 
-            // Remove result not in ur categ.
-            if ($categoryid !== 0 && $course->category != $categoryid) {
+            // When filtering by category, keep courses that belong to the selected category or any of its subcategories.
+            if ($categoryid !== 0 && is_array($allowedcategoryids) && !in_array($course->category, $allowedcategoryids)) {
                 continue;
             }
 
