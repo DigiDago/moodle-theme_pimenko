@@ -24,16 +24,12 @@
  */
 
 /**
- * @copyright  2015 Jeremy Hopkins (Coventry University)
- * @copyright  2015 Fernando Acedo (3-bits.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * Class to configure html editor for admin settings allowing use of repositories
- * Special thanks to Iban Cardona i Subiela
- * (http://icsbcn.blogspot.com.es/2015/03/use-image-repository-in-theme-settings.html) This post laid the ground work
- * for most of the code featured in this file.
+ * Class representing a custom HTML editor setting within the theme_pimenko plugin.
+ *
+ * This class extends admin_setting_configtext to provide a rich text HTML editor
+ * for Moodle admins to configure specific settings related to the theme_pimenko plugin.
  */
 class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configtext {
-
     /** @var int number of rows */
     private $rows;
 
@@ -52,23 +48,31 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
      * @param string $name
      * @param string $visiblename
      * @param string $description
-     * @param mixed $defaultsetting string or array
-     * @param mixed $paramtype
-     * @param int $cols
-     * @param int $rows
+     * @param mixed  $defaultsetting string or array
+     * @param mixed  $paramtype
+     * @param int    $cols
+     * @param int    $rows
      * @param string $filearea
      */
-    public function __construct($name, $visiblename, $description, $defaultsetting, $paramtype = PARAM_RAW, $cols = 60, $rows = 8,
-            $filearea = 'pimenkoimages') {
+    public function __construct(
+        $name,
+        $visiblename,
+        $description,
+        $defaultsetting,
+        $paramtype = PARAM_RAW,
+        $cols = 60,
+        $rows = 8,
+        $filearea = 'pimenkoimages',
+    ) {
         $this->rows = $rows;
         $this->cols = $cols;
         $this->filearea = $filearea;
         parent::__construct(
-                $name,
-                $visiblename,
-                $description,
-                $defaultsetting,
-                $paramtype
+            $name,
+            $visiblename,
+            $description,
+            $defaultsetting,
+            $paramtype,
         );
         editors_head_setup();
     }
@@ -103,13 +107,13 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
         $draftitemid = file_get_unused_draft_itemid();
         $component = is_null($this->plugin) ? 'core' : $this->plugin;
         $data = file_prepare_draft_area(
-                $draftitemid,
-                $options['context']->id,
-                $component,
-                $this->get_full_name() . '_draftitemid',
-                $draftitemid,
-                $options,
-                $data
+            $draftitemid,
+            $options['context']->id,
+            $component,
+            $this->get_full_name() . '_draftitemid',
+            $draftitemid,
+            $options,
+            $data,
         );
 
         $fpoptions = [];
@@ -132,8 +136,8 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
 
         // Moodlemedia plugin.
         $args->accepted_types = [
-                'video',
-                'audio'
+            'video',
+            'audio',
         ];
         $mediaoptions = initialise_filepicker($args);
         $mediaoptions->context = $ctx;
@@ -158,25 +162,25 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
         $fpoptions['link'] = $linkoptions;
 
         $editor->use_editor(
-                $this->get_id(),
-                $options,
-                $fpoptions
+            $this->get_id(),
+            $options,
+            $fpoptions,
         );
 
         return format_admin_setting(
-                $this,
-                $this->visiblename,
-                '<div class="form-textarea">
+            $this,
+            $this->visiblename,
+            '<div class="form-textarea">
          <textarea rows="' . $this->rows . '" cols="' . $this->cols . '" id="' . $this->get_id() . '" name="' .
-                $this->get_full_name() . '"spellcheck="true">' . s($data) . '
+            $this->get_full_name() . '"spellcheck="true">' . s($data) . '
          </textarea>
          </div>
         <input value="' . $draftitemid . '" name="' . $this->get_full_name() . '_draftitemid" type="hidden" />',
-                $this->description,
-                true,
-                '',
-                $defaultinfo,
-                $query
+            $this->description,
+            true,
+            '',
+            $defaultinfo,
+            $query,
         );
     }
 
@@ -193,9 +197,9 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
         // Handle case where USER is not define.
         // This happen when moodle install with them.
         if ($USER->id) {
-            $default['context']  = context_user::instance($USER->id);
+            $default['context'] = context_user::instance($USER->id);
         } else {
-            $default['context']  = context_system::instance();
+            $default['context'] = context_system::instance();
         }
         $default['maxbytes'] = 0;
         $default['maxfiles'] = -1;
@@ -238,63 +242,68 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
         $wwwroot = $CFG->wwwroot;
         if ($options['forcehttps']) {
             $wwwroot = str_replace(
-                    'http://',
-                    'https://',
-                    $wwwroot
+                'http://',
+                'https://',
+                $wwwroot,
             );
         }
 
-        $draftitemid = isset($_REQUEST[$this->get_full_name() . '_draftitemid']) ? $_REQUEST[$this->get_full_name() . '_draftitemid'] : null;
+        $draftitemid =
+            isset($_REQUEST[$this->get_full_name() . '_draftitemid']) ? $_REQUEST[$this->get_full_name() . '_draftitemid'] : null;
         if ($draftitemid) {
             $draftfiles = $fs->get_area_files(
-                    $options['context']->id,
-                    'user',
-                    'draft',
-                    $draftitemid,
-                    'id'
+                $options['context']->id,
+                'user',
+                'draft',
+                $draftitemid,
+                'id',
             );
             foreach ($draftfiles as $file) {
                 if (!$file->is_directory()) {
                     $strtosearch =
-                            "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . $file->get_filename();
-                    if (stripos(
-                                    $data,
-                                    $strtosearch
-                            ) !== false) {
+                        "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . $file->get_filename();
+                    if (
+                        stripos(
+                            $data,
+                            $strtosearch,
+                        ) !== false
+                    ) {
                         $filerecord = [
-                                'contextid' => context_system::instance()->id,
-                                'component' => $component,
-                                'filearea' => $this->filearea,
-                                'filename' => $file->get_filename(),
-                                'filepath' => '/',
-                                'itemid' => 0,
-                                'timemodified' => time()
+                            'contextid' => context_system::instance()->id,
+                            'component' => $component,
+                            'filearea' => $this->filearea,
+                            'filename' => $file->get_filename(),
+                            'filepath' => '/',
+                            'itemid' => 0,
+                            'timemodified' => time(),
                         ];
-                        if (!$filerec = $fs->get_file(
+                        if (
+                            !$filerec = $fs->get_file(
                                 $filerecord['contextid'],
                                 $filerecord['component'],
                                 $filerecord['filearea'],
                                 $filerecord['itemid'],
                                 $filerecord['filepath'],
-                                $filerecord['filename']
-                        )) {
+                                $filerecord['filename'],
+                            )
+                        ) {
                             $filerec = $fs->create_file_from_storedfile(
-                                    $filerecord,
-                                    $file
+                                $filerecord,
+                                $file,
                             );
                         }
                         $url = moodle_url::make_pluginfile_url(
-                                $filerec->get_contextid(),
-                                $filerec->get_component(),
-                                $filerec->get_filearea(),
-                                $filerec->get_itemid(),
-                                $filerec->get_filepath(),
-                                $filerec->get_filename()
+                            $filerec->get_contextid(),
+                            $filerec->get_component(),
+                            $filerec->get_filearea(),
+                            $filerec->get_itemid(),
+                            $filerec->get_filepath(),
+                            $filerec->get_filename(),
                         );
                         $data = str_ireplace(
-                                $strtosearch,
-                                $url,
-                                $data
+                            $strtosearch,
+                            $url,
+                            $data,
                         );
                     }
                 }
@@ -302,11 +311,11 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
         }
 
         return ($this->config_write(
-                $this->name,
-                $data
+            $this->name,
+            $data,
         ) ? '' : get_string(
-                'errorsetting',
-                'admin'
+            'errorsetting',
+            'admin',
         ));
     }
 }

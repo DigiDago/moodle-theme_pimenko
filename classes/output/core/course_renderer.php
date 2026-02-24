@@ -53,8 +53,17 @@ require_once($CFG->dirroot . '/course/renderer.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_renderer extends \core_course_renderer {
-    private $collapsecontainerid;
+    /**
+     * List of categories to display on front page.
+     *
+     * @var array
+     */
     protected $categories;
+    /**
+     * If true, categories will be expanded on front page.
+     *
+     * @var bool
+     */
     protected $categoryexpandedonload;
 
     /**
@@ -64,11 +73,11 @@ class course_renderer extends \core_course_renderer {
      * If completion is manual, returns a form (with an icon inside) that allows user to
      * toggle completion
      *
-     * @param stdClass $course course object
+     * @param stdClass        $course course object
      * @param completion_info $completioninfo completion info for the course, it is recommended
      *                                        to fetch once for all modules in course/section for performance
-     * @param cm_info $mod module to show completion for
-     * @param array $displayoptions display options, not used in core
+     * @param cm_info         $mod module to show completion for
+     * @param array           $displayoptions display options, not used in core
      *
      * @return string
      */
@@ -76,7 +85,12 @@ class course_renderer extends \core_course_renderer {
         $content = '';
 
         // Vérification des conditions d'affichage.
-        if ($this->shouldHideCompletion($displayoptions, $mod)) {
+        if (
+            $this->shouldhidecompletion(
+                $displayoptions,
+                $mod,
+            )
+        ) {
             return $content;
         }
 
@@ -89,37 +103,71 @@ class course_renderer extends \core_course_renderer {
         $completion = $completioninfo->is_enabled($mod);
 
         // Génération de l'icône de complétion en fonction du type et de l'état.
-        $completionicon = $this->getCompletionIcon($completion, $completioninfo, $mod);
+        $completionicon = $this->getcompletionicon(
+            $completion,
+            $completioninfo,
+            $mod,
+        );
 
         // Génération du contenu HTML.
         if ($completionicon) {
-            $content = $this->generateCompletionHtml($completionicon, $mod, $displayoptions, $completioninfo, $completion);
+            $content = $this->generatecompletionhtml(
+                $completionicon,
+                $mod,
+                $displayoptions,
+                $completioninfo,
+                $completion,
+            );
         }
 
         return $content;
     }
 
-    // Méthode pour vérifier les conditions d'affichage.
-    private function shouldHideCompletion($displayoptions, $mod) {
+    /**
+     * Determines if the completion status for a module should be hidden.
+     *
+     * @param array    $displayoptions Options controlling the display of the module.
+     * @param stdClass $mod The module object including its visibility and completion settings.
+     * @return bool True if the completion status should be hidden, false otherwise.
+     */
+    private function shouldhidecompletion($displayoptions, $mod) {
         return !empty($displayoptions['hidecompletion']) ||
             !isloggedin() ||
             isguestuser() ||
             !$mod->uservisible;
     }
 
-    // Méthode pour obtenir l'icône de complétion en fonction du type et de l'état.
-    private function getCompletionIcon($completion, $completioninfo, $mod) {
+    /**
+     * Retrieves the appropriate completion icon identifier based on the completion tracking mode
+     * and the completion state of the given module.
+     *
+     * @param int             $completion Completion tracking mode (e.g., manual or automatic)
+     * @param completion_info $completioninfo Completion information object for the course module
+     * @param cm_info         $mod Course module data object
+     * @return string Completion icon identifier, such as 'manual-n', 'auto-y', 'auto-pass', etc.
+     */
+    private function getcompletionicon($completion, $completioninfo, $mod) {
         if ($this->page->user_is_editing()) {
             return ($completion == COMPLETION_TRACKING_MANUAL) ? 'manual-enabled' : 'auto-enabled';
         } else if ($completion == COMPLETION_TRACKING_MANUAL) {
-            switch ($completioninfo->get_data($mod, true)->completionstate) {
+            switch (
+                $completioninfo->get_data(
+                    $mod,
+                    true,
+                )->completionstate
+            ) {
                 case COMPLETION_INCOMPLETE:
                     return 'manual-n';
                 case COMPLETION_COMPLETE:
                     return 'manual-y';
             }
         } else {
-            switch ($completioninfo->get_data($mod, true)->completionstate) {
+            switch (
+                $completioninfo->get_data(
+                    $mod,
+                    true,
+                )->completionstate
+            ) {
                 case COMPLETION_INCOMPLETE:
                     return 'auto-n';
                 case COMPLETION_COMPLETE:
@@ -132,8 +180,17 @@ class course_renderer extends \core_course_renderer {
         }
     }
 
-    // Méthode pour générer le contenu HTML en fonction de l'icône de complétion.
-    private function generateCompletionHtml($completionicon, $mod, $displayoptions, $completioninfo, $completion) {
+    /**
+     * Generates HTML to display a course module's completion icon with additional details.
+     *
+     * @param string          $completionicon The name of the completion icon (e.g., "auto-y", "auto-pass").
+     * @param stdClass        $mod The module object containing details like id and name.
+     * @param array           $displayoptions Options defining how completion information is displayed.
+     * @param completion_info $completioninfo Completion information object for the course.
+     * @param int             $completion The completion tracking method (e.g., COMPLETION_TRACKING_MANUAL).
+     * @return string
+     */
+    private function generatecompletionhtml($completionicon, $mod, $displayoptions, $completioninfo, $completion) {
         $modtemplate = new stdClass();
         $modtemplate->completionicon = $completionicon;
         $modtemplate->modid = $mod->id;
@@ -148,10 +205,17 @@ class course_renderer extends \core_course_renderer {
 
         if (!empty($displayoptions['showcompletiontext'])) {
             $modtemplate->completetext = format_string(
-                get_string('completion-alt-' . $completionicon, 'theme_pimenko', $formattedname)
+                get_string(
+                    'completion-alt-' . $completionicon,
+                    'theme_pimenko',
+                    $formattedname,
+                ),
             );
             $modtemplate->tooltiptext = format_string(
-                get_string('completion-tooltip-' . $completionicon, 'theme_pimenko')
+                get_string(
+                    'completion-tooltip-' . $completionicon,
+                    'theme_pimenko',
+                ),
             );
         }
 
@@ -159,7 +223,12 @@ class course_renderer extends \core_course_renderer {
             $modtemplate->useredit = 1;
             $modtemplate->state = 1;
 
-            if ($completioninfo->get_data($mod, true)->completionstate == COMPLETION_COMPLETE) {
+            if (
+                $completioninfo->get_data(
+                    $mod,
+                    true,
+                )->completionstate == COMPLETION_COMPLETE
+            ) {
                 $modtemplate->status = 'checked';
                 $modtemplate->state = 0;
             }
@@ -168,7 +237,12 @@ class course_renderer extends \core_course_renderer {
         } else if ($completion == COMPLETION_TRACKING_MANUAL) {
             $modtemplate->state = 1;
 
-            if ($completioninfo->get_data($mod, true)->completionstate == COMPLETION_COMPLETE) {
+            if (
+                $completioninfo->get_data(
+                    $mod,
+                    true,
+                )->completionstate == COMPLETION_COMPLETE
+            ) {
                 $modtemplate->status = 'checked';
                 $modtemplate->state = 0;
             }
@@ -184,7 +258,10 @@ class course_renderer extends \core_course_renderer {
             }
         }
 
-        return $this->output->render_from_template('theme_pimenko/completioncheck', $modtemplate);
+        return $this->output->render_from_template(
+            'theme_pimenko/completioncheck',
+            $modtemplate,
+        );
     }
 
     /**
@@ -201,56 +278,65 @@ class course_renderer extends \core_course_renderer {
                 'recursive' => true,
                 'limit' => $CFG->frontpagecourselimit,
                 'viewmoreurl' => new moodle_url('/course/index.php'),
-                'viewmoretext' => new lang_string('fulllistofcourses')
-            ]
+                'viewmoretext' => new lang_string('fulllistofcourses'),
+            ],
         );
         $chelper->set_attributes(['class' => 'frontpage-course-list-all']);
         $courses = get_courses();
 
-        if (!$courses && !$this->page->user_is_editing() && has_capability(
+        if (
+            !$courses && !$this->page->user_is_editing() && has_capability(
                 'moodle/course:create',
-                context_system::instance()
-            )) {
+                context_system::instance(),
+            )
+        ) {
             // Print link to create a new course, for the 1st available category.
             return $this->add_new_course_button();
         }
 
         return $this->frontpage_courseboxes(
             $chelper,
-            $courses
+            $courses,
         );
     }
 
     /**
-     * Review frontpage coursebox renderer.
+     * Returns HTML to display course boxes on the front page.
      *
-     * @param coursecat_helper $chelper
-     * @param                  $courses
-     *
-     * @return string
+     * @param coursecat_helper $chelper Helper object for managing course display options and settings.
+     * @param array            $courses Array of courses to be displayed in the course boxes.
+     * @return string The generated HTML for the course boxes.
      */
     public function frontpage_courseboxes(coursecat_helper $chelper, $courses) {
         $content = '';
         $template = $this->get_courses_template(
             $chelper,
-            $courses
+            $courses,
         );
 
         $content .= $this->output->render_from_template(
             'theme_pimenko/course_card',
-            $template
+            $template,
         );
 
         return $content;
     }
 
+    /**
+     * Generates a template containing courses' information to be rendered, including relevant metadata and properties.
+     *
+     * @param coursecat_helper $chelper A helper class for fetching and formatting course category or course data.
+     * @param array            $courses An array of course objects for which the template will be generated.
+     * @return stdClass An object containing the structured template data for the courses, including course count, details, and
+     *     other metadata.
+     */
     public function get_courses_template($chelper, $courses) {
         global $CFG, $DB;
 
         if (empty($this->categories)) {
             $this->categories = $DB->get_records(
                 'course_categories',
-                ['visible' => 1]
+                ['visible' => 1],
             );
         }
 
@@ -289,7 +375,12 @@ class course_renderer extends \core_course_renderer {
             if ($course instanceof stdClass) {
                 $course = new core_course_list_element($course);
             }
-            if ($this->page->pagetype == "site-index" || array_key_exists($course->id, $mycourses)) {
+            if (
+                $this->page->pagetype == "site-index" || array_key_exists(
+                    $course->id,
+                    $mycourses,
+                )
+            ) {
                 $rendercourse = new stdClass();
                 // Get course name.
                 $rendercourse->coursename = $chelper->get_course_formatted_name($course);
@@ -305,8 +396,8 @@ class course_renderer extends \core_course_renderer {
                             '/user/view.php',
                             [
                                 'id' => $userid,
-                                'course' => SITEID
-                            ]
+                                'course' => SITEID,
+                            ],
                         );
                         $rendercourse->contacts[] = $contact;
                     }
@@ -320,15 +411,17 @@ class course_renderer extends \core_course_renderer {
                 if ($course->startdate) {
                     $rendercourse->startdate = userdate(
                         $course->startdate,
-                        get_string('strftimedate')
+                        get_string('strftimedate'),
                     );
                 }
                 // Get course category name.
                 if ($catid = $course->category) {
-                    if (array_key_exists(
-                        $catid,
-                        $this->categories
-                    )) {
+                    if (
+                        array_key_exists(
+                            $catid,
+                            $this->categories,
+                        )
+                    ) {
                         $category = \core_course_category::get($course->category);
                         $rendercourse->category = $category->get_formatted_name();
                     } else {
@@ -340,7 +433,7 @@ class course_renderer extends \core_course_renderer {
                 $params = ["id" => $course->id];
                 $rendercourse->viewurl = new moodle_url(
                     "/course/view.php",
-                    $params
+                    $params,
                 );
 
                 // Search custom fields.
@@ -373,10 +466,12 @@ class course_renderer extends \core_course_renderer {
 
                 // Get the course progress.
                 $rendercourse->hasprogress = false;
-                if (array_key_exists(
-                    $course->id,
-                    $mycourses
-                )) {
+                if (
+                    array_key_exists(
+                        $course->id,
+                        $mycourses,
+                    )
+                ) {
                     $completion = new completion_info($course);
                     $rendercourse->hasprogress = true;
                     $rendercourse->progress = $this->course_progress($course->id);
@@ -417,7 +512,7 @@ class course_renderer extends \core_course_renderer {
      * @param int|stdClass|core_course_category $category
      */
     public function course_category($category) {
-        global $CFG, $OUTPUT;
+        global $CFG;
         $usertop = core_course_category::user_top();
 
         if (empty($category)) {
@@ -429,17 +524,27 @@ class course_renderer extends \core_course_renderer {
         }
 
         $site = get_site();
-        $actionbar = new \theme_pimenko\output\core\category_action_bar($this->page, $coursecat);
+        $actionbar = new \theme_pimenko\output\core\category_action_bar(
+            $this->page,
+            $coursecat,
+        );
 
         $theme = theme_config::load('pimenko');
         if ($theme->settings->enablecatalog) {
             $editoption = $actionbar->export_for_template($this);
 
-            $tagid = optional_param('tagid', 0, PARAM_INT);
+            $tagid = optional_param(
+                'tagid',
+                0,
+                PARAM_INT,
+            );
             if (isset($editoption['tagselect'])) {
                 foreach ($editoption['tagselect']->options as &$option) {
                     $url = parse_url($option['value']);
-                    parse_str($url['query'], $params);
+                    parse_str(
+                        $url['query'],
+                        $params,
+                    );
                     if ($params['tagid'] == $tagid) {
                         $option['selected'] = true;
                     } else {
@@ -450,9 +555,12 @@ class course_renderer extends \core_course_renderer {
 
             if (!empty((array) $editoption['categoryselect'])) {
                 $allcateg[] = [
-                    'name' => get_string('allcategories', 'theme_pimenko'),
+                    'name' => get_string(
+                        'allcategories',
+                        'theme_pimenko',
+                    ),
                     'value' => '/course/index.php',
-                    'selected' => true
+                    'selected' => true,
                 ];
 
                 if (($category === 0 || $category === '1' || count($editoption['categoryselect']->options) < 1)) {
@@ -462,7 +570,10 @@ class course_renderer extends \core_course_renderer {
                     $allcateg[0]['selected'] = false;
                 }
 
-                $customtemplate = array_merge($allcateg, $editoption['categoryselect']->options);
+                $customtemplate = array_merge(
+                    $allcateg,
+                    $editoption['categoryselect']->options,
+                );
                 $editoption['categoryselect']->options = $customtemplate;
             } else {
                 // If no categ we don't display this.
@@ -470,12 +581,14 @@ class course_renderer extends \core_course_renderer {
             }
 
             $template = $editoption;
-
         } else {
             $template = $actionbar->export_for_template($this);
         }
 
-        $output = $this->render_from_template('core_course/category_actionbar', $template);
+        $output = $this->render_from_template(
+            'core_course/category_actionbar',
+            $template,
+        );
 
         if (core_course_category::is_simple_site()) {
             // There is only one category in the system, do not display link to it.
@@ -492,48 +605,90 @@ class course_renderer extends \core_course_renderer {
         // Print current category description.
         $chelper = new coursecat_helper();
         if ($description = $chelper->get_category_formatted_description($coursecat)) {
-            $output .= $this->box($description, array('class' => 'generalbox info'));
+            $output .= $this->box(
+                $description,
+                ['class' => 'generalbox info'],
+            );
         }
 
         // Prepare parameters for courses and categories lists in the tree.
         $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)
-            ->set_attributes(array('class' => 'category-browse category-browse-' . $coursecat->id));
+            ->set_attributes(['class' => 'category-browse category-browse-' . $coursecat->id]);
 
-        $coursedisplayoptions = array();
-        $catdisplayoptions = array();
-        $browse = optional_param('browse', null, PARAM_ALPHA);
-        $perpage = optional_param('perpage', $CFG->coursesperpage, PARAM_INT);
-        $page = optional_param('page', 0, PARAM_INT);
+        $coursedisplayoptions = [];
+        $catdisplayoptions = [];
+        $browse = optional_param(
+            'browse',
+            null,
+            PARAM_ALPHA,
+        );
+        $perpage = optional_param(
+            'perpage',
+            $CFG->coursesperpage,
+            PARAM_INT,
+        );
+        $page = optional_param(
+            'page',
+            0,
+            PARAM_INT,
+        );
         $baseurl = new moodle_url('/course/index.php');
         if ($coursecat->id) {
-            $baseurl->param('categoryid', $coursecat->id);
+            $baseurl->param(
+                'categoryid',
+                $coursecat->id,
+            );
         }
         if ($perpage != $CFG->coursesperpage) {
-            $baseurl->param('perpage', $perpage);
+            $baseurl->param(
+                'perpage',
+                $perpage,
+            );
         }
         $coursedisplayoptions['limit'] = $perpage;
         $catdisplayoptions['limit'] = $perpage;
         if ($browse === 'courses' || !$coursecat->get_children_count()) {
             $coursedisplayoptions['offset'] = $page * $perpage;
-            $coursedisplayoptions['paginationurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
+            $coursedisplayoptions['paginationurl'] = new moodle_url(
+                $baseurl,
+                ['browse' => 'courses'],
+            );
             $catdisplayoptions['nodisplay'] = true;
-            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories'));
+            $catdisplayoptions['viewmoreurl'] = new moodle_url(
+                $baseurl,
+                ['browse' => 'categories'],
+            );
             $catdisplayoptions['viewmoretext'] = new lang_string('viewallsubcategories');
         } else if ($browse === 'categories' || !$coursecat->get_courses_count()) {
             $coursedisplayoptions['nodisplay'] = true;
             $catdisplayoptions['offset'] = $page * $perpage;
-            $catdisplayoptions['paginationurl'] = new moodle_url($baseurl, array('browse' => 'categories'));
-            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
+            $catdisplayoptions['paginationurl'] = new moodle_url(
+                $baseurl,
+                ['browse' => 'categories'],
+            );
+            $coursedisplayoptions['viewmoreurl'] = new moodle_url(
+                $baseurl,
+                ['browse' => 'courses'],
+            );
             $coursedisplayoptions['viewmoretext'] = new lang_string('viewallcourses');
         } else {
             // We have a category that has both subcategories and courses, display pagination separately.
-            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses', 'page' => 1));
-            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories', 'page' => 1));
+            $coursedisplayoptions['viewmoreurl'] = new moodle_url(
+                $baseurl,
+                ['browse' => 'courses', 'page' => 1],
+            );
+            $catdisplayoptions['viewmoreurl'] = new moodle_url(
+                $baseurl,
+                ['browse' => 'categories', 'page' => 1],
+            );
         }
         $chelper->set_courses_display_options($coursedisplayoptions)->set_categories_display_options($catdisplayoptions);
 
         // Display course category tree.
-        $output .= $this->coursecat_tree($chelper, $coursecat);
+        $output .= $this->coursecat_tree(
+            $chelper,
+            $coursecat,
+        );
 
         return $output;
     }
@@ -541,7 +696,7 @@ class course_renderer extends \core_course_renderer {
     /**
      * Returns HTML to display a tree of subcategories and courses in the given category
      *
-     * @param coursecat_helper $chelper various display options
+     * @param coursecat_helper     $chelper various display options
      * @param core_course_category $coursecat top category (this category's name and description will NOT be added to the tree)
      * @return string
      */
@@ -555,7 +710,11 @@ class course_renderer extends \core_course_renderer {
         if (!$gallery) {
             $this->categoryexpandedonload = true;
 
-            $template->categorycontent = $this->coursecat_category_content($chelper, $coursecat, 0);
+            $template->categorycontent = $this->coursecat_category_content(
+                $chelper,
+                $coursecat,
+                0,
+            );
             if (empty($template->categorycontent)) {
                 return '';
             }
@@ -579,19 +738,25 @@ class course_renderer extends \core_course_renderer {
                     $template->linkname = get_string('expandall');
                 }
                 // Only show the collapse/expand if there are children to expand.
-                $this->page->requires->strings_for_js(array('collapseall', 'expandall'), 'moodle');
+                $this->page->requires->strings_for_js(
+                    ['collapseall', 'expandall'],
+                    'moodle',
+                );
             }
 
             $content .= $this->output->render_from_template(
                 'theme_pimenko/course_category_tree',
-                $template
+                $template,
             );
         } else {
             $context = context_system::instance();
 
             // If there is a category id filter then get only this category.
             if ($coursecat->id > 0) {
-                $where = has_capability('moodle/category:viewhiddencategories', $context) ? '' : 'WHERE visible = 1';
+                $where = has_capability(
+                    'moodle/category:viewhiddencategories',
+                    $context,
+                ) ? '' : 'WHERE visible = 1';
 
                 // Define the base SQL query.
                 $basesql = "WITH RECURSIVE category_tree(id, name, parent, sortorder, visible) AS (
@@ -610,15 +775,26 @@ class course_renderer extends \core_course_renderer {
                     ";
 
                 // Set the default parameters for the SQL query.
-                $params = array(
+                $params = [
                     'category_id' => $coursecat->id,
-                );
+                ];
 
-                $cats = $DB->get_records_sql($basesql, $params);
+                $cats = $DB->get_records_sql(
+                    $basesql,
+                    $params,
+                );
             } else {
                 // Else get all categories.
-                $where = has_capability('moodle/category:viewhiddencategories', $context) ? '' : 'visible = 1';
-                $cats = $DB->get_records_select('course_categories', $where, array(), 'sortorder');
+                $where = has_capability(
+                    'moodle/category:viewhiddencategories',
+                    $context,
+                ) ? '' : 'visible = 1';
+                $cats = $DB->get_records_select(
+                    'course_categories',
+                    $where,
+                    [],
+                    'sortorder',
+                );
             }
 
             $template->courses = [];
@@ -626,22 +802,52 @@ class course_renderer extends \core_course_renderer {
             $nbcourse = 1;
             // Categories.
             foreach ($cats as $cat) {
-
                 $coursecategory = core_course_category::get(is_object($cat) ? $cat->id : $cat);
 
                 $params['categoryid'] = $coursecategory->id;
-                $params['tagid'] = optional_param('tagid', 0, PARAM_INT);
-                $params['customfieldselected'] = optional_param('customfieldselected', '', PARAM_ALPHANUMEXT);
-                $params['customfieldtext'] = optional_param('customfieldtext', '', PARAM_ALPHANUMEXT);
-                $params['customfieldvalue'] = optional_param('customfieldvalue', '', PARAM_RAW);
-                $params['day'] = optional_param('day', 0, PARAM_INT);
-                $params['year'] = optional_param('year', 0, PARAM_INT);
-                $params['month'] = optional_param('month', 0, PARAM_INT);
-                $params['timestamp'] = optional_param('timestamp', 0, PARAM_INT);
+                $params['tagid'] = optional_param(
+                    'tagid',
+                    0,
+                    PARAM_INT,
+                );
+                $params['customfieldselected'] = optional_param(
+                    'customfieldselected',
+                    '',
+                    PARAM_ALPHANUMEXT,
+                );
+                $params['customfieldtext'] = optional_param(
+                    'customfieldtext',
+                    '',
+                    PARAM_ALPHANUMEXT,
+                );
+                $params['customfieldvalue'] = optional_param(
+                    'customfieldvalue',
+                    '',
+                    PARAM_RAW,
+                );
+                $params['day'] = optional_param(
+                    'day',
+                    0,
+                    PARAM_INT,
+                );
+                $params['year'] = optional_param(
+                    'year',
+                    0,
+                    PARAM_INT,
+                );
+                $params['month'] = optional_param(
+                    'month',
+                    0,
+                    PARAM_INT,
+                );
+                $params['timestamp'] = optional_param(
+                    'timestamp',
+                    0,
+                    PARAM_INT,
+                );
                 // Courses of categories.
 
                 foreach (self::get_all_courses_by_category($params) as $c) {
-
                     $coursecontext = context_course::instance($c->id);
 
                     $course = new stdClass();
@@ -649,7 +855,7 @@ class course_renderer extends \core_course_renderer {
                     $course->name = format_string(
                         $c->fullname,
                         true,
-                        array('context' => context_course::instance($course->id))
+                        ['context' => context_course::instance($course->id)],
                     );
                     $course->summary = $chelper->get_course_formatted_summary($c);
                     $course->visible = $c->visible;
@@ -669,8 +875,15 @@ class course_renderer extends \core_course_renderer {
                       FROM {user_enrolments} ue
                       JOIN {enrol} e ON e.id = ue.enrolid
                       $coursesql";
-                        $enroledcount = $DB->get_field_sql($sql, $params);
-                        $course->enroledcount = $enroledcount . ' ' . get_string('subscribers', 'theme_pimenko');
+                        $enroledcount = $DB->get_field_sql(
+                            $sql,
+                            $params,
+                        );
+                        $course->enroledcount = $enroledcount . ' ' .
+                            get_string(
+                                'subscribers',
+                                'theme_pimenko',
+                            );
                     }
 
                     // Adding of custom fields in the template.
@@ -694,10 +907,9 @@ class course_renderer extends \core_course_renderer {
                     $neverhiddenpaypal = false;
                     $enrolmethod = enrol_get_instances(
                         $c->id,
-                        true
+                        true,
                     );
                     foreach ($enrolmethod as $enrol) {
-
                         if ($enrol->enrol == 'synopsis') {
                             $neverhidden = true;
                             break;
@@ -713,18 +925,17 @@ class course_renderer extends \core_course_renderer {
                     if ($neverhidden) {
                         $course->url = new moodle_url(
                             "/enrol/synopsis/index.php",
-                            $params
+                            $params,
                         );
-
                     } else if ($neverhiddenpaypal) {
                         $course->url = new moodle_url(
                             "/enrol/synopsispaypal/index.php",
-                            $params
+                            $params,
                         );
                     } else {
                         $course->url = new moodle_url(
                             "/course/view.php",
-                            $params
+                            $params,
                         );
                     }
 
@@ -733,17 +944,22 @@ class course_renderer extends \core_course_renderer {
                     if (count($coursefiles) > 0) {
                         $file = reset($coursefiles);
                         $course->urlimg = new moodle_url(
-                            '/pluginfile.php/' . $file->get_contextid() . '/course/overviewfiles/' . $file->get_source()
+                            '/pluginfile.php/' . $file->get_contextid() . '/course/overviewfiles/' . $file->get_source(),
                         );
                     }
 
                     // Show course or not in catalog.
-                    if ($course->visible == 1 || (theme_config::load(
-                                'pimenko'
-                            )->settings->viewallhiddencourses == 1 && ($neverhidden || $neverhiddenpaypal)) || is_enrolled(
+                    if (
+                        $course->visible == 1 || (
+                            theme_config::load(
+                                'pimenko',
+                            )->settings->viewallhiddencourses == 1 &&
+                            ($neverhidden || $neverhiddenpaypal)
+                        ) || is_enrolled(
                             $coursecontext,
-                            $USER
-                        ) || is_siteadmin($USER)) {
+                            $USER,
+                        ) || is_siteadmin($USER)
+                    ) {
                         $template->courses[] = $course;
                     }
                 }
@@ -759,7 +975,7 @@ class course_renderer extends \core_course_renderer {
 
             return $this->render_from_template(
                 'theme_pimenko/course_gallery_container',
-                $template
+                $template,
             );
         }
 
@@ -787,11 +1003,15 @@ class course_renderer extends \core_course_renderer {
             'c.visible',
             'c.cacherev',
             'c.summary',
-            'c.summaryformat'
+            'c.summaryformat',
         ];
 
         // Define base SQL query.
-        $sql = "SELECT " . implode(',', $fields) . " FROM {course} c
+        $sql = "SELECT " .
+            implode(
+                ',',
+                $fields,
+            ) . " FROM {course} c
         WHERE c.category = :category AND c.id != 1";
 
         // Define conditions for WHERE clause.
@@ -801,9 +1021,11 @@ class course_renderer extends \core_course_renderer {
             $where[] = "c.id IN (SELECT ti.itemid FROM {tag_instance} ti
                  WHERE ti.tagid = :tagid AND ti.itemtype = 'course')";
         } else if ($params['customfieldselected'] && $params['day'] && $params['month'] && $params['year']) {
-            $timestamp = DateTime::createFromFormat('Y-m-d H:i:s',
+            $timestamp = DateTime::createFromFormat(
+                'Y-m-d H:i:s',
                 $params['year'] . '-' . $params['month'] . '-' . $params['day'] . ' 00:00:00',
-                core_date::get_user_timezone_object());
+                core_date::get_user_timezone_object(),
+            );
             $params['timestamp'] = $timestamp->getTimestamp();
             $where[] = "c.id IN (SELECT cd.instanceid FROM {customfield_data} cd
                  LEFT JOIN {customfield_field} cf ON cd.fieldid = cf.id
@@ -821,7 +1043,11 @@ class course_renderer extends \core_course_renderer {
 
         // Add conditions to the SQL query.
         if (!empty($where)) {
-            $sql .= ' AND ' . implode(' AND ', $where);
+            $sql .= ' AND ' .
+                implode(
+                    ' AND ',
+                    $where,
+                );
         }
 
         // Add ORDER BY clause.
@@ -833,10 +1059,13 @@ class course_renderer extends \core_course_renderer {
             'customfieldtext' => $params['customfieldtext'],
             'customfieldselected' => $params['customfieldselected'],
             'customfieldvalue' => $params['customfieldvalue'],
-            'timestamp' => $params['timestamp']
+            'timestamp' => $params['timestamp'],
         ];
 
-        $list = $DB->get_records_sql($sql, $parameters);
+        $list = $DB->get_records_sql(
+            $sql,
+            $parameters,
+        );
 
         $courses = [];
 
@@ -850,7 +1079,7 @@ class course_renderer extends \core_course_renderer {
     /**
      * Returns HTML to display course name.
      *
-     * @param coursecat_helper $chelper
+     * @param coursecat_helper         $chelper
      * @param core_course_list_element $course
      * @return string
      */
@@ -863,27 +1092,41 @@ class course_renderer extends \core_course_renderer {
             $template->nametag = 'div';
         }
         $coursename = $chelper->get_course_formatted_name($course);
-        $template->coursenamelink = html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
-            $coursename, [
+        $template->coursenamelink = html_writer::link(
+            new moodle_url(
+                '/course/view.php',
+                ['id' => $course->id],
+            ),
+            $coursename,
+            [
                 'class' => $course->visible ? 'aalink' : 'aalink dimmed',
                 'data-moreinfoid' => 'moreinfo' . $course->id,
-                'data-summary' => $course->has_summary()
-            ]);
+                'data-summary' => $course->has_summary(),
+            ],
+        );
         // If we display course in collapsed form but the course has summary or course contacts, display the link to the info page.
         if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
-            if ($course->has_summary() || $course->has_course_contacts() || $course->has_course_overviewfiles()
-                || $course->has_custom_fields()) {
-                $template->url = new moodle_url('/course/info.php', ['id' => $course->id]);
+            if (
+                $course->has_summary() || $course->has_course_contacts() || $course->has_course_overviewfiles()
+                || $course->has_custom_fields()
+            ) {
+                $template->url = new moodle_url(
+                    '/course/info.php',
+                    ['id' => $course->id],
+                );
                 $template->title = $this->strings->summary;
                 $template->moreinfoid = 'moreinfo' . $course->id;
-                $template->image = $this->output->pix_icon('i/info', $this->strings->summary);
+                $template->image = $this->output->pix_icon(
+                    'i/info',
+                    $this->strings->summary,
+                );
                 // Make sure JS file to expand course content is included.
                 $this->coursecat_include_js();
             }
         }
         $content .= $this->output->render_from_template(
             'theme_pimenko/course_name',
-            $template
+            $template,
         );
 
         return $content;
@@ -894,7 +1137,7 @@ class course_renderer extends \core_course_renderer {
      *
      * This method is called from coursecat_coursebox() and may be re-used in AJAX
      *
-     * @param coursecat_helper $chelper various display options
+     * @param coursecat_helper                  $chelper various display options
      * @param stdClass|core_course_list_element $course
      * @return string
      */
@@ -906,37 +1149,61 @@ class course_renderer extends \core_course_renderer {
             $course = new core_course_list_element($course);
         }
 
-        $content = \html_writer::start_tag('div', ['class' => 'd-flex']);
+        $content = \html_writer::start_tag(
+            'div',
+            ['class' => 'd-flex'],
+        );
         $content .= $this->course_overview_files($course);
-        $content .= \html_writer::start_tag('div', ['class' => 'flex-grow-1']);
-        $content .= $this->course_summary($chelper, $course);
+        $content .= \html_writer::start_tag(
+            'div',
+            ['class' => 'flex-grow-1'],
+        );
+        $content .= $this->course_summary(
+            $chelper,
+            $course,
+        );
         $content .= $this->course_contacts($course);
-        $content .= $this->course_category_name($chelper, $course);
+        $content .= $this->course_category_name(
+            $chelper,
+            $course,
+        );
         $content .= $this->course_custom_fields($course);
         $content .= \html_writer::end_tag('div');
         $content .= \html_writer::end_tag('div');
 
         if ($this->page->pagetype !== 'enrol-index') {
-            $content .= html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
+            $content .= html_writer::link(
+                new moodle_url(
+                    '/course/view.php',
+                    ['id' => $course->id],
+                ),
                 get_string(
                     'entercourse',
-                    'theme_pimenko'
-                ), ['class' => 'entercourse btn btn-secondary']);
+                    'theme_pimenko',
+                ),
+                ['class' => 'entercourse btn btn-secondary'],
+            );
         }
 
         return $content;
     }
 
     /**
-     * @param $categories
-     * @param $currentcategory
-     * @param $name
-     * @return string
+     * Recursively retrieves the full breadcrumb path for a given category.
+     *
+     * @param array  $categories Array of all categories with their details.
+     * @param array  $currentcategory The current category being processed, including its parent information.
+     * @param string $name The accumulated breadcrumb path string.
+     * @return string The complete breadcrumb path for the given category.
      */
     private function coursecat_get_parents($categories, $currentcategory, $name): string {
         if ($currentcategory['parent'] != 0) {
             $name = $categories[$currentcategory['parent']]['name'] . ' -> ' . $name;
-            return $this->coursecat_get_parents($categories, $categories[$currentcategory['parent']], $name);
+            return $this->coursecat_get_parents(
+                $categories,
+                $categories[$currentcategory['parent']],
+                $name,
+            );
         } else {
             return $name;
         }

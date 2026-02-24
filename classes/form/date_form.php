@@ -22,12 +22,13 @@
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace theme_pimenko\form;
 
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir."/formslib.php");
+require_once($CFG->libdir . "/formslib.php");
 
 use moodleform;
 
@@ -40,20 +41,35 @@ use moodleform;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class date_form extends moodleform {
-
+    /**
+     * Defines the form by adding a date selector element with a default value.
+     * The name of the date selector is derived from custom data or defaults to a localized string.
+     *
+     * @return void
+     */
     public function definition(): void {
         $mform = $this->_form;
         $mform->disable_form_change_checker();
 
         if (!$this->_customdata->name) {
-            $name = get_string('datefilter', 'theme_pimenko');
+            $name = get_string(
+                'datefilter',
+                'theme_pimenko',
+            );
         } else {
             $name = $this->_customdata->name;
         }
 
         $date = $this->_customdata->urlselectedvalue ?? time();
 
-        $mform->addElement('date_selector', 'date_selector', $name);
-        $mform->setDefault('date_selector', $date);
+        $mform->addElement(
+            'date_selector',
+            'date_selector',
+            $name,
+        );
+        $mform->setDefault(
+            'date_selector',
+            $date,
+        );
     }
 }

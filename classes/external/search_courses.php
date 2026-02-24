@@ -46,6 +46,10 @@ use core_external\external_warnings;
 use Exception;
 use theme_config;
 
+/**
+ * Class that handles the search of courses in the platform, extending the core functionality
+ * provided by core_course_external.
+ */
 class search_courses extends core_course_external {
     /**
      * Defines the structure of the return value for the execute function.
@@ -495,10 +499,12 @@ class search_courses extends core_course_external {
                 ['id' => $course->category],
             );
             if (
-                (theme_config::load(
+                (
+                    theme_config::load(
                         'pimenko',
-                    )->settings->viewallhiddencourses == 1 && ($neverhidden || $neverhiddenpaypal) &&
-                    $categoryvisible == 1) || ($course->visible == 1 && $categoryvisible == 1) || is_enrolled(
+                    )->settings->viewallhiddencourses == 1 &&
+                    ($neverhidden || $neverhiddenpaypal) && $categoryvisible == 1
+                ) || ($course->visible == 1 && $categoryvisible == 1) || is_enrolled(
                     $coursecontext,
                     $USER,
                 ) || is_siteadmin($USER)
@@ -576,5 +582,4 @@ class search_courses extends core_course_external {
             ],
         );
     }
-
 }

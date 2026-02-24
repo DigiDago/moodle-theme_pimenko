@@ -21,7 +21,6 @@
  * @copyright  Pimenko 2022
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 function xmldb_theme_pimenko_install() {
     global $CFG, $DB;
 
@@ -41,7 +40,7 @@ function xmldb_theme_pimenko_install() {
                 'coverimage',
                 0,
                 "itemid, filepath, filename",
-                false
+                false,
             );
             if (!$filepimenko) {
                 $oldfilesinfo = $fs->get_area_files(
@@ -50,28 +49,33 @@ function xmldb_theme_pimenko_install() {
                     'coverimage',
                     0,
                     "itemid, filepath, filename",
-                    false
+                    false,
                 );
 
                 foreach ($oldfilesinfo as $file) {
-
-                    $filerecord = array(
+                    $filerecord = [
                         'contextid' => $context->id,
                         'component' => 'theme_pimenko',
                         'filearea' => $file->get_filearea(),
                         'filename' => $file->get_filename(),
                         'filepath' => '/',
                         'itemid' => 0,
-                        'timemodified' => time()
-                    );
-                    if (!$filerec = $fs->get_file(
-                        $filerecord['contextid'],
-                        $filerecord['component'],
-                        $filerecord['filearea'],
-                        $filerecord['itemid'],
-                        $filerecord['filepath'],
-                        $filerecord['filename'])) {
-                        $filerec = $fs->create_file_from_storedfile($filerecord, $file);
+                        'timemodified' => time(),
+                    ];
+                    if (
+                        !$filerec = $fs->get_file(
+                            $filerecord['contextid'],
+                            $filerecord['component'],
+                            $filerecord['filearea'],
+                            $filerecord['itemid'],
+                            $filerecord['filepath'],
+                            $filerecord['filename'],
+                        )
+                    ) {
+                        $filerec = $fs->create_file_from_storedfile(
+                            $filerecord,
+                            $file,
+                        );
                     }
                 }
             }

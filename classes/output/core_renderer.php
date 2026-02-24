@@ -36,7 +36,7 @@ use html_writer;
 use completion_info;
 use context_system;
 use moodle_url;
-use theme_pimenko\output\core\navigation\primary as primary;
+use theme_pimenko\output\core\navigation\primary;
 
 /**
  * Class core_renderer extended
@@ -47,24 +47,34 @@ use theme_pimenko\output\core\navigation\primary as primary;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends \theme_boost\output\core_renderer {
+    /**
+     * Theme config object.
+     * @var theme_config
+     */
     private $themeconfig;
 
     /**
-     * Returns template of login page.
+     * Renders the contact us template.
      *
-     * @param $output
+     * @param renderer_base $output The renderer object used to output the template.
      *
-     * @return string
+     * @return string The rendered contact us template.
      */
     public static function renderer_contactus($output): string {
-
         return $output->render_from_template(
             'theme_pimenko/contactus',
             [],
         );
     }
 
-    /** Render a pix using different system of moodle */
+    /**
+     * Renders a custom pix image from a specified template.
+     *
+     * @param object $output The output renderer instance.
+     * @param string $pixstring The identifier for the pix string to be rendered.
+     *
+     * @return string The rendered pix as a string.
+     */
     public function render_custom_pix($output, string $pixstring): string {
         // Define some needed var for ur template.
         $template = new stdClass();
@@ -91,11 +101,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Returns template of login page.
+     * Renders the login page.
      *
-     * @param $output
+     * @param mixed $output The renderer output instance used for generating the page.
      *
-     * @return string
+     * @return string The rendered login page as a string.
      */
     public function render_login_page($output): string {
         global $SITE;
@@ -111,7 +121,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             true,
             [
                 'context' => context_course::instance(SITEID),
-                "escape" => false
+                "escape" => false,
             ],
         );
         $template->bodyattributes = $output->body_attributes($extraclasses);
@@ -146,7 +156,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * @return string
+     * Retrieves the site logo URL if configured in theme settings.
+     *
+     * @return string The URL of the site logo or an empty string if not configured.
      */
     public function sitelogo(): string {
         $sitelogo = '';
@@ -164,9 +176,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Return the picture set in theme option.
+     * Retrieves the URL for the navbar picture, if it is set in the theme configuration.
      *
-     * @return string
+     * @return string The URL of the navbar picture or an empty string if not set.
      */
     public function navbarpicture(): string {
         $navbarpicture = '';
@@ -207,7 +219,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     "/\n/",
                     "/\r/",
                     "/<p>/",
-                    "/<\/p>/"
+                    "/<\/p>/",
                 ];
                 $textwithoutspace = preg_replace(
                     $space,
@@ -290,7 +302,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function googlefont(): string {
         $theme = theme_config::load('pimenko');
         if (!empty($theme->settings->enablegooglefont)) {
-
             if (!empty($theme->settings->googlefont)) {
                 if (empty($this->themeconfig)) {
                     $this->themeconfig = $theme = theme_config::load('pimenko');
@@ -310,7 +321,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function display_header_categories(): string {
-
         $theme = theme_config::load('pimenko');
         if (!empty($theme->settings->menuheadercateg) && $theme->settings->menuheadercateg != "disabled") {
             $cats = core_course_category::get_all();
@@ -322,8 +332,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $template->dropdownitems = [];
 
             foreach ($cats as $cat) {
-                if (!($theme->settings->menuheadercateg == 'excludehidden' && $cat->visible == 0) &&
-                    $cat->get_parent_coursecat()->id == 0) {
+                if (
+                    !($theme->settings->menuheadercateg == 'excludehidden' && $cat->visible == 0) &&
+                    $cat->get_parent_coursecat()->id == 0
+                ) {
                     $dropdownitem = new stdClass();
                     $dropdownitem->name = $cat->get_formatted_name();
                     $dropdownitem->url = $cat->get_view_link();
@@ -342,8 +354,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * @param $category core_course_category
-     * @return string
+     * Displays header categories recursively with dropdown items.
+     *
+     * @param object $category The category object to process and display.
+     *
+     * @return string Rendered template with the nested dropdown categories.
      */
     public function display_header_categories_recursively($category): string {
         $cats = $category->get_children();
@@ -361,7 +376,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 }
                 $template->dropdownitems[] = $dropdownitem;
             }
-
         }
 
         return $this->render_from_template(
@@ -399,7 +413,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             true,
             [
                 'context' => context_course::instance(SITEID),
-                "escape" => false
+                "escape" => false,
             ],
         );
 
@@ -449,7 +463,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * Returns settings as formatted text
      *
      * @param string $setting
-     * @param bool $format = false
+     * @param bool   $format = false
      * @param string $theme = null
      *
      * @return string
@@ -472,7 +486,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             return format_text(
                 $theme->settings->$setting,
                 FORMAT_HTML,
-                [ 'trusted' => true ],
+                ['trusted' => true],
             );
         } else {
             return format_string($theme->settings->$setting);
@@ -504,10 +518,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $mod = $this->page->cm;
 
-        if ($COURSE->enablecompletion != COMPLETION_ENABLED || $this->page->pagelayout == "admin" ||
+        if (
+            $COURSE->enablecompletion != COMPLETION_ENABLED || $this->page->pagelayout == "admin" ||
             $this->page->pagetype == "course-editsection" || $this->page->bodyid == 'page-mod-quiz-attempt' ||
             (isset($this->page->cm->completion) && !$this->page->cm->completion) || !isset($this->page->cm->completion) ||
-            $pagepath[0] != 'mod' || $pagepath[2] == 'index' || !is_object($mod)) {
+            $pagepath[0] != 'mod' || $pagepath[2] == 'index' || !is_object($mod)
+        ) {
             return '';
         }
 
@@ -527,7 +543,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
                 // Short circuit to next mod in list.
                 continue;
-
             } else {
                 // The continue and else condition are not mutually neccessary.
                 // But the statement block is more clear with the explicit else).
@@ -553,7 +568,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $COURSE,
                 $completioninfo,
                 $mod,
-                [ 'showcompletiontext' => true ],
+                ['showcompletiontext' => true],
             );
             return $renderer->render_from_template(
                 'theme_pimenko/completionfooter',
@@ -724,8 +739,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Handles subsection information
      *
-     * @param array $mods
-     * @param array $activitylist
+     * @param array  $mods
+     * @param array  $activitylist
      * @param object $course
      * @param object $module
      *
@@ -748,8 +763,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Adds a module to the list of modules and activities.
      *
-     * @param array $mods The list of modules.
-     * @param array $activitylist The list of activities.
+     * @param array  $mods The list of modules.
+     * @param array  $activitylist The list of activities.
      * @param object $module The module to be added.
      * @return void
      */
@@ -770,7 +785,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $linkurl = new moodle_url(
             $module->url,
-            [ 'forceview' => 1 ],
+            ['forceview' => 1],
         );
         $activitylist[$linkurl->out(false)] = $modname;
     }
@@ -818,7 +833,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         );
 
         if ($filescoverimage) {
-
             $oldfile = array_values($filescoverimage)[0];
 
             $urlcoverimage = moodle_url::make_pluginfile_url(
@@ -832,15 +846,19 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $header->urlcoverimage = $urlcoverimage;
         }
 
-        if ($this->page->pagelayout == 'course' ||
-            ($this->page->pagelayout == 'incourse' && !empty($theme->settings->displaycoverallpage))) {
+        if (
+            $this->page->pagelayout == 'course' ||
+            ($this->page->pagelayout == 'incourse' && !empty($theme->settings->displaycoverallpage))
+        ) {
             $header->coverimagedata = [
                 'id' => $this->page->course->id,
                 'filename' => (isset($oldfile)) ? $oldfile->get_filename() : null,
-                'withgradient' => (bool) (!empty($theme->settings->gradientcovercolor) ? $theme->settings->gradientcovercolor : false),
+                'withgradient' => (bool) (!empty($theme->settings->gradientcovercolor) ? $theme->settings->gradientcovercolor :
+                    false),
                 'coverexist' => (bool) $filescoverimage,
-                'displayasthumbnail' => (isset($header->urlcoverimage)) ? (!empty($theme->settings->displayasthumbnail) ? $theme->settings->displayasthumbnail : false) : false,
-                'seemenu' => $this->page->user_allowed_editing()
+                'displayasthumbnail' => (isset($header->urlcoverimage)) ?
+                    (!empty($theme->settings->displayasthumbnail) ? $theme->settings->displayasthumbnail : false) : false,
+                'seemenu' => $this->page->user_allowed_editing(),
             ];
         }
 
@@ -860,7 +878,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 html_writer::div(
                     $this->region_main_settings_menu(),
                     'd-print-none',
-                    [ 'id' => 'region-main-settings-menu' ],
+                    ['id' => 'region-main-settings-menu'],
                 ),
             );
         }
@@ -872,7 +890,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         $header->headeractions = $this->page->get_header_actions();
-        $header->displaytitlecourseunderimage = !empty($theme->settings->displaytitlecourseunderimage) ? $theme->settings->displaytitlecourseunderimage : false;
+        $header->displaytitlecourseunderimage =
+            !empty($theme->settings->displaytitlecourseunderimage) ? $theme->settings->displaytitlecourseunderimage : false;
         if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
             $header->welcomemessage = \core_user::welcome_message();
         }
@@ -900,8 +919,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $class = 'h2';
         }
 
-        if ($this->page->pagelayout == "coursecategory" && $this->themeconfig->settings->enablecatalog &&
-            $this->themeconfig->settings->titlecatalog != "") {
+        if (
+            $this->page->pagelayout == "coursecategory" && $this->themeconfig->settings->enablecatalog &&
+            $this->themeconfig->settings->titlecatalog != ""
+        ) {
             // Heading in the course index page with catalog activated.
             $heading = $this->heading(
                 format_string($this->themeconfig->settings->titlecatalog),
@@ -944,7 +965,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $html .= html_writer::tag(
             'div',
             $heading,
-            [ 'class' => 'page-header-headings' ],
+            ['class' => 'page-header-headings'],
         );
 
         // Buttons.
@@ -965,7 +986,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         'moodle',
                         [
                             'class' => 'iconsmall',
-                            'role' => 'presentation'
+                            'role' => 'presentation',
                         ],
                     );
                     $image .= html_writer::span(
@@ -977,7 +998,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         'img',
                         [
                             'src' => $button['formattedimage'],
-                            'role' => 'presentation'
+                            'role' => 'presentation',
                         ],
                     );
                 }

@@ -27,8 +27,22 @@ defined('MOODLE_INTERNAL') || die;
 
 global $OUTPUT;
 
-$page = new admin_settingpage('theme_pimenko_contact', get_string('contactsettings', 'theme_pimenko'));
-$page->add(new admin_setting_heading('contactheading', get_string('contactheading', 'theme_pimenko'),
-    theme_pimenko\output\core_renderer::renderer_contactus($OUTPUT)));
+$page = new admin_settingpage(
+    'theme_pimenko_contact',
+    get_string(
+        'contactsettings',
+        'theme_pimenko',
+    ),
+);
+$page->add(
+    new admin_setting_heading(
+        'contactheading',
+        get_string(
+            'contactheading',
+            'theme_pimenko',
+        ),
+        theme_pimenko\output\core_renderer::renderer_contactus($OUTPUT),
+    ),
+);
 
 $settings->add($page);
