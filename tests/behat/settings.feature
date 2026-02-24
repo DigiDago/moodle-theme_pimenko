@@ -1,4 +1,4 @@
-@core @core_admin @theme_pimenko @javascript
+@core @core_admin @theme @theme_pimenko @javascript
 Feature: Check if all setings are working.
 
   Background:

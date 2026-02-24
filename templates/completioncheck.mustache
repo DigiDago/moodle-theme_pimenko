@@ -14,6 +14,23 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/completioncheck
+
+    Case à cocher de complétion d'activité avec attributs de données.
+
+    Example context (json):
+    {
+        "tooltiptext": "Marquer comme terminé",
+        "status": "checked",
+        "class": "completioncheckbox",
+        "modid": 34,
+        "state": 1,
+        "modname": "assign",
+        "completionicon": "https://example.com/check.svg",
+        "changetext": "Cliquez pour changer l'état"
+    }
+}}
 <div class="checkbox d-flex flex-row">
     <label id="completion-block" data-toggle="tooltip" title="{{tooltiptext}}">
         <input type="checkbox" {{status}} class="{{class}}" value="" data-mod="{{modid}}"

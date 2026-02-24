@@ -70,15 +70,15 @@
             "options": [
                 {
                     "url": "\/course\/index.php\/?categoryid=281",
-                    "string": "Action 1"
+                    "string": "Action 1",
                     "attributes": [
                         {
                             "name": "data-id",
                             "value": "1"
                         },
                         {
-                            "name": "aria-role",
-                            "value": "test"
+                            "name": "aria-label",
+                            "value": "Action"
                         }
                     ]
                 }
@@ -117,8 +117,8 @@
 
                             <div id="moreactionsmenu" class="dropdown-menu" aria-labelledby="dropdown-actions" role="menu">
                                 {{#options}}
-                                    <a role="menuitem" class="dropdown-item" {{#attributes}}{{name}}="{{value}}"{{/attributes}} href="{{url}}"
-                                    tabindex="-1">{{string}}</a>
+                                    <a role="menuitem" class="dropdown-item"{{#attributes}} {{name}}="{{value}}"{{/attributes}} href="{{url}}"
+                                       tabindex="-1">{{string}}</a>
                                 {{/options}}
                             </div>
                         </div>

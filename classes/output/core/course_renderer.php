@@ -44,6 +44,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/course/renderer.php');
+require_once($CFG->dirroot . '/course/lib.php');
 
 /**
  * Course renderer class.

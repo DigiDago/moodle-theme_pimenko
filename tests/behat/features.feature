@@ -1,4 +1,4 @@
-@theme_pimenko @pimenko_feature @javascript
+@theme @theme_pimenko @pimenko_feature @javascript
 Feature: Test theme features
   In order to use pimenko theme features
   As an admin

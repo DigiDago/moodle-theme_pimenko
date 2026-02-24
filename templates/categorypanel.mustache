@@ -14,23 +14,41 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/categorypanel
+
+    Panneau d'une catégorie ou d'un cours avec entête cliquable et contenu expansible.
+
+    Example context (json):
+    {
+        "id": 12,
+        "collapse_id": "collapse-12",
+        "linkclass": "collapsed",
+        "name": "Nom de la catégorie ou du cours",
+        "cat_url": "https://example.com/course/index.php?categoryid=1",
+        "expanded": false,
+        "addclasses": "p-3",
+        "content": "<p>HTML</p>",
+        "additionalcontent": "<div>HTML additionnel</div>",
+        "course_url": "https://example.com/course/view.php?id=2"
+    }
+}}
 <div class="card">
     {{#cat_url}}
-        <div class="card-header" id="heading{{id}}" role="tab">
+        <div class="card-header" id="headingcat{{id}}">
             <h4 class="card-title">
-                <a aria-controls="collapse{{id}}" aria-expanded="false" class="{{{linkclass}}}"
-                   data-parent="#heading{{id}}" data-toggle="collapse" href="#{{collapse_id}}">
+                <a aria-controls="{{collapse_id}}" aria-expanded="false" class="{{linkclass}}"
+                   data-parent="#headingcat{{id}}" data-toggle="collapse" href="#{{collapse_id}}">
                     {{{name}}}
                 </a>
-                <div class="float-right">
-                    <a href="{{{cat_url}}}" class="viewcat">
-                        {{#str}}viewcat, theme_pimenko{{/str}}
-                    </a>
-                </div>
             </h4>
+            <div class="float-right">
+                <a href="{{cat_url}}" class="viewcat">
+                    {{#str}}viewcat, theme_pimenko{{/str}}
+                </a>
+            </div>
         </div>
-        <div aria-expanded="{{expanded}}" aria-labelledby="heading{{id}}" class="collapse" id="{{collapse_id}}"
-             role="tabpanel">
+        <div aria-expanded="{{#expanded}}true{{/expanded}}{{^expanded}}false{{/expanded}}" aria-labelledby="headingcat{{id}}" class="collapse" id="{{collapse_id}}" role="tabpanel">
             <div class="card-block {{addclasses}}">
                 {{{content}}}
                 {{{additionalcontent}}}
@@ -38,8 +56,8 @@
         </div>
     {{/cat_url}}
     {{#course_url}}
-        <div class="card-header" id="heading{{id}}" role="tab">
-            <a href="{{{course_url}}}">
+        <div class="card-header" id="headingcourse{{id}}">
+            <a href="{{course_url}}">
                 <h4 class="card-title">
                     {{{name}}}
                 </h4>
@@ -49,7 +67,7 @@
             </div>
             {{{additionalcontent}}}
             <div class="float-right">
-                <a href="{{{course_url}}}" class="btn btn-primary btn-sm">
+                <a href="{{course_url}}" class="btn btn-primary btn-sm">
                     {{#str}}viewcourse, theme_pimenko{{/str}}
                 </a>
             </div>

@@ -1,3 +1,18 @@
+{{!
+    @template theme_pimenko/course_name
+
+    Affiche le nom du cours avec balise dynamique et lien plus d'informations.
+
+    Example context (json):
+    {
+        "nametag": "h3",
+        "coursenamelink": "<a href=\"/course/view.php?id=2\">Nom du cours</a>",
+        "moreinfoid": "moreinfo-2",
+        "url": "/course/info.php?id=2",
+        "title": "Plus d'informations",
+        "image": "<img src=\"/pix/i/info.png\" alt=\"info\">"
+    }
+}}
 <{{{nametag}}} class='coursename'>
     {{{coursenamelink}}}
 </{{{nametag}}}>

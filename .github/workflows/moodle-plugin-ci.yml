@@ -5,15 +5,17 @@ name: Moodle Plugin CI
 on:
   push:
     branches:
+      - main
+      - master
       - dev
   pull_request:
     branches:
       - main
       - master
       - dev
-      - MOODLE_405_STABLE
-      - MOODLE_500_STABLE
-      - MOODLE_501_STABLE
+      - 'MOODLE_405_*'
+      - 'MOODLE_500_*'
+      - 'MOODLE_501_*'
 
 jobs:
   # Job pour déterminer la matrice de versions Moodle
