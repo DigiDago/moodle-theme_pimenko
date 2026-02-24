@@ -16,6 +16,8 @@
 
 namespace theme_pimenko;
 
+use theme_config;
+
 /**
  * Unit tests for theme_pimenko lib.php functions.
  *

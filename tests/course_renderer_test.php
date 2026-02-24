@@ -28,6 +28,11 @@ use theme_pimenko\output\core\course_renderer;
  * @covers \theme_pimenko\output\core\course_renderer
  */
 final class course_renderer_test extends \advanced_testcase {
+    /**
+     * Sets up the testing environment for the test case.
+     *
+     * @return void
+     */
     protected function setUp(): void {
         parent::setUp();
         $this->resetAfterTest(true);
@@ -37,7 +42,12 @@ final class course_renderer_test extends \advanced_testcase {
     }
 
     /**
-     * Test course_category method.
+     * Tests the functionality of rendering a course category using the theme renderer.
+     *
+     * Verifies that the course_category method can handle both category IDs and
+     * category objects correctly, and that the rendered output contains the expected data.
+     *
+     * @return void
      */
     public function test_course_category(): void {
         global $PAGE;

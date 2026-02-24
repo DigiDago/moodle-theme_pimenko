@@ -15,6 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace theme_pimenko;
+use context_course;
+use core_external\external_api;
+use theme_pimenko\external\save_cover_file;
 
 /**
  * Unit tests for theme_pimenko save_cover_file external class.
@@ -62,14 +65,14 @@ final class external_save_cover_file_test extends \advanced_testcase {
         $filename = 'test.gif';
 
         // Upload du fichier de couverture.
-        $result = theme_pimenko\external\save_cover_file::execute(
+        $result = save_cover_file::execute(
             $imagedata,
             $course->id,
             $filename,
             false,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\save_cover_file::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            save_cover_file::execute_returns(),
             $result,
         );
 
@@ -110,14 +113,14 @@ final class external_save_cover_file_test extends \advanced_testcase {
         );
 
         // Suppression (couvre la branche $filedelete et le nettoyage de l'area files).
-        $deleteresult = theme_pimenko\external\save_cover_file::execute(
+        $deleteresult = save_cover_file::execute(
             '',
             $course->id,
             $filename,
             true,
         );
-        $deleteresult = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\save_cover_file::execute_returns(),
+        $deleteresult = external_api::clean_returnvalue(
+            save_cover_file::execute_returns(),
             $deleteresult,
         );
         $this->assertTrue($deleteresult['success']);

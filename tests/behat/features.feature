@@ -13,14 +13,14 @@ Feature: Test theme features
     And I visit "/admin/settings.php?section=themesettingpimenko"
 
   Scenario: Verify that hiding the site name in navbar works
-    Given I click on "Navbar" "link"
+    Given I click on "Navigation bar" "link"
     And I click on "s_theme_pimenko_hidesitename" "checkbox" forced
     And I set the field "s_theme_pimenko_hidesitename" to "1"
     And I press "Save changes"
     When I am on homepage
     Then ".site-name" "css_element" should not exist
     And I visit "/admin/settings.php?section=themesettingpimenko"
-    And I click on "Navbar" "link"
+    And I click on "Navigation bar" "link"
     And I click on "s_theme_pimenko_hidesitename" "checkbox" forced
     And I set the field "s_theme_pimenko_hidesitename" to "0"
     And I press "Save changes"
@@ -28,14 +28,14 @@ Feature: Test theme features
     Then ".site-name" "css_element" should exist
 
   Scenario: Verify that the frontpage carousel can be enabled
-    Given I click on "Frontpage Block Settings" "link"
+    Given I click on "Home page settings" "link"
     And I click on "s_theme_pimenko_enablecarousel" "checkbox" forced
     And I set the field "s_theme_pimenko_enablecarousel" to "1"
     And I press "Save changes"
     When I am on homepage
     Then "#pimenko-carousel" "css_element" should exist
     And I visit "/admin/settings.php?section=themesettingpimenko"
-    And I click on "Frontpage Block Settings" "link"
+    And I click on "Home page settings" "link"
     And I click on "s_theme_pimenko_enablecarousel" "checkbox" forced
     And I set the field "s_theme_pimenko_enablecarousel" to "0"
     And I press "Save changes"
@@ -50,7 +50,7 @@ Feature: Test theme features
       | activity   | name         | intro                       | course | idnumber  | section |
       | page       | Page 1       | Test page description       | C1     | page1     | 0       |
       | page       | Page 2       | Test page description       | C1     | page2     | 0       |
-    And I click on "Pimenko features" "link"
+    And I click on "Pimenko Features" "link"
     And I set the field "s_theme_pimenko_showactivitynavigation" to "1"
     And I press "Save changes"
     And I am on "Course 1" course homepage
@@ -58,7 +58,7 @@ Feature: Test theme features
     And I click on "Page 1" "link" forced
     Then ".activity-navigation" "css_element" should exist
     And I visit "/admin/settings.php?section=themesettingpimenko"
-    And I click on "Pimenko features" "link"
+    And I click on "Pimenko Features" "link"
     And I set the field "s_theme_pimenko_showactivitynavigation" to "0"
     And I press "Save changes"
     And I am on "Course 1" course homepage
@@ -75,7 +75,7 @@ Feature: Test theme features
     And the following "course enrolments" exist:
       | user     | course | role           |
       | student1 | C1     | student        |
-    And I click on "Pimenko features" "link"
+    And I click on "Pimenko Features" "link"
     And I set the field "s_theme_pimenko_showparticipantscourse" to "0"
     And I press "Save changes"
     And I log out
@@ -85,7 +85,7 @@ Feature: Test theme features
     And I log out
     And I log in as "admin"
     And I visit "/admin/settings.php?section=themesettingpimenko"
-    And I click on "Pimenko features" "link"
+    And I click on "Pimenko Features" "link"
     And I set the field "s_theme_pimenko_showparticipantscourse" to "1"
     # Select 'student' role in listuserrole (assuming shortname is student)
     And I set the field "s_theme_pimenko_listuserrole[]" to "student"
@@ -96,7 +96,7 @@ Feature: Test theme features
     Then I should see "Participants" in the ".secondary-navigation" "css_element"
 
   Scenario: Verify that hiding manual auth on login page works
-    Given I click on "Login Page" "link"
+    Given I click on "Authentication page settings" "link"
     And I click on "s_theme_pimenko_hidemanuelauth" "checkbox" forced
     And I set the field "s_theme_pimenko_hidemanuelauth" to "1"
     And I press "Save changes"
@@ -106,7 +106,7 @@ Feature: Test theme features
     Then ".leftloginblock" "css_element" should not exist
     And I log in as "admin"
     And I visit "/admin/settings.php?section=themesettingpimenko"
-    And I click on "Login Page" "link"
+    And I click on "Authentication page settings" "link"
     And I click on "s_theme_pimenko_hidemanuelauth" "checkbox" forced
     And I set the field "s_theme_pimenko_hidemanuelauth" to "0"
     And I press "Save changes"
@@ -126,7 +126,7 @@ Feature: Test theme features
     And I should see "Footer Column 1 Text Content" in the "footer" "css_element"
 
   Scenario: Verify that Pimenko Feature settings can be enabled (Catalog)
-    Given I click on "Pimenko features" "link"
+    Given I click on "Pimenko Features" "link"
     And I set the field "s_theme_pimenko_enablecatalog" to "1"
     And I set the field "s_theme_pimenko_tagfilter" to "1"
     And I set the field "s_theme_pimenko_customfieldfilter" to "1"

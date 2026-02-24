@@ -16,6 +16,9 @@
 
 namespace theme_pimenko;
 
+use core_external\external_api;
+use theme_pimenko\external\search_courses;
+
 /**
  * Unit tests for theme_pimenko search_courses external class.
  *
@@ -73,12 +76,12 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Search by name.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             'Course 1',
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
 
@@ -111,15 +114,15 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Search by category.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             'Course',
             0,
             0,
             $category->id,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
         $this->assertEquals(
@@ -128,12 +131,12 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Search by category name.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'categoryname',
             $category->name,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
         $this->assertEquals(
@@ -142,15 +145,15 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Determine expected order of the first two courses for this search within the category.
-        $firstpage = theme_pimenko\external\search_courses::execute(
+        $firstpage = search_courses::execute(
             'search',
             'Course',
             0,
             2,
             $category->id,
         );
-        $firstpage = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $firstpage = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $firstpage,
         );
         $this->assertCount(
@@ -160,15 +163,15 @@ final class external_search_courses_test extends \advanced_testcase {
         $expectedsecondid = $firstpage['courses'][1]['id'];
 
         // Pagination: perpage=1, page=1 should return the second matching course within the category (based on API ordering).
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             'Course',
             1,
             1,
             $category->id,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
         $this->assertCount(
@@ -187,12 +190,12 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Search with no results.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             'NonExistent',
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
         $this->assertEquals(
@@ -234,15 +237,15 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Search in parent category. Should find both courses.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             'Course',
             0,
             0,
             $parentcat->id,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
 
@@ -265,15 +268,15 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Search in child category. Should find only child course.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             'Course',
             0,
             0,
             $childcat->id,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
 
@@ -319,15 +322,15 @@ final class external_search_courses_test extends \advanced_testcase {
         );
 
         // Empty search should still return both courses when filtering by parent category.
-        $result = theme_pimenko\external\search_courses::execute(
+        $result = search_courses::execute(
             'search',
             '',
             0,
             0,
             $parentcat->id,
         );
-        $result = core_external\external_api::clean_returnvalue(
-            theme_pimenko\external\search_courses::execute_returns(),
+        $result = external_api::clean_returnvalue(
+            search_courses::execute_returns(),
             $result,
         );
 
