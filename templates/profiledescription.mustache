@@ -14,6 +14,26 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/profiledescription
+
+    Description du profil avec sections, propriétés et contenus variés.
+
+    Example context (json):
+    {
+        "profileblocks": [
+            {
+                "icon": "fa fa-user",
+                "sectionname": "Informations",
+                "content": "<p>HTML</p>",
+                "dttype": true,
+                "properties": [
+                    {"label": "Ville", "value": "Paris", "classes": "", "url": "/user/profile.php", "title": "Profil", "content": ""}
+                ]
+            }
+        ]
+    }
+}}
 {{#profileblocks}}
     <div class="profile-block p-relative ">
 

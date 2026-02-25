@@ -15,7 +15,21 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    Page navbar.
+    @template theme_pimenko/theme_boost/navbar
+
+    This template renders the top navbar.
+
+    Example context (json):
+    {
+        "sitename": "Moodle",
+        "config": {
+            "homeurl": "https://moodle.local"
+        },
+        "output": {
+            "sitelogo": "https://moodle.local/logo.png",
+            "navbarpicture": "https://moodle.local/nav.png"
+        }
+    }
 }}
 <nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex pimenko-navbar {{# output.navbarpicture }}withnavbarpicture{{/output.navbarpicture}}" aria-label="{{#str}}sitemenubar, admin{{/str}}"
     {{# output.navbarpicture }}

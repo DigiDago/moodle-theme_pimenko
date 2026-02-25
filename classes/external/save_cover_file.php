@@ -24,6 +24,8 @@
 
 namespace theme_pimenko\external;
 
+defined('MOODLE_INTERNAL') || die;
+
 require_once($CFG->libdir . "/externallib.php");
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->libdir . '/filterlib.php');

@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_pimenko\output\core\navigation;
 
 use renderer_base;
@@ -25,13 +26,11 @@ use theme_config;
  * This file combines primary nav, custom menu, lang menu and
  * usermenu into a standardized format for the frontend
  *
- * @package     core
- * @category    navigation
- * @copyright   2021 onwards Peter Dias
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2019
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class primary extends \core\navigation\output\primary {
-
     /**
      * Custom menu items reside on the same level as the original nodes.
      * Fetch and convert the nodes to a standardised array.
@@ -54,11 +53,13 @@ class primary extends \core\navigation\output\primary {
             $custommenuitems = $theme->settings->custommenuitemslogin;
         }
         $currentlang = current_language();
-        $custommenunodes = custom_menu::convert_text_to_menu_nodes($custommenuitems, $currentlang);
+        $custommenunodes = custom_menu::convert_text_to_menu_nodes(
+            $custommenuitems,
+            $currentlang,
+        );
         $nodes = [];
         foreach ($custommenunodes as $node) {
             $nodes[] = $node->export_for_template($output);
-
         }
 
         return $nodes;

@@ -1,3 +1,15 @@
+{{!
+    @template theme_pimenko/header_dropdown_recursive
+
+    Sous-menu récursif pour le menu déroulant d'entête.
+
+    Example context (json):
+    {
+        "dropdownitems": [
+            {"url": "/path", "name": "Sous-lien", "submenu": "<ul class=\"dropdown-menu\"><li><a href=\"/path/child\" class=\"dropdown-item\">Sous-sous-lien</a></li></ul>"}
+        ]
+    }
+}}
 <ul class="dropdown-menu">
     {{#dropdownitems}}
         <li {{#submenu}}class="dropdown-submenu"{{/submenu}}>

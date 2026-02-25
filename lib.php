@@ -44,7 +44,6 @@ function theme_pimenko_get_main_scss_content($theme): string {
     } else if ($filename == 'plain.scss') {
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
-
     } else {
         // This preset file was fetched from the file area for theme_pimenko and not theme_boost (see the line above).
         // Fall back.
@@ -53,7 +52,14 @@ function theme_pimenko_get_main_scss_content($theme): string {
         $fs = get_file_storage();
         $filename = '/' . (!empty($theme->settings->preset) ? $theme->settings->preset : '');
         $context = context_system::instance();
-        $presetfile = $fs->get_file($context->id, 'theme_pimenko', 'preset', 0, '/', $filename);
+        $presetfile = $fs->get_file(
+            $context->id,
+            'theme_pimenko',
+            'preset',
+            0,
+            '/',
+            $filename,
+        );
         if ($presetfile) {
             $scss .= $presetfile->get_content();
         }
@@ -70,13 +76,17 @@ function theme_pimenko_get_main_scss_content($theme): string {
  */
 function theme_pimenko_get_extra_scss($theme) {
     $content = '';
-    $imageurl = $theme->setting_file_url('backgroundimage', 'backgroundimage');
+    $imageurl = $theme->setting_file_url(
+        'backgroundimage',
+        'backgroundimage',
+    );
 
     // Sets the background image, and its settings.
     if (!empty($imageurl)) {
         $content .= '@media (min-width: 768px) {';
         $content .= 'body { ';
-        $content .= "background-image: url('$imageurl'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;";
+        $content .= "background-image: url('$imageurl');
+         background-repeat: no-repeat; background-size: cover; background-attachment: fixed;";
         $content .= ' } }';
     }
 
@@ -88,7 +98,7 @@ function theme_pimenko_get_extra_scss($theme) {
  * Parses CSS before it is cached.
  * This function can make alterations and replace patterns within the CSS.
  *
- * @param string $css The CSS
+ * @param string       $css The CSS
  * @param theme_config $theme The theme config object.
  * @return string The parsed CSS The parsed CSS.
  */
@@ -144,12 +154,17 @@ function theme_pimenko_process_css($css, $theme) {
         'gradienttextcolor' => '#000',
         'gradientcovercolor' => '',
         'googlefont' => 'Verdana',
-        'tooglercolor' => 'rgb(255, 255, 255)'
+        'tooglercolor' => 'rgb(255, 255, 255)',
     ];
 
     // Get all the defined settings for the theme and replace defaults.
     foreach ($theme->settings as $key => $val) {
-        if (array_key_exists($key, $defaults) && !empty($val)) {
+        if (
+            array_key_exists(
+                $key,
+                $defaults,
+            ) && !empty($val)
+        ) {
             $defaults[$key] = $val;
         }
     }
@@ -157,7 +172,10 @@ function theme_pimenko_process_css($css, $theme) {
     // For login bg img.
     $loginbgimage = '';
     if (!empty($theme->settings->loginbgimage)) {
-        $loginbgimage = $theme->setting_file_url('loginbgimage', 'loginbgimage');
+        $loginbgimage = $theme->setting_file_url(
+            'loginbgimage',
+            'loginbgimage',
+        );
         $loginbgimage = 'url("' . $loginbgimage . '") no-repeat center center fixed';
     }
     $defaults['loginbgimage'] = $loginbgimage;
@@ -178,7 +196,10 @@ function theme_pimenko_process_css($css, $theme) {
     if ($defaults['hoovernavbarcolor']) {
         $defaults['darkennavcolor'] = $defaults['hoovernavbarcolor'];
     } else {
-        $defaults['darkennavcolor'] = theme_pimenko_colorbrightness($color, -0.5);
+        $defaults['darkennavcolor'] = theme_pimenko_colorbrightness(
+            $color,
+            -0.5,
+        );
     }
 
     // Footer darkencolor.
@@ -186,24 +207,44 @@ function theme_pimenko_process_css($css, $theme) {
     if ($defaults['hooverfootercolor']) {
         $defaults['darkenfootercolor'] = $defaults['hooverfootercolor'];
     } else {
-        $defaults['darkenfootercolor'] = theme_pimenko_colorbrightness($color, -0.5);
+        $defaults['darkenfootercolor'] = theme_pimenko_colorbrightness(
+            $color,
+            -0.5,
+        );
     }
 
     // Hoover button.
     $color = $defaults['brandcolorbutton'];
-    $defaults['darkenbrandcolorbutton'] = theme_pimenko_colorbrightness($color, 0.5);
+    $defaults['darkenbrandcolorbutton'] = theme_pimenko_colorbrightness(
+        $color,
+        0.5,
+    );
     $color = $defaults['brandcolortextbutton'];
-    $defaults['darkenbrandcolortextbutton'] = theme_pimenko_colorbrightness($color, 0.5);
+    $defaults['darkenbrandcolortextbutton'] = theme_pimenko_colorbrightness(
+        $color,
+        0.5,
+    );
 
     // Set up svg toggler color.
-    $defaults['tooglercolor'] = 'rgba(' . implode(",", theme_pimenko_hex2rgb($defaults['navbartextcolor'])) . ')';
+    $defaults['tooglercolor'] = 'rgba(' .
+        implode(
+            ",",
+            theme_pimenko_hex2rgb($defaults['navbartextcolor']),
+        ) .
+        ')';
 
     // Set up gradient for cover.
-    $defaults['gradientcovercolor'] = theme_pimenko_hex2rgba($defaults['gradientcovercolor'], '.6');
+    $defaults['gradientcovercolor'] = theme_pimenko_hex2rgba(
+        $defaults['gradientcovercolor'],
+        '.6',
+    );
 
     // Get all the defined settings for the theme and replace defaults.
 
-    return strtr($css, $defaults);
+    return strtr(
+        $css,
+        $defaults,
+    );
 }
 
 /**
@@ -217,7 +258,11 @@ function theme_pimenko_hex2rgba(string $hex, string $alpha): string {
     if ($hex && $alpha) {
         $rgba = theme_pimenko_hex2rgb($hex);
         $rgba[] = $alpha;
-        $hexrgba = 'rgba(' . implode(", ", $rgba) . ')'; // Returns the rgba values separated by commas.
+        $hexrgba = 'rgba(' .
+            implode(
+                ", ",
+                $rgba,
+            ) . ')'; // Returns the rgba values separated by commas.
     } else {
         $hexrgba = 'transparent';
     }
@@ -233,18 +278,70 @@ function theme_pimenko_hex2rgba(string $hex, string $alpha): string {
  */
 function theme_pimenko_hex2rgb($hex) {
     // From: http://bavotasan.com/2011/convert-hex-color-to-rgb-using-php/.
-    $hex = str_replace("#", "", $hex);
+    $hex = str_replace(
+        "#",
+        "",
+        $hex,
+    );
 
     if (strlen($hex) == 3) {
-        $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
-        $g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
-        $b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
+        $r = hexdec(
+            substr(
+                $hex,
+                0,
+                1,
+            ) . substr(
+                $hex,
+                0,
+                1,
+            ),
+        );
+        $g = hexdec(
+            substr(
+                $hex,
+                1,
+                1,
+            ) . substr(
+                $hex,
+                1,
+                1,
+            ),
+        );
+        $b = hexdec(
+            substr(
+                $hex,
+                2,
+                1,
+            ) . substr(
+                $hex,
+                2,
+                1,
+            ),
+        );
     } else {
-        $r = hexdec(substr($hex, 0, 2));
-        $g = hexdec(substr($hex, 2, 2));
-        $b = hexdec(substr($hex, 4, 2));
+        $r = hexdec(
+            substr(
+                $hex,
+                0,
+                2,
+            ),
+        );
+        $g = hexdec(
+            substr(
+                $hex,
+                2,
+                2,
+            ),
+        );
+        $b = hexdec(
+            substr(
+                $hex,
+                4,
+                2,
+            ),
+        );
     }
-    $rgb = array('r' => $r, 'g' => $g, 'b' => $b);
+    $rgb = ['r' => $r, 'g' => $g, 'b' => $b];
     return $rgb; // Returns the rgb as an array.
 }
 
@@ -253,14 +350,14 @@ function theme_pimenko_hex2rgb($hex) {
  *
  * @param stdClass $course
  * @param stdClass $cm
- * @param context $context
- * @param string $filearea
- * @param array $args
- * @param bool $forcedownload
- * @param array $options
+ * @param context  $context
+ * @param string   $filearea
+ * @param array    $args
+ * @param bool     $forcedownload
+ * @param array    $options
  * @return bool
  */
-function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     static $theme;
 
     if (empty($theme)) {
@@ -269,7 +366,12 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
 
     if ($context->contextlevel == CONTEXT_SYSTEM || $filearea == 'coverimage') {
         // By default, theme files must be cache-able by both browsers and proxies.  From 'More' theme.
-        if (!array_key_exists('cacheability', $options)) {
+        if (
+            !array_key_exists(
+                'cacheability',
+                $options,
+            )
+        ) {
             $options['cacheability'] = 'public';
         }
 
@@ -289,7 +391,11 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
                 $file = $fs->get_file_by_hash(sha1($fullpath));
                 if ($file) {
                     send_stored_file(
-                        $file, $lifetime, 0, $forcedownload, $options
+                        $file,
+                        $lifetime,
+                        0,
+                        $forcedownload,
+                        $options,
                     );
                     return true;
                 }
@@ -301,8 +407,16 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
             case 'navbarpicture':
             case 'pimenkoimages':
             case 'backgroundimage':
-            case strstr($filearea, 'slideimage'):
-                return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+            case strstr(
+                $filearea,
+                'slideimage',
+            ):
+                return $theme->setting_file_serve(
+                    $filearea,
+                    $args,
+                    $forcedownload,
+                    $options,
+                );
             default:
                 send_file_not_found();
         }
@@ -311,12 +425,33 @@ function theme_pimenko_pluginfile($course, $cm, $context, $filearea, $args, $for
     }
 }
 
-/** Function to darker css */
+/**
+ * Adjusts the brightness of a hexadecimal color code by a given percentage.
+ *
+ * This function modifies a hex color code to make it lighter or darker,
+ * depending on the specified percentage value. It ensures that extreme white
+ * (`#FFFFFF`) and extreme black (`#000000`) values are slightly adjusted to
+ * avoid unexpected results.
+ *
+ * @param string $hex The hexadecimal color code, with or without a leading hash (#).
+ * @param float  $percent The percentage by which to adjust the brightness. Positive values brighten the color,
+ *                       while negative values darken it. The value should be between -1 and 1.
+ * @return string The modified hexadecimal color code with its brightness adjusted.
+ */
 function theme_pimenko_colorbrightness($hex, $percent) {
     // Work out if hash given.
     $hash = '';
-    if (stristr($hex, '#')) {
-        $hex = str_replace('#', '', $hex);
+    if (
+        stristr(
+            $hex,
+            '#',
+        )
+    ) {
+        $hex = str_replace(
+            '#',
+            '',
+            $hex,
+        );
         $hash = '#';
     }
 
@@ -329,7 +464,25 @@ function theme_pimenko_colorbrightness($hex, $percent) {
     }
 
     // HEX TO RGB.
-    $rgb = [hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2))];
+    $rgb = [hexdec(
+        substr(
+            $hex,
+            0,
+            2,
+        ),
+    ), hexdec(
+        substr(
+            $hex,
+            2,
+            2,
+        ),
+    ), hexdec(
+        substr(
+            $hex,
+            4,
+            2,
+        ),
+    )];
     // CALCULATE.
     for ($i = 0; $i < 3; $i++) {
         // See if brighter or darker.
@@ -358,11 +511,22 @@ function theme_pimenko_colorbrightness($hex, $percent) {
         // Append to the hex string.
         $hex .= $hexdigit;
     }
-    return sprintf("%s%s", $hash, $hex);
+    return sprintf(
+        "%s%s",
+        $hash,
+        $hex,
+    );
 }
 
 /**
- * Get icon mapping for font-awesome.
+ * Retrieves the FontAwesome icon map for theme_pimenko.
+ *
+ * This function returns an associative array that maps custom identifiers
+ * to corresponding FontAwesome icon classes. These mappings can be used to
+ * standardize icon usage within the theme.
+ *
+ * @return array An associative array where the keys represent custom identifiers
+ *               and the values represent FontAwesome icon classes.
  */
 function theme_pimenko_get_fontawesome_icon_map() {
     return [
@@ -371,16 +535,25 @@ function theme_pimenko_get_fontawesome_icon_map() {
 }
 
 /**
- * @return array
+ * Retrieves a list of theme regions, including predefined and dynamically generated regions.
+ *
+ * This function returns an array of region identifiers that can be used for various theme-related purposes.
+ * It includes predefined regions like `side-pre` and `side-post`, as well as dynamically generated regions
+ * named `theme-front-a` through `theme-front-u`.
+ *
+ * @return array An array of region identifiers, containing both predefined and dynamically created values.
  */
 function theme_pimenko_regions() {
     $regions = [
         'side-pre',
-        'side-post'
+        'side-post',
     ];
-    foreach (range(
-        'a', 'u'
-    ) as $reg) {
+    foreach (
+        range(
+            'a',
+            'u',
+        ) as $reg
+    ) {
         $regions[] = 'theme-front-' . $reg;
     }
     return $regions;

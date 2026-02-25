@@ -17,9 +17,9 @@
 /**
  * A two column layout for the boost theme.
  *
- * @package   theme_pimenko
- * @copyright 2016 Damyon Wiese
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2019
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -36,11 +36,20 @@ require_once($CFG->dirroot . '/course/lib.php');
 
 $extraclasses = [];
 
-$PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
-$PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
+$PAGE->requires->js_call_amd(
+    'theme_pimenko/pimenko',
+    'init',
+);
+$PAGE->requires->js_call_amd(
+    'theme_pimenko/completion',
+    'init',
+);
 
 if (!empty(theme_config::load('pimenko')->settings->enablecatalog)) {
-    $PAGE->requires->js_call_amd('theme_pimenko/catalog', 'init');
+    $PAGE->requires->js_call_amd(
+        'theme_pimenko/catalog',
+        'init',
+    );
 }
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
@@ -50,7 +59,11 @@ $addblockbutton = $OUTPUT->addblockbutton();
 
 $blockshtml = $OUTPUT->blocks('side-pre');
 
-$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+$hasblocks = (
+    strpos(
+        $blockshtml,
+        'data-block=',
+    ) !== false || !empty($addblockbutton));
 if (!$hasblocks) {
     $blockdraweropen = false;
 }
@@ -62,7 +75,7 @@ if (!$courseindex) {
 }
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()  && !$PAGE->has_secondary_navigation();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
@@ -78,14 +91,28 @@ $secondarynavigation = false;
 $overflow = '';
 
 // Secondary navigation.
-if ($PAGE->has_secondary_navigation() &&
-    (!strpos($PAGE->bodyclasses, 'path-enrol')
-        || strpos($PAGE->bodyclasses, 'pagelayout-admin') > 0)) {
+if (
+    $PAGE->has_secondary_navigation()
+    && (
+        !strpos(
+            $PAGE->bodyclasses,
+            'path-enrol',
+        )
+        || strpos(
+            $PAGE->bodyclasses,
+            'pagelayout-admin',
+        ) > 0)
+) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $customnav = new \theme_pimenko\output\core\navigation\views\secondary($PAGE);
     $customnav->initialise();
     $PAGE->set_secondarynav($customnav);
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+    $moremenu = new \core\navigation\output\more_menu(
+        $PAGE->secondarynav,
+        'nav-tabs',
+        true,
+        $tablistnav,
+    );
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
     if (!is_null($overflowdata)) {
@@ -113,7 +140,7 @@ $templatecontext = [
     'sitename' => format_string(
         $SITE->shortname,
         true,
-        ['context' => context_course::instance(SITEID), "escape" => false]
+        ['context' => context_course::instance(SITEID), "escape" => false],
     ),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
@@ -135,7 +162,10 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton,
     'overflow' => $overflow,
     'hidesitename' => $theme->settings->hidesitename,
-    'moodlecompletion' => $moodlecompletion
+    'moodlecompletion' => $moodlecompletion,
 ];
 
-echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);
+echo $OUTPUT->render_from_template(
+    'theme_boost/columns2',
+    $templatecontext,
+);

@@ -14,6 +14,19 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/categoryaccordion
+
+    Accordéon de catégories affichant une liste d'items HTML et une barre de pagination.
+
+    Example context (json):
+    {
+        "collapseid": "accordion-1",
+        "items": ["<div>Item HTML</div>"],
+        "pagingbar": "<div class=\"paging\">…</div>",
+        "morelink": "<a href=\"#\">More</a>"
+    }
+}}
 <div class="prettypanels-categ">
     <div aria-multiselectable="true" id="{{collapseid}}" class="panel-group" data-collapse-color="red" role="tablist">
         {{#items}}

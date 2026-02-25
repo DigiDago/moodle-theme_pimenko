@@ -1,55 +1,71 @@
-# .github/workflows/moodle-plugin-ci.yml
 name: Moodle Plugin CI
 
-# Déclencheurs
 on:
   push:
     branches:
+      - main
+      - master
       - dev
   pull_request:
     branches:
       - main
       - master
       - dev
-      - MOODLE_405_STABLE
-      - MOODLE_500_STABLE
-      - MOODLE_501_STABLE
+      - 'MOODLE_*_DEV'
+      - 'MOODLE_*_STABLE'
 
 jobs:
-  # Job pour déterminer la matrice de versions Moodle
+  # Job to determine which Moodle branches to test
   setup:
     runs-on: ubuntu-latest
     outputs:
       moodle-branches: ${{ steps.set-matrix.outputs.moodle-branches }}
     steps:
       - id: set-matrix
+        shell: bash
         run: |
           BRANCH="${{ github.base_ref || github.ref_name }}"
-          echo "Target branch: $BRANCH"
-          if [[ "$BRANCH" == "MOODLE_405_STABLE" ]]; then
-            echo 'moodle-branches=["MOODLE_405_STABLE"]' >> $GITHUB_OUTPUT
-          elif [[ "$BRANCH" == "MOODLE_500_STABLE" ]]; then
-            echo 'moodle-branches=["MOODLE_500_STABLE"]' >> $GITHUB_OUTPUT
-          elif [[ "$BRANCH" == "MOODLE_501_STABLE" ]]; then
-            echo 'moodle-branches=["MOODLE_501_STABLE"]' >> $GITHUB_OUTPUT
+          echo "Target branch detected: $BRANCH"
+
+          # CASE 1: Direct STABLE branch
+          if [[ "$BRANCH" =~ ^MOODLE_[0-9]{3}_STABLE$ ]]; then
+            JSON="[\"$BRANCH\"]"
+
+          # CASE 2: Specific DEV version
+          elif [[ "$BRANCH" =~ ^MOODLE_([0-9]{3})_DEV$ ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+            JSON="[\"MOODLE_${VERSION}_STABLE\"]"
+
+          # CASE 3: Generic range (Example for 4.x and 5.x)
+          elif [[ "$BRANCH" =~ ^MOODLE_([0-9])0X_DEV$ ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            if [[ "$MAJOR" == "4" ]]; then
+              JSON='["MOODLE_400_STABLE","MOODLE_401_STABLE","MOODLE_402_STABLE","MOODLE_403_STABLE","MOODLE_404_STABLE","MOODLE_405_STABLE"]'
+            elif [[ "$MAJOR" == "5" ]]; then
+              JSON='["MOODLE_500_STABLE","MOODLE_501_STABLE"]'
+            fi
+
+          # CASE 4: Default matrix
           else
-            echo 'moodle-branches=["MOODLE_405_STABLE", "MOODLE_500_STABLE", "MOODLE_501_STABLE"]' >> $GITHUB_OUTPUT
+            JSON='["MOODLE_405_STABLE","MOODLE_500_STABLE","MOODLE_501_STABLE"]'
           fi
 
-  # Job complet pour tests et linting
+          echo "moodle-branches=$JSON" >> $GITHUB_OUTPUT
+
   test:
     needs: setup
+    # DYNAMIC NAME: This will show "Test for MOODLE_XXX_STABLE (pgsql)" in GitHub UI
+    name: Test for ${{ matrix.moodle-branch }} (${{ matrix.database }})
     runs-on: ubuntu-22.04
+
     services:
       postgres:
         image: postgres:15
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
-        ports:
-          - 5432:5432
+        ports: [5432:5432]
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
-
       mariadb:
         image: mariadb:10
         env:
@@ -57,14 +73,12 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: "true"
           MYSQL_CHARACTER_SET_SERVER: "utf8mb4"
           MYSQL_COLLATION_SERVER: "utf8mb4_unicode_ci"
-        ports:
-          - 3306:3306
+        ports: [3306:3306]
         options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
 
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.3' ]
         moodle-branch: ${{ fromJson(needs.setup.outputs.moodle-branches) }}
         database: [ pgsql, mariadb ]
 
@@ -74,10 +88,34 @@ jobs:
         with:
           path: plugin
 
-      - name: Setup PHP ${{ matrix.php }}
+      - name: Determine PHP Version
+        id: php-version
+        shell: bash
+        run: |
+          MBRANCH="${{ matrix.moodle-branch }}"
+          case "$MBRANCH" in
+            MOODLE_3[0-1]*) PHP="7.0" ;;
+            MOODLE_3[2-3]*) PHP="7.1" ;;
+            MOODLE_3[4-5]*) PHP="7.2" ;;
+            MOODLE_3[6-7]*) PHP="7.3" ;;
+            MOODLE_3[8-9]*) PHP="7.4" ;;
+            MOODLE_311*)    PHP="8.0" ;;
+            MOODLE_400*)    PHP="8.0" ;;
+            MOODLE_401*)    PHP="7.4" ;;
+            MOODLE_402*)    PHP="8.0" ;;
+            MOODLE_403*)    PHP="8.0" ;;
+            MOODLE_404*)    PHP="8.3" ;;
+            MOODLE_405*)    PHP="8.1" ;;
+            MOODLE_50[0-1]*) PHP="8.2" ;;
+            *)              PHP="8.3" ;;
+          esac
+          echo "php=$PHP" >> $GITHUB_OUTPUT
+          echo "Selected PHP $PHP for $MBRANCH"
+
+      - name: Setup PHP ${{ steps.php-version.outputs.php }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ steps.php-version.outputs.php }}
           ini-values: max_input_vars=5000
           coverage: none
 
@@ -90,8 +128,7 @@ jobs:
           echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
 
       - name: Install moodle-plugin-ci
-        run: |
-          moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
+        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
@@ -128,28 +165,11 @@ jobs:
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
         run: |
-          # In PHP Unit 11 the coverage information is inside a source tag instead of coverage.
-          # To use the same xml file for Moodle 4.5 and Moodle 5.0+ the tag is changed directly here.
-          # Since Moodle 5.1 the code is inside a public folder the folder will be read dynamically to 
-          # find the phpunit.xml
-
           if [ -d "moodle/public/theme/pimenko" ]; then
             PLUGIN_PATH="moodle/public/theme/pimenko"
-            echo "Path detected: Moodle 5.1+ structure ($PLUGIN_PATH)"
           else
             PLUGIN_PATH="moodle/theme/pimenko"
-            echo "Path detected: Legacy structure ($PLUGIN_PATH)"
           fi
-
-          CONFIG_FILE="$PLUGIN_PATH/phpunit.xml"
-
-          # Check if file exists before proceeding
-          if [ ! -f "$CONFIG_FILE" ]; then
-             echo "::error::Config file not found at $CONFIG_FILE"
-             ls -la $PLUGIN_PATH
-             exit 1
-          fi
-
           moodle-plugin-ci phpunit --fail-on-warning
 
       - name: Behat tests

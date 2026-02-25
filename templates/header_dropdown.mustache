@@ -1,3 +1,16 @@
+{{!
+    @template theme_pimenko/header_dropdown
+
+    Menu déroulant d'entête avec sous-menus facultatifs.
+
+    Example context (json):
+    {
+        "dropdownname": "Menu",
+        "dropdownitems": [
+            {"url": "/path", "name": "Lien", "submenu": "<ul class=\"dropdown-menu\"><li><a href=\"/sub\" class=\"dropdown-item\">Sous-lien</a></li></ul>"}
+        ]
+    }
+}}
 <div class="dropdown nav-item h-100">
     <a class="dropdown-toggle nav-link" id="navbarDropdownMenuLink"  href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{dropdownname}}

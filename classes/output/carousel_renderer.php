@@ -30,16 +30,30 @@ use plugin_renderer_base;
 use theme_config;
 use stdClass;
 
+/**
+ * carousel_renderer is responsible for rendering a carousel in the theme.
+ */
 final class carousel_renderer extends plugin_renderer_base {
+    /**
+     * Configuration array for theme settings.
+     * @var \core\output\theme_config
+     */
     public $themeconf;
+    /**
+     * An array to hold slide data.
+     * @var array|mixed
+     */
     public $slides = [];
+    /**
+     * The layout of the carousel.
+     * @var string
+     */
     public $layout;
 
     /**
-     * Render a carousel.
+     * Generates and returns the rendered output of a carousel.
      *
-     * @return string
-     * @throws moodle_exception
+     * @return string The rendered carousel output based on the provided template and slides.
      */
     public function output(): string {
         $this->load_items();
@@ -47,14 +61,19 @@ final class carousel_renderer extends plugin_renderer_base {
         $template->slides = $this->slides;
         $template->layout = 'centered';
         return $this->render_from_template(
-                'theme_pimenko/carousel',
-                $template
+            'theme_pimenko/carousel',
+            $template,
         );
     }
 
     /**
-     * @return bool
-     * @throws coding_exception
+     * Loads the theme configuration and initializes slide items for a carousel.
+     *
+     * This method processes the theme settings and generates slides based on the number
+     * of configured images, assigning necessary properties such as image URLs, captions,
+     * and active state to each slide. The slides are stored in the `$slides` property.
+     *
+     * @return bool True on successful loading of the slides.
      */
     private function load_items(): bool {
         $this->themeconf = $theme = theme_config::load('pimenko');
@@ -69,13 +88,15 @@ final class carousel_renderer extends plugin_renderer_base {
             }
             $image = "slideimage{$i}";
             $caption = "slidecaption{$i}";
-            if ($this->themeconf->setting_file_url(
+            if (
+                $this->themeconf->setting_file_url(
                     $image,
-                    $image
-            )) {
+                    $image,
+                )
+            ) {
                 $slide->image = $this->themeconf->setting_file_url(
-                        $image,
-                        $image
+                    $image,
+                    $image,
                 );
                 $slide->caption = format_text($this->themeconf->settings->$caption);
                 $this->slides[] = $slide;

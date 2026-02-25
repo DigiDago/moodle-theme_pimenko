@@ -35,11 +35,11 @@ $functions = [
         'loginrequired' => false,
         'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
     ],
-    'theme_pimenko_save_cover_file'      => [
-        'classname'   => 'theme_pimenko\external\save_cover_file',
+    'theme_pimenko_save_cover_file' => [
+        'classname' => 'theme_pimenko\external\save_cover_file',
         'description' => 'Save the course cover file',
-        'type'        => 'write',
-        'ajax'        => true,
-        'loginrequired' => true
+        'type' => 'write',
+        'ajax' => true,
+        'loginrequired' => true,
     ],
 ];

@@ -47,12 +47,12 @@
         <div class="d-flex align-items-center courseheader
             {{#coverimagedata}}{{#coverexist}}coverimage position-relative{{/coverexist}}{{/coverimagedata}}"
             {{#coverimagedata}}{{^displayasthumbnail}}
-             style="background-image: url({{{urlcoverimage}}});background-size: cover;background-repeat: no-repeat;background-position: center center;"
+             style="background-image: url({{urlcoverimage}});background-size: cover;background-repeat: no-repeat;background-position: center center;"
             {{/displayasthumbnail}}{{/coverimagedata}}
         >
             {{#coverimagedata}}
                 {{#displayasthumbnail}}
-                    <img class='displaythumbanil' alt='{{#str}}coursecover, theme_pimenko{{/str}}' src="{{{urlcoverimage}}}">
+                    <img class='displaythumbanil' alt='{{#str}}coursecover, theme_pimenko{{/str}}' src="{{urlcoverimage}}">
                 {{/displayasthumbnail}}
             {{/coverimagedata}}
             <div class="w-100 h-100 d-flex {{#coverimagedata}} {{#coverexist}} {{#withgradient}}position-absolute withgradient{{/withgradient}} {{/coverexist}} {{/coverimagedata}}">
@@ -75,7 +75,7 @@
                             <div class="edit_cover">
                                 <label class="btn btn-sm btn-file btn-secondary state-visible">
                                     <span>{{#str}} editcoverimage, theme_pimenko {{/str}}</span>
-                                    <input type="file" data-id="{{{id}}}" class="cover_file d-none" data-name="{{{filename}}}">
+                                    <input type="file" data-id="{{id}}" class="cover_file d-none" data-name="{{filename}}">
                                 </label>
                                 <button class="btn btn-danger delete-cover" type="button" style="display:inline-block;">
                                     <i class="icon fa fa-trash fa-fw " title="delete" role="img" aria-label="delete"></i>

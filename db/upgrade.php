@@ -48,7 +48,7 @@ function xmldb_theme_pimenko_upgrade($oldversion = 0) {
                     'coverimage',
                     0,
                     "itemid, filepath, filename",
-                    false
+                    false,
                 );
                 if (!$filepimenko) {
                     $oldfilesinfo = $fs->get_area_files(
@@ -57,35 +57,45 @@ function xmldb_theme_pimenko_upgrade($oldversion = 0) {
                         'coverimage',
                         0,
                         "itemid, filepath, filename",
-                        false
+                        false,
                     );
 
                     foreach ($oldfilesinfo as $file) {
-
-                        $filerecord = array(
+                        $filerecord = [
                             'contextid' => $context->id,
                             'component' => 'theme_pimenko',
                             'filearea' => $file->get_filearea(),
                             'filename' => $file->get_filename(),
                             'filepath' => '/',
                             'itemid' => 0,
-                            'timemodified' => time()
-                        );
-                        if (!$filerec = $fs->get_file(
-                            $filerecord['contextid'],
-                            $filerecord['component'],
-                            $filerecord['filearea'],
-                            $filerecord['itemid'],
-                            $filerecord['filepath'],
-                            $filerecord['filename'])) {
-                            $filerec = $fs->create_file_from_storedfile($filerecord, $file);
+                            'timemodified' => time(),
+                        ];
+                        if (
+                            !$filerec = $fs->get_file(
+                                $filerecord['contextid'],
+                                $filerecord['component'],
+                                $filerecord['filearea'],
+                                $filerecord['itemid'],
+                                $filerecord['filepath'],
+                                $filerecord['filename'],
+                            )
+                        ) {
+                            $filerec = $fs->create_file_from_storedfile(
+                                $filerecord,
+                                $file,
+                            );
                         }
                     }
                 }
             }
         }
 
-        upgrade_plugin_savepoint(true, 2022041222, 'theme', 'pimenko');
+        upgrade_plugin_savepoint(
+            true,
+            2022041222,
+            'theme',
+            'pimenko',
+        );
     }
 
     // Automatic 'Purge all caches'....
