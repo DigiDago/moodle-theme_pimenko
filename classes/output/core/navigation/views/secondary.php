@@ -24,13 +24,11 @@ use context_course;
 /**
  * custom secondary menu
  *
- * @package     theme_pimenko
- * @category    navigation
- * @copyright   2021 onwards Adrian Greeve | Pimenko
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2019
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class secondary extends \core\navigation\views\secondary {
-
     /**
      * Load the course secondary navigation. Since we are sourcing all the info from existing objects that already do
      * the relevant checks, we don't do it again here.
@@ -49,18 +47,41 @@ class secondary extends \core\navigation\views\secondary {
         $settingsnav = $this->page->settingsnav;
         $navigation = $this->page->navigation;
 
-        $url = new \moodle_url('/course/view.php', ['id' => $course->id]);
+        $url = new \moodle_url(
+            '/course/view.php',
+            ['id' => $course->id],
+        );
         $pix = null;
         if ($course->format == 'horizontaltabs') {
-            $firstnodeidentifier = get_string('learn', 'format_horizontaltabs');
-            $pix = new \pix_icon('t/grades', $firstnodeidentifier);
+            $firstnodeidentifier = get_string(
+                'learn',
+                'format_horizontaltabs',
+            );
+            $pix = new \pix_icon(
+                't/grades',
+                $firstnodeidentifier,
+            );
             $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-            $firstnodeidentifier = $system->render_pix_icon($OUTPUT, $pix) . $firstnodeidentifier;
+            $firstnodeidentifier =
+                $system->render_pix_icon(
+                    $OUTPUT,
+                    $pix,
+                ) . $firstnodeidentifier;
         } else if ($course->format == 'digidagotabs') {
-            $firstnodeidentifier = get_string('learn', 'format_digidagotabs');
-            $pix = new \pix_icon('t/grades', $firstnodeidentifier);
+            $firstnodeidentifier = get_string(
+                'learn',
+                'format_digidagotabs',
+            );
+            $pix = new \pix_icon(
+                't/grades',
+                $firstnodeidentifier,
+            );
             $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-            $firstnodeidentifier = $system->render_pix_icon($OUTPUT, $pix) . $firstnodeidentifier;
+            $firstnodeidentifier =
+                $system->render_pix_icon(
+                    $OUTPUT,
+                    $pix,
+                ) . $firstnodeidentifier;
         } else {
             $firstnodeidentifier = get_string('course');
         }
@@ -72,7 +93,13 @@ class secondary extends \core\navigation\views\secondary {
                 $settingsnav = $frontpage;
             }
         }
-        $rootnode->add($firstnodeidentifier, $url, self::TYPE_COURSE, null, 'coursehome');
+        $rootnode->add(
+            $firstnodeidentifier,
+            $url,
+            self::TYPE_COURSE,
+            null,
+            'coursehome',
+        );
 
         // Add custom secondary menu for digidagotabs and horizontaltabs course format.
         if ($course->format == 'digidagotabs' || $course->format == 'horizontaltabs') {
@@ -80,12 +107,26 @@ class secondary extends \core\navigation\views\secondary {
             $tabs = $courseformat->get_tabs();
             foreach ($tabs as $tab) {
                 if ($tab->icon) {
-                    $text = $OUTPUT->render_custom_pix($OUTPUT, $tab->icon) . $tab->name;
+                    $text =
+                        $OUTPUT->render_custom_pix(
+                            $OUTPUT,
+                            $tab->icon,
+                        ) . $tab->name;
                 } else {
                     $text = $tab->name;
                 }
-                $rootnode->add($text, $tab->url, self::TYPE_SECTION, null, $tab->name);
-                $sectiontabid = optional_param('sectiontab', 0, PARAM_INT);
+                $rootnode->add(
+                    $text,
+                    $tab->url,
+                    self::TYPE_SECTION,
+                    null,
+                    $tab->name,
+                );
+                $sectiontabid = optional_param(
+                    'sectiontab',
+                    0,
+                    PARAM_INT,
+                );
                 if ($sectiontabid == $tab->url->get_param('sectiontab') && $tab->url->get_param('sectiontab') != null) {
                     navigation_node::override_active_url($tab->url);
                 }
@@ -93,9 +134,18 @@ class secondary extends \core\navigation\views\secondary {
         }
 
         $nodes = $this->get_default_course_mapping();
-        $nodesordered = $this->get_leaf_nodes($settingsnav, $nodes['settings'] ?? []);
-        $nodesordered += $this->get_leaf_nodes($navigation, $nodes['navigation'] ?? []);
-        $this->add_ordered_nodes($nodesordered, $rootnode);
+        $nodesordered = $this->get_leaf_nodes(
+            $settingsnav,
+            $nodes['settings'] ?? [],
+        );
+        $nodesordered += $this->get_leaf_nodes(
+            $navigation,
+            $nodes['navigation'] ?? [],
+        );
+        $this->add_ordered_nodes(
+            $nodesordered,
+            $rootnode,
+        );
 
         // Hide participants node with theme settings ask for it.
         $theme = theme_config::load('pimenko');
@@ -103,17 +153,34 @@ class secondary extends \core\navigation\views\secondary {
         $allowedtosee = false;
 
         if (!empty($theme->settings->showparticipantscourse)) {
-
             if (is_siteadmin($USER) && !is_role_switched($course->id)) {
                 $allowedtosee = true;
             } else if (is_role_switched($course->id)) {
-                $roleswitched = $DB->get_record('role', ['id' => $USER->access['rsw'][$this->context->path]]);
-                if (!empty($theme->settings->listuserrole) && strpos($theme->settings->listuserrole, $roleswitched->shortname) !== false) {
+                $roleswitched = $DB->get_record(
+                    'role',
+                    ['id' => $USER->access['rsw'][$this->context->path]],
+                );
+                if (
+                    !empty($theme->settings->listuserrole) && strpos(
+                        $theme->settings->listuserrole,
+                        $roleswitched->shortname,
+                    ) !== false
+                ) {
                     $allowedtosee = true;
                 }
             } else {
-                foreach (get_user_roles($this->context, $USER->id) as $role) {
-                    if (!empty($theme->settings->listuserrole) && strpos($theme->settings->listuserrole, $role->shortname) !== false) {
+                foreach (
+                    get_user_roles(
+                        $this->context,
+                        $USER->id,
+                    ) as $role
+                ) {
+                    if (
+                        !empty($theme->settings->listuserrole) && strpos(
+                            $theme->settings->listuserrole,
+                            $role->shortname,
+                        ) !== false
+                    ) {
                         $allowedtosee = true;
                     }
                 }
@@ -137,18 +204,32 @@ class secondary extends \core\navigation\views\secondary {
 
         if ($courseadminnode) {
             foreach ($courseadminnode->children as $other) {
-                if (array_search($other->key, $expectedcourseadmin) === false) {
+                if (
+                    array_search(
+                        $other->key,
+                        $expectedcourseadmin,
+                    ) === false
+                ) {
                     $othernode = $this->get_first_action_for_node($other);
                     $recursivenode = $othernode && !$rootnode->get($othernode->key) ? $othernode : $other;
                     // Get the first node and check whether it's been added already.
                     // Also check if the first node is an external link. If it is, add all children.
-                    $this->add_external_nodes_to_secondary($recursivenode, $recursivenode, $rootnode);
+                    $this->add_external_nodes_to_secondary(
+                        $recursivenode,
+                        $recursivenode,
+                        $rootnode,
+                    );
                 }
             }
         }
 
         $coursecontext = \context_course::instance($course->id);
-        if (has_capability('moodle/course:update', $coursecontext)) {
+        if (
+            has_capability(
+                'moodle/course:update',
+                $coursecontext,
+            )
+        ) {
             $overflownode = $this->get_course_overflow_nodes($rootnode);
             if (is_null($overflownode)) {
                 return;
@@ -156,8 +237,17 @@ class secondary extends \core\navigation\views\secondary {
             $actionnode = $this->get_first_action_for_node($overflownode);
             // All additional nodes will be available under the 'Course reuse' page.
             $text = get_string('coursereuse');
-            $rootnode->add($text, $actionnode->action, navigation_node::TYPE_COURSE, null, 'coursereuse',
-                new \pix_icon('t/edit', $text));
+            $rootnode->add(
+                $text,
+                $actionnode->action,
+                navigation_node::TYPE_COURSE,
+                null,
+                'coursereuse',
+                new \pix_icon(
+                    't/edit',
+                    $text,
+                ),
+            );
         }
     }
 }

@@ -1,4 +1,4 @@
-<?php /** @noinspection Annotator */
+<?php
 // This file is part of the Pimenko theme for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // This is the version of the plugin.
-$plugin->version = 2025043000; // YYYYMMDDXX
+$plugin->version = 2025043000; // YYYYMMDDXX.
 
 // This is the version of Moodle this plugin requires.
 $plugin->requires = 2024042200;
@@ -42,5 +42,5 @@ $plugin->release = '4.5';
 
 // This is a list of plugins, this plugin depends on (and their versions).
 $plugin->dependencies = [
-        'theme_boost' => 2016102100
+        'theme_boost' => 2016102100,
 ];

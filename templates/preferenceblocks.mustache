@@ -14,6 +14,23 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/preferenceblocks
+
+    Liste de groupes de préférences avec titres et liens.
+
+    Example context (json):
+    {
+        "groups": [
+            {
+                "title": "Mes préférences",
+                "shownodes": [
+                    {"url": "/user/preferences.php", "classes": ["important"], "title": "Préférences utilisateur"}
+                ]
+            }
+        ]
+    }
+}}
 {{#groups}}
     <div class="profile-block p-relative ">
         <h3 class="heading">{{{title}}}</h3>
@@ -22,7 +39,7 @@
                 <ul class="profilelist">
                     {{#shownodes}}
                         <li class="{{#classes}} {{.}} {{/classes}}">
-                            <a href="{{{url}}}">
+                            <a href="{{url}}">
                                 {{title}}
                             </a>
                         </li>

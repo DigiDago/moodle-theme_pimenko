@@ -27,13 +27,12 @@
 
 require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
 
-use Behat\Mink\Exception\ExpectationException as ExpectationException;
+use Behat\Mink\Exception\ExpectationException;
 
 /**
  * Step definitions for the Pimenko theme.
  */
 class behat_theme_pimenko extends behat_base {
-
     /**
      * Checks if the specified checkbox is checked.
      *
@@ -42,9 +41,15 @@ class behat_theme_pimenko extends behat_base {
      * @throws ExpectationException
      */
     public function the_checkbox_should_be_checked($checkbox) {
-        $node = $this->get_selected_node('checkbox', $checkbox);
+        $node = $this->get_selected_node(
+            'checkbox',
+            $checkbox,
+        );
         if (!$node->isChecked()) {
-            throw new ExpectationException('The "' . $checkbox . '" checkbox is not checked', $this->getSession());
+            throw new ExpectationException(
+                'The "' . $checkbox . '" checkbox is not checked',
+                $this->getSession(),
+            );
         }
     }
 
@@ -56,9 +61,15 @@ class behat_theme_pimenko extends behat_base {
      * @throws ExpectationException
      */
     public function the_checkbox_should_not_be_checked($checkbox) {
-        $node = $this->get_selected_node('checkbox', $checkbox);
+        $node = $this->get_selected_node(
+            'checkbox',
+            $checkbox,
+        );
         if ($node->isChecked()) {
-            throw new ExpectationException('The "' . $checkbox . '" checkbox is checked', $this->getSession());
+            throw new ExpectationException(
+                'The "' . $checkbox . '" checkbox is checked',
+                $this->getSession(),
+            );
         }
     }
 
@@ -83,8 +94,17 @@ class behat_theme_pimenko extends behat_base {
      * @param string $selectortype
      */
     public function i_click_on_forced($element, $selectortype) {
-        $node = $this->get_selected_node($selectortype, $element);
-        $this->execute_js_on_node($node, '{{ELEMENT}}.scrollIntoView({block: "center"});');
-        $this->execute_js_on_node($node, '{{ELEMENT}}.click();');
+        $node = $this->get_selected_node(
+            $selectortype,
+            $element,
+        );
+        $this->execute_js_on_node(
+            $node,
+            '{{ELEMENT}}.scrollIntoView({block: "center"});',
+        );
+        $this->execute_js_on_node(
+            $node,
+            '{{ELEMENT}}.click();',
+        );
     }
 }

@@ -28,12 +28,11 @@ use theme_config;
 /**
  * Class responsible for generating the action bar (tertiary nav) elements in an individual category page
  *
- * @package    core
- * @copyright  2021 Peter Dias
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2019
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class category_action_bar extends \core_course\output\category_action_bar {
-
     /**
      * Export the content to be displayed on the category page.
      *
@@ -47,10 +46,14 @@ class category_action_bar extends \core_course\output\category_action_bar {
         $template = [
             'categoryselect' => $this->get_category_select($output),
             'search' => $this->get_search_form(),
-            'additionaloptions' => $this->get_additional_category_options()
+            'additionaloptions' => $this->get_additional_category_options(),
         ];
 
-        $categoryid = optional_param('categoryid', 0, PARAM_INT);
+        $categoryid = optional_param(
+            'categoryid',
+            0,
+            PARAM_INT,
+        );
 
         $template['categoryid'] = $categoryid;
 
@@ -81,27 +84,68 @@ class category_action_bar extends \core_course\output\category_action_bar {
             if (count($categories) >= 1) {
                 foreach ($categories as $id => $cat) {
                     $category = core_course_category::get($id);
-                    if ($category->visible ||
-                        has_capability('moodle/course:viewhiddencourses', context_coursecat::instance($category->id))) {
-                        $url = new moodle_url($this->page->url, ['categoryid' => $id]);
+                    if ($category->visible && $category->is_uservisible() && $this->are_all_parents_visible($category)) {
+                        $url = new moodle_url(
+                            $this->page->url,
+                            ['categoryid' => $id],
+                        );
                         $options[$url->out()] = $cat;
                     }
                 }
-                $categoryid = optional_param('categoryid', 0, PARAM_INT);
+                $categoryid = optional_param(
+                    'categoryid',
+                    0,
+                    PARAM_INT,
+                );
                 if ($categoryid) {
-                    $currenturl = new moodle_url($this->page->url, ['categoryid' => $categoryid]);
+                    $currenturl = new moodle_url(
+                        $this->page->url,
+                        ['categoryid' => $categoryid],
+                    );
                 } else {
-                    $currenturl = new moodle_url('/course/index.php', []);
+                    $currenturl = new moodle_url(
+                        '/course/index.php',
+                        [],
+                    );
                 }
 
-                $select = new \url_select($options, $currenturl, null);
-                $select->set_label(get_string('categories'), ['class' => 'sr-only']);
+                $select = new \url_select(
+                    $options,
+                    $currenturl,
+                    null,
+                );
+                $select->set_label(
+                    get_string('categories'),
+                    ['class' => 'sr-only'],
+                );
                 $select->class .= ' text-truncate w-100';
                 return $select->export_for_template($output);
             }
         }
 
         return new \stdClass();
+    }
+
+    /**
+     * Ensure all parent categories are visible.
+     * A child must be hidden if any ancestor is hidden, regardless of the child's own visible flag.
+     *
+     * @param core_course_category $category
+     * @return bool
+     */
+    private function are_all_parents_visible(core_course_category $category): bool {
+        $parentids = $category->get_parents();
+        if (empty($parentids)) {
+            return true;
+        }
+        foreach ($parentids as $pid) {
+            // Use core API to fetch parent category and check its visible flag only.
+            $parent = core_course_category::get($pid, IGNORE_MISSING);
+            if ($parent && !$parent->visible) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -115,26 +159,56 @@ class category_action_bar extends \core_course\output\category_action_bar {
 
         $alltagsobj = new \stdClass();
         $alltagsobj->id = '0';
-        $alltagsobj->name = get_string('alltags', 'theme_pimenko');
-        $alltagsobj->rawname = get_string('alltags', 'theme_pimenko');
+        $alltagsobj->name = get_string(
+            'alltags',
+            'theme_pimenko',
+        );
+        $alltagsobj->rawname = get_string(
+            'alltags',
+            'theme_pimenko',
+        );
         $alltags[] = $alltagsobj;
 
         $tags = $DB->get_records_sql('SELECT * FROM {tag}');
-        $tags = array_merge($alltags, $tags);
+        $tags = array_merge(
+            $alltags,
+            $tags,
+        );
 
         if (count($tags) >= 1) {
             $options = [];
-            $categoryid = optional_param('categoryid', 0, PARAM_INT);
+            $categoryid = optional_param(
+                'categoryid',
+                0,
+                PARAM_INT,
+            );
 
             foreach ($tags as $id => $tag) {
-                $url = new moodle_url($this->page->url->get_path(), ['tagid' => $tag->id, 'categoryid' => $categoryid]);
+                $url = new moodle_url(
+                    $this->page->url->get_path(),
+                    ['tagid' => $tag->id, 'categoryid' => $categoryid],
+                );
                 $options[$url->out(false)] = $tag->rawname;
             }
-            $tagid = optional_param('tagid', 0, PARAM_INT);
-            $currenturl = new moodle_url($this->page->url->get_path(), ['tagid' => $tagid, 'categoryid' => $categoryid]);
+            $tagid = optional_param(
+                'tagid',
+                0,
+                PARAM_INT,
+            );
+            $currenturl = new moodle_url(
+                $this->page->url->get_path(),
+                ['tagid' => $tagid, 'categoryid' => $categoryid],
+            );
             $currenturl = $currenturl->out(false);
-            $select = new \url_select($options, $currenturl, null);
-            $select->set_label(get_string('tags'), ['class' => 'sr-only']);
+            $select = new \url_select(
+                $options,
+                $currenturl,
+                null,
+            );
+            $select->set_label(
+                get_string('tags'),
+                ['class' => 'sr-only'],
+            );
             $select->class .= ' text-truncate w-100';
 
             return $select->export_for_template($output);
@@ -152,7 +226,8 @@ class category_action_bar extends \core_course\output\category_action_bar {
     public function get_customfield_select(\renderer_base $output): ?array {
         global $DB;
 
-        $customfields = $DB->get_records_sql("SELECT
+        $customfields = $DB->get_records_sql(
+            "SELECT
             cf.id,
             cf.shortname,
             cf.name,
@@ -167,46 +242,78 @@ class category_action_bar extends \core_course\output\category_action_bar {
             FROM {customfield_field} cf
             LEFT JOIN {customfield_category} cc ON cc.id = cf.categoryid
             WHERE cc.area = 'course'
-            ORDER BY cf.sortorder");
+            ORDER BY cf.sortorder",
+        );
 
         $templatecustomfields = [];
 
         if (count($customfields) >= 1) {
             foreach ($customfields as $customfield) {
-
                 $options = [];
-                $customfieldselected = optional_param('customfieldselected', '', PARAM_ALPHANUMEXT);
-                $customfieldvalue = optional_param('customfieldvalue', '', PARAM_RAW);
-                $customfieldtext = optional_param('customfieldtext', '', PARAM_ALPHANUMEXT);
-                $categoryid = optional_param('categoryid', 0, PARAM_INT);
+                $customfieldselected = optional_param(
+                    'customfieldselected',
+                    '',
+                    PARAM_ALPHANUMEXT,
+                );
+                $customfieldvalue = optional_param(
+                    'customfieldvalue',
+                    '',
+                    PARAM_RAW,
+                );
+                $customfieldtext = optional_param(
+                    'customfieldtext',
+                    '',
+                    PARAM_ALPHANUMEXT,
+                );
+                $categoryid = optional_param(
+                    'categoryid',
+                    0,
+                    PARAM_INT,
+                );
 
                 if ($customfield->type == 'select') {
-                    $urlall = new moodle_url($this->page->url, ['customfieldselected' => $customfield->shortname,
-                        'customfieldvalue' => 'all', 'categoryid' => $categoryid]);
+                    $urlall = new moodle_url(
+                        $this->page->url,
+                        ['customfieldselected' => $customfield->shortname,
+                            'customfieldvalue' => 'all', 'categoryid' => $categoryid],
+                    );
                     $options[$urlall->out(false)] = format_string($customfield->name);
 
                     // Get options of customfield.
                     $jsconfdata = json_decode($customfield->configdata);
-                    $customfieldoptions = explode(PHP_EOL, $jsconfdata->options);
+                    $customfieldoptions = explode(
+                        PHP_EOL,
+                        $jsconfdata->options,
+                    );
                     foreach ($customfieldoptions as $key => $customfieldoption) {
-                        $url = new moodle_url($this->page->url->get_path(),
+                        $url = new moodle_url(
+                            $this->page->url->get_path(),
                             [
                                 'customfieldselected' => format_string($customfield->shortname),
                                 // Key value +1 for select since it not start with 0.
                                 'customfieldvalue' => $key + 1,
-                                'categoryid' => $categoryid
-                            ]
+                                'categoryid' => $categoryid,
+                            ],
                         );
                         $options[$url->out(false)] = format_string($customfieldoption);
                     }
 
                     // Get the current url value.
-                    $currenturl = new moodle_url($this->page->url->get_path(),
+                    $currenturl = new moodle_url(
+                        $this->page->url->get_path(),
                         ['customfieldselected' => $customfieldselected, 'customfieldvalue' => $customfieldvalue,
-                            'categoryid' => $categoryid]);
+                            'categoryid' => $categoryid],
+                    );
                     $currenturl = $currenturl->out(false);
-                    $select = new \url_select($options, $currenturl, null);
-                    $select->set_label($customfield->shortname, ['class' => 'sr-only']);
+                    $select = new \url_select(
+                        $options,
+                        $currenturl,
+                        null,
+                    );
+                    $select->set_label(
+                        $customfield->shortname,
+                        ['class' => 'sr-only'],
+                    );
                     $select->class .= ' text-truncate w-100';
 
                     $template = $select->export_for_template($output);
@@ -216,7 +323,9 @@ class category_action_bar extends \core_course\output\category_action_bar {
                 } else if ($customfield->type == 'text' || $customfield->type == 'textarea') {
                     $template = [];
                     $template['action'] = new moodle_url(
-                        $this->page->url->get_path(), ['customfieldtext' => $customfield->shortname, 'categoryid' => $categoryid]);
+                        $this->page->url->get_path(),
+                        ['customfieldtext' => $customfield->shortname, 'categoryid' => $categoryid],
+                    );
                     $template['btnclass'] = 'btn-primary';
 
                     if ($customfieldvalue !== 'all' && $customfieldtext) {
@@ -231,29 +340,49 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     $template['texttype'] = true;
                     $template['query'] = null;
                     $templatecustomfields[] = $template;
-
                 } else if ($customfield->type == 'checkbox') {
-                    $urlall = new moodle_url($this->page->url, ['customfieldselected' => $customfield->shortname,
-                        'customfieldvalue' => 'all', 'categoryid' => $categoryid]);
+                    $urlall = new moodle_url(
+                        $this->page->url,
+                        ['customfieldselected' => $customfield->shortname,
+                            'customfieldvalue' => 'all', 'categoryid' => $categoryid],
+                    );
                     $options[$urlall->out(false)] = format_string($customfield->name);
 
                     // Get options of customfield.
                     $customfieldoptions = [
-                        1 => get_string('yes', 'theme_pimenko'),
-                        0 => get_string('no', 'theme_pimenko')];
+                        1 => get_string(
+                            'yes',
+                            'theme_pimenko',
+                        ),
+                        0 => get_string(
+                            'no',
+                            'theme_pimenko',
+                        )];
                     foreach ($customfieldoptions as $key => $customfieldoption) {
-                        $url = new moodle_url($this->page->url->get_path(), ['customfieldselected' => $customfield->shortname,
-                            'customfieldvalue' => $key, 'categoryid' => $categoryid]);
+                        $url = new moodle_url(
+                            $this->page->url->get_path(),
+                            ['customfieldselected' => $customfield->shortname,
+                                'customfieldvalue' => $key, 'categoryid' => $categoryid],
+                        );
                         $options[$url->out(false)] = $customfieldoption;
                     }
 
                     // Get the current url value.
-                    $currenturl = new moodle_url($this->page->url->get_path(),
+                    $currenturl = new moodle_url(
+                        $this->page->url->get_path(),
                         ['customfieldselected' => $customfieldselected,
-                            'customfieldvalue' => $customfieldvalue, 'categoryid' => $categoryid]);
+                            'customfieldvalue' => $customfieldvalue, 'categoryid' => $categoryid],
+                    );
                     $currenturl = $currenturl->out(false);
-                    $select = new \url_select($options, $currenturl, null);
-                    $select->set_label($customfield->shortname, ['class' => 'sr-only']);
+                    $select = new \url_select(
+                        $options,
+                        $currenturl,
+                        null,
+                    );
+                    $select->set_label(
+                        $customfield->shortname,
+                        ['class' => 'sr-only'],
+                    );
                     $select->class .= ' text-truncate w-100';
 
                     $template = $select->export_for_template($output);
@@ -261,19 +390,39 @@ class category_action_bar extends \core_course\output\category_action_bar {
                     $template->name = 'customfieldselect_' . $customfield->shortname;
                     $templatecustomfields[] = $template;
                 } else if ($customfield->type == 'date') {
-                    $day = optional_param('day', 0, PARAM_INT);
-                    $year = optional_param('year', 0, PARAM_INT);
-                    $month = optional_param('month', 0, PARAM_INT);
+                    $day = optional_param(
+                        'day',
+                        0,
+                        PARAM_INT,
+                    );
+                    $year = optional_param(
+                        'year',
+                        0,
+                        PARAM_INT,
+                    );
+                    $month = optional_param(
+                        'month',
+                        0,
+                        PARAM_INT,
+                    );
                     if ($day && $year && $month) {
                         $timestamp =
-                            new DateTime($year . '-' . $month . '-' . $day,
-                                core_date::get_user_timezone_object());
-                        $timestamp->setTime(0, 0, 0);
+                            new DateTime(
+                                $year . '-' . $month . '-' . $day,
+                                core_date::get_user_timezone_object(),
+                            );
+                        $timestamp->setTime(
+                            0,
+                            0,
+                            0,
+                        );
                         $customfield->urlselectedvalue = $timestamp->getTimestamp();
                     }
                     $url = new moodle_url($this->page->url->get_path());
                     $mform = new date_form(
-                        $url, $customfield);
+                        $url,
+                        $customfield,
+                    );
                     $template = new \stdClass();
                     $template->date_selector = $mform->render();
                     $template->date = true;

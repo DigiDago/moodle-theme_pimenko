@@ -1,3 +1,29 @@
+{{!
+    @template theme_pimenko/course_gallery
+
+    Grille de cartes de cours avec image, titre, catégorie, résumé, champs personnalisés et bouton charger plus.
+
+    Example context (json):
+    {
+        "courses": [
+            {
+                "id": 5,
+                "display": "block",
+                "url": "https://example.com/course/view.php?id=5",
+                "urlimg": "https://example.com/image.jpg",
+                "name": "Nom du cours",
+                "rootpath": "/moodle",
+                "categoryid": 1,
+                "category": "Catégorie",
+                "catalogsummarymodal": true,
+                "summary": "<p>Résumé</p>",
+                "enroledcount": 12,
+                "customfields": [{"customfield": "<span>HTML</span>"}]
+            }
+        ],
+        "loadmore": true
+    }
+}}
 <div class="card-text content mt-3 p-3">
     <div id="course-gallery" class="card-deck dashboard-card-deck">
         {{# courses }}
@@ -21,11 +47,11 @@
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="{{{ name }}}" aria-hidden="true">
+                                <div class="modal fade" id="modal-{{ id }}" tabindex="-1" aria-labelledby="modal-{{ id }}-label" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">{{{ name }}}</h5>
+                                                <h5 class="modal-title" id="modal-{{ id }}-label">{{{ name }}}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>

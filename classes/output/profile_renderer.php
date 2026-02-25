@@ -33,34 +33,62 @@ use preferences_groups;
 use core_user;
 use core_user\output\myprofile\manager;
 
+/**
+ * Class used for rendering user profiles with customizable display options and data processing.
+ */
 class profile_renderer extends \renderer_base {
-
+    /**
+     * card details array.
+     *
+     * @var array
+     */
     private $carddetails = [];
+    /**
+     * profile blocks array.
+     *
+     * @var array
+     */
     private $profileblocks = [];
+    /**
+     * user object.
+     *
+     * @var false|mixed
+     */
     private $user;
 
+    /**
+     * Retrieves and processes the user profile data for display.
+     *
+     * @param int $userid The ID of the user whose profile is to be loaded.
+     *
+     * @return string The rendered user profile page, or an empty string if the user is not found.
+     */
     public function userprofile($userid) {
         global $DB, $USER;
 
         $preferences = optional_param(
-                'preferences',
-                0,
-                PARAM_INT
+            'preferences',
+            0,
+            PARAM_INT,
         );
 
         if ($preferences) {
-            $this->page->set_url('/user/preferences.php', ['id' => $userid]);
+            $this->page->set_url(
+                '/user/preferences.php',
+                ['id' => $userid],
+            );
         }
 
-        if ($user = $DB->get_record(
+        if (
+            $user = $DB->get_record(
                 'user',
-                ['id' => $userid]
-        )) {
-
+                ['id' => $userid],
+            )
+        ) {
             $this->user = $user;
             $this->user->msgurl = new moodle_url(
-                    '/message/index.php',
-                    ['id' => $this->user->id]
+                '/message/index.php',
+                ['id' => $this->user->id],
             );
             $currentuser = ($user->id == $USER->id);
             $isadmin = is_siteadmin($USER);
@@ -77,7 +105,13 @@ class profile_renderer extends \renderer_base {
                 $isadmin
                 || $currentuser
                 || $user->maildisplay == 1
-                || ($user->maildisplay == 2 && enrol_sharing_course($user, $USER))
+                || (
+                    $user->maildisplay == 2
+                    && enrol_sharing_course(
+                        $user,
+                        $USER,
+                    )
+                )
             ) {
                 $this->user->seeemail = true;
             }
@@ -91,77 +125,83 @@ class profile_renderer extends \renderer_base {
             $userpicture->link = false;
             $userpicture->size = 200;
             $this->user->picture = $userpicture->get_url(
-                    $this->page
+                $this->page,
             );
 
             // Define contactarray from email viewing permission.
             if ($this->user->seeemail) {
                 $contactarray = [
-                        'email',
-                        'city',
-                        'country'
+                    'email',
+                    'city',
+                    'country',
                 ];
             } else {
                 $contactarray = [
-                        'city',
-                        'country'
+                    'city',
+                    'country',
                 ];
             }
             $this->carddetail(
-                    'time',
-                    get_string(
-                            'profile:joinedon',
-                            'theme_pimenko'
-                    ) . userdate(
-                            $this->user->firstaccess,
-                            get_string('strftimemonthyear')
-                    )
+                'time',
+                get_string(
+                    'profile:joinedon',
+                    'theme_pimenko',
+                ) . userdate(
+                    $this->user->firstaccess,
+                    get_string('strftimemonthyear'),
+                ),
             );
             $this->carddetail(
-                    'time',
-                    get_string(
-                            'profile:lastaccess',
-                            'theme_pimenko'
-                    ) . userdate(
-                            $this->user->lastaccess,
-                            get_string('strftimedatetimeshort')
-                    )
+                'time',
+                get_string(
+                    'profile:lastaccess',
+                    'theme_pimenko',
+                ) . userdate(
+                    $this->user->lastaccess,
+                    get_string('strftimedatetimeshort'),
+                ),
             );
 
             $this->user->carddetails = $this->carddetails;
 
             $this->profileblock(
-                    'person',
-                    get_string(
-                            'profile:basicinfo',
-                            'theme_pimenko'
-                    ),
-                    format_text(
-                            $this->user->description,
-                            $this->user->descriptionformat
-                    )
+                'person',
+                get_string(
+                    'profile:basicinfo',
+                    'theme_pimenko',
+                ),
+                format_text(
+                    $this->user->description,
+                    $this->user->descriptionformat,
+                ),
             );
 
             $this->profileblock(
-                    'phone',
-                    get_string(
-                            'profile:contactinfo',
-                            'theme_pimenko'
-                    ),
-                    '',
-                    $contactarray
+                'phone',
+                get_string(
+                    'profile:contactinfo',
+                    'theme_pimenko',
+                ),
+                '',
+                $contactarray,
             );
 
-            $tree = manager::build_tree($this->user, $currentuser);
-            $this->page->get_renderer('core_user', 'myprofile');
+            $tree = manager::build_tree(
+                $this->user,
+                $currentuser,
+            );
+            $this->page->get_renderer(
+                'core_user',
+                'myprofile',
+            );
             $this->render_tree($tree);
 
             if ($preferences) {
                 $profile->content = $this->userpreferences($this->user->id);
             } else {
                 $profile->content = $this->render_from_template(
-                        'theme_pimenko/profiledescription',
-                        $this->user
+                    'theme_pimenko/profiledescription',
+                    $this->user,
                 );
             }
 
@@ -169,14 +209,23 @@ class profile_renderer extends \renderer_base {
 
             // User enrolments Tab.
             return $this->render_from_template(
-                    'theme_pimenko/profile',
-                    $profile
+                'theme_pimenko/profile',
+                $profile,
             );
         } else {
             return '';
         }
     }
 
+    /**
+     * Add a card detail to the card details array.
+     *
+     * @param string      $icon The icon identifier for the card detail.
+     * @param string      $string The associated text for the card detail.
+     * @param string|null $url Optional URL associated with the card detail.
+     *
+     * @return void
+     */
     private function carddetail($icon, $string, $url = null) {
         if (!isset($this->carddetails)) {
             $this->carddetails = [];
@@ -186,8 +235,8 @@ class profile_renderer extends \renderer_base {
         $detail->text = $string;
         if ($url) {
             $detail->text = new moodle_url(
-                    $url,
-                    $detail->text
+                $url,
+                $detail->text,
             );
         }
         if (!empty($detail->text)) {
@@ -195,6 +244,16 @@ class profile_renderer extends \renderer_base {
         }
     }
 
+    /**
+     * Generate and add a profile block with specified icon, name, content, and additional properties.
+     *
+     * @param string $icon The identifier for the icon to use for the block.
+     * @param string $name The name of the section for the profile block.
+     * @param mixed  $content Content of the profile block, can be a string or an array.
+     * @param array  $properties An optional array of user properties to include in the block.
+     *
+     * @return void
+     */
     private function profileblock($icon, $name, $content, $properties = []) {
         if (!isset($this->profileblocks)) {
             $this->profileblocks = [];
@@ -247,6 +306,13 @@ class profile_renderer extends \renderer_base {
         }
     }
 
+    /**
+     * Renders a tree structure by iterating over its categories and rendering each category.
+     *
+     * @param object $tree The tree object containing categories to render.
+     *
+     * @return void
+     */
     private function render_tree($tree) {
         $categories = $tree->categories;
 
@@ -258,6 +324,20 @@ class profile_renderer extends \renderer_base {
         }
     }
 
+    /**
+     * Retrieve and render user preferences.
+     *
+     * This method fetches the preference settings for a given user, determines
+     * their accessibility based on the current user's role, and organizes them
+     * into groups for rendering.
+     *
+     * @param int $userid The ID of the user whose preferences are to be displayed.
+     *
+     * @return string The rendered preferences as a string.
+     *
+     * @throws moodle_exception If the current user does not have permission to view
+     *                          the specified user's preferences.
+     */
     public function userpreferences($userid) {
         global $USER, $CFG;
 
@@ -270,30 +350,32 @@ class profile_renderer extends \renderer_base {
         if (!$currentuser) {
             $this->page->navigation->extend_for_user($USER);
             // Need to check that settings exist.
-            if ($settings = $this->page->settingsnav->find(
+            if (
+                $settings = $this->page->settingsnav->find(
                     'userviewingsettings' . $USER->id,
-                    null
-            )) {
+                    null,
+                )
+            ) {
                 $settings->make_active();
             }
             // Show an error if there are no preferences that this user has access to.
             if (!$this->page->settingsnav->can_view_user_preferences($userid)) {
                 throw new moodle_exception(
-                        'cannotedituserpreferences',
-                        'error'
+                    'cannotedituserpreferences',
+                    'error',
                 );
             }
         } else {
             // Shutdown the users node in the navigation menu.
             $usernode = $this->page->navigation->find(
-                    'users',
-                    null
+                'users',
+                null,
             );
             $usernode->make_inactive();
 
             $settings = $this->page->settingsnav->find(
-                    'usercurrentsettings',
-                    null
+                'usercurrentsettings',
+                null,
             );
             $settings->make_active();
         }
@@ -306,8 +388,8 @@ class profile_renderer extends \renderer_base {
             if ($setting->has_children()) {
                 $icon = $this->pref_icon($setting->key);
                 $groups[] = new preferences_group(
-                        $icon . $setting->get_content(),
-                        $setting->children
+                    $icon . $setting->get_content(),
+                    $setting->children,
                 );
             } else {
                 $orphans[] = $setting;
@@ -315,8 +397,8 @@ class profile_renderer extends \renderer_base {
         }
         if (!empty($orphans)) {
             $groups[] = new preferences_group(
-                    get_string('miscellaneous'),
-                    $orphans
+                get_string('miscellaneous'),
+                $orphans,
             );
         }
 
@@ -325,27 +407,36 @@ class profile_renderer extends \renderer_base {
         return $this->render_preferences_groups($preferences);
     }
 
+    /**
+     * Retrieve the preference icon based on the supplied key.
+     *
+     * @param string $key The key associated with the desired icon.
+     *
+     * @return string The HTML string for the icon element.
+     */
     public function pref_icon($key) {
         $settingicons = [
-                'useraccount' => 'zmdi-info',
-                'blogs' => 'zmdi-globe-alt',
-                'badges' => 'zmdi-badge-check',
-                '1' => 'zmdi-male'
+            'useraccount' => 'zmdi-info',
+            'blogs' => 'zmdi-globe-alt',
+            'badges' => 'zmdi-badge-check',
+            '1' => 'zmdi-male',
         ];
         $icon = html_writer::tag(
-                'i',
-                '',
-                ['class' => 'zmdi m-r-5 zmdi-miscellaneous ' . $key]
+            'i',
+            '',
+            ['class' => 'zmdi m-r-5 zmdi-miscellaneous ' . $key],
         );
-        if (array_key_exists(
+        if (
+            array_key_exists(
                 $key,
-                $settingicons
-        )) {
+                $settingicons,
+            )
+        ) {
             $icontype = $settingicons[$key];
             $icon = html_writer::tag(
-                    'i',
-                    '',
-                    ['class' => 'zmdi m-r-5 ' . $icontype]
+                'i',
+                '',
+                ['class' => 'zmdi m-r-5 ' . $icontype],
             );
         }
         return $icon;
@@ -361,13 +452,12 @@ class profile_renderer extends \renderer_base {
      * @throws \moodle_exception
      */
     public function render_preferences_groups(preferences_groups $renderable) {
-
         foreach ($renderable->groups as $group) {
             foreach ($group->nodes as $node) {
                 if ($node->has_children()) {
                     debugging(
-                            'Preferences nodes do not support children',
-                            DEBUG_DEVELOPER
+                        'Preferences nodes do not support children',
+                        DEBUG_DEVELOPER,
                     );
                 }
                 if ($node->text == get_string('editorpreferences')) {
@@ -378,17 +468,17 @@ class profile_renderer extends \renderer_base {
         }
 
         return $this->render_from_template(
-                'theme_pimenko/preferenceblocks',
-                $renderable
+            'theme_pimenko/preferenceblocks',
+            $renderable,
         );
     }
 
     /**
-     * Render a node.
+     * Render a preference node.
      *
-     * @param node $node
+     * @param object $node The node object containing action, text, and classes properties.
      *
-     * @return string
+     * @return object A template object containing the rendered preference node attributes.
      */
     public function render_pref_node($node) {
         $nodetemplate = new stdClass();
@@ -399,15 +489,13 @@ class profile_renderer extends \renderer_base {
     }
 
     /**
-     * Render a category.
+     * Render a category block by processing its nodes and applying filters.
      *
-     * @param category $category
+     * @param object $category The category object containing name, title, and nodes.
      *
-     * @return string
-     * @throws \coding_exception
+     * @return void
      */
     public function render_category($category) {
-
         $nodes = $category->nodes;
         if (empty($nodes)) {
             return '';
@@ -418,32 +506,33 @@ class profile_renderer extends \renderer_base {
         // Learningplans - todayslogs - alllogs.
         // Outline - complete - usersessions - grade.
         $hiddenitems = [
-                'forumposts',
-                'forumdiscussions'
+            'forumposts',
+            'forumdiscussions',
         ];
         $content = [];
         foreach ($nodes as $key => $node) {
-            if (in_array(
+            if (
+                in_array(
                     $key,
-                    $hiddenitems
-            )) {
+                    $hiddenitems,
+                )
+            ) {
                 continue;
             }
             $content[] = $this->render($node);
         }
         $this->profileblock(
-                $category->name,
-                $category->title,
-                $content
+            $category->name,
+            $category->title,
+            $content,
         );
     }
 
     /**
-     * Render a node.
+     * Processes the provided node object and generates a template object with the node's details.
      *
-     * @param node $node
-     *
-     * @return string
+     * @param object $node An object representing the node, containing its URL, title, and content.
+     * @return object A new object containing the URL, title, and content of the provided node.
      */
     public function render_node($node) {
         $nodetemplate = new stdClass();

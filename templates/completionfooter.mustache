@@ -14,6 +14,18 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/completionfooter
+
+    Pied de page affichant les informations de complétion et la navigation vers la prochaine activité.
+
+    Example context (json):
+    {
+        "completionicon": "<i class=\"icon\"></i>",
+        "nextmodname": "Nom de l'activité suivante",
+        "nextmodurl": "https://example.com/mod/next/view.php?id=123"
+    }
+}}
 <div class="next_activity_area">
     <div class="next_activity_link">
         <div class="activity-complete">
@@ -27,7 +39,7 @@
 
 <form action="." method="get">
     <div>
-        <input type="hidden" id="completion_dynamic_change" name="completion_dynamic_change" value="0" />
+        <input type="hidden" id="completion_dynamic_change" name="completion_dynamic_change" value="0">
     </div>
 </form>
 
@@ -41,7 +53,7 @@
                         <i class="fa fa-times"></i>
                     </button>
                     <p class="m-t-0 m-b-20">{{#str}}nextmod, theme_pimenko{{/str}}</p>
-                    <h2 class="m-b-20 text-dimmed">{{{nextmodname}}}</h2>
+                    <h2 class="m-b-20 text-dimmed" id="myModalLabel">{{{nextmodname}}}</h2>
                     <a href="{{{nextmodurl}}}" class="btn btn-success btn-full m-b-20">
                         {{#str}}nextmod, theme_pimenko{{/str}}
                     </a>
