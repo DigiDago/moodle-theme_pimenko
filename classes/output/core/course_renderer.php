@@ -554,7 +554,9 @@ class course_renderer extends \core_course_renderer {
                 }
             }
 
-            if (!empty((array) $editoption['categoryselect'])) {
+            if (!empty($editoption['categoryselect'])) {
+                $categoryselect = (array) $editoption['categoryselect'];
+                $allcateg = [];
                 $allcateg[] = [
                     'name' => get_string(
                         'allcategories',
@@ -564,18 +566,20 @@ class course_renderer extends \core_course_renderer {
                     'selected' => true,
                 ];
 
-                if (($category === 0 || $category === '1' || count($editoption['categoryselect']->options) < 1)) {
-                    $editoption['categoryselect']->options[0]['selected'] = false;
+                if (($category === 0 || $category === '1' || count($categoryselect['options']) < 1)) {
+                    if (isset($categoryselect['options'][0])) {
+                        $categoryselect['options'][0]['selected'] = false;
+                    }
                     $allcateg[0]['selected'] = true;
                 } else {
                     $allcateg[0]['selected'] = false;
                 }
 
-                $customtemplate = array_merge(
+                $categoryselect['options'] = array_merge(
                     $allcateg,
-                    $editoption['categoryselect']->options,
+                    $categoryselect['options'],
                 );
-                $editoption['categoryselect']->options = $customtemplate;
+                $editoption['categoryselect'] = $categoryselect;
             } else {
                 // If no categ we don't display this.
                 unset($editoption['categoryselect']);
