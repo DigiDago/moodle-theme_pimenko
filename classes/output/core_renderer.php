@@ -333,7 +333,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
             foreach ($cats as $cat) {
                 if (
-                    !($theme->settings->menuheadercateg == 'excludehidden' && $cat->visible == 0) &&
+                    $cat->visible &&
+                    $cat->is_uservisible() &&
+                    $this->are_all_parents_visible($cat) &&
                     $cat->get_parent_coursecat()->id == 0
                 ) {
                     $dropdownitem = new stdClass();
@@ -367,7 +369,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $theme = theme_config::load('pimenko');
 
         foreach ($cats as $cat) {
-            if (!($theme->settings->menuheadercateg == 'excludehidden' && $cat->visible == 0)) {
+            if ($cat->visible && $cat->is_uservisible() && $this->are_all_parents_visible($cat)) {
                 $dropdownitem = new stdClass();
                 $dropdownitem->name = $cat->get_formatted_name();
                 $dropdownitem->url = $cat->get_view_link();
@@ -390,6 +392,35 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param login $form The renderable.
      *
      * @return string
+     */
+    /**
+     * Ensure all parent categories are visible.
+     * A child must be hidden if any ancestor is hidden, regardless of the child's own visible flag.
+     *
+     * @param core_course_category $category
+     * @return bool
+     */
+    private function are_all_parents_visible(core_course_category $category): bool {
+        $parentids = $category->get_parents();
+        if (empty($parentids)) {
+            return true;
+        }
+        foreach ($parentids as $pid) {
+            $parent = core_course_category::get($pid, IGNORE_MISSING);
+            if ($parent && !$parent->visible) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Renders the login page with the provided login form and additional settings.
+     * This method prepares the context for rendering the login form template,
+     * including dynamic adjustments based on configuration and theme settings.
+     *
+     * @param login $form The login form object to be rendered.
+     * @return string The rendered HTML output of the login page.
      */
     public function render_login(login $form) {
         global $CFG, $SITE;

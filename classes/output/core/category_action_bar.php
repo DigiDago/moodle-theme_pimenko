@@ -84,13 +84,7 @@ class category_action_bar extends \core_course\output\category_action_bar {
             if (count($categories) >= 1) {
                 foreach ($categories as $id => $cat) {
                     $category = core_course_category::get($id);
-                    if (
-                        $category->visible ||
-                        has_capability(
-                            'moodle/course:viewhiddencourses',
-                            context_coursecat::instance($category->id),
-                        )
-                    ) {
+                    if ($category->visible && $category->is_uservisible() && $this->are_all_parents_visible($category)) {
                         $url = new moodle_url(
                             $this->page->url,
                             ['categoryid' => $id],
@@ -130,6 +124,28 @@ class category_action_bar extends \core_course\output\category_action_bar {
         }
 
         return new \stdClass();
+    }
+
+    /**
+     * Ensure all parent categories are visible.
+     * A child must be hidden if any ancestor is hidden, regardless of the child's own visible flag.
+     *
+     * @param core_course_category $category
+     * @return bool
+     */
+    private function are_all_parents_visible(core_course_category $category): bool {
+        $parentids = $category->get_parents();
+        if (empty($parentids)) {
+            return true;
+        }
+        foreach ($parentids as $pid) {
+            // Use core API to fetch parent category and check its visible flag only.
+            $parent = core_course_category::get($pid, IGNORE_MISSING);
+            if ($parent && !$parent->visible) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
