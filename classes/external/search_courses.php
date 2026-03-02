@@ -45,6 +45,7 @@ use core_external\external_value;
 use core_external\external_warnings;
 use Exception;
 use theme_config;
+use theme_pimenko\util;
 
 /**
  * Class that handles the search of courses in the platform, extending the core functionality
@@ -493,11 +494,18 @@ class search_courses extends core_course_external {
                 continue;
             }
 
-            $categoryvisible = $DB->get_field(
-                'course_categories',
-                'visible',
-                ['id' => $course->category],
-            );
+            $coursecat = core_course_category::get($course->category, IGNORE_MISSING);
+            if (
+                !$coursecat
+                || !$coursecat->visible
+                || !$coursecat->is_uservisible()
+                || !util::are_all_parents_visible($coursecat)
+            ) {
+                $categoryvisible = 0;
+            } else {
+                $categoryvisible = 1;
+            }
+
             if (
                 (
                     theme_config::load(
@@ -528,6 +536,7 @@ class search_courses extends core_course_external {
             'warnings' => $warnings,
         ];
     }
+
 
     /**
      * Returns description of method parameters
