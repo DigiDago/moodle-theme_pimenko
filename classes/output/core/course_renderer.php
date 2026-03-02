@@ -39,6 +39,7 @@ use core_course_list_element;
 use core_course_category;
 use theme_config;
 use context_course;
+use theme_pimenko\util;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -376,6 +377,18 @@ class course_renderer extends \core_course_renderer {
             if ($course instanceof stdClass) {
                 $course = new core_course_list_element($course);
             }
+
+            // Check if course category is visible and all its parents are visible.
+            $coursecat = core_course_category::get($course->category, IGNORE_MISSING);
+            if (
+                !$coursecat
+                || !$coursecat->visible
+                || !$coursecat->is_uservisible()
+                || !util::are_all_parents_visible($coursecat)
+            ) {
+                continue;
+            }
+
             if (
                 $this->page->pagetype == "site-index" || array_key_exists(
                     $course->id,
@@ -698,8 +711,9 @@ class course_renderer extends \core_course_renderer {
         return $output;
     }
 
+
     /**
-     * Returns HTML to display a tree of subcategories and courses in the given category
+     * Renders HTML to display a tree of subcategories and courses in the given category
      *
      * @param coursecat_helper     $chelper various display options
      * @param core_course_category $coursecat top category (this category's name and description will NOT be added to the tree)
@@ -808,6 +822,14 @@ class course_renderer extends \core_course_renderer {
             // Categories.
             foreach ($cats as $cat) {
                 $coursecategory = core_course_category::get(is_object($cat) ? $cat->id : $cat);
+
+                if (
+                    !$coursecategory->visible
+                    || !$coursecategory->is_uservisible()
+                    || !util::are_all_parents_visible($coursecategory)
+                ) {
+                    continue;
+                }
 
                 $params['categoryid'] = $coursecategory->id;
                 $params['tagid'] = optional_param(

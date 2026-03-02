@@ -78,4 +78,39 @@ final class course_renderer_test extends \advanced_testcase {
             $html,
         );
     }
+
+    /**
+     * Test visibility of courses in categories when a parent category is hidden.
+     */
+    public function test_course_visibility_with_hidden_parent_category(): void {
+        global $PAGE;
+
+        // Enable catalog to use coursecat_tree logic.
+        set_config('enablecatalog', 1, 'theme_pimenko');
+
+        // Create parent category (HIDDEN).
+        $parentcat = $this->getDataGenerator()->create_category(['name' => 'Parent Hidden', 'visible' => 0]);
+        // Create child category (VISIBLE).
+        $childcat = $this->getDataGenerator()->create_category([
+            'name' => 'Child Visible',
+            'parent' => $parentcat->id,
+            'visible' => 1,
+        ]);
+        // Create course in child category.
+        $this->getDataGenerator()->create_course([
+            'fullname' => 'Visible Course',
+            'category' => $childcat->id,
+            'visible' => 1,
+        ]);
+
+        $renderer = new course_renderer($PAGE, null);
+
+        // 1. Test in catalogue (coursecat_tree).
+        // We call course_category(0) which will call coursecat_tree for all categories.
+        $html = $renderer->course_category(0);
+
+        $this->assertStringNotContainsString('Parent Hidden', $html);
+        $this->assertStringNotContainsString('Child Visible', $html);
+        $this->assertStringNotContainsString('Visible Course', $html);
+    }
 }
