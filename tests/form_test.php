@@ -14,16 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Unit tests for the form classes.
- *
- * @package    theme_pimenko
- * @copyright  Pimenko 2024
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace theme_pimenko;
 
-defined('MOODLE_INTERNAL') || die();
-
+use moodle_url;
 use theme_pimenko\form\date_form;
 
 /**
@@ -32,24 +25,32 @@ use theme_pimenko\form\date_form;
  * @package    theme_pimenko
  * @copyright  Pimenko 2024
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers \theme_pimenko\form\date_form
  */
-class theme_pimenko_form_testcase extends advanced_testcase {
-
+final class form_test extends \advanced_testcase {
     /**
-     * Test date_form definition.
+     * Tests the definition of the date form to ensure the form class can be properly instantiated.
+     *
+     * @return void
      */
-    public function test_date_form_definition() {
+    public function test_date_form_definition(): void {
         $this->resetAfterTest();
-        
+
         $url = new moodle_url('/');
         $customdata = [
             'name' => 'Test Date',
-            'urlselectedvalue' => time()
+            'urlselectedvalue' => time(),
         ];
-        
+
         // We can't easily test the output of the form in a unit test without a lot of mocking,
         // but we can at least check if the class can be instantiated.
-        $form = new date_form($url, (object)$customdata);
-        $this->assertInstanceOf(date_form::class, $form);
+        $form = new date_form(
+            $url,
+            (object) $customdata,
+        );
+        $this->assertInstanceOf(
+            date_form::class,
+            $form,
+        );
     }
 }

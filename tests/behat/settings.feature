@@ -1,4 +1,4 @@
-@core @core_admin @theme_pimenko @javascript
+@core @core_admin @theme @theme_pimenko @javascript
 Feature: Check if all setings are working.
 
   Background:
@@ -22,7 +22,7 @@ Feature: Check if all setings are working.
     Then the field "s_theme_pimenko_scss" matches value "body { background-color: #000; }"
 
   Scenario: Verify that the Pimenko Feature settings can be saved
-    Given I click on "Pimenko features" "link"
+    Given I click on "Pimenko Features" "link"
     And I click on "s_theme_pimenko_enablecatalog" "checkbox" forced
     And I set the field "s_theme_pimenko_enablecatalog" to "1"
     And I set the field "s_theme_pimenko_tagfilter" to "1"
@@ -30,7 +30,7 @@ Feature: Check if all setings are working.
     And I set the field "s_theme_pimenko_titlecatalog" to "New Catalog Title"
     And I set the field "s_theme_pimenko_showsubscriberscount" to "1"
     And I set the field "s_theme_pimenko_viewallhiddencourses" to "1"
-    And I set the field "s_theme_pimenko_catalogsummarymodal" to "1"
+    And I click on "s_theme_pimenko_catalogsummarymodal" "checkbox" forced
     And I set the field "s_theme_pimenko_displaycoverallpage" to "1"
     And I set the field "s_theme_pimenko_displayasthumbnail" to "1"
     And I set the field "s_theme_pimenko_displaytitlecourseunderimage" to "1"
@@ -42,7 +42,7 @@ Feature: Check if all setings are working.
     And I set the field "s_theme_pimenko_showactivitynavigation" to "0"
     And I set the field "s_theme_pimenko_showparticipantscourse" to "0"
     When I press "Save changes"
-    And I click on "Pimenko features" "link"
+    And I click on "Pimenko Features" "link"
     Then the field "s_theme_pimenko_enablecatalog" matches value "1"
     And the field "s_theme_pimenko_tagfilter" matches value "1"
     And the field "s_theme_pimenko_customfieldfilter" matches value "1"
@@ -60,7 +60,7 @@ Feature: Check if all setings are working.
     And the field "s_theme_pimenko_showparticipantscourse" matches value "0"
 
   Scenario: Verify that the Frontpage settings can be saved
-    Given I click on "Frontpage Block Settings" "link"
+    Given I click on "Home page settings" "link"
     And I click on "s_theme_pimenko_enablecarousel" "checkbox" forced
     And I set the field "s_theme_pimenko_enablecarousel" to "1"
     And I set the field "s_theme_pimenko_slideimagenr" to "2"
@@ -68,7 +68,7 @@ Feature: Check if all setings are working.
     And I set the field "s_theme_pimenko_showcontacts" to "1"
     And I set the field "s_theme_pimenko_showstartdate" to "1"
     When I press "Save changes"
-    And I click on "Frontpage Block Settings" "link"
+    And I click on "Home page settings" "link"
     Then the field "s_theme_pimenko_enablecarousel" matches value "1"
     And the field "s_theme_pimenko_slideimagenr" matches value "2"
     And the field "s_theme_pimenko_showcustomfields" matches value "1"
@@ -76,21 +76,21 @@ Feature: Check if all setings are working.
     And the field "s_theme_pimenko_showstartdate" matches value "1"
 
   Scenario: Verify that the Login settings can be saved
-    Given I click on "Login Page" "link"
+    Given I click on "Authentication page settings" "link"
     And I click on "s_theme_pimenko_hidemanuelauth" "checkbox" forced
     And I set the field "s_theme_pimenko_hidemanuelauth" to "1"
     And I click on "s_theme_pimenko_vanillalogintemplate" "checkbox" forced
     And I set the field "s_theme_pimenko_loginbgstyle" to "stretch"
     And I set the field "s_theme_pimenko_loginbgopacity" to "0.5"
     When I press "Save changes"
-    And I click on "Login Page" "link"
+    And I click on "Authentication page settings" "link"
     Then the field "s_theme_pimenko_hidemanuelauth" matches value "1"
     And the field "s_theme_pimenko_vanillalogintemplate" matches value "1"
     And the field "s_theme_pimenko_loginbgstyle" matches value "stretch"
     And the field "s_theme_pimenko_loginbgopacity" matches value "0.5"
 
   Scenario: Verify that the Navbar settings can be saved
-    Given I click on "Navbar" "link"
+    Given I click on "Navigation bar" "link"
     And I click on "s_theme_pimenko_hidesitename" "checkbox" forced
     And I set the field "s_theme_pimenko_hidesitename" to "1"
     And I click on "s_theme_pimenko_navbarcolor" "field" forced
@@ -99,7 +99,7 @@ Feature: Check if all setings are working.
     And I set the field "s_theme_pimenko_navbartextcolor" to "#445566"
     And I set the field "s_theme_pimenko_menuheadercateg" to "includehidden"
     When I press "Save changes"
-    And I click on "Navbar" "link"
+    And I click on "Navigation bar" "link"
     Then the field "s_theme_pimenko_hidesitename" matches value "1"
     And the field "s_theme_pimenko_navbarcolor" matches value "#112233"
     And the field "s_theme_pimenko_navbartextcolor" matches value "#445566"

@@ -25,94 +25,108 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage('theme_pimenko_footer', get_string('footersettings', 'theme_pimenko'));
+$page = new admin_settingpage(
+    'theme_pimenko_footer',
+    get_string(
+        'footersettings',
+        'theme_pimenko',
+    ),
+);
 
-$page->add(new admin_setting_heading('footersettings', get_string('footersettings', 'theme_pimenko'),
-    ''));
+$page->add(
+    new admin_setting_heading(
+        'footersettings',
+        get_string(
+            'footersettings',
+            'theme_pimenko',
+        ),
+        '',
+    ),
+);
 
 // Footer color.
-$name          = 'theme_pimenko/footercolor';
-$title         = get_string(
-        'footercolor',
-        'theme_pimenko'
+$name = 'theme_pimenko/footercolor';
+$title = get_string(
+    'footercolor',
+    'theme_pimenko',
 );
-$description   = get_string(
-        'footercolordesc',
-        'theme_pimenko'
+$description = get_string(
+    'footercolordesc',
+    'theme_pimenko',
 );
 $previewconfig = null;
-$setting       = new admin_setting_configcolourpicker(
-        $name,
-        $title,
-        $description,
-        '',
-        $previewconfig
+$setting = new admin_setting_configcolourpicker(
+    $name,
+    $title,
+    $description,
+    '',
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Footer text color.
-$name          = 'theme_pimenko/footertextcolor';
-$title         = get_string(
-        'footertextcolor',
-        'theme_pimenko'
+$name = 'theme_pimenko/footertextcolor';
+$title = get_string(
+    'footertextcolor',
+    'theme_pimenko',
 );
-$description   = get_string(
-        'footertextcolordesc',
-        'theme_pimenko'
+$description = get_string(
+    'footertextcolordesc',
+    'theme_pimenko',
 );
 $previewconfig = null;
-$setting       = new admin_setting_configcolourpicker(
-        $name,
-        $title,
-        $description,
-        '',
-        $previewconfig
+$setting = new admin_setting_configcolourpicker(
+    $name,
+    $title,
+    $description,
+    '',
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
 $page->add($setting);
 
 // Footer hoover text color.
-$name          = 'theme_pimenko/hooverfootercolor';
-$title         = get_string(
+$name = 'theme_pimenko/hooverfootercolor';
+$title = get_string(
     'hooverfootercolor',
-    'theme_pimenko'
+    'theme_pimenko',
 );
-$description   = get_string(
+$description = get_string(
     'hooverfootercolordesc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $previewconfig = null;
-$setting       = new admin_setting_configcolourpicker(
+$setting = new admin_setting_configcolourpicker(
     $name,
     $title,
     $description,
     '',
-    $previewconfig
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
 $page->add($setting);
 
 $setting = new theme_pimenko_simple_theme_settings(
-        $page,
-        'theme_pimenko',
-        'settings:footer:'
+    $page,
+    'theme_pimenko',
+    'settings:footer:',
 );
 
 for ($i = 1; $i <= 4; $i++) {
     $setting->add_headings(
-            'footercolumn',
-            $i
+        'footercolumn',
+        $i,
     );
     $setting->add_texts(
-            'footerheading',
-            $i
+        'footerheading',
+        $i,
     );
     $setting->add_superhtmleditors(
-            'footertext',
-            $i
+        'footertext',
+        $i,
     );
 }
 $settings->add($page);

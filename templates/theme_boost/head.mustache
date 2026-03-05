@@ -15,14 +15,28 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    Page header.
+    @template theme_pimenko/theme_boost/head
+
+    Page header for Boost theme.
+
+    Example context (json):
+    {
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "htmlattributes": "lang=\"en\"",
+            "page_title": "Test Page Title",
+            "favicon": "favicon.ico",
+            "googlefont": "Roboto",
+            "standard_head_html": ""
+        }
+    }
 }}
 {{{ output.doctype }}}
 <html {{{ output.htmlattributes }}}>
 <head>
     <title>{{{ output.page_title }}}</title>
     {{#output.favicon}}
-        <link rel="shortcut icon" href="{{{ output.favicon }}}"/>
+        <link rel="shortcut icon" href="{{{ output.favicon }}}">
     {{/output.favicon}}
     {{#output.googlefont}}
         <link rel="stylesheet"

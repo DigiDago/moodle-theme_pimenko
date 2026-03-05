@@ -27,190 +27,160 @@
 // This is the EN Lang package.
 defined('MOODLE_INTERNAL') || die();
 
-// A description shown in the admin theme selector.
-$string['choosereadme'] = 'Theme pimenko is a child theme of Boost. It adds some new features';
-// The name of our plugin.
-$string['pluginname'] = 'Pimenko';
-// The name of the second tab in the theme settings.
 $string['advancedsettings'] = 'Advanced settings';
-// The brand color setting.
-$string['brandcolor'] = 'Brand color';
-// The brand color setting description.
-$string['brandcolor_desc'] = 'Define a brand color.';
-// The button brand color setting.
-$string['brandcolorbutton'] = 'Button brand color';
-// The button brand color setting description.
-$string['brandcolorbuttondesc'] = 'Define a brand color for button.';
-// The button brand color setting.
+$string['allcategories'] = "All categories";
+$string['alltags'] = "All tags";
+$string['backgroundimage'] = 'Background image';
+$string['backgroundimage_desc'] = 'Add an image to be displayed as a background across the entire site.';
+$string['brandcolor'] = 'Main color';
+$string['brandcolor_desc'] = 'The main theme color that will be automatically applied to parts of the site (links, block titles, etc.).';
+$string['brandcolorbutton'] = 'Button color';
+$string['brandcolorbuttondesc'] = 'Background color for buttons';
 $string['brandcolortextbutton'] = 'Button text color';
-// The button brand color setting description.
-$string['brandcolortextbuttondesc'] = 'Define a text color for button.';
-// Name of the settings pages.
-$string['configtitle'] = 'Pimenko settings';
-// Name of the first settings tab.
-$string['generalsettings'] = 'General settings';
-// Preset files setting.
-$string['presetfiles'] = 'Additional theme preset files';
-// Preset files help text.
-$string['presetfiles_desc'] =
-    'Preset files can be used to dramatically alter the appearance of the theme. See <a href=https://docs.moodle.org/dev/Boost_Presets>Boost presets</a> for information on creating and sharing your own preset files, and see the <a href=https://moodle.net/boost>Presets repository</a> for presets that others have shared.';
-// Preset setting.
-$string['preset'] = 'Theme preset';
-// Preset help text.
-$string['preset_desc'] = 'Pick a preset to broadly change the look of the theme.';
-// Raw SCSS setting.
-$string['rawscss'] = 'Raw SCSS';
-// Raw SCSS setting help text.
-$string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will be injected at the end of the style sheet.';
-// Raw initial SCSS setting.
-$string['rawscsspre'] = 'Raw initial SCSS';
-// Raw initial SCSS setting help text.
-$string['rawscsspre_desc'] =
-    'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
-// We need to include a lang string for each block region.
-$string['region-side-pre'] = 'Right';
-
-// Favicon *******************************************************.
-
-$string['favicon'] = 'Favicon';
-$string['favicondesc'] = 'Add a favicon';
-
-// Site logo *******************************************************.
-
-$string['sitelogo'] = 'Site logo';
-$string['sitelogodesc'] = 'Add a logo for ur site';
-
-// Header picture *******************************************************.
-
-$string['navbarpicture'] = 'Navbar background';
-$string['navbarpicturedesc'] = 'Add a background image to the navigation bar, then you will have to adapt the style to your needs. You can target the "withnavbarpicture" element';
-
-// Navbar *******************************************************.
-$string['navbarsettings'] = 'Navbar';
-$string['navbarcolor'] = 'Navbar color';
-$string['navbarcolordesc'] = 'Add a background color to your navbar';
-$string['navbartextcolor'] = 'Navbar text color';
-$string['navbartextcolordesc'] = 'Add a text color to your navbar';
-$string['hoovernavbarcolor'] = 'Navbar hoover link color';
-$string['hoovernavbarcolordesc'] = 'Add a hoover text color to your navbar';
-
-// Profile page.
-$string['profile:joinedon'] = 'Joined on ';
-$string['profile:lastaccess'] = 'Last access ';
-$string['profile:basicinfo'] = 'Basic Information';
-$string['profile:contactinfo'] = 'Contact Information';
-
-// Login *******************************************************.
-$string['settings:loginsettings:vanillalogintemplate'] = 'Moodle login page';
-$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Use the classic authentication page in the official Moodle "Boost" theme';
-$string['loginsettings'] = 'Login Page';
-$string['loginsettingsheading'] = 'Customize the login page';
-$string['logindesc'] = 'Customize the login page with adding an image background and texts above and below the login box.';
-$string['loginbgimage'] = 'Background image';
-$string['loginbgimagedesc'] = 'Add a background image to the full size page.';
-$string['loginbgstyle'] = 'Login background style';
-$string['loginbgstyledesc'] = 'Select the style for the uploaded image.';
-$string['loginbgopacity'] = 'Login page header, navbar, login box and footer background opacity when there is a background image';
-$string['loginbgopacitydesc'] =
-    'Login background opacity for the header, navbar, login box and footer when there is a background image.';
-$string['logintextboxtop'] = 'Top text box';
-$string['logintextboxtopdesc'] = 'Add a custom text above the login box.';
-$string['logintextboxbottom'] = 'Bottom text box';
-$string['logintextboxbottomdesc'] = 'Add a custom text below the login box.';
-
-$string['stylecover'] = 'Cover';
-$string['stylestretch'] = 'Stretch';
-
-$string['hide'] = 'Hide';
-$string['show'] = 'Show';
-
-// Footer *******************************************************.
-$string['footersettings'] = 'Footer';
-$string['settings:footer:footercolumn'] = 'Footer column {$a}';
-$string['settings:footer:footerheading'] = 'Footer heading {$a}';
-$string['settings:footer:footertext'] = 'Footer text {$a}';
-$string['settings:footer:footerheadingdesc'] = 'h3 header for column';
-$string['settings:footer:footertextdesc'] = 'Add content for the footer.';
-$string['settings:footer:footercolumndesc'] = '';
-$string['footercolor'] = 'Footer color';
-$string['footercolordesc'] = 'Add a background color to your footer';
-$string['footertextcolor'] = 'Footer text color';
-$string['footertextcolordesc'] = 'Add a text color to your footer';
-$string['hooverfootercolor'] = 'Footer hoover link color';
-$string['hooverfootercolordesc'] = 'Add a hoover text color to your footer';
-
-// Completion.
-$string['completion-alt-manual-n'] = 'Not complete';
-$string['completion-alt-manual-n-override'] = 'Not complete';
-$string['completion-alt-manual-y'] = 'Not complete';
-$string['completion-alt-manual-y-override'] = 'Not complete';
-$string['completion-alt-auto-n'] = 'Not complete';
-$string['completion-alt-auto-n-override'] = 'Not complete';
-$string['completion-alt-auto-y'] = 'Not complete';
-$string['completion-alt-auto-y-override'] = 'Not complete';
-$string['completion-tooltip-manual-n'] = 'Click to mark as complete';
-$string['completion-tooltip-manual-n-override'] = 'Click to mark as complete';
-$string['completion-tooltip-manual-y'] = 'Click to mark as not complete';
-$string['completion-tooltip-manual-y-override'] = 'Click to mark as not complete';
+$string['brandcolortextbuttondesc'] = 'Color for button texts';
+$string['cardlabeldate'] = "Start date";
+$string['cardlabelformat'] = "Trainer";
+$string['catalogsettings'] = "Catalog";
+$string['catalogsettings_desc'] = 'Modify the behavior of the page with the <a href="/course/index.php" target="_blank">full course list</a>. These settings are effective after activating the catalog option';
+$string['catalogsummarymodal'] = "Displays the course summary in a pop-up window";
+$string['catalogsummarymodal_desc'] = 'This option hides the course summary at the thumbnail level. By clicking on the "i" icon, the summary appears in a pop-up window';
+$string['choosereadme'] = 'The Pimenko theme is a child theme of Boost. It adds some new features';
+$string['clearfilters'] = 'Reset filters';
+$string['close'] = "Close";
+$string['completion-alt-auto-enabled'] = 'The system marks this item as completed';
+$string['completion-alt-auto-n'] = 'Incomplete';
+$string['completion-alt-auto-n-override'] = 'Incomplete';
+$string['completion-alt-auto-y'] = 'Incomplete';
+$string['completion-alt-auto-y-override'] = 'Incomplete';
+$string['completion-alt-manual-enabled'] = 'Students can manually mark this item as completed';
+$string['completion-alt-manual-n'] = 'Incomplete';
+$string['completion-alt-manual-n-override'] = 'Incomplete';
+$string['completion-alt-manual-y'] = 'Incomplete';
+$string['completion-alt-manual-y-override'] = 'Incomplete';
+$string['completion-tooltip-auto-enabled'] = 'The system marks this item as completed';
 $string['completion-tooltip-auto-n'] = 'Automatic completion';
 $string['completion-tooltip-auto-n-override'] = 'Automatic completion';
+$string['completion-tooltip-auto-pass'] = 'Automatic completion';
 $string['completion-tooltip-auto-y'] = 'Automatic completion';
 $string['completion-tooltip-auto-y-override'] = 'Automatic completion';
-$string['completion-tooltip-auto-pass'] = 'Automatic completion';
-$string['completion-tooltip-auto-enabled'] = 'The system marks this item complete';
-$string['completion-tooltip-manual-enabled'] = 'Students can manually mark this item complete';
-$string['completion-alt-auto-enabled'] = 'The system marks this item complete';
-$string['completion-alt-manual-enabled'] = 'Students can manually mark this item complete';
-
-// Catalog.
-$string['viewcat'] = 'View cat';
-$string['viewcourse'] = 'View course';
-$string['nextmod'] = 'Next Activity';
-
-// Block Regions.
-$string['frontpage'] = 'Frontpage Block Settings';
-$string['settings:regions:frontpageblocksettingscription'] = '';
-$string['settings:regions:frontpageblocksettingscriptiondesc'] =
-    'On this page you can determine the composition of the homepage, which can be divided into 8 lines. For each line, you can determine the color and if it should be composed of one or more columns. Important : after making the changes, go to the homepage of your site to add content using blocks. You can find the homepage here : <a href= ' .
-    new moodle_url($CFG->wwwroot . '/?redirect=0') . '>Homepage</a>.';
-$string['settings:regions:blockrow'] = 'Block Region Row {$a}';
-$string['settings:regions:blockrowdesc'] = 'Add / set layout for block region row on front page.';
-
-// Block Regions colors.
-$string['settings:regions:blockregionrowbackgroundcolor'] = 'Row {$a} color';
-$string['settings:regions:blockregionrowbackgroundcolordesc'] = 'Add / set a color for the block region row on front page.';
-$string['settings:regions:blockregionrowtextcolor'] = 'Row {$a} text color';
-$string['settings:regions:blockregionrowtextcolordesc'] = 'Add / set a text color for the block region row on front page.';
-$string['settings:regions:blockregionrowlinkcolor'] = 'Row {$a} link color';
-$string['settings:regions:blockregionrowlinkcolordesc'] = 'Add / set a link color for the block region row on front page.';
-$string['settings:regions:blockregionrowlinkhovercolor'] = 'Row {$a} link hover color';
-$string['settings:regions:blockregionrowlinkhovercolordesc'] =
-    'Add / set a link hover color for the block region row on front page.';
-
-// Slide.
-$string['settings:frontslider:enablecarousel'] = 'Enable carousel';
-$string['settings:frontslider:enablecarouseldesc'] = 'Allows to display or not the carousel';
-$string['settings:frontslider:slideimagenr'] = 'Number of slides';
-$string['settings:frontslider:slideimagenrdesc'] = 'Define the number of slides you will use.
-                                                <br>Note: you will have to save this option to display new settings field.';
-$string['settings:frontslider:slideimage'] = 'Slide image {$a}';
-$string['settings:frontslider:slideimagedesc'] = 'Set a picture for this slide';
-$string['settings:frontslider:slidecaption'] = 'Slide caption {$a}';
-$string['settings:frontslider:slidecaptiondesc'] = 'Set a text for this slide';
-
-// Course card frontpage.
-$string['settings:frontcoursecard:showcustomfields'] = 'show customs fields';
-$string['settings:frontcoursecard:showcustomfieldsdesc'] = 'Show custom field in frontpage page course card';
-$string['settings:frontcoursecard:showcontacts'] = 'Show contacts';
-$string['settings:frontcoursecard:showcontactsdesc'] = 'Show contact in frontpage page course card';
-$string['settings:frontcoursecard:showstartdate'] = 'Show start date';
-$string['settings:frontcoursecard:showstartdatedesc'] = 'Show start date in frontpage page course card';
-
-// Fonts.
-$string['settings:font:googlefont'] = 'Google font';
-$string['settings:font:googlefontdesc'] = 'Please refer to the page: https://fonts.google.com/ to find your typography';
-
-// Frontpage Block Regions name.
+$string['completion-tooltip-manual-enabled'] = 'Students can manually mark this item as completed';
+$string['completion-tooltip-manual-n'] = 'Click to mark as completed';
+$string['completion-tooltip-manual-n-override'] = 'Click to mark as completed';
+$string['completion-tooltip-manual-y'] = 'Click to mark as incomplete';
+$string['completion-tooltip-manual-y-override'] = 'Click to mark as incomplete';
+$string['configcustommenuitemslogin'] = "If you want to display different links after authentication, you can define a custom menu here that will be displayed by the theme when you are authenticated. Each line consists of menu text, a URL (optional), a tooltip text (optional), and a language code or a comma-separated list of such codes (optional, to allow displaying items based on language). These items are separated by pipe characters (|). A hierarchical structure can be defined using hyphens at the beginning of lines, and separator lines can be indicated using ###. Example:<pre>Courses<br>-All courses|/course/<br>-Search courses|/course/search.php<br>-###<br>-FAQ|https://an-url.xyz/faq<br>-Preguntas más frecuentes|https://an-url.xyz/pmf||es<br>Mobile app|https://an-url.xyz/app|Download our app</pre>";
+$string['configtitle'] = 'Pimenko Options';
+$string['contactheading'] = "About";
+$string['contactsettings'] = "Contact us";
+$string['contactus_button_text'] = "Send us an email";
+$string['contactus_content'] = "Pimenko is based in France, in Lyon.<br>We are a player committed to NGOs, associations, training organizations, and the OpenSource community.<br>Want a custom development? Advice adapted to your needs? Contact us: <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>";
+$string['coursecover'] = "Course banner";
+$string['coursecoversettings'] = 'Thumbnails on course home pages';
+$string['coursecoversettings_desc'] = 'These options allow you to adjust how the image in the course header is displayed.';
+$string['courseimage'] = 'Course image';
+$string['customfieldfilter'] = "Display filters on custom fields";
+$string['customfieldfilter_desc'] = "This option allows you to add filters that are linked to custom course fields. Custom fields must be configured at the site level and completed in the course settings.";
+$string['custommenuitemslogin'] = 'Custom menu items after authentication';
+$string['customnavbarmenu'] = "Customization of navigation bar links and menus";
+$string['customnavbarmenu_desc'] = "These options allow you to modify links and menus in the navigation bar";
+$string['displayasthumbnail'] = 'Displays the image as a thumbnail';
+$string['displayasthumbnail_desc'] = 'If this option is enabled, the image will be displayed as a thumbnail with a maximum width of 400px to the right of the course header. If this option is not enabled, the image will be displayed as a banner that occupies the entire width of the course header.';
+$string['displaycoverallpage'] = 'Displays the image in the header of course home pages, resources, and activities';
+$string['displaycoverallpage_desc'] = 'If this option is enabled, the image will be displayed both on the course home page and in resources, activities, and course administration pages.';
+$string['displaytitlecourseunderimage'] = 'Display course title under the image';
+$string['displaytitlecourseunderimage_desc'] = 'If enabled, the course title will be displayed under the image.';
+$string['editcoverimage'] = "Change thumbnail";
+$string['enablecatalog'] = "Enable catalog display";
+$string['enablecatalog_desc'] = 'This option transforms the default display of the page with the <a href="/course/index.php" target="_blank">full course list</a>. They appear as a thumbnail with the course title and description if provided. If you have added a course image, it appears at the top of the thumbnail.';
+$string['enablegooglefont'] = 'Enable Google Fonts';
+$string['enablegooglefont_desc'] = 'Enable this option to allow the use of Google Fonts in this theme.';
+$string['entercourse'] = 'Enter';
+$string['favicon'] = 'Favicon';
+$string['favicondesc'] = 'Upload a favicon to use on the site';
+$string['filterbycustomfilter'] = 'Filter by custom fields';
+$string['footercolor'] = 'Footer color';
+$string['footercolordesc'] = 'Set the background color for the footer';
+$string['footersettings'] = 'Footer';
+$string['footertextcolor'] = 'Footer text color';
+$string['footertextcolordesc'] = 'Set the color for the footer text';
+$string['frontpage'] = 'Home page settings';
+$string['frontpagecardsettings'] = "Options for the presentation of course thumbnails on the home page";
+$string['frontpagecardsettings_desc'] = "If you display courses on the site's home page, they appear as thumbnails. These options allow you to determine the information to display.";
+$string['frontpagecontentsettings'] = "Home page content area options";
+$string['frontpagecontentsettings_desc'] = "Configure the content area for the home page";
+$string['generalsettings'] = 'General settings';
+$string['gradientcovercolor'] = "Display a foreground color";
+$string['gradientcovercolor_desc'] = "If you specify a color, it will be displayed in the foreground, i.e., over the image. Transparency is automatically applied to provide a filter effect.";
+$string['gradienttextcolor'] = "Change course title color";
+$string['gradienttextcolor_desc'] = "If you specify a color, it is used as the color for the course title. For example, you can use the white color code (#fff) to have a course title more visible on a dark-tinted image.";
+$string['h5pcss'] = 'CSS file for H5P';
+$string['h5pcss_desc'] = 'Add a CSS file that will be loaded and modify the design of H5P activities on your site.';
+$string['hide'] = 'Hide';
+$string['hidemanuelauth'] = 'Hide manual authentication';
+$string['hidemanuelauth_desc'] = "If enabled, manual authentication will be hidden. Use siteurl/login/index.php?adminpage=true to access manual authentication.";
+$string['hidesitename'] = "Hide site name";
+$string['hidesitename_desc'] = "This option allows you to hide the site name that appears in the navigation bar.";
+$string['hooverfootercolor'] = 'Highlight color for footer links';
+$string['hooverfootercolordesc'] = 'Set the highlight color for footer links';
+$string['hoovernavbarcolor'] = 'Color for navigation bar links';
+$string['hoovernavbarcolordesc'] = 'Set a color for navigation bar links';
+$string['labelcategory'] = "Filter by category";
+$string['labelsearch'] = "Or search";
+$string['leftblockloginhtmlcontent'] = 'Content area to the left of the authentication page';
+$string['leftblockloginhtmlcontentdesc'] = 'Add content that will be displayed above the left column.';
+$string['listuserrole'] = 'List of roles that see the "Participant" link';
+$string['listuserrole_desc'] = 'If the "showparticipantscourse" option is enabled, choose the users who see the "Participants" link in the secondary course menu. This allows you, for example, to hide this link from learners/students.';
+$string['loadmore'] = 'Load more';
+$string['loginbgimage'] = 'Background image';
+$string['loginbgimagedesc'] = 'Add a background image to the page.';
+$string['loginbgopacity'] = 'Content area opacity';
+$string['loginbgopacitydesc'] = 'Login background opacity for the header, navigation bar, login area, and footer when there is a background image.';
+$string['loginbgstyle'] = 'Login background style';
+$string['loginbgstyledesc'] = 'Select the style of the uploaded image.';
+$string['logindesc'] = 'Customize the login page by adding an image background and text above and below the login area.';
+$string['loginsettings'] = 'Authentication page settings';
+$string['loginsettingsheading'] = 'Customize the login page';
+$string['logintextboxbottom'] = 'Bottom content area';
+$string['logintextboxbottomdesc'] = 'Add custom content (text, image, etc.) at the bottom of the authentication block. It will be displayed across the full block.';
+$string['logintextboxtop'] = 'Top content area';
+$string['logintextboxtopdesc'] = 'Add custom content (text, image, etc.) at the top of the authentication block. It will be displayed across the full block.';
+$string['menuheadercateg'] = 'My categories';
+$string['menuheadercateg:disabled'] = 'Disable';
+$string['menuheadercateg:excludehidden'] = 'Enable exclusion of hidden categories';
+$string['menuheadercateg:includehidden'] = 'Enable inclusion of hidden categories';
+$string['menuheadercategdesc'] = 'Display site categories and subcategories in a menu.';
+$string['moodleactivitycompletion'] = "Enable Moodle activity completion at the top of the resources and activities page";
+$string['moodleactivitycompletion_desc'] = "By default, the Pimenko theme displays activity completion conditions as a badge at the bottom of each resource or activity. This option allows you to revert to Moodle's default behavior: activity completion conditions are displayed at the top of the page as a label.";
+$string['navbarcolor'] = 'Navigation bar color';
+$string['navbarcolordesc'] = 'Set a background color for the navigation bar';
+$string['navbarpicture'] = 'Navigation bar background';
+$string['navbarpicturedesc'] = 'Add a background image to the navigation bar. It is generally necessary to adapt the style (for example, the height of the navigation bar).';
+$string['navbarsettings'] = 'Navigation bar';
+$string['navbartextcolor'] = 'Navigation bar text color';
+$string['navbartextcolordesc'] = 'Set a color for the navigation bar text';
+$string['nextmod'] = 'Next activity';
+$string['no'] = 'No';
+$string['optionloginhtmlcontent'] = 'Options specific to the two-column display';
+$string['optionloginhtmlcontentdesc'] = 'This layout has customizable content areas. It also has the particularity of displaying authentication methods in two columns. If you use several authentication methods on your site (manual, SSO, LDAP, Auth2, etc.), manual authentication is displayed in the left column and other authentication methods are displayed in the right column.';
+$string['otherfeature'] = "Options to transform Moodle's behavior";
+$string['otherfeature_desc'] = "It is sometimes necessary to modify or enrich Moodle's classic behavior. These options allow you to finely adapt the platform to your needs.";
+$string['pimenkofeature'] = 'Pimenko Features';
+$string['placeholdersearch'] = "Keywords...";
+$string['pluginname'] = 'Pimenko';
+$string['preset'] = 'Theme presets';
+$string['preset_desc'] = 'Please choose a preset to change the look of the theme.';
+$string['presetfiles'] = 'Theme preset files';
+$string['presetfiles_desc'] = 'Preset files can be used to totally change the theme\'s presentation. <a href="https://docs.moodle.org/dev/Boost_Presets">See Moodle documentation</a> for information on how to create and share your own preset files';
+$string['profile:basicinfo'] = 'General information';
+$string['profile:contactinfo'] = 'Contact';
+$string['profile:joinedon'] = 'Joined on ';
+$string['profile:lastaccess'] = 'Last access ';
+$string['rawscss'] = 'Raw SCSS';
+$string['rawscss_desc'] = 'This field allows you to specify SCSS or CSS code that will be injected at the end of the stylesheet.';
+$string['rawscsspre'] = 'Initial raw SCSS';
+$string['rawscsspre_desc'] = 'This field allows you to specify initialization SCSS code, which will be injected into the stylesheet before any other definition. Most of the time, this code will be used to define variables.';
+$string['region-side-post'] = 'Right';
+$string['region-side-pre'] = 'Left';
 $string['region-theme-front-a'] = 'Pimenko front-a';
 $string['region-theme-front-b'] = 'Pimenko front-b';
 $string['region-theme-front-c'] = 'Pimenko front-c';
@@ -232,170 +202,70 @@ $string['region-theme-front-r'] = 'Pimenko front-r';
 $string['region-theme-front-s'] = 'Pimenko front-s';
 $string['region-theme-front-t'] = 'Pimenko front-t';
 $string['region-theme-front-u'] = 'Pimenko front-u';
-$string['region-side-post'] = 'Right';
-$string['region-side-pre'] = 'Left';
-
-// Trad enter button in courselist.
-$string['entercourse'] = 'Enter';
-
-// Moodle activity completion design enabling setting.
-$string['moodleactivitycompletion'] = "Enable display of moodle activity completion";
-$string['moodleactivitycompletion_desc'] = "This option enables the default display of the activity completion used by moodle";
-
-// Show or not navigation in mod in course.
-$string['showactivitynavigation'] = "Show previous/next navigation for mods";
-$string['showactivitynavigation_desc'] = "This option allows you to show or hide the previous/next navigation in the activities";
-
-// Setting show participant tab or no.
-$string['showparticipantscourse'] = "Display the participant section in the secondary menu visible in the courses";
-$string['showparticipantscourse_desc'] =
-    "This option allows you to show or hide the 'Participants' section which is displayed by default in the secondary menu of the home page of a course.";
-
-$string['totop'] = 'Go to top';
-
-$string['listuserrole'] = 'List of user role';
-$string['listuserrole_desc'] =
-    'If the option showparticipantscourse is activated define the users who can see the participants tab';
-
-$string['unaddableblocks'] = 'Unneeded blocks';
-$string['unaddableblocks_desc'] =
-    'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
-
-$string['backgroundimage'] = 'Background image';
-$string['backgroundimage_desc'] =
-    'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
-
-$string['pimenkofeature'] = 'Pimenko features';
-
-// Catalog enabling setting.
-$string['catalogsettings'] = "Catalog";
-$string['catalogsettings_desc'] = "Configuring the catalog page";
-$string['customfieldfilter'] = "Enabling of the custom field filter";
-$string['customfieldfilter_desc'] = "Enable filters on course custom fields in the catalog";
-$string['enablecatalog'] = "Enabling of the catalog";
-$string['enablecatalog_desc'] = "Enable the catalog";
-
-$string['titlecatalog'] = "Title of the catalog";
-$string['titlecatalog_desc'] = "Define catalog title";
-
-$string['tagfilter'] = "Activation of the filter by catalog tags";
-$string['tagfilter_desc'] = "This option allows you to add a filter by tags at the level of the course catalog";
-
-$string['allcategories'] = "All categories";
-$string['alltags'] = "All tags";
-$string['labelcategory'] = "Filter by category";
-$string['labelsearch'] = "Or search";
-$string['placeholdersearch'] = "Key words...";
+$string['removedprimarynavitems'] = "Menu links to remove";
+$string['removedprimarynavitems_desc'] = 'Indicate the identifiers of the links to remove from the navigation bar. The identifiers must be separated by a "," For example, to remove the home page, my courses page, dashboard, and site administration, use: <br><pre>home,courses,myhome,siteadmin</pre>';
+$string['rightblockloginhtmlcontent'] = 'Content area to the right of the authentication page';
+$string['rightblockloginhtmlcontentdesc'] = 'Add content that will be displayed above the right column.';
 $string['search'] = "Search";
-$string['close'] = "Close";
-
-// Show the count of subscribers.
-$string['showsubscriberscount'] = 'Show the count of subscribers';
-$string['showsubscriberscount_desc'] = 'Allows to show the count of subscribers on the cards of courses';
-$string['subscribers'] = 'subscribers';
-
-$string['viewallhiddencourses'] = "Show hidden courses on the 'course/index.php' page for synopsis enrol";
-$string['viewallhiddencourses_desc'] = "Enable / Disable hidden courses";
-
-$string['catalogsummarymodal'] = "Display catalog course summary as a modal";
-$string['catalogsummarymodal_desc'] = "Allows the display of the summary of the courses of the catalog in the form of a modal";
-
-// Other feature heading.
-$string['otherfeature'] = "Other features";
-$string['otherfeature_desc'] = "Configuring other features of Pimenko theme";
-
-// Slider heading settings.
-$string['slidersettings'] = "Options for slider";
-$string['slidersettings_desc'] = "Configure the carousel for the homepage";
-
-// Front page content settings heading.
-$string['frontpagecontentsettings'] = "Options for front page content ";
-$string['frontpagecontentsettings_desc'] = "Configure the front page content row";
-
-// Card settings heading.
-$string['frontpagecardsettings'] = "Options for course cards on the home page";
-$string['frontpagecardsettings_desc'] = "Configure the display of cards on the home page";
-
-// Hide site name setting.
-$string['hidesitename'] = "Hide site name";
-$string['hidesitename_desc'] = "This option allow to hide the site name";
-$string['cardlabelformat'] = "Former";
-$string['cardlabeldate'] = "Start date";
-
-$string['contactsettings'] = "Contact us";
-$string['contactheading'] = "About us";
-$string['contactus_content'] = "Pimenko is based in France, in Lyon.<br>
-We are a committed player with NGOs, associations, training organizations and in the OpenSource community.<br>
-Want a custom development? Advice tailored to your needs? Contact us : <a href='mailto:support@pimenko.com' target='_blank' style='font-weight: bold;'>support@pimenko.com</a>";
-$string['contactus_button_text'] = "Send us a mail";
-
-// Custom navbar menu.
-// Custom navbar menu.
-$string['removedprimarynavitems'] = "Menu tabs to delete";
-$string['removedprimarynavitems_desc'] = "You can also fill in the identifiers of the menus to be removed from the navbar. Each identifier must be separated by a ',' example:<br>
-<pre>home,myhome,courses,siteadmin</pre>";
-$string['customnavbarmenu'] = "Customizing the menu in the navigation bar";
-$string['customnavbarmenu_desc'] = "The following options will allow you to change the appearance of the menu in the navigation bar";
-$string['custommenuitemslogin'] = 'Custom menu items on login';
-$string['configcustommenuitemslogin'] = "A custom menu available when you're login may be configured here. Enter each menu item on a new line with format: menu text, a link URL (optional, not for a top menu item with sub-items), a tooltip title (optional) and a language code or comma-separated list of codes (optional, for displaying the line to users of the specified language only), separated by pipe characters. Lines starting with a hyphen will appear as menu items in the previous top level menu and ### makes a divider. For example:
-<pre>
-Courses
--All courses|/course/
--Course search|/course/search.php
--###
--FAQ|https://someurl.xyz/faq
--Preguntas más frecuentes|https://someurl.xyz/pmf||es
-Mobile app|https://someurl.xyz/app|Download our app
-</pre>";
-
-// Cover image for course.
-$string['coursecover'] = "Course cover";
-$string['coursecoversettings'] = "Determine the settings for the image display (thumbnail) at the top of the course pages";
-$string['coursecoversettings_desc'] = "It is possible to add an image in the header of the pages of a course. The options below allow you to choose how these images are displayed.";
-$string['editcoverimage'] = "Change cover image";
-$string['gradienttextcolor'] = "
-If you specify a color, it will be used to change the color of the course title displayed in the header. For example, you can put the color code of white (#fff) to have a more visible course title on a dark photo.";
-$string['gradienttextcolor_desc'] = "This option allows you to change the color of the text displayed on the banner";
-$string['displaycoverallpage'] = "Display the image in the header of all course pages";
-$string['displaycoverallpage_desc'] = "If this option is activated, the image will be displayed both on the course home page but also in the activities, resources or administration pages of the course";
-$string['displayasthumbnail'] = "Display the image as a thumbnail or as the full width of the course header";
-$string['displayasthumbnail_desc'] = "If this option is activated, the image will be displayed as a thumbnail, i.e. a rectangle of approximately . If this option is not enabled, the image will be displayed as a banner that takes up the entire width of the course header.";
-// Options pour la vignette des cours.
-$string['gradientcovercolor'] = "Apply a color to the image";
-$string['gradientcovercolor_desc'] = "If you specify a color, it will be displayed over the image with transparency to give a color mask effect above the image";
-// Options d'affichage pour le menu des cate.
-$string['menuheadercateg']                    = 'My categories';
-$string['menuheadercategdesc']                = 'Show a dropdown menu with user\'s categories';
-$string['menuheadercateg:excludehidden']      = 'Enable excluding hidden categories';
-$string['menuheadercateg:includehidden']      = 'Enable including hidden categories';
-$string['menuheadercateg:disabled']           = 'Disable';
-$string['filterbycustomfilter'] = 'Filter by custom field';
+$string['settings:font:googlefont'] = 'Google Font';
+$string['settings:font:googlefontdesc'] = 'Use a Google Font. See documentation at <a href="https://fonts.google.com/">https://fonts.google.com/</a>';
+$string['settings:footer:footercolumn'] = 'Customize column {$a} footer';
+$string['settings:footer:footercolumndesc'] = '';
+$string['settings:footer:footerheading'] = 'Column {$a} footer title';
+$string['settings:footer:footerheadingdesc'] = 'Add a title (it will be h3 level)';
+$string['settings:footer:footertext'] = 'Column {$a} footer content area';
+$string['settings:footer:footertextdesc'] = 'Add content for the footer.';
+$string['settings:frontcoursecard:showcontacts'] = 'Display teachers';
+$string['settings:frontcoursecard:showcontactsdesc'] = 'Display teachers in the course thumbnail';
+$string['settings:frontcoursecard:showcustomfields'] = 'Display custom fields';
+$string['settings:frontcoursecard:showcustomfieldsdesc'] = 'Display custom fields in the course thumbnail';
+$string['settings:frontcoursecard:showstartdate'] = 'Display start date';
+$string['settings:frontcoursecard:showstartdatedesc'] = 'Display the start date in the thumbnail';
+$string['settings:frontslider:enablecarousel'] = 'Enable slideshow';
+$string['settings:frontslider:enablecarouseldesc'] = 'Enable the slideshow at the top of the site\'s home page.';
+$string['settings:frontslider:slidecaption'] = 'Image {$a} caption';
+$string['settings:frontslider:slidecaptiondesc'] = 'Define a text for the image';
+$string['settings:frontslider:slideimage'] = 'Image {$a}';
+$string['settings:frontslider:slideimagedesc'] = 'Add an image. Recommended size is 1600px x 400px or more.';
+$string['settings:frontslider:slideimagenr'] = 'Number of images';
+$string['settings:frontslider:slideimagenrdesc'] = 'Select the number of images you want to add then click Save to save your choice. Additional image upload areas will appear.';
+$string['settings:loginsettings:vanillalogintemplate'] = 'Moodle authentication page';
+$string['settings:loginsettings:vanillalogintemplatedesc'] = 'Use the classic authentication page from the official Moodle "Boost" theme';
+$string['settings:regions:blockregionrowbackgroundcolor'] = 'Area {$a} background color';
+$string['settings:regions:blockregionrowbackgroundcolordesc'] = 'Set a background color for the content area on the first page.';
+$string['settings:regions:blockregionrowlinkcolor'] = 'Area {$a} link color';
+$string['settings:regions:blockregionrowlinkcolordesc'] = 'Set a color for links in the content area on the first page.';
+$string['settings:regions:blockregionrowlinkhovercolor'] = 'Area {$a} link hover color';
+$string['settings:regions:blockregionrowlinkhovercolordesc'] = 'Set a color for hovered links in the content area on the first page.';
+$string['settings:regions:blockregionrowtextcolor'] = 'Area {$a} text color';
+$string['settings:regions:blockregionrowtextcolordesc'] = 'Set a text color for the content area on the first page.';
+$string['settings:regions:blockrow'] = 'Content area {$a}';
+$string['settings:regions:blockrowdesc'] = 'Define the layout for the content area on the first page.';
+$string['settings:regions:frontpageblocksettingscription'] = '';
+$string['settings:regions:frontpageblocksettingscriptiondesc'] = 'You can compose the home page: it can be divided into 8 rows to allow you to add your content. For each row, options allow you to choose colors and the number of columns. Important: to add content in the areas, you must enable editing mode on the home page. You can then drag/drop blocks into the created areas. You can find the home page here: <a href="/?redirect=0">Home page</a>.';
+$string['show'] = 'Show';
+$string['showactivitynavigation'] = "Enable navigation features in each activity and resource";
+$string['showactivitynavigation_desc'] = "Since Moodle 4.0, navigation between activities and resources is no longer available at the bottom of the page. This option allows you to display a link to the previous and next activity or resource. It also displays a drop-down menu to access any content in the course.";
+$string['showparticipantscourse'] = "Displays the participant link in the secondary course menu to chosen users";
+$string['showparticipantscourse_desc'] = "This option allows you to choose the users for whom the \"Participants\" link is displayed in the secondary course menu. You must determine the roles that see the link in the menu below. If this option is not enabled, only administrators will see the \"participant\" link.";
+$string['showsubscriberscount'] = 'Display number of enrolled users on course thumbnails';
+$string['showsubscriberscount_desc'] = 'This option automatically displays the number of enrolled users on course thumbnails';
+$string['sitelogo'] = 'Site logo';
+$string['sitelogodesc'] = 'Add a logo in the navigation bar.';
+$string['slidersettings'] = "Home page slideshow";
+$string['slidersettings_desc'] = "Configure the slideshow for the home page";
+$string['stylecover'] = 'Cover';
+$string['stylestretch'] = 'Stretch';
+$string['subscribers'] = 'enrolled';
+$string['tagfilter'] = "Displays a filter system linked to the course tag feature";
+$string['tagfilter_desc'] = "This option adds a drop-down menu to filter courses by tags. They must be added in a course's settings (<strong>Tags</strong> section).";
+$string['titlecatalog'] = "Catalog title";
+$string['titlecatalog_desc'] = 'This option modifies the title of the page with the <a href="/course/index.php" target="_blank">full course list</a>.';
+$string['totop'] = 'Go to top';
+$string['unaddableblocks'] = 'Unnecessary blocks';
+$string['unaddableblocks_desc'] = 'The specified blocks are not necessary when using this theme and will not be listed in the \'Add a block\' menu.';
+$string['viewallhiddencourses'] = 'Displays courses with "hidden" visibility for the synopsis enrollment method';
+$string['viewallhiddencourses_desc'] = 'If the course visibility is set to "hidden", this option still allows participants to see the course thumbnail in the catalog. Note: this option only works with the "enrol synopsis" enrollment method developed by Pimenko. When a participant clicks on the course, they access the description page and can enroll while waiting for it to open.';
+$string['viewcat'] = 'View category';
+$string['viewcourse'] = 'View course';
 $string['yes'] = 'Yes';
-$string['no'] = 'No';
-
-$string['optionloginhtmlcontent'] = 'Options specific to the login page in landscape';
-$string['optionloginhtmlcontentdesc'] = 'These settings are displayed when you activate the display of authentication in landscape mode';
-$string['leftblockloginhtmlcontent'] = 'Left block for the login page';
-$string['leftblockloginhtmlcontentdesc'] = 'Allows the creation of an HTML content block that will be displayed in the left part of the login page';
-$string['rightblockloginhtmlcontent'] = 'Right block for the login page';
-$string['rightblockloginhtmlcontentdesc'] = 'Allows the creation of an HTML content block that will be displayed in the left part of the login page';
-
-// H5P.
-$string['h5pcss'] = 'CSS file for H5P';
-$string['h5pcss_desc'] = 'Add a CSS file that will only be loaded by H5P to change the design';
-
-$string['loadmore'] = 'Load more';
-
-// Add deprecated Moodle.
-$string['clearfilters'] = 'Clear filters';
-$string['courseimage'] = 'Course image';
-
-$string['displaytitlecourseunderimage'] = 'Display course title under image';
-$string['displaytitlecourseunderimage_desc'] = 'If enabled, the course title will be displayed under the image.';
-
-$string['hidemanuelauth'] = 'Hide manual authentification';
-$string['hidemanuelauth_desc'] = "If enabled, manual authentication will be hidden. Use yoursite/login/index.php?adminpage=true to access manual authentication.";
-
-// File: lang/en/theme_pimenko.php
-$string['enablegooglefont'] = 'Enable Google Fonts';
-$string['enablegooglefont_desc'] = 'Enable this option to allow the use of Google Fonts in this theme.';

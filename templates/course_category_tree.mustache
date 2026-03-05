@@ -1,3 +1,16 @@
+{{!
+    @template theme_pimenko/course_category_tree
+
+    Arborescence des catégories avec actions repliables et contenu HTML fourni.
+
+    Example context (json):
+    {
+        "contentattributes": "id=\"cat-tree\" class=\"category-tree\"",
+        "linkclass": "toggle-all",
+        "linkname": "Tout replier",
+        "categorycontent": "<ul><li>Catégorie</li></ul>"
+    }
+}}
 <div {{{contentattributes}}}>
     <div class="collapsible-actions">
         <a href="#" class="{{{linkclass}}}">{{{linkname}}}</a>
@@ -6,10 +19,10 @@
 </div>
 {{#js}}
     require(['jquery'], function($) {
-        <!--   We open all 1st rank category by default. -->
+        // Open all 1st rank categories by default.
         $(document).ready(function() {
-            if($('.categoryname')) {
-            $('.categoryname').click();
+            if ($('.categoryname')) {
+                $('.categoryname').click();
             }
         });
     });

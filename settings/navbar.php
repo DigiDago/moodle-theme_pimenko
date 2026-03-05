@@ -25,25 +25,60 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage('theme_pimenko_navbar',
-    get_string('navbarsettings', 'theme_pimenko'));
+$page = new admin_settingpage(
+    'theme_pimenko_navbar',
+    get_string(
+        'navbarsettings',
+        'theme_pimenko',
+    ),
+);
 
-$page->add(new admin_setting_heading('navbarsettings', get_string('navbarsettings', 'theme_pimenko'),
-    ''));
+$page->add(
+    new admin_setting_heading(
+        'navbarsettings',
+        get_string(
+            'navbarsettings',
+            'theme_pimenko',
+        ),
+        '',
+    ),
+);
 
 // Site logo.
 $name = 'theme_pimenko/sitelogo';
-$title = get_string('sitelogo', 'theme_pimenko');
-$description = get_string('sitelogodesc', 'theme_pimenko');
-$setting = new admin_setting_configstoredfile($name, $title, $description, 'sitelogo');
+$title = get_string(
+    'sitelogo',
+    'theme_pimenko',
+);
+$description = get_string(
+    'sitelogodesc',
+    'theme_pimenko',
+);
+$setting = new admin_setting_configstoredfile(
+    $name,
+    $title,
+    $description,
+    'sitelogo',
+);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Header picture.
 $name = 'theme_pimenko/navbarpicture';
-$title = get_string('navbarpicture', 'theme_pimenko');
-$description = get_string('navbarpicturedesc', 'theme_pimenko');
-$setting = new admin_setting_configstoredfile($name, $title, $description, 'navbarpicture');
+$title = get_string(
+    'navbarpicture',
+    'theme_pimenko',
+);
+$description = get_string(
+    'navbarpicturedesc',
+    'theme_pimenko',
+);
+$setting = new admin_setting_configstoredfile(
+    $name,
+    $title,
+    $description,
+    'navbarpicture',
+);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
@@ -51,17 +86,17 @@ $page->add($setting);
 $name = 'theme_pimenko/hidesitename';
 $title = get_string(
     'hidesitename',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'hidesitename_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -69,11 +104,11 @@ $page->add($setting);
 $name = 'theme_pimenko/navbarcolor';
 $title = get_string(
     'navbarcolor',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'navbarcolordesc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $previewconfig = null;
 $setting = new admin_setting_configcolourpicker(
@@ -81,7 +116,7 @@ $setting = new admin_setting_configcolourpicker(
     $title,
     $description,
     '',
-    $previewconfig
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
@@ -91,11 +126,11 @@ $page->add($setting);
 $name = 'theme_pimenko/navbartextcolor';
 $title = get_string(
     'navbartextcolor',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'navbartextcolordesc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $previewconfig = null;
 $setting = new admin_setting_configcolourpicker(
@@ -103,7 +138,7 @@ $setting = new admin_setting_configcolourpicker(
     $title,
     $description,
     '',
-    $previewconfig
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
@@ -113,11 +148,11 @@ $page->add($setting);
 $name = 'theme_pimenko/hoovernavbarcolor';
 $title = get_string(
     'hoovernavbarcolor',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'hoovernavbarcolordesc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $previewconfig = null;
 $setting = new admin_setting_configcolourpicker(
@@ -125,54 +160,108 @@ $setting = new admin_setting_configcolourpicker(
     $title,
     $description,
     '',
-    $previewconfig
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
 $page->add($setting);
 
-$page->add(new admin_setting_heading('customnavbarmenu', get_string('customnavbarmenu', 'theme_pimenko'),
-    get_string('customnavbarmenu_desc', 'theme_pimenko')));
+$page->add(
+    new admin_setting_heading(
+        'customnavbarmenu',
+        get_string(
+            'customnavbarmenu',
+            'theme_pimenko',
+        ),
+        get_string(
+            'customnavbarmenu_desc',
+            'theme_pimenko',
+        ),
+    ),
+);
 
 $options = [
     'excludehidden' => get_string(
         'menuheadercateg:excludehidden',
-        'theme_pimenko'
+        'theme_pimenko',
     ),
     'includehidden' => get_string(
         'menuheadercateg:includehidden',
-        'theme_pimenko'
+        'theme_pimenko',
     ),
-    'disabled'      => get_string(
+    'disabled' => get_string(
         'menuheadercateg:disabled',
-        'theme_pimenko'
-    )
+        'theme_pimenko',
+    ),
 ];
-$setting = new admin_setting_configselect('theme_pimenko/menuheadercateg',
-    get_string('menuheadercateg', 'theme_pimenko'),
-    get_string('menuheadercategdesc', 'theme_pimenko'),
-'disabled',
-    $options);
+$setting = new admin_setting_configselect(
+    'theme_pimenko/menuheadercateg',
+    get_string(
+        'menuheadercateg',
+        'theme_pimenko',
+    ),
+    get_string(
+        'menuheadercategdesc',
+        'theme_pimenko',
+    ),
+    'disabled',
+    $options,
+);
 $page->add($setting);
 
 // Unaddable blocks.
 // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
 // Section links.
 $default = '';
-$setting = new admin_setting_configtext('theme_pimenko/removedprimarynavitems',
-    get_string('removedprimarynavitems', 'theme_pimenko'),
-    get_string('removedprimarynavitems_desc', 'theme_pimenko'), $default, PARAM_TEXT);
+$setting = new admin_setting_configtext(
+    'theme_pimenko/removedprimarynavitems',
+    get_string(
+        'removedprimarynavitems',
+        'theme_pimenko',
+    ),
+    get_string(
+        'removedprimarynavitems_desc',
+        'theme_pimenko',
+    ),
+    $default,
+    PARAM_TEXT,
+);
 $page->add($setting);
 
-$page->add(new admin_setting_configtextarea('custommenuitems', new lang_string('custommenuitems', 'admin'),
-    new lang_string('configcustommenuitems', 'admin'), '', PARAM_RAW, '50', '10'));
+$page->add(
+    new admin_setting_configtextarea(
+        'custommenuitems',
+        new lang_string(
+            'custommenuitems',
+            'admin',
+        ),
+        new lang_string(
+            'configcustommenuitems',
+            'admin',
+        ),
+        '',
+        PARAM_RAW,
+        '50',
+        '10',
+    ),
+);
 
 $page->add(
     new admin_setting_configtextarea(
         'theme_pimenko/custommenuitemslogin',
-        new lang_string('custommenuitemslogin', 'theme_pimenko'),
-        new lang_string('configcustommenuitemslogin', 'theme_pimenko'),
+        new lang_string(
+            'custommenuitemslogin',
+            'theme_pimenko',
+        ),
+        new lang_string(
+            'configcustommenuitemslogin',
+            'theme_pimenko',
+        ),
         '',
-        PARAM_RAW, '50', '10'));
+        PARAM_RAW,
+        '50',
+        '10',
+    ),
+);
 
 $settings->add($page);

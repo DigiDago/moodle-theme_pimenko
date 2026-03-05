@@ -36,7 +36,11 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
 
-$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+$hasblocks = (
+    strpos(
+        $blockshtml,
+        'data-block=',
+    ) !== false || !empty($addblockbutton));
 
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index') == true);
@@ -73,8 +77,10 @@ if ($PAGE->has_secondary_navigation()) {
     $customnav->initialise();
     $PAGE->set_secondarynav($customnav);
     $moremenu =
-        new core\navigation\output\more_menu($PAGE->secondarynav,
-            'nav-tabs');
+        new core\navigation\output\more_menu(
+            $PAGE->secondarynav,
+            'nav-tabs',
+        );
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
 }
 
@@ -86,8 +92,8 @@ $templatecontext = [
         true,
         [
             'context' => context_course::instance(SITEID),
-            "escape" => false
-        ]
+            "escape" => false,
+        ],
     ),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
@@ -106,14 +112,20 @@ $templatecontext = [
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'forceblockdraweropen' => $forceblockdraweropen,
     'addblockbutton' => $addblockbutton,
-    'hidesitename' => $theme->settings->hidesitename
+    'hidesitename' => $theme->settings->hidesitename,
 ];
 
 // Include js module.
-$PAGE->requires->js_call_amd('theme_pimenko/pimenko', 'init');
-$PAGE->requires->js_call_amd('theme_pimenko/completion', 'init');
+$PAGE->requires->js_call_amd(
+    'theme_pimenko/pimenko',
+    'init',
+);
+$PAGE->requires->js_call_amd(
+    'theme_pimenko/completion',
+    'init',
+);
 
 echo $OUTPUT->render_from_template(
     'theme_pimenko/frontpage',
-    $templatecontext
+    $templatecontext,
 );
