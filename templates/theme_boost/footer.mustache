@@ -15,7 +15,26 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    Page footer.
+    @template theme_pimenko/theme_boost/footer
+
+    Page footer for theme pimenko.
+
+    Example context (json):
+    {
+        "output": {
+            "has_communication_links": true,
+            "communication_url": "https://moodle.org",
+            "has_popover_links": true,
+            "page_doc_link": "<a href=\"#\">Page doc</a>",
+            "services_support_link": "<a href=\"#\">Support</a>",
+            "supportemail": "support@example.com",
+            "course_footer": "Course footer content",
+            "login_info": "Logged in as Admin",
+            "standard_footer_html": "Standard footer HTML",
+            "footer_custom_content": "Custom footer content",
+            "custom_menu_flat": []
+        }
+    }
 }}
 <div id="goto-top-link">
     {{! go to top is sticky to footer so needs to be sibling }}
@@ -57,7 +76,6 @@
         {{{ output.standard_footer_html }}}
     </div>
     <div class="container">
-        <div id="course-footer">{{{ output.course_footer }}}</div>
         <!-- Custom footer content -->
         {{{ output.footer_custom_content }}}
         {{{ output.login_info }}}

@@ -28,8 +28,9 @@
     {
         "output": {
             "doctype": "<!DOCTYPE html>",
-            "htmlattributes": "HTML attributes",
+            "htmlattributes": "lang=\"en\"",
             "bodyattributes": "HTML bodyattributes",
+            "page_title": "Login to Moodle",
             "standard_top_of_body_html": "The standard tags (typically skip links) that should be output just inside",
             "main_content": "<h1>Headers keep HTML validators happy</h1>",
             "logintextstartwrapper": "Some HTML content",
@@ -59,7 +60,10 @@
 </div>
 
 </body>
+{{! mustachelint-disable html-valid }}
+{{! Follow up Moodle on this but for some reason html is closed there ... }}
 </html>
+{{! mustachelint-enable html-valid }}
 {{#js}}
     M.util.js_pending('theme_boost/loader');
     require(['theme_boost/loader'], function() {

@@ -20,6 +20,17 @@
     @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 }}
 
+{{!
+    @template theme_pimenko/contactus
+
+    Bloc de contact simple affichant un texte configuré.
+
+    Example context (json):
+    {
+        "str": {"contactus_content, theme_pimenko": "Texte de contact"}
+    }
+}}
+
 <div class="container d-flex flex-column">
     <div class="card text-center">
         <p class="p-2">{{#str}} contactus_content, theme_pimenko{{/str}}</p>
@@ -28,19 +39,19 @@
 
 {{#js}}
     require(['jquery'], function($) {
-    // Hide or show save button for setting page.
-    let anchor = $(location).prop('hash').substr(1);
-    if ( anchor === '#theme_pimenko_contact' ) {
-    $('.settingsform .btn.btn-primary').addClass('d-none');
-    }
-    $('.settingsform .nav.nav-tabs .nav-item a').on('click', function(){
-    let url = this.href;
-    let anchor = url.substring(url.indexOf('#'));
-    if ( anchor === '#theme_pimenko_contact' ) {
-    $('.settingsform .btn.btn-primary').addClass('d-none');
-    } else {
-    $('.settingsform .btn.btn-primary').removeClass('d-none');
-    }
-    });
+        // Hide or show save button for setting page.
+        let anchor = $(location).prop('hash').substr(1);
+        if (anchor === '#theme_pimenko_contact') {
+            $('.settingsform .btn.btn-primary').addClass('d-none');
+        }
+        $('.settingsform .nav.nav-tabs .nav-item a').on('click', function() {
+            let url = this.href;
+            let anchor = url.substring(url.indexOf('#'));
+            if (anchor === '#theme_pimenko_contact') {
+                $('.settingsform .btn.btn-primary').addClass('d-none');
+            } else {
+                $('.settingsform .btn.btn-primary').removeClass('d-none');
+            }
+        });
     });
 {{/js}}

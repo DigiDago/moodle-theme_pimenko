@@ -24,14 +24,23 @@ use context_system;
  *
  * Extends the H5P renderer so that we are able to override the relevant
  * functions declared there
+ *
+ * @package    theme_pimenko
+ * @copyright  Pimenko 2019
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_h5p_renderer extends \core_h5p\output\renderer {
     /**
-     * Add styles when an H5P is displayed.
+     * Alters the styles being loaded for H5P content.
      *
-     * @param array $styles Styles that will be applied.
-     * @param array $libraries Libraries that wil be shown.
-     * @param string $embedType How the H5P is displayed.
+     * This method allows the addition of custom styles defined in the theme
+     * configuration to be applied to H5P content. If a custom CSS file is
+     * configured, its URL is added to the styles array.
+     *
+     * @param array  $styles An array of style objects that will be modified to include additional styles.
+     * @param array  $libraries An array of H5P libraries being used.
+     * @param string $embedtype Specifies how the content is embedded (e.g., div, iframe).
+     * @return void
      */
     public function h5p_alter_styles(&$styles, $libraries, $embedtype) {
         global $CFG;
@@ -53,5 +62,4 @@ class core_h5p_renderer extends \core_h5p\output\renderer {
             ];
         }
     }
-
 }

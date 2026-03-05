@@ -66,24 +66,7 @@
                 }
             ]
         },
-        "additionaloptions": {
-            "options": [
-                {
-                    "url": "\/course\/index.php\/?categoryid=281",
-                    "string": "Action 1"
-                    "attributes": [
-                        {
-                            "name": "data-id",
-                            "value": "1"
-                        },
-                        {
-                            "name": "aria-role",
-                            "value": "test"
-                        }
-                    ]
-                }
-            ]
-        }
+        "additionaloptions": "<div class=\"action-menu text-inline ms-auto\">...</div>"
     }
 }}
 <div class="container-fluid tertiary-navigation" id="action_bar">
@@ -107,23 +90,7 @@
                         {{> core/url_select }}
                     </div>
                 {{/tagselect}}
-                {{#additionaloptions}}
-                    <div class="ml-auto d-flex">
-                        <div class="navitem dropdown">
-                            <button aria-label="{{#str}}moreactions{{/str}}" class="btn btn-secondary dropdown-toggle" id="dropdown-actions"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-controls="moreactionsmenu">
-                                {{#str}}moremenu{{/str}}
-                            </button>
-
-                            <div id="moreactionsmenu" class="dropdown-menu" aria-labelledby="dropdown-actions" role="menu">
-                                {{#options}}
-                                    <a role="menuitem" class="dropdown-item" {{#attributes}}{{name}}="{{value}}"{{/attributes}} href="{{url}}"
-                                    tabindex="-1">{{string}}</a>
-                                {{/options}}
-                            </div>
-                        </div>
-                    </div>
-                {{/additionaloptions}}
+                {{{additionaloptions}}}
             </div>
         </div>
     </div>

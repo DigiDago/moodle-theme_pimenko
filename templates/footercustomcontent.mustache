@@ -14,18 +14,40 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/footercustomcontent
+
+    Contenu personnalisé du pied de page avec colonnes configurables.
+
+    Example context (json):
+    {
+        "columns": [
+            {
+                "gridcount": 4,
+                "heading": {
+                    "classheading": "h1",
+                    "heading": "<h3>Titre<\/h3>"
+                },
+                "text": {
+                    "classtext": "t1",
+                    "text": "<p>Texte<\/p>"
+                }
+            }
+        ]
+    }
+}}
 <div class="container-fluid m-t-20" id="footer-1">
     <div class="row footerrow">
         {{#columns}}
             <div class="col-sm-{{gridcount}}">
                 <div class="p-l-10 p-t-20 text-left">
                     {{#heading}}
-                        <div id={{{classheading}}}>
+                        <div id="{{classheading}}">
                             {{{heading}}}
                         </div>
                     {{/heading}}
                     {{#text}}
-                        <div id={{{classtext}}}>
+                        <div id="{{classtext}}">
                             {{{text}}}
                         </div>
                     {{/text}}

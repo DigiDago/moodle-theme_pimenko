@@ -25,27 +25,43 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage('theme_pimenko_pimenkofeature',
-    get_string('pimenkofeature', 'theme_pimenko'));
+$page = new admin_settingpage(
+    'theme_pimenko_pimenkofeature',
+    get_string(
+        'pimenkofeature',
+        'theme_pimenko',
+    ),
+);
 
-$page->add(new admin_setting_heading('catalogsettings', get_string('catalogsettings', 'theme_pimenko'),
-    get_string('catalogsettings_desc', 'theme_pimenko')));
+$page->add(
+    new admin_setting_heading(
+        'catalogsettings',
+        get_string(
+            'catalogsettings',
+            'theme_pimenko',
+        ),
+        get_string(
+            'catalogsettings_desc',
+            'theme_pimenko',
+        ),
+    ),
+);
 
 // Activation of catalog view.
 $name = 'theme_pimenko/enablecatalog';
 $title = get_string(
     'enablecatalog',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'enablecatalog_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -53,17 +69,17 @@ $page->add($setting);
 $name = 'theme_pimenko/tagfilter';
 $title = get_string(
     'tagfilter',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'tagfilter_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -71,17 +87,17 @@ $page->add($setting);
 $name = 'theme_pimenko/customfieldfilter';
 $title = get_string(
     'customfieldfilter',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'customfieldfilter_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -89,34 +105,34 @@ $page->add($setting);
 $name = 'theme_pimenko/titlecatalog';
 $title = get_string(
     'titlecatalog',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'titlecatalog_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configtext(
     $name,
     $title,
     $description,
-    ''
+    '',
 );
 $page->add($setting);
 
 $name = 'theme_pimenko/showsubscriberscount';
 $title = get_string(
     'showsubscriberscount',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'showsubscriberscount_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -124,17 +140,17 @@ $page->add($setting);
 $name = 'theme_pimenko/viewallhiddencourses';
 $title = get_string(
     'viewallhiddencourses',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'viewallhiddencourses_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -142,38 +158,49 @@ $page->add($setting);
 $name = 'theme_pimenko/catalogsummarymodal';
 $title = get_string(
     'catalogsummarymodal',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'catalogsummarymodal_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
-$page->add(new admin_setting_heading('coursecoversettings', get_string('coursecoversettings', 'theme_pimenko'),
-    get_string('coursecoversettings_desc', 'theme_pimenko')));
+$page->add(
+    new admin_setting_heading(
+        'coursecoversettings',
+        get_string(
+            'coursecoversettings',
+            'theme_pimenko',
+        ),
+        get_string(
+            'coursecoversettings_desc',
+            'theme_pimenko',
+        ),
+    ),
+);
 
 // Display or not course cover option.
 $name = 'theme_pimenko/displaycoverallpage';
 $title = get_string(
     'displaycoverallpage',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'displaycoverallpage_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -181,35 +208,37 @@ $page->add($setting);
 $name = 'theme_pimenko/displayasthumbnail';
 $title = get_string(
     'displayasthumbnail',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'displayasthumbnail_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
 // Option to control displaying course title under image.
 $name = 'theme_pimenko/displaytitlecourseunderimage';
 $title = get_string(
-    'displaytitlecourseunderimage', // Updated option name
-    'theme_pimenko'
+    'displaytitlecourseunderimage',
+    // Updated option name.
+    'theme_pimenko',
 );
 $description = get_string(
-    'displaytitlecourseunderimage_desc', // Corresponding description
-    'theme_pimenko'
+    'displaytitlecourseunderimage_desc',
+    // Corresponding description.
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -217,11 +246,11 @@ $page->add($setting);
 $name = 'theme_pimenko/gradientcovercolor';
 $title = get_string(
     'gradientcovercolor',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'gradientcovercolor_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $previewconfig = null;
 $setting = new admin_setting_configcolourpicker(
@@ -229,7 +258,7 @@ $setting = new admin_setting_configcolourpicker(
     $title,
     $description,
     '',
-    $previewconfig
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
@@ -238,11 +267,11 @@ $page->add($setting);
 $name = 'theme_pimenko/gradienttextcolor';
 $title = get_string(
     'gradienttextcolor',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'gradienttextcolor_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 
 $setting = new admin_setting_configcolourpicker(
@@ -250,30 +279,41 @@ $setting = new admin_setting_configcolourpicker(
     $title,
     $description,
     '',
-    $previewconfig
+    $previewconfig,
 );
 $setting->set_updatedcallback('theme_reset_all_caches');
 
 $page->add($setting);
 
-$page->add(new admin_setting_heading('otherfeature', get_string('otherfeature', 'theme_pimenko'),
-    get_string('otherfeature_desc', 'theme_pimenko')));
+$page->add(
+    new admin_setting_heading(
+        'otherfeature',
+        get_string(
+            'otherfeature',
+            'theme_pimenko',
+        ),
+        get_string(
+            'otherfeature_desc',
+            'theme_pimenko',
+        ),
+    ),
+);
 
 // Active or not moodle activity completion.
 $name = 'theme_pimenko/moodleactivitycompletion';
 $title = get_string(
     'moodleactivitycompletion',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'moodleactivitycompletion_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    '0'
+    '0',
 );
 $page->add($setting);
 
@@ -281,17 +321,17 @@ $page->add($setting);
 $name = 'theme_pimenko/showactivitynavigation';
 $title = get_string(
     'showactivitynavigation',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'showactivitynavigation_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    true
+    true,
 );
 $page->add($setting);
 
@@ -299,17 +339,17 @@ $page->add($setting);
 $name = 'theme_pimenko/showparticipantscourse';
 $title = get_string(
     'showparticipantscourse',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'showparticipantscourse_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting = new admin_setting_configcheckbox(
     $name,
     $title,
     $description,
-    true
+    true,
 );
 $page->add($setting);
 
@@ -328,15 +368,20 @@ if (!$roles) {
 $name = 'theme_pimenko/listuserrole';
 $title = get_string(
     'listuserrole',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $description = get_string(
     'listuserrole_desc',
-    'theme_pimenko'
+    'theme_pimenko',
 );
 $setting =
-    new admin_setting_configmultiselect($name, $title, $description,
-        ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'], $myrolearray);
+    new admin_setting_configmultiselect(
+        $name,
+        $title,
+        $description,
+        ['editingteacher' => 'editingteacher', 'teacher' => 'teacher', 'manager' => 'manager'],
+        $myrolearray,
+    );
 $page->add($setting);
 
 $settings->add($page);

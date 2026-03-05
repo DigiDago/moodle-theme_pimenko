@@ -19,12 +19,25 @@
     @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
     @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 }}
+{{!
+    @template theme_pimenko/carousel
+
+    Carousel d'images affichant des slides avec image et légende.
+
+    Example context (json):
+    {
+        "layout": "carousel-fade",
+        "slides": [
+            {"active": "active", "image": "https://example.com/image.jpg", "caption": "<p>Texte HTML</p>", "slidenum": 0}
+        ]
+    }
+}}
 <div id="pimenko-carousel" class="carousel slide {{layout}}" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         {{#slides}}
             <div class="carousel-item {{active}}">
-                <img class="d-block w-100" src="{{{image}}}">
+                <img class="d-block w-100" src="{{image}}" alt="">
                 <div class="carousel-caption d-none d-md-block">
                     {{{caption}}}
                 </div>

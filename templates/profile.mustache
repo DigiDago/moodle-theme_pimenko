@@ -14,6 +14,23 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+    @template theme_pimenko/profile
+
+    Page de profil utilisateur avec photo, actions et contenu.
+
+    Example context (json):
+    {
+        "user": {
+            "picture": "https://example.com/pix/u/f2.png",
+            "cansend": true,
+            "msgurl": "/message/index.php?id=2",
+            "fullname": "Utilisateur Test",
+            "carddetails": [{"icon": "fa fa-envelope", "text": "user@example.com"}]
+        },
+        "content": "<div>Contenu de profil</div>"
+    }
+}}
 <div id="region-main">
     <div class="main-content-area">
         <div id="profile-main" class="row">
@@ -21,12 +38,11 @@
                 <div class="col-sm-4 col-lg-2">
                     <div class="profile-pic">
                         <div class="p-relative">
-                            <img src="{{{picture}}}" class="img-responsive">
+                            <img src="{{picture}}" class="img-responsive" alt="{{fullname}}">
                             <div class="dropdown profilep-message">
                                 {{#cansend}}
-                                    <a href="{{{msgurl}}}" role="button"
-                                       class="btn bgm-white bg-white btn-float active z-depth-1 waves-effect"
-                                       href="{{{msgurl}}}">
+                                    <a href="{{msgurl}}" role="button"
+                                       class="btn bgm-white bg-white btn-float active z-depth-1 waves-effect">
                                 <span>
                                     <span class="header-button-title">
                                         <i class="zmdi zmdi-comments"></i>
@@ -51,7 +67,7 @@
                 </div>
             {{/user}}
             <div class="col-sm-8 col-lg-10">
-                <div rol="tabpanel">
+                <div role="tabpanel">
                     {{{content}}}
                 </div>
             </div>

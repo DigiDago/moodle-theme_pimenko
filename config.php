@@ -56,7 +56,7 @@ $THEME->enable_dock = false;
 
 // This is an old setting used to load specific CSS for some YUI JS. We don't need it in Boost based themes because Boost
 // provides default styling for the YUI modules that we use. It is not recommended to use this setting anymore.
-$THEME->yuicssmodules = array();
+$THEME->yuicssmodules = [];
 
 // Most themes will use this rendererfactory as this is the one that allows the theme to override any other renderer.
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
@@ -73,7 +73,7 @@ $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 
 // This is the function that returns the SCSS source for the main file in our theme. We override the boost version because
 // we want to allow presets uploaded to our own theme file area to be selected in the preset list.
-$THEME->scss = function($theme) {
+$THEME->scss = function ($theme) {
     return theme_pimenko_get_main_scss_content($theme);
 };
 
@@ -83,111 +83,111 @@ $THEME->csspostprocess = 'theme_pimenko_process_css';
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 
 $THEME->activityheaderconfig = [
-    'notitle' => true
+    'notitle' => true,
 ];
 
 // Define here layout we override.
 // Login page.
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks.
-    'base' => array(
+    'base' => [
         'file' => 'columns2.php',
-        'regions' => array(),
-    ),
+        'regions' => [],
+    ],
     // Standard layout with blocks.
-    'standard' => array(
-        'file' => 'columns2.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-    // Main course page.
-    'course' => array(
-        'file' => 'columns2.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu' => true),
-    ),
-    // My dashboard page.
-    'mydashboard' => array(
-        'file' => 'columns2.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('nonavbar' => true, 'langmenu' => true),
-    ),
-    'coursecategory' => array(
-        'file' => 'columns2.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu' => true),
-    ),
-    // My courses page.
-    'mycourses' => array(
+    'standard' => [
         'file' => 'columns2.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-        'options' => array('nonavbar' => true),
-    ),
+    ],
+    // Main course page.
+    'course' => [
+        'file' => 'columns2.php',
+        'regions' => ['side-pre'],
+        'defaultregion' => 'side-pre',
+        'options' => ['langmenu' => true],
+    ],
+    // My dashboard page.
+    'mydashboard' => [
+        'file' => 'columns2.php',
+        'regions' => ['side-pre'],
+        'defaultregion' => 'side-pre',
+        'options' => ['nonavbar' => true, 'langmenu' => true],
+    ],
+    'coursecategory' => [
+        'file' => 'columns2.php',
+        'regions' => ['side-pre'],
+        'defaultregion' => 'side-pre',
+        'options' => ['langmenu' => true],
+    ],
+    // My courses page.
+    'mycourses' => [
+        'file' => 'columns2.php',
+        'regions' => ['side-pre'],
+        'defaultregion' => 'side-pre',
+        'options' => ['nonavbar' => true],
+    ],
     // Server administration scripts.
-    'admin' => array(
+    'admin' => [
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
+        'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-    ),
-    'secure' => array(
+    ],
+    'secure' => [
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
+        'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-    ),
-    'incourse' => array(
+    ],
+    'incourse' => [
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
+        'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-        'options' => array('langmenu' => true),
-    ),
+        'options' => ['langmenu' => true],
+    ],
     // The site home page.
     'frontpage' => [
         'file' => 'frontpage.php',
         'defaultregion' => 'side-pre',
         'regions' => theme_pimenko_regions(),
     ],
-    'login' => array(
+    'login' => [
         'file' => 'login.php',
-        'regions' => array(),
-        'options' => array('langmenu' => true),
-    ),
+        'regions' => [],
+        'options' => ['langmenu' => true],
+    ],
     // My public page.
-    'mypublic' => array(
+    'mypublic' => [
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
+        'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-    ),
-    'pimenkoProfile' => array(
+    ],
+    'pimenkoProfile' => [
         'file' => 'columns2.php',
         'regions' => [
             'side-pre',
-            'side-post'
+            'side-post',
         ],
         'defaultregion' => 'side-pre',
-    ),
+    ],
     // The pagelayout used for reports.
-    'report' => array(
+    'report' => [
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
+        'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-    ),
-    'popup' => array(
+    ],
+    'popup' => [
         'file' => 'columns2.php',
-        'regions' => array(),
-        'options' => array(
+        'regions' => [],
+        'options' => [
             'nofooter' => true,
             'nonavbar' => true,
             'activityheader' => [
                 'notitle' => true,
                 'nocompletion' => true,
-                'nodescription' => true
-            ]
-        )
-    ),
+                'nodescription' => true,
+            ],
+        ],
+    ],
 ];
 
 $THEME->haseditswitch = true;
