@@ -6,6 +6,7 @@ on:
       - main
       - master
       - dev
+      - 'MOODLE_*_DEV'
   pull_request:
     branches:
       - main
