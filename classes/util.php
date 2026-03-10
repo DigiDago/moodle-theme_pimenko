@@ -45,7 +45,7 @@ class util {
         }
         foreach ($parentids as $pid) {
             // Use core API to fetch parent category and check its visible flag only.
-            $parent = core_course_category::get($pid, IGNORE_MISSING);
+            $parent = core_course_category::get($pid, MUST_EXIST, true);
             if ($parent && !$parent->visible) {
                 return false;
             }
