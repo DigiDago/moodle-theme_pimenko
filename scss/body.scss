@@ -22,7 +22,7 @@
  */
 
 body {
-    font-family: unquote('googlefont'), serif;
+    font-family: $googlefont, serif;
 
     #page {
         margin-top: 0;
@@ -40,7 +40,7 @@ body {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: unquote('brandcolortextbutton');
+                color: $brandcolortextbutton;
             }
         }
     }
@@ -52,47 +52,48 @@ body {
     #goto-top-link .btn,
     .popover-region-seeall-text,
     .btn-secondary {
-        background-color: unquote('brandcolorbutton');
-        border-color: unquote('brandcolorbutton');
-        color: unquote('brandcolortextbutton');
+        background-color: $brandcolorbutton;
+        border-color: $brandcolorbutton;
+        color: $brandcolortextbutton;
 
         &:hover,
         &:active,
         &:focus {
-            background-color: unquote('darkenbrandcolorbutton');
-            border-color: unquote('darkenbrandcolorbutton');
-            color: unquote('darkenbrandcolortextbutton');
+            background-color: $darkenbrandcolorbutton;
+            border-color: $darkenbrandcolorbutton;
+            color: $darkenbrandcolortextbutton;
         }
     }
 
     .dropdown-item {
         &:hover,
         &:active {
-            background-color: unquote('darkenbrandcolorbutton');
-            border-color: unquote('darkenbrandcolorbutton');
-            color: unquote('darkenbrandcolortextbutton') !important;
+            background-color: $darkenbrandcolorbutton;
+            border-color: $darkenbrandcolorbutton;
+            color: $darkenbrandcolortextbutton;
         }
+
         &:focus,
         &:focus-within {
-            background-color: unquote('brandcolorbutton');
-            border-color: unquote('brandcolorbutton');
-            color: unquote('brandcolortextbutton') !important;
+            background-color: $brandcolorbutton;
+            border-color: $brandcolorbutton;
+            color: $brandcolortextbutton;
         }
     }
 
     section.block {
 
         & > .card-body {
-            padding: 0 !important;
+            padding: 0 !important; /* stylelint-disable-line declaration-no-important */
         }
 
         .card-body {
             .card-title {
-                background-color: unquote('brandcolorbutton');
-                color: unquote('brandcolortextbutton');
-                display: inline-block !important;
+                background-color: $brandcolorbutton;
+                color: $brandcolortextbutton;
                 padding: 1rem;
                 width: 100%;
+                display: inline-block !important; /* stylelint-disable-line declaration-no-important */
             }
         }
     }
@@ -126,6 +127,7 @@ body.scrolled #goto-top-link {
     position: fixed;
     bottom: $gototop-bottom-position;
     right: 0;
+
     a {
         position: absolute;
         right: 0;
@@ -138,6 +140,7 @@ body.scrolled #goto-top-link {
         padding-left: 10px;
         padding-right: 10px;
     }
+
     .card-text {
         padding: 10px;
     }
