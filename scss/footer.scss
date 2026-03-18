@@ -22,19 +22,19 @@
  */
 
 footer,
-#page-footer {
-    background-color: unquote('footercolor');
-    color: unquote('footertextcolor');
+#page-footer.footer-dark {
+    background-color: $footercolor;
+    color: $footertextcolor;
     // We need to be sure this is not override.
-    max-width: 100% !important;
-    border-radius: initial !important;
+    max-width: 100%;
+    border-radius: initial;
 
     a {
-        color: unquote('footertextcolor');
+        color: $footertextcolor;
 
         &:hover,
         &:focus {
-            color: unquote('darkenfootercolor');
+            color: $darkenfootercolor;
         }
     }
 
