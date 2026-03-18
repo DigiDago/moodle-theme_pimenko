@@ -26,8 +26,9 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . '/libs/theme_pimenko_admin_setting_confightmleditor.php');
-require_once(__DIR__ . "/libs/theme_pimenko_simple_theme_settings.php");
+global $CFG, $ADMIN;
+require_once($CFG->dirroot . '/theme/pimenko/libs/theme_pimenko_admin_setting_confightmleditor.php');
+require_once($CFG->dirroot . '/theme/pimenko/libs/theme_pimenko_simple_theme_settings.php');
 
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.

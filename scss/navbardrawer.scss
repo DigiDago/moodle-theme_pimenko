@@ -21,7 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$togglercolor: unquote('tooglercolor');
 
 [data-region='drawer'] {
     background: #fff;
@@ -34,7 +33,7 @@ $togglercolor: unquote('tooglercolor');
 
         &.active,
         &:hover {
-            color: unquote('brandcolor');
+            color: $brandcolor;
         }
     }
 
@@ -52,7 +51,7 @@ $togglercolor: unquote('tooglercolor');
 
 .navbar-light .navbar-toggler {
     border: none;
-    color: unquote('navbartextcolor');
+    color: $navbartextcolor;
 
     .navbar-toggler-icon {
         background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$togglercolor}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");

@@ -163,6 +163,11 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci mustache
 
+      - name: Stylelint
+        continue-on-error: true
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci grunt --tasks stylelint
+
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
         run: |
