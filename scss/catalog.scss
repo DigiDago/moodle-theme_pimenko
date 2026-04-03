@@ -70,7 +70,7 @@
 
             &:before,
             &:after {
-                background-color: unquote('brandcolor');
+                background-color: $brandcolor;
                 bottom: 0;
                 content: '';
                 height: 2px;
@@ -270,7 +270,7 @@
 
                 &:before,
                 &:after {
-                    background-color: unquote('brandcolor');
+                    background-color: $brandcolor;
                     bottom: 0;
                     content: '';
                     height: 2px;
@@ -305,7 +305,7 @@
 
     button.collapsed {
         .expanded-icon-container {
-            display:none;
+            display: none;
         }
 
         .collapsed-icon-container {

@@ -34,7 +34,7 @@
     z-index: 1;
 
     label {
-        color: unquote('buttontextcolour');
+        color: $buttontextcolour;
         display: inline-block;
         margin: 0;
 
@@ -58,23 +58,24 @@
 }
 
 .courseheader {
-   margin: 10px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 
 .coverimage {
     min-height: 300px;
 
     .withgradient {
-        color: unquote('gradienttextcolor');
-        background: linear-gradient(270.78deg,rgba(47,42,128,.3) 0%,unquote('gradientcovercolor') 100%);
+        color: $gradienttextcolor;
+        background: linear-gradient(270.78deg, rgba(47, 42, 128, .3) 0%, $gradientcovercolor 100%);
 
         .page-context-header {
             padding-left: 15px;
             display: flex;
 
             .page-header-headings {
-                .text-muted {
-                    color: unquote('gradienttextcolor') !important;
+                .text-muted,
+                span.text-muted {
+                    color: $gradienttextcolor;
                 }
             }
         }
