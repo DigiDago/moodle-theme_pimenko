@@ -40,15 +40,15 @@
 @for $i from 1 through 8 {
 
     #front-page-row-#{$i} {
-        background-color: unquote('blockregionrowbackgroundcolor#{$i}');
-        color: unquote('blockregionrowtextcolor#{$i}');
+        background-color: map-get($blockregionrowbackgroundcolors, $i);
+        color: map-get($blockregionrowtextcolors, $i);
 
         a {
-            color: unquote('blockregionrowlinkcolor#{$i}');
+            color: map-get($blockregionrowlinkcolors, $i);
 
             &:hover,
             &:focus {
-                color: unquote('blockregionrowlinkhovercolor#{$i}');
+                color: map-get($blockregionrowlinkhovercolors, $i);
             }
 
             &.menu-action {
@@ -62,7 +62,7 @@
         }
 
         .block_html .header h2 {
-            color: unquote('blockregionrowtextcolor#{$i}');
+            color: map-get($blockregionrowtextcolors, $i);
         }
     }
 }
@@ -70,7 +70,7 @@
 #page-site-index #topofscroll {
     margin-top: 0;
     max-width: 100%;
-    padding: 0 !important;
+    padding: 0;
 
     .carousel-item img {
         max-height: 600px;

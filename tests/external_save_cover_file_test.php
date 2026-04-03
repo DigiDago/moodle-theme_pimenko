@@ -33,7 +33,9 @@ final class external_save_cover_file_test extends \advanced_testcase {
      * Set up before each test.
      */
     public function setUp(): void {
+        global $CFG;
         parent::setUp();
+        require_once($CFG->dirroot . '/theme/pimenko/external/save_cover_file.php');
         $this->resetAfterTest();
     }
 
