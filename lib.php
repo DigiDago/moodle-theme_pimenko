@@ -23,8 +23,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// We will add callbacks here as we add features to our theme.
-
 /**
  * Returns the main SCSS content.
  *
