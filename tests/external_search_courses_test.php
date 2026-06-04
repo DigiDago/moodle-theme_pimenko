@@ -32,7 +32,9 @@ final class external_search_courses_test extends \advanced_testcase {
      * Set up before each test.
      */
     public function setUp(): void {
+        global $CFG;
         parent::setUp();
+        require_once($CFG->dirroot . '/theme/pimenko/external/search_courses.php');
         $this->resetAfterTest();
     }
 

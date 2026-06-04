@@ -22,7 +22,7 @@
  */
 
 @import '../../boost/scss/moodle';
-@import 'variables';
+@import '__variables';
 @import 'body';
 @import 'login';
 @import 'navbar';
@@ -36,7 +36,6 @@
 @import 'frontpage';
 @import 'carousel';
 @import 'coursecard';
-@import 'moodleoverride';
 @import 'admin';
 @import 'contact';
 @import 'coverimage';

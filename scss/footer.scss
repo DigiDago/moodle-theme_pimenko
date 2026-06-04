@@ -20,21 +20,20 @@
  * @author     Sylvain Revenu - Pimenko 2020 <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 footer,
-#page-footer {
-    background-color: unquote('footercolor');
-    color: unquote('footertextcolor');
+#page.drawers #page-footer.footer-popover {
+    background-color: $footercolor;
+    color: $footertextcolor;
     // We need to be sure this is not override.
-    max-width: 100% !important;
-    border-radius: initial !important;
+    max-width: 100%;
+    border-radius: initial;
 
     a {
-        color: unquote('footertextcolor');
+        color: $footertextcolor;
 
         &:hover,
         &:focus {
-            color: unquote('darkenfootercolor');
+            color: $darkenfootercolor;
         }
     }
 

@@ -2,6 +2,14 @@
 $gradient-start-color: #00acee !default;
 $gradient-end-color: #027efb !default;
 
+$navbar-z-index: 1030;
+$navbar-padding: 0 16px;
+$navbar-height: 60px !default;
+$popover-top-offset: 38px;
+$dropdown-submenu-top-offset: -6px;
+
+$dropdown-default-text-color: #333;
+
 // Other variables used in the theme.
 $gototop-bottom-position: 50px !default;
 $course-content-maxwidth: 100%;
@@ -22,8 +30,19 @@ $loginbgstyle: unquote('loginbgstyle');
 $loginbgopacity1: unquote('loginbgopacity1');
 $loginbgopacity2: unquote('loginbgopacity2');
 $loginbgopacity3: unquote('loginbgopacity3');
-$togglercolor: unquote('tooglercolor');
+$navbarcolor: unquote('navbarcolor');
+$darkennavcolor: unquote('darkennavcolor');
+$togglercolor: unquote('togglercolor');
 $navbartextcolor: unquote('navbartextcolor');
+
+$navbar-bg-color: unquote('navbarcolor');
+$navbar-text-color: unquote('navbartextcolor');
+$navbar-hover-color: unquote('darkennavcolor');
+$brand-button-color: unquote('brandcolorbutton');
+$brand-button-text-color: unquote('brandcolortextbutton');
+$brand-button-hover-color: unquote('darkenbrandcolorbutton');
+$brand-button-hover-text-color: unquote('darkenbrandcolortextbutton');
+$navbar-logo-max-height: calc(#{$navbar-height} - (0.25rem * 2));
 
 $blockregionrowbackgroundcolors: ();
 $blockregionrowtextcolors: ();

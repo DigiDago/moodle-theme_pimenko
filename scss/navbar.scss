@@ -20,29 +20,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Variables de couleurs
-$navbar-bg-color: unquote('navbarcolor');
-$navbar-text-color: unquote('navbartextcolor');
-$navbar-hover-color: unquote('darkennavcolor');
-$brand-button-color: unquote('brandcolorbutton');
-$brand-button-text-color: unquote('brandcolortextbutton');
-$brand-button-hover-color: unquote('darkenbrandcolorbutton');
-$brand-button-hover-text-color: unquote('darkenbrandcolortextbutton');
-
-// Variables de dimensions
-$navbar-z-index: 1030;
-$navbar-padding: 0 16px;
-$navbar-height: 60px !default;
-$navbar-logo-max-height: calc(#{$navbar-height} - (0.25rem * 2));
-$popover-top-offset: 38px;
-$dropdown-submenu-top-offset: -6px;
-
-// Couleur par défaut pour les éléments du menu
-$dropdown-default-text-color: #333;
-
 nav.navbar.pimenko-navbar,
 nav.navbar.pimenko-navbar.fixed-top {
-    background-color: $navbar-bg-color !important;
+    background-color: $navbar-bg-color;
     color: $navbar-text-color;
     position: fixed;
     z-index: $navbar-z-index;
@@ -104,7 +84,7 @@ nav.navbar.pimenko-navbar.fixed-top {
 
         li:not(.d-none):not(.dropdown.nav-item),
         input {
-            display: flex !important;
+            display: flex;
         }
     }
 
@@ -134,8 +114,9 @@ nav.navbar.pimenko-navbar.fixed-top {
     }
 
     .editmode-switch-form {
-        label.text-primary {
-            color: $navbar-text-color !important;
+        label.text-primary,
+        span.text-primary {
+            color: $navbar-text-color;
         }
 
         .custom-switch .custom-control-input {
@@ -150,7 +131,7 @@ nav.navbar.pimenko-navbar.fixed-top {
     .popover-region-toggle {
         &:hover,
         &:focus {
-            color: $navbar-hover-color !important;
+            color: $navbar-hover-color;
         }
     }
 
@@ -183,14 +164,14 @@ nav.navbar.pimenko-navbar.fixed-top {
             &:active {
                 background-color: $brand-button-hover-color;
                 border-color: $brand-button-hover-color;
-                color: $brand-button-hover-text-color !important;
+                color: $brand-button-hover-text-color;
             }
 
             &:focus,
             &:focus-within {
                 background-color: $brand-button-color;
                 border-color: $brand-button-color;
-                color: $brand-button-text-color !important;
+                color: $brand-button-text-color;
 
                 &::before {
                     color: $brand-button-text-color;
@@ -240,7 +221,7 @@ nav.navbar.pimenko-navbar.fixed-top {
         }
 
         &.active {
-            border-bottom-color: $navbar-hover-color !important;
+            border-bottom-color: $navbar-hover-color;
         }
     }
 }
