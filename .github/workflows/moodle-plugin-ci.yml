@@ -65,7 +65,7 @@ jobs:
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
-        ports: [5432:5432]
+        ports: [ 5432:5432 ]
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
       mariadb:
         image: mariadb:10
@@ -74,7 +74,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: "true"
           MYSQL_CHARACTER_SET_SERVER: "utf8mb4"
           MYSQL_COLLATION_SERVER: "utf8mb4_unicode_ci"
-        ports: [3306:3306]
+        ports: [ 3306:3306 ]
         options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
 
     strategy:
@@ -185,3 +185,31 @@ jobs:
       - name: Mark cancelled jobs as failed
         if: ${{ cancelled() }}
         run: exit 1
+  
+  mirror:
+    needs: test
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'push' &&
+      (
+        github.ref_name == 'main' ||
+        github.ref_name == 'master' ||
+        startsWith(github.ref_name, 'MOODLE_')
+      )
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push branch and tags to GitLab
+        run: |
+          git remote add gitlab ${{ secrets.ESNbyUM }}
+          BRANCH_NAME=${{ github.ref_name }}
+          echo "Mirroring branch: $BRANCH_NAME"
+          # S'assurer que la branche distante est récupérée
+          git fetch origin $BRANCH_NAME
+          # Pousser la branche vers GitLab
+          git push gitlab "refs/remotes/origin/$BRANCH_NAME:refs/heads/$BRANCH_NAME" --force
+          # Pousser les tags vers GitLab
+          git push gitlab --tags --force
