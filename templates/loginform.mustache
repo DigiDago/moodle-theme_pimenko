@@ -145,12 +145,13 @@
                                                     !}}{{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}" {{!
                                                     !}}autocomplete="username">
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group position-relative">
                                                     <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
-                                                    <input type="password" name="password" id="password" value=""
+                                                    <input type="password" name="password" id="custom-password" value=""
                                                            class="form-control"
                                                            placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}}
                                                            autocomplete="current-password">
+                                                        <i class="icon fa fa-eye fa-fw" aria-hidden="true" id="custom-toggle-icon"></i>
                                                 </div>
                                                 {{#rememberusername}}
                                                     <div class="rememberpass mt-3">
@@ -280,4 +281,17 @@
             });
         {{/autofocusform}}
     {{/error}}
+
+    require(['jquery'], function($) {
+        const $passw = $('#custom-password');
+        const $toggleIcon = $('#custom-toggle-icon');
+
+        $toggleIcon.on('click', function() {
+
+            const $hidden = $passw.attr('type') === 'password';
+            $passw.attr('type', $hidden ? 'text' : 'password');
+            $toggleIcon.toggleClass('fa-eye fa-eye-slash');
+        });
+    });
 {{/js}}
+
