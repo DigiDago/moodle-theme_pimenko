@@ -260,19 +260,26 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
             );
             foreach ($draftfiles as $file) {
                 if (!$file->is_directory()) {
+                    $filename = $file->get_filename();
                     $strtosearch =
-                        "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . $file->get_filename();
-                    if (
-                        stripos(
-                            $data,
-                            $strtosearch,
-                        ) !== false
-                    ) {
+                        "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . $filename;
+                    $strtosearchencoded =
+                        "$wwwroot/draftfile.php/" . $options['context']->id . "/user/draft/$draftitemid/" . rawurlencode($filename);
+                    $found = false;
+                    if (stripos($data, $strtosearch) !== false) {
+                        $found = true;
+                        $searchstr = $strtosearch;
+                    } else if (stripos($data, $strtosearchencoded) !== false) {
+                        $found = true;
+                        $searchstr = $strtosearchencoded;
+                    }
+
+                    if ($found) {
                         $filerecord = [
                             'contextid' => context_system::instance()->id,
                             'component' => $component,
                             'filearea' => $this->filearea,
-                            'filename' => $file->get_filename(),
+                            'filename' => $filename,
                             'filepath' => '/',
                             'itemid' => 0,
                             'timemodified' => time(),
@@ -301,7 +308,7 @@ class theme_pimenko_admin_setting_confightmleditor extends admin_setting_configt
                             $filerec->get_filename(),
                         );
                         $data = str_ireplace(
-                            $strtosearch,
+                            $searchstr,
                             $url,
                             $data,
                         );
