@@ -141,3 +141,15 @@
     border: 1px solid rgb(0 0 0 / .125);
     border-radius: .5rem;
 }
+
+#custom-toggle-icon {
+    position: absolute;
+    right: 3px;
+    top: 30%;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+#custom-toggle-icon:hover {
+    color: #495057;
+}
