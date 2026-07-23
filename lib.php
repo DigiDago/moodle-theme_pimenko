@@ -224,7 +224,7 @@ function theme_pimenko_process_css($css, $theme) {
     );
 
     // Set up svg toggler color.
-    $defaults['tooglercolor'] = 'rgba(' .
+    $defaults['togglercolor'] = 'rgba(' .
         implode(
             ",",
             theme_pimenko_hex2rgb($defaults['navbartextcolor']),

@@ -145,12 +145,13 @@
                                                     !}}{{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}" {{!
                                                     !}}autocomplete="username">
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group position-relative">
                                                     <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
-                                                    <input type="password" name="password" id="password" value=""
+                                                    <input type="password" name="password" id="custom-password" value=""
                                                            class="form-control"
                                                            placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}}
                                                            autocomplete="current-password">
+                                                        <i class="icon fa fa-eye fa-fw" aria-hidden="true" id="custom-toggle-icon"></i>
                                                 </div>
                                                 {{#rememberusername}}
                                                     <div class="rememberpass mt-3">
@@ -221,27 +222,25 @@
         </div>
     </div>
 
-    {{#hasinstructions}}
-        <div class="row mt-3">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h2>{{#str}}firsttime{{/str}}</h2>
-                        </div>
-                        <div>
-                            {{{instructions}}}
-                            {{#cansignup}}
-                                <form class="mt-3" action="{{signupurl}}" method="get" id="signup">
-                                    <button type="submit" class="btn btn-secondary">{{#str}}startsignup{{/str}}</button>
-                                </form>
-                            {{/cansignup}}
-                        </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h2>{{#str}}firsttime{{/str}}</h2>
+                    </div>
+                    <div>
+                        {{{instructions}}}
+                        {{#cansignup}}
+                            <form class="mt-3" action="{{signupurl}}" method="get" id="signup">
+                                <button type="submit" class="btn btn-secondary">{{#str}}startsignup{{/str}}</button>
+                            </form>
+                        {{/cansignup}}
                     </div>
                 </div>
             </div>
         </div>
-    {{/hasinstructions}}
+    </div>
 
     {{#maintenance}}
         <div class="row mt-3">
@@ -280,4 +279,17 @@
             });
         {{/autofocusform}}
     {{/error}}
+
+    require(['jquery'], function($) {
+        const $passw = $('#custom-password');
+        const $toggleIcon = $('#custom-toggle-icon');
+
+        $toggleIcon.on('click', function() {
+
+            const $hidden = $passw.attr('type') === 'password';
+            $passw.attr('type', $hidden ? 'text' : 'password');
+            $toggleIcon.toggleClass('fa-eye fa-eye-slash');
+        });
+    });
 {{/js}}
+
