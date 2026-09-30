@@ -107,7 +107,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string The rendered login page as a string.
      */
     public function render_login_page($output): string {
-        global $SITE;
+        global $SITE, $CFG;
 
         $theme = theme_config::load('pimenko');
 
@@ -134,6 +134,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $primarymenu = $primary->export_for_template($renderer);
 
         $template->primarymoremenu = $primarymenu['moremenu'];
+        $template->useprimaryreactmenu = file_exists($CFG->dirroot . '/lib/templates/primarymoremenu.mustache');
 
         // Hide site name option.
         $template->hidesitename = !empty($theme->settings->hidesitename) ? $theme->settings->hidesitename : false;

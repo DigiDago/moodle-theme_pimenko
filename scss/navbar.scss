@@ -190,6 +190,22 @@ nav.navbar.pimenko-navbar.fixed-top {
     border-bottom-color: $brand-button-color;
 }
 
+nav.navbar.pimenko-navbar .primary-navigation .mds-nav-pill--selected .mds-nav-pill__indicator {
+    background-color: $navbar-hover-color;
+}
+
+.secondary-navigation {
+    --mds-text-subtle: #{$brandcolor};
+}
+
+body .secondary-navigation .mds-nav-pill--selected .mds-nav-pill__indicator {
+    background-color: $brand-button-color;
+}
+
+body .secondary-navigation .navigation.secondarynav-tabbar .mds-nav-pill.active::before {
+    background-color: $brand-button-color;
+}
+
 // Force logo size
 .navbar.fixed-top .navbar-brand .logo {
     max-height: $navbar-logo-max-height;

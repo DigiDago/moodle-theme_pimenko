@@ -52,7 +52,8 @@
 
     {{#primarymoremenu}}
         <div class="primary-navigation">
-            {{> core/moremenu}}
+            {{#useprimaryreactmenu}}{{> core/primarymoremenu}}{{/useprimaryreactmenu}}
+            {{^useprimaryreactmenu}}{{> core/moremenu}}{{/useprimaryreactmenu}}
         </div>
     {{/primarymoremenu}}
 
