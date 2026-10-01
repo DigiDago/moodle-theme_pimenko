@@ -52,13 +52,10 @@
 
     {{#primarymoremenu}}
         <div class="primary-navigation">
-            {{> core/moremenu}}
+            {{#useprimaryreactmenu}}{{> core/primarymoremenu}}{{/useprimaryreactmenu}}
+            {{^useprimaryreactmenu}}{{> core/moremenu}}{{/useprimaryreactmenu}}
         </div>
     {{/primarymoremenu}}
-
-    <div id="header-category-select">
-        {{{output.display_header_categories}}}
-    </div>
 
     <ul class="navbar-nav d-none d-md-flex my-1 px-1">
         <!-- page_heading_menu -->

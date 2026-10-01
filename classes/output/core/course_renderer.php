@@ -537,6 +537,10 @@ class course_renderer extends \core_course_renderer {
             $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
         }
 
+        if (!$coursecat) {
+            throw new moodle_exception('cannotviewcategory');
+        }
+
         $site = get_site();
         $actionbar = new \theme_pimenko\output\core\category_action_bar(
             $this->page,

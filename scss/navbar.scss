@@ -37,46 +37,6 @@ nav.navbar.pimenko-navbar.fixed-top {
         background-size: auto;
     }
 
-    // Header category select
-    #header-category-select {
-        .dropdown-menu {
-            position: absolute;
-
-            li:hover > ul.dropdown-menu {
-                display: block;
-            }
-
-            .dropdown-submenu {
-                position: relative;
-
-                > .dropdown-menu {
-                    left: 100%;
-                    margin-top: $dropdown-submenu-top-offset;
-                    top: 0;
-                }
-            }
-
-            & > li > a {
-                &:after {
-                    border-bottom: 0;
-                    border-left: 0.3em solid transparent;
-                    border-right: 0.3em solid transparent;
-                    border-top: 0.3em solid;
-                    content: "";
-                    display: inline-block;
-                    font-size: 15px;
-                    margin-left: 0.255em;
-                    vertical-align: 0.255em;
-                }
-
-                &:hover:after {
-                    text-decoration: underline;
-                    transform: rotate(-90deg);
-                }
-            }
-        }
-    }
-
     // Navigation elements
     .navbar-nav {
         align-items: center;
@@ -230,8 +190,20 @@ nav.navbar.pimenko-navbar.fixed-top {
     border-bottom-color: $brand-button-color;
 }
 
-.navbar.fixed-top #header-category-select .dropdown .dropdown-menu {
-    overflow-y: visible;
+nav.navbar.pimenko-navbar .primary-navigation .mds-nav-pill--selected .mds-nav-pill__indicator {
+    background-color: $navbar-hover-color;
+}
+
+.secondary-navigation {
+    --mds-text-subtle: #{$brandcolor};
+}
+
+body .secondary-navigation .mds-nav-pill--selected .mds-nav-pill__indicator {
+    background-color: $brand-button-color;
+}
+
+body .secondary-navigation .navigation.secondarynav-tabbar .mds-nav-pill.active::before {
+    background-color: $brand-button-color;
 }
 
 // Force logo size
