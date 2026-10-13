@@ -4,6 +4,8 @@ Feature: Check if all setings are working.
   Background:
     Given I log in as "admin"
     And I maximize the window
+    And the following config values are set as admin:
+      | enablemyhome | 1 |
     And I visit "/admin/settings.php?section=themesettingpimenko"
 
   Scenario: Verify that the general settings can be saved
@@ -97,13 +99,11 @@ Feature: Check if all setings are working.
     And I set the field "s_theme_pimenko_navbarcolor" to "#112233"
     And I click on "s_theme_pimenko_navbartextcolor" "field" forced
     And I set the field "s_theme_pimenko_navbartextcolor" to "#445566"
-    And I set the field "s_theme_pimenko_menuheadercateg" to "includehidden"
     When I press "Save changes"
     And I click on "Navigation bar" "link"
     Then the field "s_theme_pimenko_hidesitename" matches value "1"
     And the field "s_theme_pimenko_navbarcolor" matches value "#112233"
     And the field "s_theme_pimenko_navbartextcolor" matches value "#445566"
-    And the field "s_theme_pimenko_menuheadercateg" matches value "includehidden"
 
   Scenario: Verify that the Footer settings can be saved
     Given I click on "Footer" "link"
