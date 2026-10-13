@@ -29,7 +29,6 @@ use context_header;
 use core_auth\output\login;
 use stdClass;
 use theme_config;
-use core_course_category;
 use context_course;
 use custom_menu;
 use html_writer;
@@ -37,7 +36,6 @@ use completion_info;
 use context_system;
 use moodle_url;
 use theme_pimenko\output\core\navigation\primary;
-use theme_pimenko\util;
 
 /**
  * Class core_renderer extended
@@ -109,7 +107,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string The rendered login page as a string.
      */
     public function render_login_page($output): string {
-        global $SITE;
+        global $SITE, $CFG;
 
         $theme = theme_config::load('pimenko');
 
@@ -136,6 +134,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $primarymenu = $primary->export_for_template($renderer);
 
         $template->primarymoremenu = $primarymenu['moremenu'];
+        $template->useprimaryreactmenu = file_exists($CFG->dirroot . '/lib/templates/primarymoremenu.mustache');
 
         // Hide site name option.
         $template->hidesitename = !empty($theme->settings->hidesitename) ? $theme->settings->hidesitename : false;
@@ -314,77 +313,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         } else {
             return false;
         }
-    }
-
-    /**
-     * Rendering the category menu in the header
-     *
-     * @return string
-     */
-    public function display_header_categories(): string {
-        $theme = theme_config::load('pimenko');
-        if (!empty($theme->settings->menuheadercateg) && $theme->settings->menuheadercateg != "disabled") {
-            $cats = core_course_category::get_all();
-            $template = new stdClass();
-            $template->dropdownname = get_string(
-                'menuheadercateg',
-                'theme_pimenko',
-            );
-            $template->dropdownitems = [];
-
-            foreach ($cats as $cat) {
-                if (
-                    $cat->visible &&
-                    $cat->is_uservisible() &&
-                    util::are_all_parents_visible($cat) &&
-                    $cat->get_parent_coursecat()->id == 0
-                ) {
-                    $dropdownitem = new stdClass();
-                    $dropdownitem->name = $cat->get_formatted_name();
-                    $dropdownitem->url = $cat->get_view_link();
-                    if ($cat->has_children()) {
-                        $dropdownitem->submenu = $this->display_header_categories_recursively($cat);
-                    }
-                    $template->dropdownitems[] = $dropdownitem;
-                }
-            }
-            return $this->render_from_template(
-                'theme_pimenko/header_dropdown',
-                $template,
-            );
-        }
-        return "";
-    }
-
-    /**
-     * Displays header categories recursively with dropdown items.
-     *
-     * @param object $category The category object to process and display.
-     *
-     * @return string Rendered template with the nested dropdown categories.
-     */
-    public function display_header_categories_recursively($category): string {
-        $cats = $category->get_children();
-        $template = new stdClass();
-        $template->dropdownitems = [];
-        $theme = theme_config::load('pimenko');
-
-        foreach ($cats as $cat) {
-            if ($cat->visible && $cat->is_uservisible() && util::are_all_parents_visible($cat)) {
-                $dropdownitem = new stdClass();
-                $dropdownitem->name = $cat->get_formatted_name();
-                $dropdownitem->url = $cat->get_view_link();
-                if ($cat->get_children_count() > 0) {
-                    $dropdownitem->submenu = $this->display_header_categories_recursively($cat);
-                }
-                $template->dropdownitems[] = $dropdownitem;
-            }
-        }
-
-        return $this->render_from_template(
-            'theme_pimenko/header_dropdown_recursive',
-            $template,
-        );
     }
 
     /**

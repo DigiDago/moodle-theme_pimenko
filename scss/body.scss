@@ -94,6 +94,8 @@ body {
                 padding: 1rem;
                 width: 100%;
                 display: inline-block !important; /* stylelint-disable-line declaration-no-important */
+                border-top-left-radius: $card-inner-border-radius;
+                border-top-right-radius: $card-inner-border-radius;
             }
         }
     }

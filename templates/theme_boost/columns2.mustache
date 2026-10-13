@@ -107,7 +107,8 @@
                                 title="{{#str}}opendrawerindex, core{{/str}}"
                         >
                             <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
-                            {{#pix}} t/index_drawer, moodle {{/pix}}
+                            <span class="dir-rtl-hide">{{#pix}} e/sidebar_right, core {{/pix}}</span>
+                            <span class="dir-ltr-hide">{{#pix}} e/sidebar_left, core {{/pix}}</span>
                         </button>
                     </div>
                 {{/courseindex}}
@@ -123,15 +124,17 @@
                                 title="{{#str}}opendrawerblocks, core{{/str}}"
                         >
                             <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
-                            {{#pix}}t/blocks_drawer, core, {{#str}}opendrawerblocks, core{{/str}}{{/pix}}
+                            <span class="dir-rtl-hide">{{#pix}} e/sidebar_left, core {{/pix}}</span>
+                            <span class="dir-ltr-hide">{{#pix}} e/sidebar_right, core {{/pix}}</span>
                         </button>
                     </div>
                 {{/hasblocks}}
             </div>
             {{{ output.full_header }}}
             {{#secondarymoremenu}}
-                <div class="secondary-navigation">
-                    {{> core/moremenu}}
+                <div class="secondary-navigation d-print-none">
+                    {{#usesecondaryreactmenu}}{{> core/secondarymoremenu}}{{/usesecondaryreactmenu}}
+                    {{^usesecondaryreactmenu}}{{> core/moremenu}}{{/usesecondaryreactmenu}}
                 </div>
             {{/secondarymoremenu}}
             <div id="page-content" class="pb-3 d-print-block">

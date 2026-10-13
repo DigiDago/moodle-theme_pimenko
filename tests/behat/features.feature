@@ -1,4 +1,4 @@
-@theme @theme_pimenko @pimenko_feature @javascript
+@theme @theme_pimenko @pimenko_feature @javascript @_file_upload
 Feature: Test theme features
   In order to use pimenko theme features
   As an admin
@@ -9,6 +9,7 @@ Feature: Test theme features
     And I maximize the window
     And the following config values are set as admin:
       | defaulthomepage | 0 |
+      | enablemyhome    | 1 |
       | custommenuitems | -This is a custom item\|/customurl/ |
     And I visit "/admin/settings.php?section=themesettingpimenko"
 
@@ -31,6 +32,15 @@ Feature: Test theme features
     Given I click on "Home page settings" "link"
     And I click on "s_theme_pimenko_enablecarousel" "checkbox" forced
     And I set the field "s_theme_pimenko_enablecarousel" to "1"
+    And I press "Save changes"
+    When I am on homepage
+    Then "#pimenko-carousel" "css_element" should not exist
+    And I visit "/admin/settings.php?section=themesettingpimenko"
+    And I click on "Home page settings" "link"
+    And I set the field "s_theme_pimenko_slideimagenr" to "1"
+    And I press "Save changes"
+    And I click on "Home page settings" "link"
+    And I upload "pix/moodlelogo_grayhat.png" file to "Image 1" filemanager
     And I press "Save changes"
     When I am on homepage
     Then "#pimenko-carousel" "css_element" should exist
@@ -101,8 +111,7 @@ Feature: Test theme features
     And I set the field "s_theme_pimenko_hidemanuelauth" to "1"
     And I press "Save changes"
     And I log out
-    When I am on homepage
-    And I click on "Log in" "link"
+    When I visit "/login/index.php"
     Then ".leftloginblock" "css_element" should not exist
     And I log in as "admin"
     And I visit "/admin/settings.php?section=themesettingpimenko"
@@ -111,8 +120,7 @@ Feature: Test theme features
     And I set the field "s_theme_pimenko_hidemanuelauth" to "0"
     And I press "Save changes"
     And I log out
-    When I am on homepage
-    And I click on "Log in" "link"
+    When I visit "/login/index.php"
     Then ".leftloginblock" "css_element" should exist
 
   Scenario: Verify that footer content is displayed
