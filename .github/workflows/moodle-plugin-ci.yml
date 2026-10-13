@@ -43,12 +43,12 @@ jobs:
             if [[ "$MAJOR" == "4" ]]; then
               JSON='["MOODLE_400_STABLE","MOODLE_401_STABLE","MOODLE_402_STABLE","MOODLE_403_STABLE","MOODLE_404_STABLE","MOODLE_405_STABLE"]'
             elif [[ "$MAJOR" == "5" ]]; then
-              JSON='["MOODLE_500_STABLE","MOODLE_501_STABLE"]'
+              JSON='["MOODLE_500_STABLE","MOODLE_501_STABLE","MOODLE_502_STABLE","MOODLE_503_STABLE"]'
             fi
 
           # CASE 4: Default matrix
           else
-            JSON='["MOODLE_405_STABLE","MOODLE_500_STABLE","MOODLE_501_STABLE"]'
+            JSON='["MOODLE_500_STABLE","MOODLE_501_STABLE","MOODLE_502_STABLE","MOODLE_503_STABLE"]'
           fi
 
           echo "moodle-branches=$JSON" >> $GITHUB_OUTPUT
