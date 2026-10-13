@@ -36,6 +36,7 @@ final class course_renderer_test extends \advanced_testcase {
     protected function setUp(): void {
         parent::setUp();
         $this->resetAfterTest(true);
+        $this->setAdminUser();
         global $PAGE;
         $PAGE->set_context(context_system::instance());
         $PAGE->set_url('/');

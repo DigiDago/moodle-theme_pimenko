@@ -142,6 +142,8 @@ $templatecontext = [
         true,
         ['context' => context_course::instance(SITEID), "escape" => false],
     ),
+    'useprimaryreactmenu' => file_exists($CFG->dirroot . '/lib/templates/primarymoremenu.mustache'),
+    'usesecondaryreactmenu' => file_exists($CFG->dirroot . '/lib/templates/secondarymoremenu.mustache'),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,

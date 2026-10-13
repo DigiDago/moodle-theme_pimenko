@@ -87,7 +87,16 @@ function theme_pimenko_get_extra_scss($theme) {
          background-repeat: no-repeat; background-size: cover; background-attachment: fixed;";
         $content .= ' } }';
     }
-
+    // Transparent block header background.
+    if (!empty($theme->settings->blockheadertransparent)) {
+        $content .= '
+        body section.block .card-body .card-title {
+            background-color: transparent;
+            color: $body-color;
+            padding-bottom: 0;
+            }
+        ';
+    }
     // Always return the background image with the scss when we have it.
     return !empty($theme->settings->scss) ? $theme->settings->scss . ' ' . $content : $content;
 }

@@ -180,35 +180,6 @@ $page->add(
     ),
 );
 
-$options = [
-    'excludehidden' => get_string(
-        'menuheadercateg:excludehidden',
-        'theme_pimenko',
-    ),
-    'includehidden' => get_string(
-        'menuheadercateg:includehidden',
-        'theme_pimenko',
-    ),
-    'disabled' => get_string(
-        'menuheadercateg:disabled',
-        'theme_pimenko',
-    ),
-];
-$setting = new admin_setting_configselect(
-    'theme_pimenko/menuheadercateg',
-    get_string(
-        'menuheadercateg',
-        'theme_pimenko',
-    ),
-    get_string(
-        'menuheadercategdesc',
-        'theme_pimenko',
-    ),
-    'disabled',
-    $options,
-);
-$page->add($setting);
-
 // Unaddable blocks.
 // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
 // Section links.
