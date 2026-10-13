@@ -4,6 +4,8 @@ Feature: Check if all setings are working.
   Background:
     Given I log in as "admin"
     And I maximize the window
+    And the following config values are set as admin:
+      | enablemyhome | 1 |
     And I visit "/admin/settings.php?section=themesettingpimenko"
 
   Scenario: Verify that the general settings can be saved
