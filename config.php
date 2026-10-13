@@ -91,55 +91,55 @@ $THEME->activityheaderconfig = [
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks.
     'base' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => [],
     ],
     // Standard layout with blocks.
     'standard' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
     ],
     // Main course page.
     'course' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
         'options' => ['langmenu' => true],
     ],
     // My dashboard page.
     'mydashboard' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
         'options' => ['nonavbar' => true, 'langmenu' => true],
     ],
     'coursecategory' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
         'options' => ['langmenu' => true],
     ],
     // My courses page.
     'mycourses' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
         'options' => ['nonavbar' => true],
     ],
     // Server administration scripts.
     'admin' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
     ],
     'secure' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
     ],
     'incourse' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
         'options' => ['langmenu' => true],
@@ -157,12 +157,12 @@ $THEME->layouts = [
     ],
     // My public page.
     'mypublic' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
     ],
     'pimenkoProfile' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => [
             'side-pre',
             'side-post',
@@ -171,12 +171,12 @@ $THEME->layouts = [
     ],
     // The pagelayout used for reports.
     'report' => [
-        'file' => 'columns2.php',
+        'file' => 'pimenkocustom.php',
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
     ],
     'popup' => [
-        'file' => 'columns2.php',
+        'file' => 'columns1.php',
         'regions' => [],
         'options' => [
             'nofooter' => true,
