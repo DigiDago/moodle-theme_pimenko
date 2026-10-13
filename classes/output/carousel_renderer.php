@@ -57,6 +57,9 @@ final class carousel_renderer extends plugin_renderer_base {
      */
     public function output(): string {
         $this->load_items();
+        if (empty($this->slides)) {
+            return '';
+        }
         $template = new stdClass();
         $template->slides = $this->slides;
         $template->layout = 'centered';

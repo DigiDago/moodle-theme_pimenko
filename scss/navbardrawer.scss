@@ -57,3 +57,33 @@
         background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$togglercolor}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
     }
 }
+$drawer-corner-pages: "body#page-site-index";
+
+#{$drawer-corner-pages} {
+    .drawer-toggler.drawer-right-toggle.drawer-right-toggle {
+        top: 75px;
+        right: 0;
+        left: auto;
+        z-index: 1030;
+        position: fixed;
+    }
+
+    #theme_boost-drawers-blocks#theme_boost-drawers-blocks {
+        top: 65px;
+        left: auto;
+        clip-path: none;
+        transition: right 0.2s ease, visibility 0.2s ease;
+        right: calc(-315px + -10px);
+
+        &.show {
+            right: 0;
+            left: auto;
+            top: 65px;
+        }
+    }
+
+    &:has(#page.drawers.show-drawer-right) .btn-footer-popover {
+        right: calc(32px + 315px);
+        transition: right 0.2s ease;
+    }
+}
