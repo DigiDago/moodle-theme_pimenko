@@ -38,7 +38,7 @@ class secondary extends \core\navigation\views\secondary {
      *                                       node by default.
      */
     protected function load_course_navigation(?navigation_node $rootnode = null): void {
-        global $SITE, $OUTPUT, $USER, $DB;
+        global $SITE, $OUTPUT, $USER, $DB, $CFG;
 
         $rootnode = $rootnode ?? $this;
         $course = $this->page->course;
@@ -47,41 +47,33 @@ class secondary extends \core\navigation\views\secondary {
         $settingsnav = $this->page->settingsnav;
         $navigation = $this->page->navigation;
 
+        // Before Moodle 5.3 the secondary menu renders the node text as HTML, so the icon can be injected in the text.
+        // From Moodle 5.3 the node text is escaped: the text must be plain and the icon passed as a pix_icon.
+        $legacymenu = $CFG->branch < 503;
+
         $url = new \moodle_url(
             '/course/view.php',
             ['id' => $course->id],
         );
         $pix = null;
-        if ($course->format == 'horizontaltabs') {
+        if ($course->format == 'horizontaltabs' || $course->format == 'digidagotabs') {
             $firstnodeidentifier = get_string(
                 'learn',
-                'format_horizontaltabs',
+                'format_' . $course->format,
             );
             $pix = new \pix_icon(
                 't/grades',
                 $firstnodeidentifier,
             );
-            $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-            $firstnodeidentifier =
-                $system->render_pix_icon(
-                    $OUTPUT,
-                    $pix,
-                ) . $firstnodeidentifier;
-        } else if ($course->format == 'digidagotabs') {
-            $firstnodeidentifier = get_string(
-                'learn',
-                'format_digidagotabs',
-            );
-            $pix = new \pix_icon(
-                't/grades',
-                $firstnodeidentifier,
-            );
-            $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
-            $firstnodeidentifier =
-                $system->render_pix_icon(
-                    $OUTPUT,
-                    $pix,
-                ) . $firstnodeidentifier;
+            if ($legacymenu) {
+                $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
+                $firstnodeidentifier =
+                    $system->render_pix_icon(
+                        $OUTPUT,
+                        $pix,
+                    ) . $firstnodeidentifier;
+                $pix = null;
+            }
         } else {
             $firstnodeidentifier = get_string('course');
         }
@@ -99,6 +91,7 @@ class secondary extends \core\navigation\views\secondary {
             self::TYPE_COURSE,
             null,
             'coursehome',
+            $pix,
         );
 
         // Add custom secondary menu for digidagotabs and horizontaltabs course format.
@@ -106,14 +99,18 @@ class secondary extends \core\navigation\views\secondary {
             $courseformat = course_get_format($course->id);
             $tabs = $courseformat->get_tabs();
             foreach ($tabs as $tab) {
-                if ($tab->icon) {
-                    $text =
-                        $OUTPUT->render_custom_pix(
-                            $OUTPUT,
-                            $tab->icon,
-                        ) . $tab->name;
+                if ($legacymenu) {
+                    if ($tab->icon) {
+                        $text =
+                            $OUTPUT->render_custom_pix(
+                                $OUTPUT,
+                                $tab->icon,
+                            ) . $tab->name;
+                    } else {
+                        $text = $tab->name;
+                    }
                 } else {
-                    $text = $tab->name;
+                    $text = strip_tags($tab->name);
                 }
                 $rootnode->add(
                     $text,

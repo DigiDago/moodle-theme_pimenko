@@ -43,6 +43,11 @@
         background-color: map-get($blockregionrowbackgroundcolors, $i);
         color: map-get($blockregionrowtextcolors, $i);
 
+        .card,
+        .block-controls .icon {
+            color: inherit;
+        }
+
         a {
             color: map-get($blockregionrowlinkcolors, $i);
 
