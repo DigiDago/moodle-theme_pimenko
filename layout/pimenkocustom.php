@@ -143,7 +143,11 @@ $templatecontext = [
         ['context' => context_course::instance(SITEID), "escape" => false],
     ),
     'useprimaryreactmenu' => file_exists($CFG->dirroot . '/lib/templates/primarymoremenu.mustache'),
-    'usesecondaryreactmenu' => file_exists($CFG->dirroot . '/lib/templates/secondarymoremenu.mustache'),
+    'usesecondaryreactmenu' => file_exists($CFG->dirroot . '/lib/templates/secondarymoremenu.mustache')
+        && !in_array($PAGE->course->format, ['horizontaltabs', 'digidagotabs']),
+    // Moodle 5.3+: horizontaltabs / digidagotabs keep the old menu (for the tab icons), styled like the new one.
+    'secondarylegacypills' => file_exists($CFG->dirroot . '/lib/templates/secondarymoremenu.mustache')
+        && in_array($PAGE->course->format, ['horizontaltabs', 'digidagotabs']),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,

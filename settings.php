@@ -212,6 +212,36 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Colour modes (light / dark / system), Moodle 5.3+.
+    // These are the theme Boost settings themselves (saved as theme_boost/...), shown here too so they can be
+    // set from the Pimenko settings. Both pages share the same values, and the Boost code (colour mode menu in the
+    // navbar, default mode) keeps working as it is.
+    if (class_exists('\\theme_boost\\colour_mode')) {
+        $name = 'theme_boost/enablecolourmodes';
+        $title = get_string('enablecolourmodes', 'theme_boost');
+        $description = get_string('enablecolourmodes_desc', 'theme_boost');
+        $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+        $page->add($setting);
+
+        $name = 'theme_boost/defaultcolourmode';
+        $title = get_string('defaultcolourmode', 'theme_boost');
+        $description = get_string('defaultcolourmode_desc', 'theme_boost');
+        $choices = [];
+        foreach (\theme_boost\colour_mode::get_modes() as $mode) {
+            $choices[$mode] = get_string('colourmode:' . $mode, 'theme_boost');
+        }
+        $setting = new admin_setting_configselect(
+            $name,
+            $title,
+            $description,
+            \theme_boost\colour_mode::LIGHT,
+            $choices,
+        );
+        $page->add($setting);
+        // Set on the tabs page, not on the tab: see theme/boost/settings.php.
+        $settings->hide_if('theme_boost/defaultcolourmode', 'theme_boost/enablecolourmodes', 'notchecked');
+    }
+
     $name = 'theme_pimenko/enablegooglefont';
     $title = get_string(
         'enablegooglefont',

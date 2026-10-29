@@ -206,6 +206,71 @@ body .secondary-navigation .navigation.secondarynav-tabbar .mds-nav-pill.active:
     background-color: $brand-button-color;
 }
 
+// Old secondary menu shown on Moodle 5.3+ for horizontaltabs / digidagotabs courses
+.secondary-navigation.pimenko-legacy-pills .moremenu {
+    // Pills centred in the bar, same space above and above the line.
+    &.navigation {
+        height: 3rem;
+        padding: .5rem 0;
+    }
+
+    .nav-tabs {
+        border-bottom: 0;
+        height: 2rem;
+        gap: .25rem;
+    }
+
+    .nav-link {
+        border: 0;
+        height: 2rem;
+        border-radius: var(--mds-border-radius-md, .5rem);
+        padding: 0 var(--mds-spacing-sm, .75rem);
+        font-size: var(--mds-font-size-paragraph-small, .875rem);
+        font-weight: var(--mds-font-weight-medium, 500);
+        line-height: 2rem;
+        color: $brandcolor;
+        transition: background-color .15s ease-in-out, color .15s ease-in-out;
+        // Long tab names are cut with "…" so the items fit on one line.
+        display: block;
+        max-width: 16rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:hover,
+        &:focus {
+            background-color: rgba(0, 0, 0, .05);
+            color: $brandcolor;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $brand-button-color;
+            outline-offset: 2px;
+        }
+
+        &.active {
+            color: var(--mds-text-default, #1d2125);
+            background-color: var(--mds-bg-nav-pill-selected, #e9ecef);
+
+            &::before {
+                content: "";
+                display: inline-block;
+                width: .375rem;
+                height: .375rem;
+                margin-right: .5rem;
+                border-radius: 50%;
+                background-color: $brand-button-color;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .tabicon {
+        margin-right: .375rem;
+        vertical-align: -.1em;
+    }
+}
+
 // Force logo size
 .navbar.fixed-top .navbar-brand .logo {
     max-height: $navbar-logo-max-height;
