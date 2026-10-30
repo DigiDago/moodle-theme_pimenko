@@ -49,7 +49,7 @@ class secondary extends \core\navigation\views\secondary {
 
         // Before Moodle 5.3 the secondary menu renders the node text as HTML, so the icon can be injected in the text.
         // From Moodle 5.3 the node text is escaped: the text must be plain and the icon passed as a pix_icon.
-        $legacymenu = $CFG->branch < 503;
+        $legacymenu = $CFG->branch < 503 || in_array($course->format, ['horizontaltabs', 'digidagotabs']);
 
         $url = new \moodle_url(
             '/course/view.php',

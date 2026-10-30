@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // This is the version of the plugin.
-$plugin->version = 2026102100; // YYYYMMDDXX.
+$plugin->version = 2026102800; // YYYYMMDDXX.
 
 // This is the version of Moodle this plugin requires.
 $plugin->requires = 2025041400; // MOODLE 5X.
@@ -38,7 +38,7 @@ $plugin->component = 'theme_pimenko';
 // Maturity (do not use ALPHA or BETA versions in production sites).
 $plugin->maturity = MATURITY_STABLE;
 
-$plugin->release = '4.9';
+$plugin->release = '5.0';
 
 // This is a list of plugins, this plugin depends on (and their versions).
 $plugin->dependencies = [
