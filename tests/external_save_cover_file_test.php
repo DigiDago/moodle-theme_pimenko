@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace theme_pimenko;
+
 use context_course;
 use core_external\external_api;
 use theme_pimenko\external\save_cover_file;
